@@ -1,0 +1,121 @@
+<style>
+  .flickity-viewport > .flickity-slider > .flickity-slide .lazyload {
+  	display: none;
+  }
+</style>
+
+<section class="staff-picks influencers">
+  <div class="title">{{ section.settings.title }}</div>
+  {% if section.settings.button-url != blank %}
+    <a class="view-all-link" href="{{ section.settings.button-url }}">
+      {{ section.settings.button-text }}
+      <img alt="Right Arrow" class="arrow" src="{{ 'arrow-right.svg' | asset_url }}">
+    </a>
+  {% endif %}
+
+  <div class="carousel carousel-influencers">
+    {% for block in section.blocks %}
+      <div class="carousel-cell" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".{{ forloop.index }}s">
+        <a href="{{ block.settings.url }}" target="_blank">
+          {% assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+          <img 
+            class="lazyload"
+            {% if forloop.index == 1 %}
+            src="{{ block.settings.image | img_url: '180x' }}"
+            {% endif %}
+            alt="{{ block.settings.handle | escape | strip }}"
+            data-src="{{ img_url }}"
+            data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+            data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+            data-sizes="auto"
+            width="{{ block.settings.image.width }}"
+            height="{{ block.settings.image.height }}"
+            data-cc-animate="cc-fade-in-up" 
+            data-cc-animate-delay=".1s"
+          />
+          <div class="handle">{{ block.settings.handle }}</div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="carousel-pagination d-none d-lg-block">
+    <span id="current-page-inf" class="num current-page">1</span>
+    <span class="num divider">/</span>
+    <span id="total-pages-inf" class="num total-pages">0</span>
+  </div>
+  <script>
+    var options = {
+      cellAlign: 'left',
+      contain: true,
+      pageDots: false,
+      imagesLoaded: false,
+      wrapAround: true
+    };
+
+    var $influencerCarousel = $('.carousel-influencers').flickity(options);
+
+    $(document).ready(() => {
+      var size = $('div.carousel-influencers div.carousel-cell').length;
+      $('#total-pages-inf').text(size);
+
+      $influencerCarousel.on('change.flickity', function(event, index) {
+        $('#current-page-inf').text(index + 1);
+      });
+    })
+  </script>
+</section>
+
+{% schema %}
+  {
+    "name": "Influencers",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "#jetsetcandy"
+      },
+      {
+        "type": "text",
+        "id": "button-text",
+        "label": "Button Text",
+        "default": "VIEW ALL"
+      },
+      {
+        "type": "url",
+        "id": "button-url",
+        "label": "Button URL"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "influencer",
+        "name": "Influencer",
+        "settings": [
+          {
+            "id": "image",
+            "type": "image_picker",
+            "label": "Image"
+          },
+          {
+            "id": "handle",
+            "type": "text",
+            "label": "Handle"
+          },
+          {
+            "id": "url",
+            "type": "url",
+            "label": "URL"
+          }
+        ]
+      }
+    ],
+    "presets": [
+	    {
+        "name": "Influencers",
+        "category": "Custom",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}

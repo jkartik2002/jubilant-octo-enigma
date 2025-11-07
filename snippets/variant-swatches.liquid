@@ -1,0 +1,99 @@
+{% unless product.tags contains 'no-swatch' %}
+  {% assign firstVariantTitle = '' %}
+  {% for collection2 in product.collections %}
+    {% if product.metafields.custom_fields["variant_title"] != blank %}
+      {% assign firstVariantTitle = product.metafields.custom_fields["variant_title"] %}
+    {% elsif collection2.title contains 'Solid Gold' %}
+      {% assign firstVariantTitle = 'Solid Gold' %}
+    {% elsif collection2.title contains 'Gold Vermeil' or collection2.title contains 'gold vermeil' %}
+      {% assign firstVariantTitle = 'Gold Vermeil' %}
+    {% elsif collection2.title contains 'Silver' %}
+      {% assign firstVariantTitle = 'Sterling Silver' %}
+    {% elsif product.title contains 'Solid Rose Gold' %}
+      {% assign firstVariantTitle = 'Solid Rose Gold' %}
+    {% elsif product.title contains 'Rose Gold' %}
+      {% assign firstVariantTitle = 'Rose Gold' %}
+    {% elsif product.handle contains 'silver' %}
+      {% assign firstVariantTitle = 'Sterling Silver' %}
+    {% endif %}
+  {% endfor %}
+
+  {% if product.metafields.custom_fields["variant_collection_reference"] != blank %}
+    {% assign collection1 = collections[product.metafields.custom_fields["variant_collection_reference"]] %}
+    <div class="bb variant-wrapper {% if isCollection %}is-collection{% endif %} {% if collection1.metafields.custom_fields["is_enamel_collection"] == 1 %}is-enamel{% endif %}">
+      {% for variant in collection1.products %}
+        {% assign collectionClass = '' %}
+        {% assign variantTitle = '' %}
+        {% for collection3 in variant.collections %}
+          {% if collection3.title contains 'Solid Gold' or variant.handle contains 'solid-gold' %}
+            {% assign collectionClass = 'solid-gold' %}
+            {% assign variantTitle = 'Solid Gold' %}
+          {% elsif collection3.title contains 'Gold Vermeil' or variant.handle contains 'gold' %}
+            {% assign collectionClass = 'gold-vermeil' %}
+            {% assign variantTitle = 'Gold Vermeil' %}
+          {% elsif collection3.title contains 'Silver' %}
+            {% assign collectionClass = 'silver' %}
+            {% assign variantTitle = 'Sterling Silver' %}
+          {% elsif variant.title contains 'Solid Rose Gold' %}
+            {% assign collectionClass = 'solid-rose-gold' %}
+            {% assign variantTitle = 'Solid Rose Gold' %}
+          {% elsif variant.title contains 'Rose Gold' %}
+            {% assign collectionClass = 'rose-gold' %}
+            {% assign variantTitle = 'Rose Gold' %}
+          {% elsif variant.handle contains 'silver' %}
+            {% assign collectionClass = 'silver' %}
+            {% assign variantTitle = 'Sterling Silver' %}
+          {% endif %}
+        {% endfor %}
+
+        {% if variant.metafields.custom_fields["variant_title"] != blank  %}
+          {% assign variantTitle = variant.metafields.custom_fields["variant_title"]  %}
+        {% endif %}
+
+        {% if collection1.metafields.custom_fields["is_enamel_collection"] == 1 %}
+          {% if forloop.index < 6 %}
+            {% render 'variant-swatch', product: product, variant: variant, quick_add: quick_add, isCollection: true, collectionClass: collectionClass, variantTitle: variantTitle %}
+          {% else %}
+            {% render 'variant-swatch', product: product, variant: variant, quick_add: quick_add, isCollection: true, collectionClass: collectionClass, variantTitle: variantTitle, isEnamel: true %}
+          {% endif %}
+        {% else %}
+          {% render 'variant-swatch', product: product, variant: variant, quick_add: quick_add, isCollection: true, collectionClass: collectionClass, variantTitle: variantTitle %}
+        {% endif %}
+      {% endfor  %}
+
+      {% if collection1.metafields.custom_fields["is_enamel_collection"] == 1 and collection1.products.size > 5 %}
+        <span class="variant-title colors enamel-{{ product.handle }}" onclick="$('div.variant.enamel-{{ product.handle }}').css('display','inline-block'); $('span.variant-title.enamel-{{ product.handle }}').hide();">+ {{ collection1.products.size | minus: 5 }} Colors</span>
+      {% else %}
+        <span class="variant-title"><span class="line">|</span>{{ firstVariantTitle }}</span>
+      {% endif %}
+    </div>
+  {% elsif product.metafields.custom_fields["hide_swatches"] != 1 %}
+    {% assign collectionClass = '' %}
+    {% assign variantTitle = '' %}
+    {% for collection4 in product.collections %}
+      {% if collection4.title contains 'Solid Gold' %}
+        {% assign collectionClass = 'solid-gold' %}
+        {% assign variantTitle = 'Solid Gold' %}
+      {% elsif collection4.title contains 'Gold Vermeil' %}
+        {% assign collectionClass = 'gold-vermeil' %}
+        {% assign variantTitle = 'Gold Vermeil' %}
+      {% elsif collection4.title contains 'Silver' %}
+        {% assign collectionClass = 'silver' %}
+        {% assign variantTitle = 'Sterling Silver' %}
+      {% elsif variant.title contains 'Solid Rose Gold' %}
+        {% assign collectionClass = 'solid-rose-gold' %}
+        {% assign variantTitle = 'Solid Rose Gold' %}
+      {% elsif variant.title contains 'Rose Gold' %}
+        {% assign collectionClass = 'rose-gold' %}
+        {% assign variantTitle = 'Rose Gold' %}
+      {% elsif product.handle contains 'silver' %}
+        {% assign collectionClass = 'silver' %}
+        {% assign variantTitle = 'Sterling Silver' %}
+      {% endif %}
+    {% endfor %}
+    <div class="xx variant-wrapper {% if isCollection %}is-collection{% endif %}">
+      {% render 'variant-swatch', product: product, variant: product, quick_add: quick_add, isCollection: true, collectionClass: collectionClass, variantTitle: variantTitle, noJS: true %}
+      <span class="variant-title"><span class="line">|</span>{{ firstVariantTitle }}</span>
+    </div>
+  {% endif %}
+{% endunless %}

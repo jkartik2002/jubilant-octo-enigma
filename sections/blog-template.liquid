@@ -1,0 +1,228 @@
+<section class="blog-home">
+  <div data-section-type="blog-template">
+    {% paginate blog.articles by 6 %}
+
+    <div class="text-center">
+      <h1 class="title" data-cc-animate>{{ blog.title }}</h1>
+    </div>
+
+    {% assign full_url = request.host | append: request.path %}
+
+    {% unless full_url contains '/tagged/' %}
+      <div class="feature-article">
+        {% if section.settings.featured_article != blank %}
+          {% assign article1 = articles[section.settings.featured_article] %}
+        {% else %}
+          {% assign article1 = blogs['the-jet-set-candy-blog'].articles[0] %}
+        {% endif %}
+        {% if article.metafields.custom_fields["banner_image"] != blank %}
+          {% assign blogImage = article.metafields.custom_fields["banner_image"] %}
+        {% else %}
+          {% assign blogImage = article1.image.src | img_url: '2000x' %}
+        {% endif %}
+        <img alt="{{ article1.title }}" class="feature w-100" src="{{ blogImage }}">
+        <div class="text-container flex-container-left-align">
+          <div class="text-wrapper">
+            <div class="date">{{ article1.published_at | date: '%B %d, %Y' }}</div>
+            <h2 class="title">{{ article1.title }}</h2>
+            <div class="desc">{{ article1.excerpt_or_content | strip_html | escape }}</div>
+            <a class="view-all-link" href="{{ article1.url }}">
+              READ MORE
+              <img alt="Right Arrow" class="arrow" src="{{ 'arrow-right.svg' | asset_url }}">
+            </a>
+          </div>
+        </div>
+      </div>
+    {% endunless %}
+
+    <div class="wrapper no-overflow">
+      <div class="col col-sidebar">
+        <div class="sidebar d-none d-lg-block">
+          <h3 class="subtitle">Categories</h3>
+          <a class="tag {% unless full_url contains '/tagged/' %}selected{% endunless %}" href="/blogs/the-jet-set-candy-blog">All Categories</a>
+          <a class="tag {% if full_url contains '/tagged/armchair-traveler' %}selected{% endif %}" href="/blogs/the-jet-set-candy-blog/tagged/armchair-traveler">Armchair Traveller</a>
+          <a class="tag {% if full_url contains '/tagged/events' %}selected{% endif %}" href="/blogs/the-jet-set-candy-blog/tagged/events">Events</a>
+          <a class="tag {% if full_url contains '/tagged/global-calendar' %}selected{% endif %}" href="/blogs/the-jet-set-candy-blog/tagged/global-calendar">Global Calendar</a>
+          <a class="tag {% if full_url contains '/tagged/jet-set-stories' %}selected{% endif %}" href="/blogs/the-jet-set-candy-blog/tagged/jet-set-stories">Jet Set Stories</a>
+          <a class="tag {% if full_url contains '/tagged/perfect-packables' %}selected{% endif %}" href="/blogs/the-jet-set-candy-blog/tagged/perfect-packables">Perfect Packables</a>
+          <a class="tag {% if full_url contains '/tagged/stylish-souvenirs' %}selected{% endif %}" href="/blogs/the-jet-set-candy-blog/tagged/stylish-souvenirs">Stylish Souvenirs</a>
+          <a class="tag {% if full_url contains '/tagged/the-musts' %}selected{% endif %}" href="/blogs/the-jet-set-candy-blog/tagged/the-musts">The Musts</a>
+          <a class="tag {% if full_url contains '/tagged/travel-makes-life-sweet' %}selected{% endif %}" href="/blogs/the-jet-set-candy-blog/tagged/travel-makes-life-sweet">Travel Makes Life Sweet</a>
+        </div>
+        <select id="mobile-tag-picker" class="noreplace d-block d-lg-none">
+          <option value="all">All Categories</option>
+          <option value="armchair-traveler">Armchair Traveller</option>
+          <option value="events">Events</option>
+          <option value="global-calendar">Global Calendar</option>
+          <option value="jet-set-stories">Jet Set Stories</option>
+          <option value="perfect-packables">Perfect Packables</option>
+          <option value="stylish-souvenirs">Stylish Souvenirs</option>
+          <option value="the-musts">The Musts</option>
+          <option value="travel-makes-life-sweet">Travel Makes Life Sweet</option>
+        </select>
+        <script>
+          $('#mobile-tag-picker').on('change', function() {
+            var value = $(this).val();
+            if(value == 'all') {
+              window.location.href = '/blogs/the-jet-set-candy-blog';
+            } else {
+              window.location.href = `/blogs/the-jet-set-candy-blog/tagged/${value}`;
+            }
+          })
+
+          {% if full_url contains '/tagged/armchair-traveler' %}
+            $('#mobile-tag-picker').val('armchair-traveler');
+          {% elsif full_url contains '/tagged/events' %}
+            $('#mobile-tag-picker').val('events');
+          {% elsif full_url contains '/tagged/global-calendar' %}
+            $('#mobile-tag-picker').val('global-calendar');
+          {% elsif full_url contains '/tagged/jet-set-stories' %}
+            $('#mobile-tag-picker').val('jet-set-stories');
+          {% elsif full_url contains '/tagged/perfect-packables' %}
+            $('#mobile-tag-picker').val('perfect-packables');
+          {% elsif full_url contains '/tagged/stylish-souvenirs' %}
+            $('#mobile-tag-picker').val('stylish-souvenirs');
+          {% elsif full_url contains '/tagged/the-musts' %}
+            $('#mobile-tag-picker').val('the-musts');
+          {% elsif full_url contains '/tagged/travel-makes-life-sweet' %}
+            $('#mobile-tag-picker').val('travel-makes-life-sweet');
+          {% endif %}
+        </script>
+      </div>
+      <div class="col col-articles">
+        <div class="wrapper">
+        {% for article in blog.articles %}
+          {% assign mod = forloop.index | modulo: 4 %}
+          {% if mod == 0 or mod == 1 %}
+            {% assign style = '' %}
+          {% elsif mod == 2 %}
+            {% assign style = 'circle' %}
+          {% elsif mod == 3 %}
+            {% assign style = 'arch' %}
+          {% endif %}
+          <div class="col">
+            <a href="{{ article.url }}">
+              {% assign img_url = article.image.src | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+              <img 
+                class="w-100 {{ mod }} {{ style }} lazyload"
+                alt="{{ article.title | escape | strip }}"
+                data-src="{{ img_url }}"
+                data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+                data-aspectratio="{{ article.image.aspect_ratio }}"
+                data-sizes="auto"
+                width="{{ article.image.width }}"
+                height="{{ article.image.height }}"
+                data-cc-animate="cc-fade-in-up"
+                data-cc-animate-delay="0.1s"
+              />
+            </a>
+            <div class="date">{{ article.published_at | date: '%B %d, %Y' }}</div>
+            <a href="{{ article.url }}">
+              <h3 class="title">{{ article.title }}</h3>
+            </a>
+            <div class="desc">{{ article.excerpt_or_content | strip_html | escape }}</div>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    {% comment %} {% if blog.all_tags.size > 0 %}
+    <div class="option align-center option--gap-top" data-cc-animate  data-cc-animate-delay="0.2s">
+      <label for="filter-by">{{ 'blogs.filtering.filter_by' | t }}</label>
+      <select id="filter-by" class="redirecter">
+        <option value="{{ blog.url }}">{{ 'blogs.filtering.all' | t }}</option>
+        {% for tag in blog.all_tags %}
+        <option value="{{ blog.url }}/tagged/{{ tag | handle }}" {% if current_tags contains tag %}selected{% endif %}>{{ tag | capitalize }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    {% endif %} {% endcomment %}
+
+
+    {% comment %} <div class="articles">
+      {% for article in blog.articles %}
+      <article class="article content-row" data-cc-animate>
+        {% if article.image %}
+        <div class="article-image no-side-pad">
+          <a data-cc-animate-click href="{{ article.url }}">
+            {% render 'responsive-image', image: article.image %}
+          </a>
+        </div>
+        {% endif %}
+
+        <h2>
+          <a data-cc-animate-click href="{{ article.url }}">{{ article.title }}</a>
+        </h2>
+
+        {% if section.settings.blog_show_date or section.settings.blog_show_author %}
+          <div class="feature-subheader">
+            {%- if section.settings.blog_show_date -%}
+              <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_date_year' }}</time>
+            {%- endif -%}
+
+            {%- if section.settings.blog_show_author -%}
+              {%- if section.settings.blog_show_date -%},&nbsp;{%- endif -%}
+              <span class="author">{{ article.author }}</span>
+            {%- endif -%}
+          </div>
+        {% endif %}
+
+        <div class="rte rte--allow-full-width-images">
+          {% if article.excerpt != blank %}
+            {{ article.excerpt }}
+          {% else %}
+            <p>{{ article.content | strip_html | truncatewords: 100 }}</p>
+          {% endif %}
+        </div>
+        <a data-cc-animate class="blog-read-more" href="{{ article.url }}">{{ 'blogs.article.read_more' | t }}</a>
+      </article>
+
+      {% else %}
+        <p class="align-centre"><em>{{ 'blogs.general.no_matches' | t }}</em></p>
+      {% endfor %}
+
+    </div> {% endcomment %}
+
+    {% if paginate.pages > 1 %}
+    <div class="pagination">
+      {% comment %}
+      When paginating blog articles, a previous article is actually a newer article, not an older one,
+      because blog articles are shown and paginated in a reversed chronological order.
+      The word 'previous' can be confusing, hence we'll change it.
+      {% endcomment %}
+      {% assign older_articles = 'blogs.pagination.older_articles' | t %}
+      {% assign newer_articles = 'blogs.pagination.newer_articles' | t %}
+      {{ paginate | default_pagination | replace: 'Previous', newer_articles | replace: 'Next', older_articles }}
+    </div>
+    {% endif %}
+
+    {% assign dm_paginate_by = paginate.page_size %}{% endpaginate %}
+  </div>
+</section>
+
+
+{% if dm_paginate_by %}{% render 'spurit_dmr_collection_template_snippet', paginate_by: dm_paginate_by %}{% endif %}{% schema %}
+  {
+    "name": "Blog pages",
+    "settings": [
+      {
+        "type": "article",
+        "id": "featured_article",
+        "label": "Featured Article"
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_show_author",
+        "label": "Show author",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_show_date",
+        "label": "Show date",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}

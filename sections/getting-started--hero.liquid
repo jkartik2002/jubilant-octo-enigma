@@ -1,0 +1,321 @@
+<section class="getting-started--hero">
+  <h1 class="title">{{ section.settings.title }}</h1>
+  <div class="desc">{{ section.settings.desc }}</div>
+</section>
+
+
+<section class="getting-started--collection">
+  <hr class="gs-line">
+  <h2 class="title">{{ section.settings.title-2 }}</h2>
+
+  <div class="wrapper">
+    <div class="column left">
+      <a href="{{ section.settings.c-cta-url-1 }}">
+        {% assign img_url = section.settings.c-image-1 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+        <img 
+          class="d-none d-lg-block lazyload"
+          src="{{ section.settings.c-image-1 | img_url: '360x' }}"
+          alt="{{ section.settings.c-title-1 | escape | strip }}"
+          data-src="{{ img_url }}"
+          data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+          data-aspectratio="{{ section.settings.c-image-1.aspect_ratio }}"
+          data-sizes="auto"
+          style="display: block; width: 100%; height: auto;"
+          width="{{ section.settings.c-image-1.width }}"
+          height="{{ section.settings.c-image-1.height }}"
+          data-cc-animate="cc-fade-in-up"
+        />
+        {% assign img_url = section.settings.c-image-1-xs | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+        <img 
+          class="d-block d-lg-none lazyload"
+          {% if forloop == 1 %}
+          src="{{ section.settings.c-image-1-xs | img_url: '360x' }}"
+          {% endif %}
+          alt="{{ section.settings.c-title-1 | escape | strip }}"
+          data-src="{{ img_url }}"
+          data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+          data-aspectratio="{{ section.settings.c-image-1-xs.aspect_ratio }}"
+          data-sizes="auto"
+          style="display: block; width: 100%; height: auto;"
+          width="{{ section.settings.c-image-1-xs.width }}"
+          height="{{ section.settings.c-image-1-xs.height }}"
+          data-cc-animate="cc-fade-in-up"
+        />
+      </a>
+      <h2 class="title d-none d-lg-block">{{ section.settings.c-title-1 }}</h2>
+      <div class="desc">{{ section.settings.c-desc-1 }}</div>
+      <a class="cta" href="{{ section.settings.c-cta-url-1 }}">{{ section.settings.c-cta-button-text-1 }}</a>
+    </div>
+    <div class="column right">
+      <a href="{{ section.settings.c-cta-url-2 }}">
+        {% assign img_url = section.settings.c-image-2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+        <img 
+          class="d-none d-lg-block lazyload"
+          src="{{ section.settings.c-image-2 | img_url: '360x' }}"
+          alt="{{ section.settings.c-title-2 | escape | strip }}"
+          data-src="{{ img_url }}"
+          data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+          data-aspectratio="{{ section.settings.c-image-2.aspect_ratio }}"
+          data-sizes="auto"
+          style="display: block; width: 100%; height: auto;"
+          width="{{ section.settings.c-image-2.width }}"
+          height="{{ section.settings.c-image-2.height }}"
+          data-cc-animate="cc-fade-in-up"
+        />
+        {% assign img_url = section.settings.c-image-2-xs | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+        <img 
+          class="d-block d-lg-none lazyload"
+          {% if forloop == 1 %}
+          src="{{ section.settings.c-image-2-xs | img_url: '360x' }}"
+          {% endif %}
+          alt="{{ section.settings.c-title-2 | escape | strip }}"
+          data-src="{{ img_url }}"
+          data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+          data-aspectratio="{{ section.settings.c-image-2-xs.aspect_ratio }}"
+          data-sizes="auto"
+          style="display: block; width: 100%; height: auto;"
+          width="{{ section.settings.c-image-2-xs.width }}"
+          height="{{ section.settings.c-image-2-xs.height }}"
+          data-cc-animate="cc-fade-in-up"
+        />
+      </a>
+      <h2 class="title d-none d-lg-block">{{ section.settings.c-title-2 }}</h2>
+      <div class="desc">{{ section.settings.c-desc-2 }}</div>
+      <a class="cta" href="{{ section.settings.c-cta-url-2 }}">{{ section.settings.c-cta-button-text-2 }}</a>
+    </div>
+  </div>
+  <div class="wrapper">
+    <div class="column left">
+      <a href="{{ section.settings.c-cta-url-3 }}">
+        {% assign img_url = section.settings.c-image-3 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+        <img 
+          class="special d-none d-lg-block lazyload"
+          alt="{{ section.settings.c-title-3 | escape | strip }}"
+          data-src="{{ img_url }}"
+          data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+          data-aspectratio="{{ section.settings.c-image-3.aspect_ratio }}"
+          data-sizes="auto"
+          style="display: block; width: 100%; height: auto;"
+          width="{{ section.settings.c-image-3.width }}"
+          height="{{ section.settings.c-image-3.height }}"
+          data-cc-animate="cc-fade-in-up"
+        />
+        {% assign img_url = section.settings.c-image-3-xs | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+        <img 
+          class="special d-block d-lg-none lazyload"
+          {% if forloop == 1 %}
+          src="{{ section.settings.c-image-3-xs | img_url: '360x' }}"
+          {% endif %}
+          alt="{{ section.settings.c-title-3 | escape | strip }}"
+          data-src="{{ img_url }}"
+          data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+          data-aspectratio="{{ section.settings.c-image-3-xs.aspect_ratio }}"
+          data-sizes="auto"
+          style="display: block; width: 100%; height: auto;"
+          width="{{ section.settings.c-image-3-xs.width }}"
+          height="{{ section.settings.c-image-3-xs.height }}"
+          data-cc-animate="cc-fade-in-up"
+        />
+      </a>
+      <h2 class="title">{{ section.settings.c-title-3 }}</h2>
+      <div class="desc">{{ section.settings.c-desc-3 }}</div>
+      <a class="cta" href="{{ section.settings.c-cta-url-3 }}">{{ section.settings.c-cta-button-text-3 }}</a>
+    </div>
+    <div class="column right">
+      <a href="{{ section.settings.c-cta-url-4 }}">
+        {% assign img_url = section.settings.c-image-4 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+        <img 
+          class="d-none d-lg-block lazyload"
+          alt="{{ section.settings.c-title-4 | escape | strip }}"
+          data-src="{{ img_url }}"
+          data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+          data-aspectratio="{{ section.settings.c-image-4.aspect_ratio }}"
+          data-sizes="auto"
+          style="display: block; width: 100%; height: auto;"
+          width="{{ section.settings.c-image-4.width }}"
+          height="{{ section.settings.c-image-4.height }}"
+          data-cc-animate="cc-fade-in-up"
+        />
+        {% assign img_url = section.settings.c-image-4-xs | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+        <img 
+          class="d-block d-lg-none lazyload"
+          {% if forloop == 1 %}
+          src="{{ section.settings.c-image-4-xs | img_url: '360x' }}"
+          {% endif %}
+          alt="{{ section.settings.c-title-4 | escape | strip }}"
+          data-src="{{ img_url }}"
+          data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+          data-aspectratio="{{ section.settings.c-image-4-xs.aspect_ratio }}"
+          data-sizes="auto"
+          style="display: block; width: 100%; height: auto;"
+          width="{{ section.settings.c-image-4-xs.width }}"
+          height="{{ section.settings.c-image-4-xs.height }}"
+          data-cc-animate="cc-fade-in-up"
+        />
+      </a>
+      <h2 class="title">{{ section.settings.c-title-4 }}</h2>
+      <div class="desc">{{ section.settings.c-desc-4 }}</div>
+      <a class="cta" href="{{ section.settings.c-cta-url-4 }}">{{ section.settings.c-cta-button-text-4 }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Hero",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "desc",
+        "label": "Text"
+      },
+      {
+        "type": "header",
+        "content": "General"
+      },
+      {
+        "type": "text",
+        "id": "title-2",
+        "label": "Title",
+        "default": "Start Your Collection Today!"
+      },
+      {
+        "type": "image_picker",
+        "id": "c-image-1",
+        "label": "Image 1 - Desktop"
+      },
+      {
+        "type": "image_picker",
+        "id": "c-image-1-xs",
+        "label": "Image 1 - Mobile"
+      },
+      {
+        "type": "text",
+        "id": "c-title-1",
+        "label": "Title 1",
+        "default": "Luggage Tag Starter Set"
+      },
+      {
+        "type": "text",
+        "id": "c-desc-1",
+        "label": "Desc 1",
+        "default": "Don’t know where to start? You can’t go wrong with a starter set!"
+      },
+      {
+        "type": "url",
+        "id": "c-cta-url-1",
+        "label": "URL 1"
+      },
+      {
+        "type": "text",
+        "id": "c-cta-button-text-1",
+        "label": "Button Text 1",
+        "default": "SHOP NOW"
+      },
+      {
+        "type": "image_picker",
+        "id": "c-image-2",
+        "label": "Image 2 - Desktop"
+      },
+      {
+        "type": "image_picker",
+        "id": "c-image-2-xs",
+        "label": "Image 2 - Mobile"
+      },
+      {
+        "type": "text",
+        "id": "c-title-2",
+        "label": "Title 2",
+        "default": "Passport Starter Set"
+      },
+      {
+        "type": "text",
+        "id": "c-desc-2",
+        "label": "Desc 2",
+        "default": "Don’t know where to start? You can’t go wrong with a starter set!"
+      },
+      {
+        "type": "url",
+        "id": "c-cta-url-2",
+        "label": "URL 2"
+      },
+      {
+        "type": "text",
+        "id": "c-cta-button-text-2",
+        "label": "Button Text 2",
+        "default": "SHOP NOW"
+      },
+      {
+        "type": "image_picker",
+        "id": "c-image-3",
+        "label": "Image 3 - Desktop"
+      },
+      {
+        "type": "image_picker",
+        "id": "c-image-3-xs",
+        "label": "Image 3 - Mobile"
+      },
+      {
+        "type": "text",
+        "id": "c-title-3",
+        "label": "Title 3",
+        "default": "Shopping for a gift?"
+      },
+      {
+        "type": "text",
+        "id": "c-desc-3",
+        "label": "Desc 3",
+        "default": "These gift guides are made for you."
+      },
+      {
+        "type": "url",
+        "id": "c-cta-url-3",
+        "label": "URL 3"
+      },
+      {
+        "type": "text",
+        "id": "c-cta-button-text-3",
+        "label": "Button Text 3",
+        "default": "SHOP NOW"
+      },
+      {
+        "type": "image_picker",
+        "id": "c-image-4",
+        "label": "Image 4 - Desktop"
+      },
+      {
+        "type": "image_picker",
+        "id": "c-image-4-xs",
+        "label": "Image 4 - Mobile"
+      },
+      {
+        "type": "text",
+        "id": "c-title-4",
+        "label": "Title 4",
+        "default": "Lorem Ipsum Dolor"
+      },
+      {
+        "type": "text",
+        "id": "c-desc-4",
+        "label": "Desc 4",
+        "default": "Lorem ipsum dolor sit amet, consectetur adipiscing."
+      },
+      {
+        "type": "url",
+        "id": "c-cta-url-4",
+        "label": "URL 4"
+      },
+      {
+        "type": "text",
+        "id": "c-cta-button-text-4",
+        "label": "Button Text 4",
+        "default": "SHOP NOW"
+      }
+    ]
+  }
+{% endschema %}

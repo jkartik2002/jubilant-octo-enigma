@@ -1,0 +1,597 @@
+{% assign promo_color = "#2a2a5f" %}
+
+.saso-notification {
+  z-index: 2147483647;
+  display: none;
+  left: 0px;
+  width: 100%;
+  margin: 0px;
+  padding: 5px;
+  font-size: 14px;
+  text-align: center;
+
+  p {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+  a {
+    font-weight: bold;
+  }
+
+}
+
+.saso-notification-x {
+  font-weight: bold;
+  float:right;
+  height: 0;
+  overflow: visible;
+  margin-right: 2em;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+
+  a {
+  	text-decoration: none;
+    font-weight: 400;
+    font-family: 'Nunito Sans';
+  }
+}
+
+.saso-price {
+  color: {{promo_color}};
+  font-weight: bold;
+  display: inline !important;
+}
+
+
+
+.saso-volumes, .saso-bundle {
+  margin-top: 10px;
+  clear: both;
+}
+
+.saso-volumes {
+  .saso-volume-discount-tiers {
+    text-transform: uppercase;
+    background-color: #d2fded;
+    padding: 5px 10px;
+    display: inline-block;
+
+    h4 {
+      font-size: 14px;
+      text-align: left;
+      color: #2A2A5F;
+    }
+  }
+}
+
+.saso-volume-discount-tiers .saso-table {
+  display: none;
+
+  margin-top: 6px;
+  border-collapse: collapse;
+  /*text-align: center;*/
+
+  thead {
+  }
+
+  tbody {
+    tr:nth-child(even) {
+      background: #f8f8f8;
+      color: #2a2a5f;
+    }
+    tr:nth-child(odd) {
+      background: #ececec;
+      color: #2a2a5f;
+    }
+
+    .saso-add-to-cart {
+      font-weight: bold;
+    }
+  }
+
+  th, td {
+  	border: 1px solid #e6e6e6;
+    padding: 4px;
+  }
+
+}
+
+
+.saso-cross-sell-popup {
+  position: relative;
+  color: #2a2a5f;
+  width: auto;
+  min-width: 250px;
+  margin: 20px auto;
+  text-transform: none;
+  background-color: #DEFEF2;
+  padding: 25px;
+  padding-right: 0;
+  clear: both; /* some product pages have floats, required when embedded */
+
+  .saso-message {
+    font-size: 24px;
+    line-height: 1.2;
+    color: #2A2A5F;
+    padding-right: 25px;
+    font-weight: 500;
+    font-family: futura-pt,sans-serif !important;
+  }
+
+  .saso-products-container {
+    display: block;
+	overflow: auto;
+  }
+
+  table {
+    table-layout: fixed;
+    width: auto;
+    min-width: 180px;
+    margin: auto;
+    border: 0 !important;
+  }
+  tr {
+    border-top: 1px solid #DCDCDC;
+    /*border-bottom: 1px solid #DCDCDC;*/
+  }
+  tr:first-child th:after, tr:first-child td:after {
+    border-bottom: 0 !important;
+  }
+
+  td {
+    border: 0 !important;
+    padding: 14px 40px 8px 0 !important; /* some themes have padding first-child 0px */
+    display: table-cell !important;
+  }
+
+  .saso-product-container {
+    width: 160px;
+    vertical-align: top;
+  }
+
+  .saso-image {
+    width: 180px;
+    height: 180px;
+    line-height: 180px;
+    margin: auto;
+    text-align: center;
+    display: block;
+    overflow: hidden;
+  }
+  .saso-image img {
+    width: auto;
+    height: auto;
+    max-width: 180px;
+    max-height: 180px;
+    vertical-align: middle;
+    margin: 0 auto;
+    display: inline-block;
+  }
+
+  .saso-title {
+    margin: 21px 0px 7px;
+    min-height: 40px;
+    font-weight: 500;
+    text-align: left;
+    font-size: 18px;
+    line-height: 20px;
+    font-family: futura-pt,sans-serif !important;
+
+    @media (max-width: 1099px) {
+      min-height: 60px;
+    }
+  }
+
+  .saso-variants-container {
+    min-height: 24px; /* don't use height, will overlap with next row */
+    margin: 4px 0px;
+    display: none;
+  }
+  .saso-variants {
+    width: 100%;
+    padding-right: 0px !important;
+    padding: 2px 2px 2px 10px;
+    font-size: 14px;
+   	/*
+  	background: transparent url(https://cdn.shopify.com/s/files/1/0653/0119/t/1/assets/select.png) no-repeat right;
+  	*/
+  }
+
+  .saso-price, .saso-was-price {
+    font-weight: bold;
+    font-family: futura-pt,sans-serif !important;
+    font-size: 14px;
+  }
+  .saso-price {
+    color: #F45EF4;
+  }
+  .saso-was-price {
+    color: #606A8A;
+    text-decoration: line-through;
+  }
+  .saso-was-price:empty {
+    display:none;
+  }
+
+  .saso-add-to-cart, button.saso-click-here {
+    background: #FFFFFF;
+    color: #2A2A5F;
+    height: 44px;
+    width: 100%;
+    line-height: 3;
+    border: 1px solid #2A2A5F;
+    margin: 14px 0px 10px;
+    font-family: futura-pt,sans-serif !important;
+    padding: 0 20px !important;
+    font-weight: 700;
+    float: none !important;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+
+    @media (max-width: 1099px) {
+      padding: 0 5px !important;
+      height: 41px;
+      font-size: 12px;
+    }
+  }
+  button.saso-click-here {
+    width: auto;
+  }
+
+
+  a.saso-click-here {
+    color: #ffffff;
+  }
+  a.saso-click-here:hover {
+    opacity: 0.9;
+  }
+
+  a.saso-close {
+    float: none !important;
+    display: block;
+    margin: 10px 0 0 0;
+  }
+}
+
+
+.saso-cross-sell-popup0 {
+  padding: 60px;
+}
+
+
+.saso-bundle-popup {
+  background: #f4f4f4;
+  padding: 2px;
+
+  .saso-message {
+  	color: #fe19f5;
+  }
+
+  .saso-product-container {
+    width: 160px;
+    display: inline-block;
+  }
+
+  .saso-image {
+    width: 160px;
+    height: 160px;
+    line-height: 160px;
+    position: relative;
+  }
+  .saso-image img {
+    max-width: 160px;
+    max-height: 160px;
+  }
+
+  .saso-product-container .saso-price {
+    text-decoration: line-through;
+  }
+
+  .saso-quantity-container, .saso-plus-container, .saso-equal-container {
+    color: {{promo_color}};
+    font-weight: bold;
+	  font-size: 60px;
+  	display: inline-block;
+  }
+  .saso-quantity-container {
+	  font-size: 30px;
+    vertical-align: top;
+    position: absolute;
+    top: -60px;
+    left: 0px;
+    z-index: 100;
+  }
+  .saso-plus-container {
+    vertical-align: top;
+    padding-top: 35px;
+    width: 10px;
+  }
+  .saso-plus-container-inner {
+    position: relative;
+    margin-left: -14px;
+    z-index: 100;
+  }
+  .saso-plus-container:last-child {
+    display: none !important;
+  }
+
+  .saso-bundle-row {
+    border-top: 0px solid #DCDCDC;
+    td {
+      padding: 0px 10px !important;
+    }
+  }
+
+  .saso-bundle-price-container {
+	  font-size: 36px;
+    padding: 0px 0px 0px 10px !important;
+  }
+
+  .saso-bundle-success {
+    display: none;
+  }
+}
+
+
+.saso-cart-item-discount-notes, .saso-cart-item-upsell-notes {
+  display: block;
+  color: #fe19f5;
+  a {
+    color: #fe19f5;
+  }
+}
+
+.saso-cart-item-upsell-notes {
+  font-weight: bold;
+}
+
+.saso-cart-item-price, .saso-cart-item-line-price {
+  .original_price {
+    text-decoration: line-through;
+    font-weight: 500;
+    display: inline-block;
+  }
+  .discounted_price {
+    font-weight: 600;
+    color: #FE19F5;
+    margin-left: 5px;
+  }
+}
+
+.saso-cart-total {
+  display: block;
+  font-weight: bold;
+}
+
+.saso-summary {
+  font-size: 14px;
+}
+
+.saso-cart-offers {
+  @media (max-width: 1099px) {
+    width: calc(100% + 25px);
+    margin-bottom: 10px;
+  }
+
+  .saso-hide-when-embedded {
+  	display: none;
+  }
+
+  .title {
+    padding: 0px !important;
+    height: auto;
+  }
+}
+
+
+.saso-use-discount-code-cart-container {
+  margin: 4px 0 4px 0;
+
+  input {
+    display: inline !important;
+    width: auto;
+    max-width: 16em;
+  }
+  button {
+    margin: 0px 0px;
+  }
+
+}
+
+.saso-use-discount-code-cart-container::after {
+  margin-top: 3px;
+  background-color: rgba(175,175,175,0.34);
+  content: '';
+  display: block;
+  height: 1px;
+  transition: background-color 0.3s cubic-bezier(0.3, 0, 0, 1);
+  width: 100%;
+  z-index: 4;
+}
+
+.saso-use-discount-code-cart-code {
+  display: inline !important;
+  max-width: 10em !important;
+}
+
+.saso-use-discount-instead-container {
+  border: 2px solid #91FCD4;
+  padding: 15px 30px 20px;
+
+  div.title {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 23px;
+    font-family: futura-pt,sans-serif !important;
+    margin-bottom: 9px;
+    color: #2A2A5F;
+
+    @media (max-width: 1099px) {
+      margin-bottom: 20px;
+    }
+  }
+  label {
+    font-family: futura-pt,sans-serif !important;
+    font-size: 16px;
+    line-height: 24px;
+    color: #2A2A5F;
+    text-transform: initial;
+    letter-spacing: 0;
+
+    input {
+      margin-right: 10px;
+      border: 1px solid #D8D8D8;
+      width: 22px;
+      height: 22px;
+      border-radius: 0 !important;
+      appearance: none;
+      position: relative;
+      transition: .2s all;
+
+      &:checked {
+        border: none;
+        background-color: #2A2A5F;
+
+        &::before {
+          content: "";
+          width: 10px;
+          height: 6px;
+          border: 2px solid white;
+          border-top: none;
+          border-right: none;
+          -ms-transform: rotate(-50deg);
+          -webkit-transform: rotate(-50deg);
+          transform: rotate(-50deg);
+          -ms-box-sizing: border-box;
+          -webkit-box-sizing: border-box;
+          position: absolute;
+          top: 7px;
+          left: 5px;
+        }
+      }
+    }
+  }
+}
+
+
+
+/* mobile */
+@media (max-width: 960px) {
+
+  .saso-notification {
+    font-size: 14px;
+  }
+  .saso-notification-x {
+    font-size: 16px;
+    margin-right: 15px;
+    margin-top: 3px;
+  }
+
+
+  .saso-cross-sell-popup {
+    min-width: 260px;
+    margin-left: -24px;
+    width: calc(100% + 48px);
+    max-width: none;
+    margin-bottom: 0;
+
+    .saso-message {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .saso-title {
+      font-size: 16px;
+    }
+
+    .saso-image {
+      width: 120px;
+      height: 120px;
+      line-height: 120px;
+    }
+    .saso-image img {
+      max-width: 120px;
+      max-height: 120px;
+    }
+
+  }
+
+  .saso-bundle-popup {
+    .saso-product-container {
+      width: 120px;
+    }
+    .saso-bundle-price-container {
+	  font-size: 24px;
+    }
+    .saso-quantity-container, .saso-plus-container, .saso-equal-container {
+      font-size: 24px;
+    }
+  }
+
+  /*
+  ::-webkit-scrollbar {
+      -webkit-appearance: none;
+  }
+*/
+  ::-webkit-scrollbar:vertical {
+      width: 24px;
+  }
+
+  ::-webkit-scrollbar:horizontal {
+      height: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+      background-color: #2A2A5F;
+      border-radius: 10px;
+      border: 2px solid #ffffff;
+  }
+
+  ::-webkit-scrollbar-track {
+      border-radius: 10px;
+      background-color: #BAD4D5;
+  }
+}
+
+
+
+.amazon-payments-pay-button:hover {
+    cursor: pointer;
+}
+
+
+.saso-products-container tr{border:0px !important;}
+
+span.saso-cart-original-total, .saso-cart-total {
+    width: auto !important;
+}
+
+.saso-cart-total {
+    margin-left: 0.5em;
+  	font-weight: 700 !important;
+}
+
+/* Custom Scrollbar*/
+.saso-cart-offers .saso-products-container {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  padding-bottom: 1em;
+}
+.saso-cart-offers .saso-products-container::-webkit-scrollbar {
+    background-color: #2a2a5f51;
+    border-radius: 10px;
+    width: 10px;
+    height: 5px;
+}
+.saso-cart-offers .saso-products-container::-webkit-scrollbar-thumb{
+    background-color: #2A2A5F!important;
+    border-radius: 10px;
+    border: 5px solid #2A2A5F;
+}
+/* End of Custom Scrollbar */
+.saso-use-discount-code-cart-container {
+  display: none;
+}

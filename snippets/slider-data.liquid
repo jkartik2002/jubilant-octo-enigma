@@ -1,0 +1,186 @@
+<section class="gift-guide-section">  
+  <style>
+  .image-with-text-car-section.nosto_element { padding-left: 0; padding-right: 0; }
+  .image-with-text-car-section { padding-top: 40px; padding-bottom: 40px; }
+  .image-with-text-item { width: 24%; padding: 0 10px; display: block; }
+  .car-image img, .car-image { width: 100%; }
+  .image-with-text-car-section .flickity-prev-next-button.previous { left: 20px; }
+  .image-with-text-car-section .flickity-prev-next-button.next { right: 20px; }
+  .image-with-text-car-section button.flickity-button[disabled] { display: none; }
+  .car-content { font-family: futura-pt, sans-serif; font-weight: 500; color: #2a2a5f; line-height: 20px; font-size: 17px; margin-bottom: 8px; padding-top: 10px; }
+  .image-with-text-car-section:not(.flickity-enabled) { display:flex; overflow: hidden; }
+  .image-with-text-car-section:not(.flickity-enabled) .image-with-text-item { min-width: 22%; }
+  @media(max-width:991px) {
+    .image-with-text-car-section .flickity-button { width: 35px; height: 35px; }
+    .image-with-text-item { width: calc(100% / 3); padding: 0 10px; }
+    .image-with-text-car-section:not(.flickity-enabled) .image-with-text-item { min-width: calc(100% / 3); }
+  }
+  @media(max-width:767px) {
+    .image-with-text-car-section .flickity-button { display: none; }
+    .image-with-text-car-section { padding-top: 20px; padding-bottom: 20px; }
+    .image-with-text-item { width: 45%; padding: 0 10px; }
+    .image-with-text-car-section:not(.flickity-enabled) .image-with-text-item { min-width: 40%; }
+  }
+  @media(max-width:1099px) {
+    .image-with-text-car-section .flickity-prev-next-button.previous { left: 20px; }
+  }
+  </style>
+  
+    <div class="image-with-text-car-section" data-flickity='{"adaptiveHeight": true, "freeScroll": false, "contain": true, "pageDots": false, "prevNextButtons": true, "cellAlign": "left", "draggable": true}'>
+    {% if block.settings.image1 != blank %}
+      <a href="{{ block.settings.link1 }}"  class="image-with-text-item">
+        {% if block.settings.image1 != blank %}
+          <div class="car-image">
+            <img src="{{ block.settings.image1 | img_url: 'master' }}" width="400" height="520" alt="{{ block.settings.text1 }}">
+          </div>
+        {% endif %}
+        {%  if block.settings.text1 != blank %} 
+          <div class="car-content">{{ block.settings.text1 }} </div>
+        {% endif %}
+      </a>
+    {% endif %}
+     {% if block.settings.image2 != blank %}
+      <a href="{{ block.settings.link2 }}"  class="image-with-text-item">
+        {% if block.settings.image2 != blank %}
+          <div class="car-image">
+            <img src="{{ block.settings.image2 | img_url: 'master' }}" width="400" height="520" alt="{{ block.settings.text2 }}">
+          </div>
+        {% endif %}
+        {%  if block.settings.text2 != blank %} 
+          <div class="car-content">{{ block.settings.text2 }} </div>
+        {% endif %}
+      </a>
+    {% endif %}
+     {% if block.settings.image3 != blank %}
+      <a href="{{ block.settings.link3 }}"  class="image-with-text-item">
+        {% if block.settings.image3 != blank %}
+          <div class="car-image">
+            <img src="{{ block.settings.image3 | img_url: 'master' }}" width="400" height="520" alt="{{ block.settings.text3 }}">
+          </div>
+        {% endif %}
+        {%  if block.settings.text3 != blank %} 
+          <div class="car-content">{{ block.settings.text3 }} </div>
+        {% endif %}
+      </a>
+    {% endif %}
+     {% if block.settings.image4 != blank %}
+      <a href="{{ block.settings.link4 }}"  class="image-with-text-item">
+        {% if block.settings.image4 != blank %}
+          <div class="car-image">
+            <img src="{{ block.settings.image4 | img_url: 'master' }}" width="400" height="520" alt="{{ block.settings.text4 }}">
+          </div>
+        {% endif %}
+        {%  if block.settings.text4 != blank %} 
+          <div class="car-content">{{ block.settings.text4 }} </div>
+        {% endif %}
+      </a>
+    {% endif %}
+     {% if block.settings.image5 != blank %}
+      <a href="{{ block.settings.link5 }}"  class="image-with-text-item">
+        {% if block.settings.image5 != blank %}
+          <div class="car-image">
+            <img src="{{ block.settings.image5 | img_url: 'master' }}" width="400" height="520" alt="{{ block.settings.text5 }}">
+          </div>
+        {% endif %}
+        {%  if block.settings.text5 != blank %} 
+          <div class="car-content">{{ block.settings.text5 }} </div>
+        {% endif %}
+      </a>
+    {% endif %}
+     {% if block.settings.image6 != blank %}
+      <a href="{{ block.settings.link6 }}"  class="image-with-text-item">
+        {% if block.settings.image6 != blank %}
+          <div class="car-image">
+            <img src="{{ block.settings.image6 | img_url: 'master' }}" width="400" height="520" alt="{{ block.settings.text6 }}">
+          </div>
+        {% endif %}
+        {%  if block.settings.text6 != blank %} 
+          <div class="car-content">{{ block.settings.text6 }} </div>
+        {% endif %}
+      </a>
+    {% endif %}
+     {% if block.settings.image7 != blank %}
+      <a href="{{ block.settings.link7 }}"  class="image-with-text-item">
+        {% if block.settings.image7 != blank %}
+          <div class="car-image">
+            <img src="{{ block.settings.image7 | img_url: 'master' }}" width="400" height="520" alt="{{ block.settings.text7 }}">
+          </div>
+        {% endif %}
+        {%  if block.settings.text7 != blank %} 
+          <div class="car-content">{{ block.settings.text7 }} </div>
+        {% endif %}
+      </a>
+    {% endif %}
+     {% if block.settings.image8 != blank %}
+      <a href="{{ block.settings.link8 }}"  class="image-with-text-item">
+        {% if block.settings.image8 != blank %}
+          <div class="car-image">
+            <img src="{{ block.settings.image8 | img_url: 'master' }}" width="400" height="520" alt="{{ block.settings.text8 }}">
+          </div>
+        {% endif %}
+        {%  if block.settings.text8 != blank %} 
+          <div class="car-content">{{ block.settings.text8 }} </div>
+        {% endif %}
+      </a>
+    {% endif %}
+     {% if block.settings.image9 != blank %}
+      <a href="{{ block.settings.link9 }}"  class="image-with-text-item">
+        {% if block.settings.image9 != blank %}
+          <div class="car-image">
+            <img src="{{ block.settings.image9 | img_url: 'master' }}" width="400" height="520" alt="{{ block.settings.text9 }}">
+          </div>
+        {% endif %}
+        {%  if block.settings.text9 != blank %} 
+          <div class="car-content">{{ block.settings.text9 }} </div>
+        {% endif %}
+      </a>
+    {% endif %}
+     {% if block.settings.image10 != blank %}
+      <a href="{{ block.settings.link10 }}"  class="image-with-text-item">
+        {% if block.settings.image10 != blank %}
+          <div class="car-image">
+            <img src="{{ block.settings.image10 | img_url: 'master' }}" width="400" height="520" alt="{{ block.settings.text10 }}">
+          </div>
+        {% endif %}
+        {%  if block.settings.text10 != blank %} 
+          <div class="car-content">{{ block.settings.text10 }} </div>
+        {% endif %}
+      </a>
+    {% endif %}
+     {% if block.settings.image11 != blank %}
+      <a href="{{ block.settings.link11 }}"  class="image-with-text-item">
+        {% if block.settings.image11 != blank %}
+          <div class="car-image">
+            <img src="{{ block.settings.image11 | img_url: 'master' }}" width="400" height="520" alt="{{ block.settings.text11 }}">
+          </div>
+        {% endif %}
+        {%  if block.settings.text11 != blank %} 
+          <div class="car-content">{{ block.settings.text11 }} </div>
+        {% endif %}
+      </a>
+    {% endif %}
+     {% if block.settings.image12 != blank %}
+      <a href="{{ block.settings.link12 }}"  class="image-with-text-item">
+        {% if block.settings.image12 != blank %}
+          <div class="car-image">
+            <img src="{{ block.settings.image12 | img_url: 'master' }}" width="400" height="520" alt="{{ block.settings.text12 }}">
+          </div>
+        {% endif %}
+        {%  if block.settings.text12 != blank %} 
+          <div class="car-content">{{ block.settings.text12 }} </div>
+        {% endif %}
+      </a>
+    {% endif %}
+  </div>
+   <script>
+    // $('.image-with-text-car-section').flickity({
+    //   adaptiveHeight: true,
+    //   freeScroll: false,
+    //   contain: true,
+    //   prevNextButtons: true,
+    //   pageDots: false,
+    //   cellAlign: 'left',
+    //   draggable: true
+    // });
+  </script>
+</section>

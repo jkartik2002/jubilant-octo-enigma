@@ -1,0 +1,121 @@
+{% if section.settings.show-section %}
+  <section id="gift-guide-page">
+    <div class="gift-container">
+      <div class="image-with-text-container">
+        <div class="image-wrapper lazyload--placeholder">
+          <a href="{{ section.settings.button_link }}">
+            {% if section.settings.video-link != blank %}
+              <video class="video w-100" playsinline="" autoplay="" muted="" loop="">
+                <source src="{{ section.settings.video-link }}">
+              </video>
+            {% else %}
+              <div class="rimage-outer-wrapper lazyload fade-in"
+                  data-bgset="{% render 'bgset', image: section.settings.image %}"
+                  data-sizes="auto"
+                  data-parent-fit="cover"
+                  {% comment %} style="max-width: {{ section.settings.image.width }}px; max-height: {{ section.settings.image.height }}px" {% endcomment %}
+                  >
+                <div class="rimage-wrapper" style="padding-top:{{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%">
+                  <noscript>
+                    <img src="{{ section.settings.image | img_url: '1024x1024' }}" alt="{{ section.settings.image.alt | escape }}" class="rimage__image">
+                  </noscript>
+                </div>
+              </div>
+            {% endif %}
+          </a>
+        </div>
+        <div class="info-wrapper" {% if section.settings.image_position == 'right' %}style="order: -1"{% endif %}>
+          <h1>{{ section.settings.title }}</h1>
+          <p class="subheading">{{ section.settings.subheading }}</p>
+
+          <div class="btn-wrapper">
+            <a href="{{ section.settings.button_link }}">
+              {{ section.settings.button_label }}
+              <img src="https://cdn.shopify.com/s/files/1/0072/8455/5834/files/pink_arrow.png?v=1636098385" alt="">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Image and Text",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Text"
+      },
+      {
+        "type": "checkbox",
+        "id": "show-section",
+        "label": "Show Section?",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Media with text"
+      },
+      {
+        "type": "textarea",
+        "id": "subheading",
+        "label": "Subheading"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      },
+      {
+        "type": "header",
+        "content": "Media"
+      },
+      {
+        "type": "text",
+        "id": "video-link",
+        "label": "Video Link",
+        "info": "Only use Video or Image, leave the unneeded one blank"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image",
+        "info": "1024px x 1024px recommended"
+      },
+      {
+        "type": "select",
+        "id": "image_position",
+        "label": "Media position",
+        "default": "right",
+        "options": [
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          }
+        ]
+      }
+    ],
+    "presets": [
+	    {
+        "name": "Inspiration",
+        "category": "Custom",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}
+
+

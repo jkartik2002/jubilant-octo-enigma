@@ -1,0 +1,89 @@
+{% if product.metafields.custom_fields["featured_review"] != blank %}
+  <div class="nosto_element" id="productpage-nosto-4"></div>
+  <div class="nosto_element" id="productpage-nosto-5"></div>
+  <section class="text-full product {% if section.settings.extra_padding %}extra-padding{% endif %}">
+    <div class="text-wrapper" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".1s">
+      <div class="star-wrapper">
+        <img alt="Star 1" src="{{ 'star.svg' | asset_url }}">
+        <img alt="Star 2" src="{{ 'star.svg' | asset_url }}">
+        <img alt="Star 3" src="{{ 'star.svg' | asset_url }}">
+        <img alt="Star 4" src="{{ 'star.svg' | asset_url }}">
+        <img alt="Star 5" src="{{ 'star.svg' | asset_url }}">
+      </div>
+      <div class="desc">{{ product.metafields.custom_fields["featured_review"] }}</div>
+      <div class="author">{{ product.metafields.custom_fields["featured_review_author"] }}</div>
+      {% if section.settings.button-text != blank %}
+        <a class="cta" href="{{ section.settings.button-url }}">{{ section.settings.button-text }}</a>
+      {% endif %}
+    </div>
+
+    {% if section.settings.image-1 != blank %}
+      <img alt="Customer Testimony Image" class="floating-image image-1 d-block d-lg-none lazyload" data-src="{{ section.settings.image-1 | img_url: '500x' }}" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".1s">
+    {% endif %}
+    {% if section.settings.image-2 != blank %}
+      <img alt="Customer Testimony Image 2" class="floating-image image-2 d-none d-lg-block lazyload" data-src="{{ section.settings.image-2 | img_url: '500x' }}" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".1s">
+    {% endif %}
+    {% if section.settings.image-3 != blank %}
+      <img alt="Customer Testimony Image 3" class="floating-image image-3 d-none d-lg-block lazyload" data-src="{{ section.settings.image-3 | img_url: '500x' }}" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".1s">
+    {% endif %}
+    {% if section.settings.image-4 != blank %}
+      <img alt="Customer Testimony Image 4" class="floating-image image-4 d-block d-lg-none lazyload" data-src="{{ section.settings.image-4 | img_url: '500x' }}" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".1s">
+    {% endif %}
+  </section>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Product Testimony",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "extra_padding",
+        "label": "Extra Vertical Padding?"
+      },
+      {
+        "type": "text",
+        "id": "author",
+        "label": "Author"
+      },
+      {
+        "type": "text",
+        "id": "button-text",
+        "label": "Button Text",
+        "default": "SHOP NOW"
+      },
+      {
+        "type": "url",
+        "id": "button-url",
+        "label": "Button URL"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-1",
+        "label": "Floating Image 1 - Mobile Only"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-2",
+        "label": "Floating Image 2 - Desktop Only"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-3",
+        "label": "Floating Image 3 - Desktop Only"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-4",
+        "label": "Floating Image 4 - Mobile Only"
+      }
+    ],
+    "presets": [
+	    {
+        "name": "Text Feature - Product",
+        "category": "Custom",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}

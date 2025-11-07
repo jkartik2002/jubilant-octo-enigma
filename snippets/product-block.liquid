@@ -1,0 +1,175 @@
+{% assign sca_product = product %}{% assign sca_product_id_text = "," | append : sca_product.id | append : "," %}{% assign sca_price = sca_product.price %}{% assign sca_price_min = sca_product.price_min %}{% assign sca_price_max = sca_product.price_max %}{% assign sca_compare_at_price = sca_product.compare_at_price %}{% assign sca_compare_at_price_min = sca_product.compare_at_price_min %}{% assign sca_compare_at_price_max = sca_product.compare_at_price_max %}{% assign sca_product_available = sca_product.available %}{% assign sca_product_variantCount = sca_product.variants.size %}{% assign sca_compare_at_price_varies = sca_product.compare_at_price_varies %}{% assign sca_price_varies = sca_product.price_varies %}{% assign sca_has_only_default_variant = false %}{% capture sca_product_variants_json %}{{sca_product.variants | json }}{% endcapture %} {% capture sca_product_json %}{ {% if sca_all_gift_products_ids == null or sca_all_gift_products_ids contains sca_product_id_text %}{% assign sca_product_available = false %}{% assign sca_product_variantCount = 0 %}{% assign sca_has_only_default_variant = true %}{% assign sca_is_first_variant = true %}{% capture sca_variants_json %} [{% for variant in sca_product.variants %}{% unless variant.metafields.secomapp.freegifts %}{% unless variant.title contains '(Freegifts)' %}{% unless variant.title contains '% Off' %}{% unless variant.metafields.shappify_qb.qb_hide == "1" %}{% unless variant.metafields.shappify_bundle.is_bundle == "true" %}{% unless variant.metafields.brodev_scn.hide == "true" %}{% unless variant.metafields.wholesaler2.wholesale %}{% unless variant.metafields.Wholesaler.level %}{% unless variant.title contains '(Wholesale' %}{% if sca_is_first_variant%} {{ variant | json }}{% assign sca_price = variant.price %} {% assign sca_price_min = variant.price %} {% assign sca_price_max = variant.price %} {% assign sca_compare_at_price = variant.compare_at_price %} {% assign sca_compare_at_price_min = variant.compare_at_price %} {% assign sca_compare_at_price_max = variant.compare_at_price %} {% assign sca_product_available = variant.available %} {% assign sca_product_variantCount = 1 %} {% assign sca_is_first_variant = false%}{% else %},{{variant | json }} {% if sca_price_min >= variant.price %} {% assign sca_price_min = variant.price %} {% assign sca_price = variant.price %}{% endif %} {% if sca_price_max <= variant.price %} {% assign sca_price_max = variant.price %} {% endif %} {% if variant.compare_at_price %} {% if sca_compare_at_price_min==null or sca_compare_at_price_min >= variant.compare_at_price %} {% assign sca_compare_at_price_min = variant.compare_at_price %} {% assign sca_compare_at_price = variant.compare_at_price %} {% endif %} {% if sca_compare_at_price_max==null or sca_compare_at_price_max < variant.compare_at_price %} {% assign sca_compare_at_price_max = variant.compare_at_price %} {% endif %} {% endif %} {% if variant.available == true %} {% assign sca_product_available = true %} {% endif %} {% assign sca_product_variantCount = sca_product_variantCount | plus: 1 %}{% endif %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{%endfor%} ]{% endcapture %}{% if sca_price_min < sca_price_max %}{% assign sca_price_varies = true %}{% else %}{% assign sca_price_varies = false %}{% endif %}{% if sca_compare_at_price_min < sca_compare_at_price_max %}{% assign sca_compare_at_price_varies = true %}{% else %}{% assign sca_compare_at_price_varies = false %}{% endif %}{% if sca_product_variantCount > 1 %}{% assign sca_has_only_default_variant = false %}{% endif %}{% if sca_product_variantCount == sca_product.variants.size %} "variants":{{ sca_product.variants }},{% else %}{%assign sca_product_variants_json = sca_variants_json %} "variants":{{ sca_variants_json }},{% endif %}{% else %} "variants":{{ sca_product_variants_json }},{% endif %} "id": {{sca_product.id}}, "title": {{sca_product.title | json}}, "handle": {{sca_product.handle | json}}, "description": {{sca_product.description | json}}, "published_at": "{{sca_product.published_at | date: "%Y-%m-%dT%H-%M-%S%:z" }}", "created_at": "{{sca_product.created_at | date: "%Y-%m-%dT%H-%M-%S%:z" }}", "vendor": {{sca_product.vendor | json}}, "type": {{sca_product.type | json}}, "tags": {{sca_product.tags | json}}, "price": {{sca_price}}, "price_min": {{sca_price_min}}, "price_max": {{sca_price_max}}, "available": {{sca_product.available}}, "price_varies": {{sca_price_varies}}, "compare_at_price": {{sca_compare_at_price}}, "compare_at_price_min": {{sca_compare_at_price_min}}, "compare_at_price_max": {{sca_compare_at_price_max}}, "compare_at_price_varies": {{sca_compare_at_price_varies}}, "images": {{sca_product.images | json}}, "featured_image": {{sca_product.featured_image | json }}, "options": {{sca_product.options | json}}, "media": {{sca_product.media | json }}, "content": {{sca_product.content | json }}} {% endcapture sca_product_json %}
+
+{%- liquid
+  assign on_sale = false
+  if sca_compare_at_price > sca_price
+    assign on_sale = true
+  endif
+
+  assign product_url = product.url | within: collection
+
+  if animation_type == blank
+    assign animation_type = "cc-fade-in-up"
+  endif
+
+  assign primary_image = product.featured_media.preview_image
+  assign secondary_image = product.media[1].preview_image
+
+  if settings.prod_show_videos
+    assign videos = product.media | where: "media_type", "video"
+    unless videos == blank
+      for source in videos[0].sources
+        if source != blank and source.format == "mp4"
+          assign video_source = source
+          break
+        endif
+      endfor
+
+      assign mp4_url = video_source.url
+    endunless
+  endif
+-%}
+
+
+<div class="product-block
+  {% unless product.available %} sold-out{% endunless %}
+  {% if on_sale %} on-sale{% endif %}
+  {% if settings.prod_hover_show_image %}hover-image{% endif %}
+  {% if product.tags contains 'meta-layout-right' %}layout-right{% endif %}
+  {% if settings.prod_label_layout == 'marquee_on_hover' %} product-block--marquee-on-hover {% endif%}
+  {% if settings.quickbuy_enabled %}product-block--quickbuy{% endif %}
+  {% if mp4_url != blank %}product-block--video{% endif %}
+  {{ product_class }}"
+     data-loop-index="{{ i }}"
+  {% if animate %} data-cc-animate="{{ animation_type }}" data-cc-animate-delay="{{ animate | times: 0.15 }}s" {% endif %}>
+
+  {% if passport %}
+    <div class="passport">
+      {% render 'product-label', product: product %}
+    </div>
+  {% endif %}
+
+  <div class="product-block__inner {% if settings.quickbuy_enabled %}quickbuy-enabled{% endif %}">
+    <div class="image-wrapper hover-image">
+      <div class="image {% if settings.prod_hover_show_image and product.media.size > 1 %}image--hover-second {% if primary_image.aspect_ratio == secondary_image.aspect_ratio %}image--same-aspect-ratio{% endif %}{% endif %}">
+        {% if settings.prod_label_layout contains 'marquee' %}
+          <div class="product-marquee">
+            {% render 'product-label', product: product %}
+          </div>
+        {% endif %}
+
+        <a class="image-inner product-click" data-href="{{ product_url }}" aria-label="{{ product.title | escape }}" tabindex="-1" data-title="{{ product.title }}" data-id="{{ product.variants.first.id }}" data-price="{{ product.variants.first.price | money_without_currency }}" data-position="{{ i }}" data-category="{{ category }}">
+          <div class="image__first">
+            {% if mp4_url != blank %}
+              {% render 'inline-video', video: mp4_url, image: primary_image %}
+            {% else %}
+              {% assign img_url = primary_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+              <img 
+                class="lazyload"
+                alt="{{ product.title | escape | strip }}"
+                data-src="{{ img_url }}"
+                data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+                data-aspectratio="{{ primary_image.aspect_ratio }}"
+                data-sizes="auto"
+                style="display: block; width: 100%; height: auto;"
+                width="{{ primary_image.width }}"
+                height="{{ primary_image.height }}"
+                data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".1s" loading="lazy"
+              />
+            {% endif %}
+          </div>
+          
+          {% unless settings.prod_label_layout contains 'marquee' or passport == true %}
+            {% render 'product-label', product: product %}
+          {% endunless %}
+
+          {% if settings.prod_hover_show_image and product.media.size > 1 %}
+          <div class="image__second">
+            {% assign img_url = secondary_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img 
+              class="lazyload"
+              alt="{{ product.title | escape | strip }}"
+              data-src="{{ img_url }}"
+              data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+              data-aspectratio="{{ secondary_image.aspect_ratio }}"
+              data-sizes="auto"
+              style="display: block; width: 100%; height: auto;"
+              width="{{ secondary_image.width }}"
+              height="{{ secondary_image.height }}"
+              data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".1s" loading="lazy"
+            />
+          </div>
+          {% endif %}
+        </a>
+
+        {% unless no_wishlist %}
+          {% render 'swym-product-view', product: product %}
+          <!-- <button class="swym-button swym-add-to-wishlist-view-product product_{{product.id}}" data-swaction="addToWishlist" data-product-id="{{product.id | json}}"></button> -->
+
+          <!-- Swym Wishlist Plus EPI Button-->
+          <button data-with-epi="true" class="swym-button swym-add-to-wishlist-view-product product_{{product.id}}" data-swaction="addToWishlist" data-product-id="{{product.id | json}}" data-variant-id="{{product.variants[0].id}}" data-product-url="{{ shop.url }}{{ product.url }}"></button>
+          <!-- Swym Wishlist Plus EPI Button-->
+        {% endunless %}
+
+
+        {%- if settings.quickbuy_enabled -%}
+          <a href="{{ product_url }}" data-cc-quick-buy class="button alt cc-quick-buy-btn">
+            {{ 'products.listing.quick_view' | t }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {% if cart_quick %}
+      <form {% if ajax_cart %}class="quick-add"{% else %} action="/cart/add" method="POST"{% endif %}>
+        <input type="hidden" name="form_type" value="product">
+        <input type="hidden" name="id" value="{{ product.variants[0].id }}">
+        <input type="hidden" name="quantity" value="1">
+        {% if product.metafields.custom_fields["variant_collection_reference"] != blank %}
+          {% assign title = collections[product.metafields.custom_fields["variant_collection_reference"]].title %}
+        {% elsif product.metafields.custom_fields["shortened_title"] != blank  %}
+          {% assign title = product.metafields.custom_fields["shortened_title"] %}
+        {% else %}
+          {% assign title = '' %}
+        {% endif %}
+        <input type="hidden" name="properties[_short_title]" value="{{ title }}">
+        <button class="cta" type="submit">ADD TO BAG</button>
+      </form>
+    {% endif %}
+
+    <a data-href="{{ product_url }}" class="caption upper product-click" data-title="{{ product.title }}" data-id="{{ product.variants.first.id }}" data-price="{{ product.variants.first.price | money_without_currency }}" data-position="{{ i }}" data-category="{{ category }}">
+      <span class="title">
+        {% if product.metafields.custom_fields["variant_collection_reference"] != blank %}
+          {{ collections[product.metafields.custom_fields["variant_collection_reference"]].title }}
+        {% elsif product.metafields.custom_fields["shortened_title"] != blank  %}
+          {{ product.metafields.custom_fields["shortened_title"] }}
+        {% else %}
+          {{ product.title }}
+        {% endif %}
+      </span>
+
+      {% if show_vendor %}
+        <span class="vendor">{{ product.vendor }}</span>
+      {% endif %}
+
+      <div class="price">
+        {% if sca_price_varies %}{{ 'products.listing.from' | t }}{% endif %}
+        <span class="theme-money{% if on_sale %} on-sale{% endif %}">{{ sca_price | money_without_trailing_zeros }}</span>
+        {% if on_sale %}<span class="was-price theme-money">{{ sca_compare_at_price | money }}</span>{% endif %}
+
+        {%- assign variant = product.variants | sort: 'price' | first -%}
+        {% render 'unit-price', variant: variant %}
+      </div>
+    </a>
+
+    {% unless passport or no_swatch or product.tags contains 'no-swatches' %}
+      {% render 'variant-swatches', product: product, quick_add: quick_add %}
+    {% endunless %}
+
+    {% if settings.show_product_block_reviews %}
+      <a data-cc-animate-click href="{{ product_url }}" class="themed-product-reviews" tabindex="-1">
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+      </a>
+    {% endif %}
+  </div>
+</div>

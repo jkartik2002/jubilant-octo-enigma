@@ -1,0 +1,76 @@
+{% assign productCollections = product.collections | map: "handle" %}
+{% if product.metafields.custom_fields["show_section"] == 1 or productCollections contains settings.video--collection or product.tags contains settings.video--tag %}
+  <div class="nosto_element" id="productpage-nosto-4"></div>
+
+<div class="nosto_element" id="productpage-nosto-5"></div>
+  <section class="product-image-text video unique">
+    <div class="wrapper">
+      {% unless product.metafields.custom_fields["video_on_right_side"] == 1 %}
+        <div class="col left">
+          <div class="image-wrapper">
+            <div class="bg-image"></div>
+            {% if productCollections contains settings.video--collection %}
+              <video class="video" playsinline="" autoplay="" muted="" loop="">
+                <source src="{{ settings.video--collection-link }}">
+              </video>
+            {% elsif product.tags contains settings.video--tag %}
+              <video class="video" playsinline="" autoplay="" muted="" loop="">
+                <source src="{{ settings.video--tag-link }}">
+              </video>
+            {% elsif product.metafields.custom_fields["video_link"] != blank %}
+              <video class="video" playsinline="" autoplay="" muted="" loop="">
+                <source src="{{ product.metafields.custom_fields["video_link"] }}">
+              </video>
+            {% else %}
+              <img alt="{{product.title}}" class="lazyload" data-src="{{ product.metafields.custom_fields["gif_link"] }}">
+            {% endif %}
+          </div>
+        </div>
+      {% endunless %}
+      <div class="col right">
+        {% if productCollections contains settings.video--collection %}
+          {% assign title = settings.video--collection-title %}
+          {% assign desc = settings.video--collection-text %}
+        {% elsif product.tags contains settings.video--tag %}
+          {% assign title = settings.video--tag-title %}
+          {% assign desc = settings.video--tag-text %}
+        {% else %}
+          {% assign title = product.metafields.custom_fields["title"] %}
+          {% assign desc = product.metafields.custom_fields["text"] %}
+        {% endif %}
+        <h2 class="title">{{ title }}</h2>
+        <div class="desc">{{ desc }}</div>
+      </div>
+      {% if product.metafields.custom_fields["video_on_right_side"] == 1 %}
+        <div class="col right">
+          <div class="image-wrapper">
+            <div class="bg-image"></div>
+            {% assign productCollections = product.collections | map: "handle" %}
+            {% if productCollections contains settings.video--collection %}
+              <video class="video" playsinline="" autoplay="" muted="" loop="">
+                <source src="{{ settings.video--collection-link }}">
+              </video>
+            {% elsif product.tags contains settings.video--tag %}
+              <video class="video" playsinline="" autoplay="" muted="" loop="">
+                <source src="{{ settings.video--tag-link }}">
+              </video>
+            {% elsif product.metafields.custom_fields["video_link"] != blank %}
+              <video class="video" playsinline="" autoplay="" muted="" loop="">
+                <source src="{{ product.metafields.custom_fields["video_link"] }}">
+              </video>
+            {% else %}
+              <img alt="{{product.title}} Gif Link" class="lazyload" data-src="{{ product.metafields.custom_fields["gif_link"] }}">
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Video and Text",
+    "settings": []
+  }
+{% endschema %}

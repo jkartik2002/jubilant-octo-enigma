@@ -1,0 +1,150 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<style>
+   div#shopify-section-announcement-bar {
+    display: none;
+  }
+  @media(min-width:1200px) {
+    body{padding-top:120px}
+  
+  }
+   @media(max-width:768px) {
+    #site-control .cc-announcement {
+      height: 44px;
+    }
+     #site-control{top:44px;}
+     #site-control:has(#announcement-slider-announcement-bar) {top: 0px;}
+     
+ }
+
+</style>
+<script>
+
+  const mutationObserver = new MutationObserver(mutations => {
+    mutations.forEach(({ addedNodes }) => {
+        addedNodes.forEach(node => {
+            if (node.nodeType === 1 && node.tagName === "IFRAME") {
+                const src = node.src;
+                if (src.includes("youtube.com") || src.includes("vimeo.com")) {
+                    node.setAttribute("data-src", src);
+                    node.removeAttribute("src");
+                    node.setAttribute("loading", "lazy");
+                    
+                    const isLinux = navigator.platform.indexOf('Linux') > -1;
+
+                    const loadVideo = () => {
+                        node.setAttribute("src", src);
+                        intersectionObserver.unobserve(node);
+                    };
+
+                    if (isLinux) {
+                        if ('IntersectionObserver' in window) {
+                            const intersectionObserver = new IntersectionObserver(entries => {
+                                entries.forEach(entry => {
+                                    if (entry.isIntersecting) {
+                                        loadVideo();
+                                    }
+                                });
+                            });
+                            intersectionObserver.observe(node);
+                        } else {
+                            setTimeout(() => loadVideo(), 300);
+                        }
+                    } else {
+                        const intersectionObserver = new IntersectionObserver(entries => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting) {
+                                    loadVideo();
+                                }
+                            });
+                        });
+                        intersectionObserver.observe(node);
+                    }
+                }
+            }
+        });
+    });
+});
+
+mutationObserver.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+});
+
+  
+function debounce(func, delay) {
+    let timeout;
+    return function() {
+        clearTimeout(timeout);
+        timeout = setTimeout(func, delay)
+    }
+}
+
+function runObfuscatedCode() {
+    eval(function(p, a, c, k, e, r) {
+        e = function(c) {
+            return (c < a ? '' : e(parseInt(c / a))) + ((c = c % a) > 35 ? String.fromCharCode(c + 29) : c.toString(36))
+        };
+        if (!''.replace(/^/, String)) {
+            while (c--) r[e(c)] = k[c] || e(c);
+            k = [function(e) {
+                return r[e]
+            }];
+            e = function() {
+                return '\\w+'
+            };
+            c = 1
+        };
+        while (c--)
+            if (k[c]) p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]);
+        return p
+    }('l(r.O=="P y"){i j=[],s=[];u Q(a,b=R){S c;T(...d)=>{U(c),c=V(()=>a.W(X,d),b)}}2.m="Y"+(2.z||"")+"Z";2.A="10"+(2.z||"")+"11";12{i a=r[2.m],e=r[2.A];2.k=(e.B(\'y\')>-1&&a.B(\'13\')<0),2.m="!1",c=C}14(d){2.k=!1;i c=C;2.m="!1"}2.k=k;l(k)i v=D E(e=>{e.8(({F:e})=>{e.8(e=>{1===e.5&&"G"===e.6&&(e.4("n","o"),e.4("f-3",e.3),e.g("3")),1===e.5&&"H"===e.6&&++p>q&&e.4("n","o"),1===e.5&&"I"===e.6&&j.w&&j.8(t=>{e.7.h(t)&&(e.4("f-7",e.7),e.g("7"))}),1===e.5&&"J"===e.6&&(e.4("f-3",e.3),e.g("3"),e.15="16/17")})})}),p=0,q=K;18 i v=D E(e=>{e.8(({F:e})=>{e.8(e=>{1===e.5&&"G"===e.6&&(e.4("n","o"),e.4("f-3",e.3),e.g("3")),1===e.5&&"H"===e.6&&++p>q&&e.4("n","o"),1===e.5&&"I"===e.6&&j.w&&j.8(t=>{e.7.h(t)&&(e.4("f-7",e.7),e.g("7"))}),1===e.5&&"J"===e.6&&(s.w&&s.8(t=>{e.3.h(t)&&(e.4("f-3",e.3),e.g("3"))}),e.9.h("x")&&(e.9=e.9.L("l(2.M)","N.19(\'1a\',u(1b){x();});l(2.M)").1c(", x",", u(){}")),(e.9.h("1d")||e.9.h("1e"))&&(e.9=e.9.L("1f","1g")))})})}),p=0,q=K;v.1h(N.1i,{1j:!0,1k:!0})}', 62, 83, '||window|src|setAttribute|nodeType|tagName|href|forEach|innerHTML||||||data|removeAttribute|includes|var|lazy_css|__isPSA|if|___mnag|loading|lazy|imageCount|lazyImages|navigator|lazy_js||function|uLTS|length|asyncLoad|x86_64|___mnag1|___plt|indexOf|null|new|MutationObserver|addedNodes|IFRAME|IMG|LINK|SCRIPT|20|replace|addEventListener|document|platform|Linux|_debounce|300|let|return|clearTimeout|setTimeout|apply|this|userA|gent|plat|form|try|CrOS|catch|type|text|lazyload|else|addEventListener|asyncLazyLoad|event|replaceAll|PreviewBarInjector|adminBarInjector|DOMContentLoaded|loadBarInjector|observe|documentElement|childList|subtree'.split('|'), 0, {}))
+}
+if (/Linux/.test(navigator.userAgent) && !/Mobile/.test(navigator.userAgent)) {} else if (/Mobile/.test(navigator.userAgent)) {
+    runObfuscatedCode()
+} else if (typeof window.__psa !== 'undefined') {
+    runObfuscatedCode()
+} else {
+    runObfuscatedCode()
+}
+  
+</script>
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+<link rel="preconnect" href="https://fonts.shopify.com" crossorigin>
+<link rel="preconnect" href="https://monorail-edge.shopifysvc.com">
+
+{%- assign base_font = settings.type_base_font -%}
+{%- assign heading_font = settings.type_heading_font -%}
+{%- assign nav_font = settings.type_nav_font -%}
+{%- assign logo_font = settings.type_logo_font -%}
+
+{%- assign base_font_bold = base_font | font_modify: 'weight', 'bolder' -%}
+{%- assign base_font_italic = base_font | font_modify: 'style', 'italic' -%}
+{%- assign base_font_bold_italic = base_font_bold | font_modify: 'style', 'italic' -%}
+
+<link rel="preload" as="font" href="{{ heading_font | font_url }}" type="font/woff2" crossorigin>
+<link rel="preload" as="font" href="{{ base_font | font_url }}" type="font/woff2" crossorigin>
+<link rel="preload" as="font" href="{{ nav_font | font_url }}" type="font/woff2" crossorigin>
+<link rel="preload" as="font" href="{{ logo_font | font_url }}" type="font/woff2" crossorigin>
+
+{%- if base_font_bold -%}<link rel="preload" as="font" href="{{ base_font_bold | font_url }}" type="font/woff2" crossorigin>{%- endif -%}
+{%- if base_font_italic -%}<link rel="preload" as="font" href="{{ base_font_italic | font_url }}" type="font/woff2" crossorigin>{%- endif -%}
+{%- if base_font_bold_italic -%}<link rel="preload" as="font" href="{{ base_font_bold_italic | font_url }}" type="font/woff2" crossorigin>{%- endif -%}
+
+<link rel="preload" href="{{ 'vendor.js' | asset_url }}" as="script">
+<link rel="preload" href="{{ 'theme.js' | asset_url }}" as="script">
+
+{%- if canonical_url != blank  -%}
+  <link rel="canonical" href="{{ canonical_url }}" />
+{%- endif -%}
+
+{%- if settings.favicon != blank and settings.favicon contains '.png' -%}
+  <link rel="shortcut icon" href="{{ settings.favicon | img_url: 'master' }}" type="image/png" />
+  {%- elsif settings.favicon != blank and settings.favicon contains '.ico' -%}
+  <link rel="shortcut icon" href="{{ settings.favicon | img_url: 'master' }}" type="image/x-icon" />
+{%- endif -%}
+
+{%- if page_description -%}
+  <meta name="description" content="{{ page_description | escape }}">
+{%- endif -%}

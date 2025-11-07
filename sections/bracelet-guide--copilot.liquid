@@ -1,0 +1,95 @@
+{% if section.settings.show-section %}
+  <section class="product-image-text bracelet-guide--image-text-2 bracelet-guide--copilot">
+    <h2 class="title top">{{ section.settings.section-title }}</h2>
+    <div class="desc">{{ section.settings.section-subtitle }}</div>
+    <div class="text-center">
+      <a class="cta upper" href="{{ section.settings.button-url-2 }}">{{ section.settings.button-text-2 }}</a>
+    </div>
+    <div class="wrapper">
+      <div class="col left">
+        {% assign img_url = section.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+        <img 
+          class="lazyload"
+          alt="{{ section.settings.section-title | escape | strip }}"
+          data-src="{{ img_url }}"
+          data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+          data-aspectratio="{{ section.settings.image.aspect_ratio }}"
+          data-sizes="auto"
+          style="display: block; width: 100%; height: auto;"
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
+          data-cc-animate="cc-fade-in-up"
+          data-cc-animate-delay="0.1s"
+        />
+      </div>
+      <div class="col right d-none d-lg-inline-block">
+        {% assign img_url = section.settings.image-2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+        <img 
+          class="lazyload"
+          alt="{{ section.settings.section-title | escape | strip }}"
+          data-src="{{ img_url }}"
+          data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+          data-aspectratio="{{ section.settings.image-2.aspect_ratio }}"
+          data-sizes="auto"
+          style="display: block; width: 100%; height: auto;"
+          width="{{ section.settings.image-2.width }}"
+          height="{{ section.settings.image-2.height }}"
+          data-cc-animate="cc-fade-in-up"
+          data-cc-animate-delay="0.2s"
+        />
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Copilot",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show-section",
+        "label": "Show Section?",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "section-title",
+        "label": "Section Title",
+        "default": "Wanna wow your co-pilot?"
+      },
+      {
+        "type": "text",
+        "id": "section-subtitle",
+        "label": "Section Subtitle",
+        "default": "Showcase your trips together over the years by engraving charms with travel dates for a personalized anniversary gift."
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-2",
+        "label": "Image 2"
+      },
+      {
+        "type": "text",
+        "id": "button-text-2",
+        "label": "Button Text",
+        "default": "SHOP CHARM BRACELETS"
+      },
+      {
+        "type": "url",
+        "id": "button-url-2",
+        "label": "Button URL"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Copilot"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,167 @@
+{% assign sca_product = product %}{% assign sca_product_id_text = "," | append : sca_product.id | append : "," %}{% assign sca_price = sca_product.price %}{% assign sca_price_min = sca_product.price_min %}{% assign sca_price_max = sca_product.price_max %}{% assign sca_compare_at_price = sca_product.compare_at_price %}{% assign sca_compare_at_price_min = sca_product.compare_at_price_min %}{% assign sca_compare_at_price_max = sca_product.compare_at_price_max %}{% assign sca_product_available = sca_product.available %}{% assign sca_product_variantCount = sca_product.variants.size %}{% assign sca_compare_at_price_varies = sca_product.compare_at_price_varies %}{% assign sca_price_varies = sca_product.price_varies %}{% assign sca_has_only_default_variant = false %}{% capture sca_product_variants_json %}{{sca_product.variants | json }}{% endcapture %} {% capture sca_product_json %}{ {% if sca_all_gift_products_ids == null or sca_all_gift_products_ids contains sca_product_id_text %}{% assign sca_product_available = false %}{% assign sca_product_variantCount = 0 %}{% assign sca_has_only_default_variant = true %}{% assign sca_is_first_variant = true %}{% capture sca_variants_json %} [{% for variant in sca_product.variants %}{% unless variant.metafields.secomapp.freegifts %}{% unless variant.title contains '(Freegifts)' %}{% unless variant.title contains '% Off' %}{% unless variant.metafields.shappify_qb.qb_hide == "1" %}{% unless variant.metafields.shappify_bundle.is_bundle == "true" %}{% unless variant.metafields.brodev_scn.hide == "true" %}{% unless variant.metafields.wholesaler2.wholesale %}{% unless variant.metafields.Wholesaler.level %}{% unless variant.title contains '(Wholesale' %}{% if sca_is_first_variant%} {{ variant | json }}{% assign sca_price = variant.price %} {% assign sca_price_min = variant.price %} {% assign sca_price_max = variant.price %} {% assign sca_compare_at_price = variant.compare_at_price %} {% assign sca_compare_at_price_min = variant.compare_at_price %} {% assign sca_compare_at_price_max = variant.compare_at_price %} {% assign sca_product_available = variant.available %} {% assign sca_product_variantCount = 1 %} {% assign sca_is_first_variant = false%}{% else %},{{variant | json }} {% if sca_price_min >= variant.price %} {% assign sca_price_min = variant.price %} {% assign sca_price = variant.price %}{% endif %} {% if sca_price_max <= variant.price %} {% assign sca_price_max = variant.price %} {% endif %} {% if variant.compare_at_price %} {% if sca_compare_at_price_min==null or sca_compare_at_price_min >= variant.compare_at_price %} {% assign sca_compare_at_price_min = variant.compare_at_price %} {% assign sca_compare_at_price = variant.compare_at_price %} {% endif %} {% if sca_compare_at_price_max==null or sca_compare_at_price_max < variant.compare_at_price %} {% assign sca_compare_at_price_max = variant.compare_at_price %} {% endif %} {% endif %} {% if variant.available == true %} {% assign sca_product_available = true %} {% endif %} {% assign sca_product_variantCount = sca_product_variantCount | plus: 1 %}{% endif %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{%endfor%} ]{% endcapture %}{% if sca_price_min < sca_price_max %}{% assign sca_price_varies = true %}{% else %}{% assign sca_price_varies = false %}{% endif %}{% if sca_compare_at_price_min < sca_compare_at_price_max %}{% assign sca_compare_at_price_varies = true %}{% else %}{% assign sca_compare_at_price_varies = false %}{% endif %}{% if sca_product_variantCount > 1 %}{% assign sca_has_only_default_variant = false %}{% endif %}{% if sca_product_variantCount == sca_product.variants.size %} "variants":{{ sca_product.variants }},{% else %}{%assign sca_product_variants_json = sca_variants_json %} "variants":{{ sca_variants_json }},{% endif %}{% else %} "variants":{{ sca_product_variants_json }},{% endif %} "id": {{sca_product.id}}, "title": {{sca_product.title | json}}, "handle": {{sca_product.handle | json}}, "description": {{sca_product.description | json}}, "published_at": "{{sca_product.published_at | date: "%Y-%m-%dT%H-%M-%S%:z" }}", "created_at": "{{sca_product.created_at | date: "%Y-%m-%dT%H-%M-%S%:z" }}", "vendor": {{sca_product.vendor | json}}, "type": {{sca_product.type | json}}, "tags": {{sca_product.tags | json}}, "price": {{sca_price}}, "price_min": {{sca_price_min}}, "price_max": {{sca_price_max}}, "available": {{sca_product.available}}, "price_varies": {{sca_price_varies}}, "compare_at_price": {{sca_compare_at_price}}, "compare_at_price_min": {{sca_compare_at_price_min}}, "compare_at_price_max": {{sca_compare_at_price_max}}, "compare_at_price_varies": {{sca_compare_at_price_varies}}, "images": {{sca_product.images | json}}, "featured_image": {{sca_product.featured_image | json }}, "options": {{sca_product.options | json}}, "media": {{sca_product.media | json }}, "content": {{sca_product.content | json }}} {% endcapture sca_product_json %}
+
+{% assign num_labels_reps = 20 %}
+{% if product.metafields.custom_fields["product_badge"] != blank %}
+  <span class="product-label sale">
+    <span>{{ product.metafields.custom_fields["product_badge"] }}</span>
+  </span>
+{% elsif product.tags contains 'pfs:label-pre-order' %}
+  <span class="product-label sale">
+    <span>Pre-Order</span>
+  </span>
+  </span>
+{% elsif product.tags contains 'pfs:label-today-only' %}
+  <span class="product-label sale">
+    <span>Today Only</span>
+  </span>
+   </span>
+  {% elsif product.tags contains 'pfs:label-archive-sale' %}
+  <span class="product-label sale">
+    <span>Archive Sale</span>
+  </span>
+   </span>
+{% elsif product.tags contains 'pfs:label-special-price' %}
+  <span class="product-label sale">
+    <span>Special Price</span>
+  </span>
+  </span>
+   </span>
+{% elsif product.tags contains 'pfs:label-flash-deal' %}
+  <span class="product-label sale">
+    <span>BLK-FRI Flash Deal</span>
+  </span>
+   </span>
+{% elsif product.tags contains 'pfs:label-multi-15' %}
+  <span class="product-label sale">
+    <span>15% OFF 3+</span>
+  </span>
+   </span>
+{% elsif product.tags contains 'pfs:label-multi-10' %}
+  <span class="product-label sale">
+    <span>10% OFF 3+</span>
+  </span>
+   </span>
+{% elsif product.tags contains 'pfs:label-limited-time' %}
+  <span class="product-label sale">
+    <span>Limited Time</span>
+  </span>
+  {% elsif product.tags contains 'pfs:label-leaving-soon' %}
+  <span class="product-label sale">
+    <span>Leaving Soon</span>
+  </span>
+   </span>
+  {% elsif product.tags contains 'pfs:label-archived' %}
+  <span class="product-label sale">
+    <span>Archived</span>
+  </span>
+   </span>
+  {% elsif product.tags contains 'pfs:label-seasonal-only' %}
+  <span class="product-label sale">
+    <span>Seasonal Only</span>
+  </span>
+{% elsif product.tags contains 'pfs:label-best-seller' %}
+  <span class="product-label sale">
+    <span>Best Seller</span>
+  </span>
+{% elsif product.tags contains 'pfs:label-limited-edition' %}
+  <span class="product-label limited-edition">
+    <span>Limited Edition</span>
+  </span>
+{% elsif product.tags contains 'pfs:label-back-order' %}
+  <span class="product-label back-order">
+    <span>Back-Order</span>
+  </span>
+{% elsif product.tags contains 'pfs:label-almost-gone' %}
+  <span class="product-label back-order">
+    <span>Almost Gone</span>
+  </span>
+{% elsif product.tags contains 'pfs:label-sold-out' %}
+  <span class="product-label back-order">
+    <span>Sold Out</span>
+  </span>
+{% elsif product.tags contains 'pfs:label-for-kids' %}
+  <span class="product-label badge">
+    <span>FOR KIDS</span>
+  </span>
+{% elsif product.tags contains 'pfs:label-young-jetsetters' %}
+<span class="product-label badge">
+  <span>YOUNG JETSETTERS</span>
+</span>
+{% elsif product.tags contains 'pfs:label-made-to-order' %}
+  <span class="product-label badge">
+    <span>MADE TO ORDER</span>
+  </span>
+{% elsif product.tags contains 'pfs:label-customizable' %}
+  <span class="product-label badge">
+    <span>CUSTOMIZABLE</span>
+  </span>
+{% elsif product.tags contains 'pfs:label-engravable' %}
+  <span class="product-label badge">
+    <span>ENGRAVABLE</span>
+  </span>
+{% elsif product.tags contains 'pfs:label-top-rated' %}
+  <span class="product-label badge">
+    <span>TOP RATED</span>
+  </span>
+{% elsif product.tags contains 'pfs:label-bespoke' %}
+  <span class="product-label badge">
+    <span>BESPOKE</span>
+  </span>
+{% elsif product.tags contains 'pfs:label-new-arrival' %}
+  <span class="product-label badge">
+    <span>ARRIVAL</span>
+  </span>
+{% elsif product.tags contains 'pfs:label-just-in' %}
+  <span class="product-label badge">
+    <span>JUST IN!</span>
+  </span>
+{% elsif product.tags contains 'pfs:label-unisex' %}
+  <span class="product-label badge">
+    <span>UNISEX</span>
+  </span>
+{% elsif product.tags contains 'pfs:label-only-a-few-left' %}
+  <span class="product-label badge">
+    <span>ONLY A FEW LEFT</span>
+  </span>
+{% elsif product.tags contains 'pfs:label-its-back' %}
+  <span class="product-label badge">
+    <span>IT'S BACK!</span>
+  </span>
+{% elsif product.available == false and settings.show_sold_out_label %}
+  <span class="product-label unavailable
+    {% if settings.prod_label_layout == 'marquee' or settings.prod_label_layout == 'marquee_on_hover' %}product-label--marquee{% endif %}
+    {% if settings.prod_label_layout == 'marquee_on_hover' %}product-label--marquee-on-hover{% endif %}">
+
+    <span>{{ 'products.listing.sold_out' | t }}</span>
+    {% if settings.prod_label_layout == 'marquee' or settings.prod_label_layout == 'marquee_on_hover' %}
+      {% for i in (1..num_labels_reps) %}
+        <span>{{ 'products.listing.sold_out' | t }}</span>
+      {% endfor %}
+    {% endif %}
+  </span>
+{% elsif sca_compare_at_price > sca_price and settings.show_sale_label %}
+  {% unless product.handle contains 'bundle' %}
+    <span class="product-label sale
+      {% if settings.prod_label_layout == 'marquee' or settings.prod_label_layout == 'marquee_on_hover' %}product-label--marquee{% endif %}
+      {% if settings.prod_label_layout == 'marquee_on_hover' %}product-label--marquee-on-hover{% endif %}">
+
+      <span>{{ 'products.product.sale' | t }}</span>
+      {% if settings.prod_label_layout == 'marquee' or settings.prod_label_layout == 'marquee_on_hover' %}
+        {% for i in (1..num_labels_reps) %}
+          <span>{{ 'products.product.sale' | t }}</span>
+        {% endfor %}
+      {% endif %}
+    </span>
+  {% endunless %}
+{%- elsif settings.show_new_label and product.tags contains 'pfs:label-new' -%}
+    <span class="product-label product-label--new
+      {% if settings.prod_label_layout == 'marquee' or settings.prod_label_layout == 'marquee_on_hover' %}product-label--marquee{% endif %}
+      {% if settings.prod_label_layout == 'marquee_on_hover' %}product-label--marquee-on-hover{% endif %}">
+      <span>{{ 'products.labels.new_in' | t }}</span>
+       {% if settings.prod_label_layout == 'marquee' or settings.prod_label_layout == 'marquee_on_hover' %}
+         {% for i in (1..num_labels_reps) %}
+           <span>{{ 'products.labels.new_in' | t }}</span>
+         {% endfor %}
+       {% endif %}
+    </span>
+{% endif %}

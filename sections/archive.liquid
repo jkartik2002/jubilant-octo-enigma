@@ -1,0 +1,1056 @@
+{% for block in section.blocks %}
+  {% if block.type == 'media-and-text' %}
+    <section class="product-image-text video">
+      <div class="wrapper">
+        {% unless block.settings.video-right %}
+          <div class="col left">
+            <div class="image-wrapper">
+              <div class="bg-image"></div>
+              {% if block.settings.video-link != blank %}
+                <video class="video" playsinline="" autoplay="" muted="" loop="">
+                  <source src="{{ block.settings.video-link }}">
+                </video>
+              {% elsif block.settings.gif-link != blank %}
+                <img alt="{{ block.settings.title | escape | strip }}"
+                alt="{{ block.settings.title | escape | strip }}" src="{{ block.settings.gif-link }}">
+              {% elsif block.settings.image-link != blank %}
+                {% assign img_url = block.settings.image-link | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+                <img 
+                  class="lazyload"
+                  {% if forloop == 1 %}
+                  src="{{ block.settings.image-link | img_url: '360x' }}"
+                  {% endif %}
+                  alt="{{ block.settings.title | escape | strip }}"
+                  data-src="{{ img_url }}"
+                  data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+                  data-aspectratio="{{ block.settings.image-link.aspect_ratio }}"
+                  data-sizes="auto"
+                  style="display: block; width: 100%; height: auto;"
+                  width="{{ block.settings.image-link.width }}"
+                  height="{{ block.settings.image-link.height }}"
+                  data-cc-animate="cc-fade-in-up"
+                />
+              {% endif %}
+            </div>
+          </div>
+        {% endunless %}
+        <div class="col right">
+          <h2 class="title">{{ block.settings.title }}</h2>
+          <div class="desc">{{ block.settings.text }}</div>
+        </div>
+        {% if block.settings.video-right %}
+          <div class="col right">
+            <div class="image-wrapper">
+              <div class="bg-image"></div>
+              {% if block.settings.video-link != blank %}
+                <video class="video" playsinline="" autoplay="" muted="" loop="">
+                  <source src="{{ block.settings.video-link }}">
+                </video>
+              {% elsif block.settings.gif-link != blank %}
+                <img src="{{ block.settings.gif-link }}" alt="{{ block.settings.title | escape | strip }}">
+              {% elsif block.settings.image-link != blank %}
+                {% assign img_url = block.settings.image-link | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+                <img 
+                  class="lazyload"
+                  {% if forloop == 1 %}
+                  src="{{ block.settings.image-link | img_url: '360x' }}"
+                  {% endif %}
+                  alt="{{ block.settings.title | escape | strip }}"
+                  data-src="{{ img_url }}"
+                  data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+                  data-aspectratio="{{ block.settings.image-link.aspect_ratio }}"
+                  data-sizes="auto"
+                  style="display: block; width: 100%; height: auto;"
+                  width="{{ block.settings.image-link.width }}"
+                  height="{{ block.settings.image-link.height }}"
+                  data-cc-animate="cc-fade-in-up"
+                />
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </section>
+  {% elsif block.type == 'media-grid' %}
+    <section class="getting-started--collection promotion">
+      <h2 class="title">{{ block.settings.title-2 }}</h2>
+
+      <div class="wrapper">
+        <div class="column left">
+          {% assign img_url = block.settings.c-image-1 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+          <img 
+            class="d-none d-lg-block lazyload"
+            {% if forloop == 1 %}
+            src="{{ block.settings.c-image-1 | img_url: '360x' }}"
+            {% endif %}
+            alt="{{ block.settings.c-title-1 | escape | strip }}"
+            data-src="{{ img_url }}"
+            data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+            data-aspectratio="{{ block.settings.c-image-1.aspect_ratio }}"
+            data-sizes="auto"
+            style="display: block; width: 100%; height: auto;"
+            width="{{ block.settings.c-image-1.width }}"
+            height="{{ block.settings.c-image-1.height }}"
+            data-cc-animate="cc-fade-in-up"
+          />
+          {% assign img_url = block.settings.c-image-1-xs | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+          <img 
+            class="d-block d-lg-none lazyload"
+            {% if forloop == 1 %}
+            src="{{ block.settings.c-image-1-xs | img_url: '360x' }}"
+            {% endif %}
+            alt="{{ block.settings.c-title-1 | escape | strip }}"
+            data-src="{{ img_url }}"
+            data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+            data-aspectratio="{{ block.settings.c-image-1-xs.aspect_ratio }}"
+            data-sizes="auto"
+            style="display: block; width: 100%; height: auto;"
+            width="{{ block.settings.c-image-1-xs.width }}"
+            height="{{ block.settings.c-image-1-xs.height }}"
+            data-cc-animate="cc-fade-in-up"
+          />
+          <h2 class="title d-none d-lg-block">{{ block.settings.c-title-1 }}</h2>
+          <div class="desc">{{ block.settings.c-desc-1 }}</div>
+          {% if block.settings.c-cta-url-1 != blank %}
+            <a class="cta" href="{{ block.settings.c-cta-url-1 }}">SHOP NOW</a>
+          {% endif %}
+        </div>
+        <div class="column right">
+          {% assign img_url = block.settings.c-image-2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+          <img 
+            class="d-none d-lg-block lazyload"
+            {% if forloop == 1 %}
+            src="{{ block.settings.c-image-2 | img_url: '360x' }}"
+            {% endif %}
+            alt="{{ block.settings.c-title-2 | escape | strip }}"
+            data-src="{{ img_url }}"
+            data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+            data-aspectratio="{{ block.settings.c-image-2.aspect_ratio }}"
+            data-sizes="auto"
+            style="display: block; width: 100%; height: auto;"
+            width="{{ block.settings.c-image-2.width }}"
+            height="{{ block.settings.c-image-2.height }}"
+            data-cc-animate="cc-fade-in-up"
+          />
+          {% assign img_url = block.settings.c-image-2-xs | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+          <img 
+            class="d-block d-lg-none lazyload"
+            {% if forloop == 1 %}
+            src="{{ block.settings.c-image-2-xs | img_url: '360x' }}"
+            {% endif %}
+            alt="{{ block.settings.c-title-2 | escape | strip }}"
+            data-src="{{ img_url }}"
+            data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+            data-aspectratio="{{ block.settings.c-image-2-xs.aspect_ratio }}"
+            data-sizes="auto"
+            style="display: block; width: 100%; height: auto;"
+            width="{{ block.settings.c-image-2-xs.width }}"
+            height="{{ block.settings.c-image-2-xs.height }}"
+            data-cc-animate="cc-fade-in-up"
+          />
+          <h2 class="title d-none d-lg-block">{{ block.settings.c-title-2 }}</h2>
+          <div class="desc">{{ block.settings.c-desc-2 }}</div>
+          {% if block.settings.c-cta-url-2 != blank %}
+            <a class="cta" href="{{ block.settings.c-cta-url-2 }}">SHOP NOW</a>
+          {% endif %}
+        </div>
+        {% if block.settings.c-image-3 != blank %}
+          <div class="column left">
+            {% assign img_url = block.settings.c-image-3 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img 
+              class="d-none d-lg-block lazyload"
+              {% if forloop == 1 %}
+              src="{{ block.settings.c-image-3 | img_url: '360x' }}"
+              {% endif %}
+              alt="{{ block.settings.c-title-3 | escape | strip }}"
+              data-src="{{ img_url }}"
+              data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+              data-aspectratio="{{ block.settings.c-image-3.aspect_ratio }}"
+              data-sizes="auto"
+              style="display: block; width: 100%; height: auto;"
+              width="{{ block.settings.c-image-3.width }}"
+              height="{{ block.settings.c-image-3.height }}"
+              data-cc-animate="cc-fade-in-up"
+            />
+            {% assign img_url = block.settings.c-image-3-xs | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img 
+              class="d-block d-lg-none lazyload"
+              {% if forloop == 1 %}
+              src="{{ block.settings.c-image-3-xs | img_url: '360x' }}"
+              {% endif %}
+              alt="{{ block.settings.c-title-3 | escape | strip }}"
+              data-src="{{ img_url }}"
+              data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+              data-aspectratio="{{ block.settings.c-image-3-xs.aspect_ratio }}"
+              data-sizes="auto"
+              style="display: block; width: 100%; height: auto;"
+              width="{{ block.settings.c-image-3-xs.width }}"
+              height="{{ block.settings.c-image-3-xs.height }}"
+              data-cc-animate="cc-fade-in-up"
+            />
+            <h2 class="title">{{ block.settings.c-title-3 }}</h2>
+            <div class="desc">{{ block.settings.c-desc-3 }}</div>
+            {% if block.settings.c-cta-url-3 != blank %}
+              <a class="cta" href="{{ block.settings.c-cta-url-3 }}">SHOP NOW</a>
+            {% endif %}
+          </div>
+        {% endif %}
+        {% if block.settings.c-image-4 != blank %}
+          <div class="column right">
+            {% assign img_url = block.settings.c-image-4 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img 
+              class="d-none d-lg-block lazyload"
+              {% if forloop == 1 %}
+              src="{{ block.settings.c-image-4 | img_url: '360x' }}"
+              {% endif %}
+              alt="{{ block.settings.c-title-4 | escape | strip }}"
+              data-src="{{ img_url }}"
+              data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+              data-aspectratio="{{ block.settings.c-image-4.aspect_ratio }}"
+              data-sizes="auto"
+              style="display: block; width: 100%; height: auto;"
+              width="{{ block.settings.c-image-4.width }}"
+              height="{{ block.settings.c-image-4.height }}"
+              data-cc-animate="cc-fade-in-up"
+            />
+            {% assign img_url = block.settings.c-image-4-xs | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img 
+              class="d-block d-lg-none lazyload"
+              {% if forloop == 1 %}
+              src="{{ block.settings.c-image-4-xs | img_url: '360x' }}"
+              {% endif %}
+              alt="{{ block.settings.c-title-4 | escape | strip }}"
+              data-src="{{ img_url }}"
+              data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+              data-aspectratio="{{ block.settings.c-image-4-xs.aspect_ratio }}"
+              data-sizes="auto"
+              style="display: block; width: 100%; height: auto;"
+              width="{{ block.settings.c-image-4-xs.width }}"
+              height="{{ block.settings.c-image-4-xs.height }}"
+              data-cc-animate="cc-fade-in-up"
+            />
+            <h2 class="title">{{ block.settings.c-title-4 }}</h2>
+            <div class="desc">{{ block.settings.c-desc-4 }}</div>
+            {% if block.settings.c-cta-url-4 != blank %}
+              <a class="cta" href="{{ block.settings.c-cta-url-4 }}">SHOP NOW</a>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </section>
+  {% elsif block.type == 'gallery' %}
+    <section class="staff-picks influencers inspo">
+      <h2 class="title">{{ block.settings.title }}</h2>
+      <div class="desc">{{ block.settings.desc }}</div>
+      <a class="view-all-link" href="{{ block.settings.button-url }}">
+        {{ block.settings.button-text }}
+        <img alt="Right Arrow" class="arrow" src="{{ 'arrow-right.svg' | asset_url }}">
+      </a>
+
+      <div class="carousel carousel-insp">
+        <div class="carousel-cell" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".{{ forloop.index }}s">
+          {% assign img_url = block.settings.image-1 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+          <img 
+            class="lazyload"
+            {% if forloop == 1 %}
+            src="{{ block.settings.image-1 | img_url: '360x' }}"
+            {% endif %}
+            alt="{{ block.settings.title | escape | strip }}"
+            data-src="{{ img_url }}"
+            data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+            data-aspectratio="{{ block.settings.image-1.aspect_ratio }}"
+            data-sizes="auto"
+            style="display: block; width: 100%; height: auto;"
+            width="{{ block.settings.image-1.width }}"
+            height="{{ block.settings.image-1.height }}"
+            data-cc-animate="cc-fade-in-up"
+          />
+        </div>
+        {% if block.settings.image-2 != blank %}
+          <div class="carousel-cell" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".{{ forloop.index }}s">
+            {% assign img_url = block.settings.image-21 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img 
+              class="lazyload"
+              {% if forloop == 1 %}
+              src="{{ block.settings.image-21 | img_url: '360x' }}"
+              {% endif %}
+              alt="{{ block.settings.title | escape | strip }}"
+              data-src="{{ img_url }}"
+              data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+              data-aspectratio="{{ block.settings.image-21.aspect_ratio }}"
+              data-sizes="auto"
+              style="display: block; width: 100%; height: auto;"
+              width="{{ block.settings.image-21.width }}"
+              height="{{ block.settings.image-21.height }}"
+              data-cc-animate="cc-fade-in-up"
+            />
+          </div>
+        {% endif %}
+        {% if block.settings.image-3 != blank %}
+          <div class="carousel-cell" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".{{ forloop.index }}s">
+            {% assign img_url = block.settings.image-3 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img 
+              class="lazyload"
+              {% if forloop == 1 %}
+              src="{{ block.settings.image-3 | img_url: '360x' }}"
+              {% endif %}
+              alt="{{ block.settings.title | escape | strip }}"
+              data-src="{{ img_url }}"
+              data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+              data-aspectratio="{{ block.settings.image-3.aspect_ratio }}"
+              data-sizes="auto"
+              style="display: block; width: 100%; height: auto;"
+              width="{{ block.settings.image-3.width }}"
+              height="{{ block.settings.image-3.height }}"
+              data-cc-animate="cc-fade-in-up"
+            />
+          </div>
+        {% endif %}
+        {% if block.settings.image-4 != blank %}
+          <div class="carousel-cell" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".{{ forloop.index }}s">
+            {% assign img_url = block.settings.image-4 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img 
+              class="lazyload"
+              {% if forloop == 1 %}
+              src="{{ block.settings.image-4 | img_url: '360x' }}"
+              {% endif %}
+              alt="{{ block.settings.title | escape | strip }}"
+              data-src="{{ img_url }}"
+              data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+              data-aspectratio="{{ block.settings.image-4.aspect_ratio }}"
+              data-sizes="auto"
+              style="display: block; width: 100%; height: auto;"
+              width="{{ block.settings.image-4.width }}"
+              height="{{ block.settings.image-4.height }}"
+              data-cc-animate="cc-fade-in-up"
+            />
+          </div>
+        {% endif %}
+        {% if block.settings.image-5 != blank %}
+          <div class="carousel-cell" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".{{ forloop.index }}s">
+            {% assign img_url = block.settings.image-5 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img 
+              class="lazyload"
+              {% if forloop == 1 %}
+              src="{{ block.settings.image-5 | img_url: '360x' }}"
+              {% endif %}
+              alt="{{ block.settings.title | escape | strip }}"
+              data-src="{{ img_url }}"
+              data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+              data-aspectratio="{{ block.settings.image-5.aspect_ratio }}"
+              data-sizes="auto"
+              style="display: block; width: 100%; height: auto;"
+              width="{{ block.settings.image-5.width }}"
+              height="{{ block.settings.image-5.height }}"
+              data-cc-animate="cc-fade-in-up"
+            />
+          </div>
+        {% endif %}
+        {% if block.settings.image-6 != blank %}
+          <div class="carousel-cell" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".{{ forloop.index }}s">
+            {% assign img_url = block.settings.image-6 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img 
+              class="lazyload"
+              {% if forloop == 1 %}
+              src="{{ block.settings.image-6 | img_url: '360x' }}"
+              {% endif %}
+              alt="{{ block.settings.title | escape | strip }}"
+              data-src="{{ img_url }}"
+              data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+              data-aspectratio="{{ block.settings.image-6.aspect_ratio }}"
+              data-sizes="auto"
+              style="display: block; width: 100%; height: auto;"
+              width="{{ block.settings.image-6.width }}"
+              height="{{ block.settings.image-6.height }}"
+              data-cc-animate="cc-fade-in-up"
+            />
+          </div>
+        {% endif %}
+        {% if block.settings.image-7 != blank %}
+          <div class="carousel-cell" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".{{ forloop.index }}s">
+            {% assign img_url = block.settings.image-7 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img 
+              class="lazyload"
+              {% if forloop == 1 %}
+              src="{{ block.settings.image-7 | img_url: '360x' }}"
+              {% endif %}
+              alt="{{ block.settings.title | escape | strip }}"
+              data-src="{{ img_url }}"
+              data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+              data-aspectratio="{{ block.settings.image-7.aspect_ratio }}"
+              data-sizes="auto"
+              style="display: block; width: 100%; height: auto;"
+              width="{{ block.settings.image-7.width }}"
+              height="{{ block.settings.image-7.height }}"
+              data-cc-animate="cc-fade-in-up"
+            />
+          </div>
+        {% endif %}
+        {% if block.settings.image-8 != blank %}
+          <div class="carousel-cell" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".{{ forloop.index }}s">
+            {% assign img_url = block.settings.image-8 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img 
+              class="lazyload"
+              {% if forloop == 1 %}
+              src="{{ block.settings.image-8 | img_url: '360x' }}"
+              {% endif %}
+              alt="{{ block.settings.title | escape | strip }}"
+              data-src="{{ img_url }}"
+              data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+              data-aspectratio="{{ block.settings.image-8.aspect_ratio }}"
+              data-sizes="auto"
+              style="display: block; width: 100%; height: auto;"
+              width="{{ block.settings.image-8.width }}"
+              height="{{ block.settings.image-8.height }}"
+              data-cc-animate="cc-fade-in-up"
+            />
+          </div>
+        {% endif %}
+      </div>
+      <div class="carousel-pagination d-none d-lg-block">
+        <span id="current-page-insp" class="num current-page">1</span>
+        <span class="num divider">/</span>
+        <span id="total-pages-insp" class="num total-pages">0</span>
+      </div>
+
+      <div class="progress-wrapper d-block d-lg-none">
+        <div class="progress-bar"></div>
+      </div>
+      <script>
+        var options = {
+          cellAlign: 'left',
+          contain: true,
+          pageDots: false,
+          imagesLoaded: true,
+          wrapAround: true
+        };
+
+        var $inspirationCarousel = $('.carousel-insp').flickity(options);
+
+        $(document).ready(() => {
+          var size = $('div.carousel-insp div.carousel-cell').length,
+              indexXS = $('div.carousel-insp div.carousel-cell.is-selected').index() + 1,
+              totalXS = $('div.carousel-insp div.carousel-cell').length,
+              percent = (indexXS / totalXS) * 100;
+
+          $('#total-pages-insp').text(size);
+          $('div.progress-bar').css('width',`${percent}%`);
+
+          $inspirationCarousel.on('change.flickity', function(event, index) {
+            var indexXS = $('div.carousel-insp div.carousel-cell.is-selected').index() + 1,
+                totalXS = $('div.carousel-insp div.carousel-cell').length,
+                percent = (indexXS / totalXS) * 100;
+
+            $('#current-page-insp').text(index + 1);
+            $('div.progress-bar').css('width',`${percent}%`);
+          });
+        })
+      </script>
+    </section>
+  {% elsif block.type == 'call-to-action' %}
+    <section class="bracelet-guide bracelet-guide--cta getting-started">
+      <h2 class="title">{{ block.settings.title }}</h2>
+      <div class="desc">{{ block.settings.text }}</div>
+      <a class="cta" href="{{ block.settings.button-url }}">{{ block.settings.button-text }}</a>
+    </section>
+  {% elsif block.type == 'hero-color-text' %}
+    <section class="getting-started--hero">
+      <h1 class="title">{{ block.settings.title }}</h1>
+      <div class="desc text-center">{{ block.settings.desc }}</div>
+    </section>
+    <style>
+      section.getting-started--hero {
+        padding-bottom: 0 !important;
+      }
+      section.getting-started--hero h1.title, section.getting-started--hero h1.title p {
+        background-size: cover !important;
+      }
+    </style>
+  {% elsif block.type == 'media-centered' %}
+    <section class="product-image-text video centered">
+      <div class="wrapper text-center">
+        <div class="col">
+          <div class="image-wrapper">
+            <div class="bg-image"></div>
+            {% if block.settings.video-link != blank %}
+              <video class="video" playsinline="" autoplay="" muted="" loop="">
+                <source src="{{ block.settings.video-link }}">
+              </video>
+            {% elsif block.settings.gif-link != blank %}
+              <img src="{{ block.settings.gif-link }}" alt="{{ block.settings.title | escape | strip }}">
+            {% elsif block.settings.image-link != blank %}
+              {% assign img_url = block.settings.image-link | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+              <img 
+                class="lazyload"
+                {% if forloop == 1 %}
+                src="{{ block.settings.image-link | img_url: '360x' }}"
+                {% endif %}
+                alt="{{ block.settings.title | escape | strip }}"
+                data-src="{{ img_url }}"
+                data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+                data-aspectratio="{{ block.settings.image-link.aspect_ratio }}"
+                data-sizes="auto"
+                style="display: block; width: 100%; height: auto;"
+                width="{{ block.settings.image-link.width }}"
+                height="{{ block.settings.image-link.height }}"
+              />
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </section>
+  {% elsif block.type == 'product-list' %}
+    {%- if block.settings.layout == 'rows' -%}
+      {%- if block.settings.grid == 2 -%}
+        {%- assign product_class = 'column half' -%}
+        {%- elsif block.settings.grid == 3 -%}
+        {%- assign product_class = 'column third' -%}
+      {%- else -%}
+        {%- assign product_class = 'column quarter' -%}
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- assign max_products = block.settings.grid | times: block.settings.rows -%}
+
+    {% assign animation_type = "cc-fade-in-up" %}
+    {%- if block.settings.layout == "columns" -%}
+      {% assign animation_type = "cc-fade-in" %}
+    {%- endif -%}
+
+    {% if block.settings.layout == 'carousel' %}<div class="product-slider">{% endif %}
+
+    <div id="featured-collection-{{block.id}}" class="featured-collection wide-container half-gutter section-spacing {% if block.settings.alternate_bg_color %}use-alt-bg {% endif %}{% if block.settings.show_more_less %}show-less {% endif %}" data-section-type="featured-collection" data-cc-animate>
+      {% if block.settings.title != blank or block.settings.show_view_all %}
+        <div class="section-heading" data-cc-animate>
+          {% if block.settings.title != blank %}
+            <h2 class="h2">
+              <a data-cc-animate-click href="{{ collections[block.settings.collection].url }}">
+                {{ block.settings.title | escape }}
+              </a>
+            </h2>
+          {% else %}
+              <div></div>
+          {% endif %}
+
+          {% unless block.settings.show_view_all %}
+            <a data-cc-animate-click class="view-all-link" href="{{ collections[block.settings.collection].url }}">
+              {{ block.settings.link_text }}
+              <img alt="Right Arrow" class="arrow" src="{{ 'arrow-right.svg' | asset_url }}">
+            </a>
+          {% endunless %}
+        </div>
+      {% endif %}
+
+      {% if block.settings.layout == 'carousel' %}
+        <div 
+          class="swiper-container product-list product-list--{{ block.settings.layout }}"
+          id="product-list-{{ block.id }}"
+          data-products-in-view="{{ block.settings.grid }}"
+        >
+
+          <div class="swiper-wrapper" data-normheights=".image" data-normheights-inner="img">
+            {% if block.settings.collection != blank %}
+              {% assign collection = collections[block.settings.collection] %}
+              {% if block.settings.show_more_less %}
+                {% for product in collection.products %}
+                  <div class="swiper-slide">
+                    {% assign animate_delay = forloop.index | times: 0.4 %}
+                    {% render 'product-block', product: product, product_class: product_class, i: forloop.index, animate: animate_delay, show_vendor: block.settings.show_vendor, category: collection.title %}
+                  </div>
+                {% endfor %}
+              {% else %}
+                {% for product in collection.products limit: 12 %}
+                  <div class="swiper-slide">
+                    {% assign animate_delay = forloop.index | times: 0.4 %}
+                    {% render 'product-block', product: product, product_class: product_class, i: forloop.index, animate: animate_delay, show_vendor: block.settings.show_vendor, category: collection.title %}
+                  </div>
+                {% endfor %}
+              {% endif %}
+
+            {% else %}
+              {% for i in (1..max_products) %}
+                <div class="swiper-slide">
+                  {% assign animate_delay = forloop.index | times: 0.4 %}
+                  {% render 'onboarding-product-block', i: forloop.index, product_class: product_class, animate: animate_delay %}
+                </div>
+              {% endfor %}
+            {% endif %}
+          </div>
+
+          <div class="swiper-scrollbar"></div>
+          <a href="#" class="swiper-button-prev" aria-label="{{ 'general.accessibility_labels.previous' | t | escape }}">{% render 'svg-chevron-left' %}</a>
+          <a href="#" class="swiper-button-next" aria-label="{{ 'general.accessibility_labels.next' | t | escape }}">{% render 'svg-chevron-right' %}</a>
+        </div>
+      {% else %}
+        <div 
+          id="product-list-{{ block.id }}"
+          class="product-list
+          product-list--{{ block.settings.layout }}
+          {% if block.settings.grid_mobile == '2' %}mob-two-col{% endif %}
+          mob-show-4
+          {% if block.settings.layout == 'columns' %}jiggly-split dynamic-col-{{ block.settings.grid }}{% else %}grid--uniform{% endif %}"
+        >
+          {% if block.settings.collection != blank %}
+            {% assign collection = collections[block.settings.collection] %}
+            {% if block.settings.show_more_less %}
+              {% for product in collection.products %}
+                {% render 'product-block', product: product, product_class: product_class, animation_type: animation_type, i: forloop.index, show_vendor: block.settings.show_vendor, animate: forloop.index, category: collection.title %}
+              {% endfor %}
+
+            {% else %}
+              {% for product in collection.products limit: max_products %}
+                {% render 'product-block', product: product, product_class: product_class, animation_type: animation_type, i: forloop.index, show_vendor: block.settings.show_vendor, animate: forloop.index, category: collection.title %}
+              {% endfor %}
+            {% endif %}
+
+          {% else %}
+            {% for i in (1..max_products) %}
+              {% assign animate_delay = forloop.index | times: 0.4 %}
+              {% render 'onboarding-product-block', i: forloop.index, product_class: product_class, animate: animate_delay, animation_type: animation_type %}
+            {% endfor %}
+          {% endif %}
+        </div>
+      {% endif %}
+      {% if block.settings.show_more_less %}
+        <div class="show-more-link-wrapper">
+          <a data-cc-animate-click class="view-all-link show-more-link" id="show-more-{{ block.id }}">
+            <span class="show-more">+ More {{ collections[block.settings.collection].title }}</span>
+            <span class="show-less" style="display: none">- Less {{ collections[block.settings.collection].title }}</span>
+          </a>
+        </div>
+        <script>
+          $(document).ready(function() {
+            var productList = $('#product-list-{{ block.id }}');
+            var productItems = productList.find('.product-block');
+            var showMoreButton = $('#show-more-{{ block.id }}');
+            var parentDiv = $('#featured-collection-{{block.id}}');
+  
+            if(productItems.length >= 4) {
+              showMoreButton.click(function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+  
+                $(this).toggleClass('active');
+                parentDiv.toggleClass('show-less');
+                productList.toggleClass('mob-show-4');
+              });
+            } else {
+              showMoreButton.hide();
+              parentDiv.removeClass('show-less');
+              productList.removeClass('mob-show-4');
+            }
+          });
+        </script>
+      {% endif %}
+    </div>
+
+    {% if block.settings.layout == 'carousel' %}</div>{% endif %}
+  {% endif %}
+{% endfor %}
+
+{% schema %}
+  {
+    "name": "Promotion Landing Page",
+    "settings": [
+
+    ],
+    "blocks": [
+      {
+        "type": "media-and-text",
+        "name": "Media and Text",
+        "settings": [
+          {
+            "type": "text",
+            "id": "video-link",
+            "label": "Video Link",
+            "info": "Only use Video, Gif or Image, leave the unneeded ones blank"
+          },
+          {
+            "type": "text",
+            "id": "gif-link",
+            "label": "Gif Link / Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image-link",
+            "label": "Image"
+          },
+          {
+            "type": "checkbox",
+            "id": "video-right",
+            "label": "Video on Right Side?"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text"
+          }
+        ]
+      },
+      {
+        "type": "media-grid",
+        "name": "Media Grid",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title-2",
+            "label": "Title",
+            "default": "Start Your Collection Today!"
+          },
+          {
+            "type": "image_picker",
+            "id": "c-image-1",
+            "label": "Image 1 - Desktop"
+          },
+          {
+            "type": "image_picker",
+            "id": "c-image-1-xs",
+            "label": "Image 1 - Mobile"
+          },
+          {
+            "type": "text",
+            "id": "c-title-1",
+            "label": "Title 1",
+            "default": "Luggage Tag Starter Set"
+          },
+          {
+            "type": "text",
+            "id": "c-desc-1",
+            "label": "Desc 1",
+            "default": "Don’t know where to start? You can’t go wrong with a starter set!"
+          },
+          {
+            "type": "url",
+            "id": "c-cta-url-1",
+            "label": "URL 1"
+          },
+          {
+            "type": "image_picker",
+            "id": "c-image-2",
+            "label": "Image 2 - Desktop"
+          },
+          {
+            "type": "image_picker",
+            "id": "c-image-2-xs",
+            "label": "Image 2 - Mobile"
+          },
+          {
+            "type": "text",
+            "id": "c-title-2",
+            "label": "Title 2",
+            "default": "Passport Starter Set"
+          },
+          {
+            "type": "text",
+            "id": "c-desc-2",
+            "label": "Desc 2",
+            "default": "Don’t know where to start? You can’t go wrong with a starter set!"
+          },
+          {
+            "type": "url",
+            "id": "c-cta-url-2",
+            "label": "URL 2"
+          },
+          {
+            "type": "image_picker",
+            "id": "c-image-3",
+            "label": "Image 3 - Desktop"
+          },
+          {
+            "type": "image_picker",
+            "id": "c-image-3-xs",
+            "label": "Image 3 - Mobile"
+          },
+          {
+            "type": "text",
+            "id": "c-title-3",
+            "label": "Title 3",
+            "default": "Shopping for a gift?"
+          },
+          {
+            "type": "text",
+            "id": "c-desc-3",
+            "label": "Desc 3",
+            "default": "These gift guides are made for you."
+          },
+          {
+            "type": "url",
+            "id": "c-cta-url-3",
+            "label": "URL 3"
+          },
+          {
+            "type": "image_picker",
+            "id": "c-image-4",
+            "label": "Image 4 - Desktop"
+          },
+          {
+            "type": "image_picker",
+            "id": "c-image-4-xs",
+            "label": "Image 4 - Mobile"
+          },
+          {
+            "type": "text",
+            "id": "c-title-4",
+            "label": "Title 4",
+            "default": "Lorem Ipsum Dolor"
+          },
+          {
+            "type": "text",
+            "id": "c-desc-4",
+            "label": "Desc 4",
+            "default": "Lorem ipsum dolor sit amet, consectetur adipiscing."
+          },
+          {
+            "type": "url",
+            "id": "c-cta-url-4",
+            "label": "URL 4"
+          }
+        ]
+      },
+      {
+        "type": "gallery",
+        "name": "Gallery",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "In Need of Some Inspo?"
+          },
+          {
+            "type": "text",
+            "id": "desc",
+            "label": "Desc",
+            "default": "Check out the Gallery to get a glimpse of how jetsetters are using Jet Set Candy to share their stories."
+          },
+          {
+            "type": "text",
+            "id": "button-text",
+            "label": "Button Text",
+            "default": "VIEW GALLERY"
+          },
+          {
+            "type": "url",
+            "id": "button-url",
+            "label": "Button URL"
+          },
+          {
+            "id": "image-1",
+            "type": "image_picker",
+            "label": "Image 1"
+          },
+          {
+            "id": "image-2",
+            "type": "image_picker",
+            "label": "Image 2"
+          },
+          {
+            "id": "image-3",
+            "type": "image_picker",
+            "label": "Image 3"
+          },
+          {
+            "id": "image-4",
+            "type": "image_picker",
+            "label": "Image 4"
+          },
+          {
+            "id": "image-5",
+            "type": "image_picker",
+            "label": "Image 5"
+          },
+          {
+            "id": "image-6",
+            "type": "image_picker",
+            "label": "Image 6"
+          },
+          {
+            "id": "image-7",
+            "type": "image_picker",
+            "label": "Image 7"
+          },
+          {
+            "id": "image-8",
+            "type": "image_picker",
+            "label": "Image 8"
+          }
+        ]
+      },
+      {
+        "type": "call-to-action",
+        "name": "Call to Action",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Got More Questions?"
+          },
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Text",
+            "default": "Schedule your virtual shopping experience with a JSC stylist."
+          },
+          {
+            "type": "text",
+            "id": "button-text",
+            "label": "Button Text",
+            "default": "BOOK NOW"
+          },
+          {
+            "type": "url",
+            "id": "button-url",
+            "label": "Button URL"
+          }
+        ]
+      },
+      {
+        "type": "hero-color-text",
+        "name": "Color Text",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "textarea",
+            "id": "desc",
+            "label": "Text"
+          }
+        ]
+      },
+      {
+        "type": "media-centered",
+        "name": "Media Centered",
+        "settings": [
+          {
+            "type": "text",
+            "id": "video-link",
+            "label": "Video Link",
+            "info": "Only use Video, Gif or Image, leave the unneeded ones blank"
+          },
+          {
+            "type": "text",
+            "id": "gif-link",
+            "label": "Gif Link / Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image-link",
+            "label": "Image"
+          }
+        ]
+      },
+      {
+        "type": "product-list",
+        "name": "Product List",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Featured collection"
+          },
+          {
+            "type": "collection",
+            "id": "collection",
+            "label": "Collection"
+          },
+          {
+            "type": "text",
+            "id": "link_text",
+            "label": "Link Text",
+            "default": "SHOP ALL"
+          },
+          {
+            "type": "select",
+            "id": "layout",
+            "label": "Layout",
+            "options": [
+              {
+                "value": "columns",
+                "label": "Collage"
+              },
+              {
+                "value": "rows",
+                "label": "Grid"
+              },
+              {
+                "value": "carousel",
+                "label": "Carousel"
+              }
+            ],
+            "default": "rows",
+            "info": "Collage will only work when the 'Image shape' is set to Natural - in Products / Image shape"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_vendor",
+            "label": "Show product vendor",
+            "default": false
+          },
+          {
+            "type": "range",
+            "id": "grid",
+            "label": "Desktop products per row",
+            "min": 2,
+            "max": 4,
+            "default": 3
+          },
+          {
+            "type": "range",
+            "id": "rows",
+            "label": "Rows",
+            "min": 1,
+            "max": 12,
+            "default": 2,
+            "info": "Does not apply to carousel layout"
+          },
+          {
+            "type": "select",
+            "id": "grid_mobile",
+            "label": "Mobile products per row",
+            "options": [
+              {
+                "value": "1",
+                "label": "1"
+              },
+              {
+                "value": "2",
+                "label": "2"
+              }
+            ],
+            "default": "2"
+          },
+          {
+            "type": "checkbox",
+            "id": "alternate_bg_color",
+            "label": "Use alternate section color",
+            "default": false
+          },
+          {
+            "type": "checkbox",
+            "id": "show_view_all",
+            "label": "Show 'View all' link",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "show_more_less",
+            "label": "Show More/Less Toggle",
+            "info": "Overrides limit and view all link",
+            "default": false
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

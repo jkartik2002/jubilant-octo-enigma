@@ -1,0 +1,29 @@
+<script>
+  {% if customer %}
+    {% assign customerID = customer.id %}
+    {% assign customerTotal = customer.total_spent %}
+    {% assign customerTotalOrders = customer.orders.size %}
+    {% assign loginStatus = 'logged in' %}
+    {% assign userEmail = customer.email %}
+    {% assign userFirstName= customer.first_name %}
+    {% assign userLastName= customer.last_name %}
+  {% else %}
+    {% assign customerID = 'unknown' %}
+    {% assign customerTotal = 0 %}
+    {% assign customerTotalOrders = 0 %}
+    {% assign loginStatus = 'guest' %}
+    {% assign userEmail = 'unknown' %}
+    {% assign userFirstName = 'unknown' %}
+    {% assign userLastName = 'unknown' %}
+  {% endif %}
+
+  dataLayer.push({
+    customerId: '{{ customerID }}', // shopify customer ID. default to 'unknown'.
+    totalSpent: {{ customerTotal }}, // total spent in JSC store from Shopify. default to 0.
+    totalOrders: {{ customerTotalOrders }}, // total order count in JSC store from Shopify. default to 0.
+    loginStatus: '{{ loginStatus }}', // default to 'guest'
+    userEmail: '{{ userEmail }}', // user's email address. note that this is PII and will not be passed to GA. default to 'unknown'
+    customerFirstName: '{{ userFirstName }}', // default to 'unknown'
+    customerLastName: '{{ userLastName }}', // default to 'unknown'
+  })
+</script>

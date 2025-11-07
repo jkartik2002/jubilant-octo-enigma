@@ -1,0 +1,11 @@
+{% if product != blank %}
+	{% if product.metafields.custom_fields["variant_collection_reference"] != blank %}
+		{{ collections[product.metafields.custom_fields["variant_collection_reference"]].title }}
+	{% elsif product.metafields.custom_fields["shortened_title"] != blank  %}
+		{{ product.metafields.custom_fields["shortened_title"] }}
+	{% else %}
+		{{ product.title }}
+	{% endif %}
+{% else %}
+	{{ 'onboarding.product.title' | t }}
+{% endif %}

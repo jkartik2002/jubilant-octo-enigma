@@ -1,0 +1,203 @@
+{% if section.settings.show-section %}
+  <section class="product-image-text chain-guide--image-text upper">
+    <div class="wrapper">
+      <div class="col left">
+        <div class="text-wrapper text-wrapper-2">
+          <h2 class="title">{{ section.settings.title-2 }}</h2>
+          {% if section.settings.text-2 != blank %}
+            <div class="desc">{{ section.settings.text-2 }}</div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="col right">
+        <div class="image-wrapper">
+          <img alt="" class="bg-image" src="{{ 'bg-gradient.jpg' | asset_img_url: '500x' }}">
+
+          {% if section.settings.video-link-2 != blank %}
+            <video class="video" playsinline="" autoplay="" muted="" loop="">
+              <source src="{{ section.settings.video-link-2 }}">
+            </video>
+          {% else %}
+            {% assign img_url = section.settings.image-12 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img 
+              class="d-none d-lg-block lazyload"
+              alt="{{ section.settings.title-2 | escape | strip }}"
+              data-src="{{ img_url }}"
+              data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+              data-aspectratio="{{ section.settings.image-12.aspect_ratio }}"
+              data-sizes="auto"
+              width="{{ section.settings.image-12.width }}"
+              height="{{ section.settings.image-12.height }}"
+              data-cc-animate="cc-fade-in-up"
+            />
+            {% assign img_url = section.settings.image-xs-2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img 
+              class="d-block d-lg-none lazyload"
+              alt="{{ section.settings.title-2 | escape | strip }}"
+              data-src="{{ img_url }}"
+              data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+              data-aspectratio="{{ section.settings.image-xs-2.aspect_ratio }}"
+              data-sizes="auto"
+              width="{{ section.settings.image-xs-2.width }}"
+              height="{{ section.settings.image-xs-2.height }}"
+              data-cc-animate="cc-fade-in-up"
+            />
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    {% assign img_url = section.settings.image-2-2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+    <img 
+      class="floating floating-2 lazyload"
+      alt="{{ section.settings.title | escape | strip }}"
+      data-src="{{ img_url }}"
+      data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+      data-aspectratio="{{ section.settings.image-2-2.aspect_ratio }}"
+      data-sizes="auto"
+      width="{{ section.settings.image-2-2.width }}"
+      height="{{ section.settings.image-2-2.height }}"
+      data-cc-animate="cc-fade-down-up"
+    />
+  </section>
+
+  <section class="product-image-text chain-guide--image-text lower">
+    <div class="wrapper">
+      <div class="col left">
+        <div class="image-wrapper">
+          <div class="bg-image"></div>
+
+          {% if section.settings.video-link != blank %}
+            <video class="video" playsinline="" autoplay="" muted="" loop="">
+              <source src="{{ section.settings.video-link }}">
+            </video>
+          {% else %}
+            {% assign img_url = section.settings.image-xs | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img 
+              class="d-none d-lg-block lazyload"
+              alt="{{ section.settings.title | escape | strip }}"
+              data-src="{{ img_url }}"
+              data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+              data-aspectratio="{{ section.settings.image-xs.aspect_ratio }}"
+              data-sizes="auto"
+              width="{{ section.settings.image-xs.width }}"
+              height="{{ section.settings.image-xs.height }}"
+              data-cc-animate="cc-fade-in-up"
+            />
+            {% assign img_url = section.settings.image-xs | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img 
+              class="d-block d-lg-none lazyload"
+              alt="{{ section.settings.title | escape | strip }}"
+              data-src="{{ img_url }}"
+              data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+              data-aspectratio="{{ section.settings.image-xs.aspect_ratio }}"
+              data-sizes="auto"
+              width="{{ section.settings.image-xs.width }}"
+              height="{{ section.settings.image-xs.height }}"
+              data-cc-animate="cc-fade-in-up"
+            />
+          {% endif %}
+        </div>
+      </div>
+      <div class="col right">
+        <div class="text-wrapper">
+          <h2 class="title">{{ section.settings.title }}</h2>
+          {% if section.settings.text != blank %}
+            <div class="desc">{{ section.settings.text }}</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    {% assign img_url = section.settings.image-2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+    <img 
+      class="floating floating-1 lazyload"
+      alt="{{ section.settings.title | escape | strip }}"
+      data-src="{{ img_url }}"
+      data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+      data-aspectratio="{{ section.settings.image-2.aspect_ratio }}"
+      data-sizes="auto"
+      width="{{ section.settings.image-2.width }}"
+      height="{{ section.settings.image-2.height }}"
+      data-cc-animate="cc-fade-in-up"
+    />
+  </section>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Text and Image",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show-section",
+        "label": "Show Section?",
+        "default": true
+      },
+      {
+        "type": "textarea",
+        "id": "title-2",
+        "label": "Title",
+        "default": "Chain Length"
+      },
+      {
+        "type": "textarea",
+        "id": "text-2",
+        "label": "Text"
+      },
+      {
+        "type": "text",
+        "id": "video-link-2",
+        "label": "Video",
+        "info": "Vimeo Download URL - takes priority over Image above"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-12",
+        "label": "Image - Desktop"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-xs-2",
+        "label": "Image - Mobile"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-2-2",
+        "label": "Icon"
+      },
+      {
+        "type": "textarea",
+        "id": "title",
+        "label": "Title 2",
+        "default": "Chain Length"
+      },
+      {
+        "type": "textarea",
+        "id": "text",
+        "label": "Text 2"
+      },
+      {
+        "type": "text",
+        "id": "video-link",
+        "label": "Video",
+        "info": "Vimeo Download URL 2 - takes priority over Image above"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image - Desktop 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-xs",
+        "label": "Image - Mobile 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-2",
+        "label": "Icon 2"
+      }
+    ]
+  }
+{% endschema %}

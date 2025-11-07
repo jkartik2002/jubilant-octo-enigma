@@ -1,0 +1,154 @@
+<section class="staff-picks influencers inspo chain-guide--gallery">
+  <h2 class="title">{{ section.settings.title }}</h2>
+  {% if section.settings.desc != blank %}
+    <div class="desc">{{ section.settings.desc }}</div>
+  {% endif %}
+  <a class="view-all-link" href="{{ section.settings.button-url }}">
+    {{ section.settings.button-text }}
+    <img alt="Right Arrow" class="arrow" src="{{ 'arrow-right.svg' | asset_url }}">
+  </a>
+
+  <div class="carousel carousel-insp d-none d-lg-block">
+    {% for block in section.blocks %}
+      <div class="carousel-cell" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".{{ forloop.index }}s">
+        <a href="{{ section.settings.button-url }}">
+          {% assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+          <img 
+            class="lazyload"
+            {% if forloop == 1 %}
+            src="{{ block.settings.image | img_url: '360x' }}"
+            {% endif %}
+            alt="{{ section.settings.title | escape | strip }}"
+            data-src="{{ img_url }}"
+            data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+            data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+            data-sizes="auto"
+            style="display: block; width: 100%; height: auto;"
+            width="{{ block.settings.image.width }}"
+            height="{{ block.settings.image.height }}"
+            data-cc-animate="cc-fade-in-up"
+            data-cc-animate-delay="0.{{ forloop.inded }}s"
+          />
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="carousel carousel-insp-xs d-block d-lg-none">
+    {% for block in section.blocks %}
+      <div class="carousel-cell" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".{{ forloop.index }}s">
+        <a href="{{ section.settings.button-url }}">
+          {% assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+          <img 
+            class="lazyload"
+            {% if forloop == 1 %}
+            src="{{ block.settings.image | img_url: '360x' }}"
+            {% endif %}
+            alt="{{ section.settings.title | escape | strip }}"
+            data-src="{{ img_url }}"
+            data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+            data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+            data-sizes="auto"
+            style="display: block; width: 100%; height: auto;"
+            width="{{ block.settings.image.width }}"
+            height="{{ block.settings.image.height }}"
+            data-cc-animate="cc-fade-in-up"
+            data-cc-animate-delay="0.{{ forloop.inded }}s"
+          />
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="carousel-pagination d-none {% if section.blocks.size > 4 %}d-lg-block{% endif %}">
+    <span id="current-page-insp" class="num current-page">1</span>
+    <span class="num divider">/</span>
+    <span id="total-pages-insp" class="num total-pages">0</span>
+  </div>
+
+  <script>
+    var options = {
+      cellAlign: 'left',
+      contain: true,
+      pageDots: false,
+      imagesLoaded: true,
+      wrapAround: true
+    };
+
+    {% if section.blocks.size > 4 %}
+      var $inspirationCarousel = $('.carousel-insp').flickity(options);
+    {% endif %}
+
+    var $inspirationCarouselXS = $('.carousel-insp-xs').flickity(options);
+
+    $(document).ready(() => {
+      var size = $('div.carousel-insp div.carousel-cell').length;
+
+      $('#total-pages-insp').text(size);
+
+      {% if section.blocks.size > 4 %}
+        $inspirationCarousel.on('change.flickity', function(event, index) {
+          $('#current-page-insp').text(index + 1);
+        });
+      {% endif %}
+    })
+  </script>
+</section>
+
+{% if section.blocks.size < 5 %}
+  <style>
+    section.staff-picks.influencers.inspo div.carousel-insp {
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    section.staff-picks.influencers.inspo div.carousel-insp div.carousel-cell {
+      display: inline-block;
+      width: 25%;
+    }
+  </style>
+{% endif %}
+
+
+{% schema %}
+  {
+    "name": "Gallery",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Lorem Ipsum"
+      },
+      {
+        "type": "text",
+        "id": "desc",
+        "label": "Desc"
+      },
+      {
+        "type": "text",
+        "id": "button-text",
+        "label": "Button Text",
+        "default": "VIEW GALLERY"
+      },
+      {
+        "type": "url",
+        "id": "button-url",
+        "label": "Button URL"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "carousel-cell",
+        "name": "Carousel Cell",
+        "settings": [
+          {
+            "id": "image",
+            "type": "image_picker",
+            "label": "Image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

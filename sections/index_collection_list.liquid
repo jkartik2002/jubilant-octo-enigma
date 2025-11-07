@@ -1,0 +1,181 @@
+<section class="staff-picks influencers collection">
+  {% if section.settings.title != blank %}
+    <h2 class="title">{{ section.settings.title }}</h2>
+  {% endif %}
+  {% if section.settings.button-url != blank %}
+  <a class="view-all-link" href="{{ section.settings.button-url }}">
+    {{ section.settings.button-text }}
+    <img width="14" height="23" alt="Right Arrow" class="arrow" src="{{ 'arrow-right.svg' | asset_url }}">
+  </a>
+{% endif %}
+
+  <div class="carousel carousel-collection desktop carousel-{{ section.id }} d-none d-lg-block">
+    {% for block in section.blocks %}
+      <div aria-hidden="true" class="carousel-cell cell-{{ section.id }}" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".{{ forloop.index }}s">
+        {% assign collection1 = collections[block.settings.collection] %}
+        <a aria-hidden="true" href="{{ collection1.url }}">
+          <div class="image">
+            <img alt="" class="hover-image" src="{{ 'hover-effect.png' | asset_img_url: '500x' }}">
+            <div class="image-inner">
+              <div class="image-wrapper">
+                {% assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+                <img 
+                  class="lazyload"
+                  {% if forloop.index == 1 %}
+                  src="{{ block.settings.image | img_url: '180x' }}"
+                  {% endif %}
+                  alt="{{ collection1.title | escape }}"
+                  data-src="{{ img_url }}"
+                  data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+                  data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                  data-sizes="auto"
+                  style="display: block; width: 100%; height: auto;"
+                  width="328"
+                  height="328"
+                  data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".2s"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="title">{{ collection1.title }}</div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="carousel carousel-collection mobile carousel-{{ section.id }} d-block d-lg-none">
+    {% for block in section.blocks %}
+      <div aria-hidden="true" class="carousel-cell">
+        {% assign collection1 = collections[block.settings.collection] %}
+        <a aria-hidden="true" href="{{ collection1.url }}">
+          <div class="image">
+            <img alt="" class="hover-image lazyload"
+                 src="{{ 'hover-effect.png' | asset_img_url: '20x' }}"
+                 data-src="{{ 'hover-effect.png' | asset_img_url: '500x' }}">
+            <div class="image-inner">
+              <div class="image-wrapper">
+                {% assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+                <img 
+                  class="lazyload"
+                  alt="{{ collection1.title | escape }}"
+                  data-src="{{ img_url }}"
+                  data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+                  data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                  data-sizes="auto"
+                  style="display: block; width: 100%; height: auto;"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                  data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".2s"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="title">{{ collection1.title }}</div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if section.blocks.size > 4 %}
+    <div class="carousel-pagination d-none d-lg-block">
+      <span id="current-page-col-{{ section.id }}" class="num current-page">1</span>
+      <span class="num divider">/</span>
+      <span id="total-pages-col-{{ section.id }}" class="num total-pages">0</span>
+    </div>
+  {% else %}
+    <style>
+      div.carousel-collection.desktop {
+        white-space: nowrap;
+      }
+      div.carousel-collection.desktop div.carousel-cell {
+        display: inline-block;
+      }
+    </style>
+  {% endif %}
+
+  <script>
+    {% if section.blocks.size > 4 %}
+      var options = {
+        cellAlign: 'left',
+        contain: true,
+        pageDots: false,
+         autoPlay: true,
+        autoPlay: 3000,
+        wrapAround: true
+      };
+
+      var $collectionCarousel{{ section.id }} = $('.carousel-collection.desktop.carousel-{{ section.id }}').flickity(options);
+
+      $(document).ready(() => {
+        var size = $('div.carousel-collection.desktop div.carousel-cell.cell-{{ section.id }}').length;
+        $('#total-pages-col-{{ section.id }}').text(size);
+
+        $collectionCarousel{{ section.id }}.on('change.flickity', function(event, index) {
+          $('#current-page-col-{{ section.id }}').text(index + 1);
+        });
+      })
+    {% endif %}
+
+    var optionsXS = {
+      cellAlign: 'center',
+      contain: true,
+      pageDots: false,
+      imagesLoaded: true,
+      autoPlay: true,
+      autoPlay: 3000,
+      wrapAround: true
+    };
+
+    var $collectionCarouselXS{{ section.id }} = $('.carousel-collection.mobile.carousel-{{ section.id }}').flickity(optionsXS);
+  </script>
+</section>
+
+{% schema %}
+  {
+    "name": "Collection List Custom",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Staff Picks"
+      },
+      {
+        "type": "text",
+        "id": "button-text",
+        "label": "Button Text",
+        "default": "SHOP STAFF PICKS"
+      },
+      {
+        "type": "url",
+        "id": "button-url",
+        "label": "Button URL"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+              "type": "collection",
+              "id": "collection",
+              "label": "Collection"
+          },
+          {
+              "type": "image_picker",
+              "id": "image",
+              "label": "Image"
+          }
+        ]
+      }
+    ],
+    "presets": [
+	    {
+        "name": "Collection List Custom",
+        "category": "Custom",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}

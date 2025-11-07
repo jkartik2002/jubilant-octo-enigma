@@ -1,0 +1,269 @@
+<style>
+.category-view { padding-top:{{ section.settings.desk_padding_top}}px; padding-bottom:{{section.settings.desk_padding_bottom}}px;}
+.category-list .flickity-slider .categories {width: 25%; text-align:center; padding: 0 10px 15px; }
+.category-view .category-title h2 {font-size:30px; line-height:32px; letter-spacing:3px; text-transform: uppercase;}
+.category-view .category-title.main-title {margin-bottom:{{section.settings.title_margin_bottom}}px;}
+.category-list .flickity-page-dots {bottom:20px;}
+.category-list .flickity-button, .category-list button[disabled].flickity-button {background: transparent; pointer-events: inherit;}
+.category-list button:not(.hover-grow):not(.no-hover):not(input.textbutton[type=submit]):not(button.textbutton):not([disabled="disabled"]):hover svg {fill: initial;}
+.category-list .flickity-prev-next-button {top:42%;}
+.category-list .image{position:relative;}
+.category-list .image-inner .image-wrapper{background:#F9F9F9;width:100%;height:100%;border-radius:0;z-index:99;position:relative;}
+.category-list .categories .category-title{margin:30px 0;font-size:16px;line-height:1;letter-spacing:.2em;color:#2a2a5f;text-transform:uppercase;display:inline-block;width:auto;padding-bottom:3px;font-weight:500;max-width:70%;position:relative;font-family:futura-pt,sans-serif!important;font-style:normal;}
+.category-view .carousel-pagination{margin:0 auto;text-align:center;}
+.category-view .carousel-pagination span.num{font-size:16px;letter-spacing:0.2em;color:#2a2a5f;}
+.category-view div.main-carousel button.flickity-button {top:calc(50% - 47px); background-repeat:no-repeat; background-position:center center; width:26px; height:26px; background-size:contain; border-radius:0 !important; outline:none; box-shadow:none;}
+.category-view div.main-carousel button.flickity-button svg {display:none;}
+.category-view div.main-carousel button.flickity-button.previous{left:23px; background-image:url("data:image/svg+xml,%3Csvg width='15' height='26' viewBox='0 0 15 26' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 1L2 13L14 25' stroke='%232a2a5f' stroke-width='2'/%3E%3C/svg%3E%0A");}
+.category-view div.main-carousel button.flickity-button.next{right:23px; background-image:url("data:image/svg+xml,%3Csvg width='15' height='26' viewBox='0 0 15 26' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L13 13L1 25' stroke='%232a2a5f' stroke-width='2'/%3E%3C/svg%3E");}
+@media(min-width:1100px){
+  .category-list .categories:hover .category-title{border-bottom:1px solid #2a2a5f;}
+}
+@media(max-width:1199px){
+  .category-list .categories .category-title {max-width:100%;}
+}
+@media(max-width:1099px){
+  .category-view .category-list {padding: 0 11px;}
+  .category-list .flickity-slider .categories{padding:0 7px;}
+  .category-list .categories .category-title{margin:20px 0 0;font-size:14px;}
+  .category-list .categories.is-selected .category-title{border-bottom:1px solid #2a2a5f;}
+  .category-view div.main-carousel button.flickity-button {top:calc(50% - 19px);}
+  .category-view div.main-carousel button.flickity-button.previous{left:0;}
+  .category-view div.main-carousel button.flickity-button.next{right:0;}
+}
+@media(max-width:1023px) {
+  .category-list .flickity-slider .categories {width:33.33%;}
+}
+@media(max-width:767px){
+  .category-view .category-list {padding: 0 17px;}
+  .category-list .categories .category-title {margin: 15px 0 0;}
+  .category-view .category-title h2 {font-size:20px;}
+  .category-list .flickity-prev-next-button.next {right: -30px;}
+  .category-list .flickity-slider .categories {width: 50%; padding:0 5px 15px;}
+  .category-view .category-title.main-title {margin-bottom:{{section.settings.mob_title_margin_bottom}}px;}
+  .category-view {padding-top:{{ section.settings.mob_padding_top}}px; padding-bottom:{{section.settings.mob_padding_bottom}}px;}
+  .category-view div.main-carousel button.flickity-button {top:calc(50% - 24px);}
+  .category-view div.main-carousel button.flickity-button.previous{left:4px;}
+  .category-view div.main-carousel button.flickity-button.next{right:4px;}
+}
+</style>
+<div class="category-view">
+  {% if section.settings.title != blank %}
+    <div class="category-title main-title">
+      <h2>{{ section.settings.title }}</h2>
+    </div>
+  {% endif %}
+  <div class="category-list main-carousel desktop carousel-{{ section.id }} d-none d-lg-block">
+    {% for block in section.blocks %}
+        {% if block.settings.url != blank %}
+      <div class="categories carousel-cell cell-{{ section.id }}" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".{{ forloop.index }}s">
+          <a href="{{ block.settings.url }}">
+            {% if block.settings.image != blank %}
+            <div class="image">
+              <div class="image-inner">
+                <div class="image-wrapper">
+                  <img class="category-image lazyloaded" src="{{ block.settings.image | img_url: 'master' }}"
+                    data-src="{{ block.settings.image | img_url: 'master' }}"
+                    data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+                    data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                    data-sizes="auto"
+                    style="display: block; width: 100%; height: auto;"
+                    width="345"
+                    height="345"
+                    data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".2s"/>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            {% if block.settings.title != blank %}
+              <span class="category-title">{{ block.settings.title }}</span>
+            {% endif %}
+          </a>
+      </div>
+        {% endif %}
+    {% endfor %}
+  </div>
+  <div class="category-list main-carousel mobile carousel-{{ section.id }} d-block d-lg-none">
+    {% for block in section.blocks %}
+        {% if block.settings.url != blank %}
+        <div class="categories carousel-cell">
+            <a href="{{ block.settings.url }}">
+              {% if block.settings.image != blank %}
+              <div class="image">
+                <div class="image-inner">
+                  <div class="image-wrapper">
+                    <img class="category-image lazyloaded" src="{{ block.settings.image | img_url: 'master' }}"
+                      data-src="{{ block.settings.image | img_url: 'master' }}"
+                      data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+                      data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                      data-sizes="auto"
+                      style="display: block; width: 100%; height: auto;"
+                      width="100%"
+                      height="100%"
+                      data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".2s"/>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+              {% if block.settings.title != blank %}
+                <span class="category-title">{{ block.settings.title }}</span>
+              {% endif %}
+            </a>
+        </div>
+        {% endif %}
+    {% endfor %}
+  </div>
+  {% if section.blocks.size > 4 %}
+    <div class="carousel-pagination d-none d-lg-block">
+      <span id="current-page-col-{{ section.id }}" class="num current-page">1</span>
+      <span class="num divider">/</span>
+      <span id="total-pages-col-{{ section.id }}" class="num total-pages">0</span>
+    </div>
+  {% else %}
+    <style>
+      div.category-list.desktop {
+        white-space: nowrap;
+      }
+      div.category-list.desktop div.carousel-cell {
+        display: inline-block;
+      }
+    </style>
+  {% endif %}
+</div>
+<button class="destroy-flickity" style="display: none;">Destroy</button>
+<script>
+    {% if section.blocks.size > 4 %}
+      var options = {
+        cellAlign: 'left',
+        contain: true,
+        pageDots: false,
+        autoPlay: false,
+        wrapAround: true
+      };
+
+      var $collectionCarousel{{ section.id }} = $('.category-list.desktop.carousel-{{ section.id }}').flickity(options);
+
+      $(document).ready(() => {
+        var size = $('div.category-list.desktop div.carousel-cell.cell-{{ section.id }}').length;
+        $('#total-pages-col-{{ section.id }}').text(size);
+
+        $collectionCarousel{{ section.id }}.on('change.flickity', function(event, index) {
+          $('#current-page-col-{{ section.id }}').text(index + 1);
+        });
+      })
+    {% endif %}
+
+    var optionsXS = {
+      cellAlign: 'left',
+      contain: true,
+      pageDots: false,
+      imagesLoaded: true,
+      autoPlay: false,
+      wrapAround: true
+    };
+
+    var $collectionCarouselXS{{ section.id }} = $('.category-list.mobile.carousel-{{ section.id }}').flickity(optionsXS);
+  </script>
+{% schema %}
+{
+  "name": "Category Section",
+  "settings": [   
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",      
+    },
+     {
+      "type": "header",
+      "content": "Desktop Customization"
+    },
+    {
+      "type": "range",
+      "id": "desk_padding_top",
+      "min": 0,
+      "max": 100,
+      "unit": "px",
+      "default": 30,
+      "label": "Padding Top",
+    },
+    {
+      "type": "range",
+      "id": "desk_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "unit": "px",
+      "default": 30,
+      "label": "Padding Bottom",
+    },    
+    {
+      "type": "range",
+      "id": "title_margin_bottom",
+      "min": 0,
+      "max": 100,
+      "unit": "px",
+      "default": 30,
+      "label": "Title Margin Bottom",
+    },    
+    {
+      "type": "header",
+      "content": "Mobile Customization"
+    },
+    {
+      "type": "range",
+      "id": "mob_padding_top",
+      "min": 0,
+      "max": 100,
+      "unit": "px",
+      "default": 30,
+      "label": "Padding Top",
+    },
+       {
+      "type": "range",
+      "id": "mob_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "unit": "px",
+      "default": 30,
+      "label": "Padding Bottom",
+    },
+    {
+      "type": "range",
+      "id": "mob_title_margin_bottom",
+      "min": 0,
+      "max": 100,
+      "unit": "px",
+      "default": 30,
+      "label": "Title Margin Bottom",
+    },
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "limit": 20,
+      "name": "Category",
+      "settings": [
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Thumbnail Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Section"
+    }
+  ]
+}
+{% endschema %}

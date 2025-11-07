@@ -1,0 +1,26 @@
+{% comment %}
+Don't edit this file.
+This snippet is auto generated and will be overwritten.
+{% endcomment %}
+
+<script id="back-in-stock-helper">
+  var _BISConfig = _BISConfig || {};
+
+{% if product %}
+  _BISConfig.product = {{ product | json }};
+
+  {% for variant in product.variants %}
+{% unless variant.metafields.secomapp.freegifts %}
+{% unless variant.title contains '% off)' %}
+
+    _BISConfig.product.variants[{{forloop.index | minus: 1 }}]['inventory_quantity'] = {{ variant.inventory_quantity }};
+
+{% endunless %}
+{% endunless %}
+  {% endfor %}
+{% endif %}
+
+{% if customer %}
+  _BISConfig.customer = { email: {{ customer.email | json }} };
+{% endif %}
+</script>

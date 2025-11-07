@@ -1,0 +1,32 @@
+<li class="{% if child_link.active %}active{% endif %}{% if child_link.links != blank %} contains-children{% endif %}{% if featured_links contains child_link.title %} featured-link{% endif %}">
+  {% comment %} {% if child_link.url == '#' %}
+    {% assign categoryTitle = child_link.title | downcase %}
+  {% endif %} {% endcomment %}
+
+  <a {% if child_link.links == blank %}data-cc-animate-click{% endif %} data-href="{{ child_link.url }}"
+  class="{% if child_link.links != blank %}has-children column-title{% endif %} {% if section.settings.nav_large_link contains child_link.title %}featured-link{% endif %} child-link  {{ child_link.title | handle }}"
+  {% if child_link.links != blank %}aria-haspopup="true"{% endif %} data-category-title="{{ link.title }}" data-title="{{ child_link.title }}">
+    {{ child_link.title }}
+
+    {% comment %} {% if child_link.links != blank %}
+      <span class="arr arr--small">{% render 'svg-chevron-right' %}</span>
+    {% endif %} {% endcomment %}
+  </a>
+
+  {% if child_link.links != blank %}
+    <ul class="child-child-links">
+      {% for child_child_link in child_link.links %}
+        <li class="{% if child_child_link.active %}active{% endif %}{% if featured_links contains child_child_link.title %} featured-link{% endif %}  {{ child_child_link.title | handle }}">
+          <a data-href="{{ child_child_link.url }}" class="child-child-link"
+          data-category-title="{{ link.title }}"
+          data-title="{{ child_child_link.title | downcase }}">
+            {% if section.settings.nav_featured_link_new == child_child_link.title or section.settings.nav_featured_link_new_2 == child_child_link.title %}
+              <span class="new-flag">New!</span>
+            {% endif %}
+            {{ child_child_link.title }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</li>

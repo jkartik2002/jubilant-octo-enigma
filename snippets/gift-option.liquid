@@ -1,0 +1,74 @@
+<div class="gift-wrapper">
+  {% assign variantTitle = '' %}
+  {% capture gift_key %}"{{ gift_item.key }}"{% endcapture %}
+  {% assign gift_key = gift_key | replace: ':', '-' | replace: '"', '' %}
+  {% for collection2 in gift_item.product.collections %}
+    {% if gift_item.product.metafields.custom_fields["variant_title"] != blank %}
+      {% assign variantTitle = product.metafields.custom_fields["variant_title"] %}
+    {% elsif collection2.title contains 'Solid Gold' %}
+      {% assign variantTitle = 'Solid Gold' %}
+    {% elsif collection2.title contains 'Gold Vermeil' %}
+      {% assign variantTitle = 'Gold Vermeil' %}
+    {% elsif collection2.title contains 'Silver' %}
+      {% assign variantTitle = 'Sterling Silver' %}
+    {% elsif product.title contains 'Solid Rose Gold' %}
+      {% assign variantTitle = 'Solid Rose Gold' %}
+    {% elsif product.title contains 'Rose Gold' %}
+      {% assign variantTitle = 'Rose Gold' %}
+    {% elsif product.handle contains 'silver' %}
+      {% assign variantTitle = 'Sterling Silver' %}
+    {% endif %}
+  {% endfor %}
+
+  <div class="options">
+
+    <img alt="Gift Icon" class="gift-icon" src="{{ 'gift.svg' | asset_url }}">
+    <span class="desc">Is this a gift?</span>
+
+    <div class="checkbox-wrapper">
+      <div class="checkbox">
+        <input class="gift-checkbox" type="checkbox">
+      </div>
+    </div>
+
+    <div class="card-container card-container-{{ gift_key }}">
+      <div class="card-title">Select a Postcard</div>
+      <div class="card-desc">Choice not guaranteed but we'll do our best</div>
+      <div class="wrapper">
+        {% for variant in all_products['gift-note'].variants %}
+          {% capture u %}{% cycle 'odd', 'even' %}{% endcapture %}
+          {% if forloop.index == 5 %}
+            <div class="additional-post-cards">
+          {% endif %}
+          <div class="column {{ u }}">
+            <label class="image" for="{{ variant.id }}-{{ gift_key }}">
+              {% assign img_url = variant.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+              <img 
+                class="gift-image lazyload"
+                alt="{{ variant.title | escape | strip }}"
+                data-src="{{ img_url }}"
+                data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+                data-aspectratio="{{ variant.image.aspect_ratio }}"
+                data-sizes="auto"
+                width="{{ variant.image.width }}"
+                height="{{ variant.image.height }}"
+              />
+              <input id="{{ variant.id }}-{{ gift_key }}" class="giftcard giftcard-{{ gift_key }}" name="{{ gift_key }}" type="radio" value="{{ variant.title }}" data-property-name="Gift Card">
+              <span>{{ variant.title }}</span>
+            </label>
+          </div>
+        {% endfor %}
+      </div>
+      {% if all_products['gift-note'].variants.size > 4 %}
+        </div>
+        <div class="button show-more-btn">Show More</div>
+      {% endif %}
+      <textarea class="gift-message" id="gift-message-{{ gift_key }}" placeholder="Gift Message (Optional)" data-property-name="Gift Message" maxlength="70"></textarea>
+      <div class="word-counter">0/100</div>
+
+      <textarea class="instructions" id="gift-instructions-{{ gift_key }}" placeholder="Special Instructions (Optional) &#10;Gift includes multiple items? List them here and we'll pack them together." data-property-name="Gift Instructions"></textarea>
+
+      <div class="button submit-gift-card" data-id="{{ gift_key }}" data-line-index="{{ forloop.index }}">SUBMIT</div>
+    </div>
+  </div>
+</div>

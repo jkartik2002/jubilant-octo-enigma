@@ -1,0 +1,80 @@
+<section class="getting-started--glossary">
+  <h2 class="title">{{ section.settings.title }}</h2>
+
+  <div class="tab-container">
+    {% for block in section.blocks %}
+      <div class="faq-tab faq-tab-{{ forloop.index }} {% if forloop.first %}first selected{% endif %}">
+        <div class="faq-title" data-index="{{ forloop.index }}">{{ block.settings.title }}</div>
+        <div class="faq-content faq-content-{{ forloop.index }} {% if forloop.first %}first{% endif %} {% if block.settings.image != blank %}image-present{% endif %}">
+          {% if block.settings.image != blank %}
+            {% assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img 
+              class="lazyload"
+              alt="{{ block.settings.title | escape | strip }}"
+              data-src="{{ img_url }}"
+              data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+              data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+              data-sizes="auto"
+              width="{{ block.settings.image.width }}"
+              height="{{ block.settings.image.height }}"
+              data-cc-animate="cc-fade-in-up"
+            />
+          {% endif %}
+          {{ block.settings.text }}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<script>
+  $('.faq-title').click(function() {
+    var index = $(this).data('index'),
+        isOpen = $(`.faq-tab-${index}`).hasClass('selected');
+
+    $('.faq-content').slideUp();
+    $('.faq-tab').removeClass('selected');
+
+    if(!isOpen) {
+      $(`.faq-tab-${index}`).addClass('selected');
+      $(`.faq-content-${index}`).slideDown();
+    }
+  })
+</script>
+
+{% schema %}
+  {
+    "name": "Glossary",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "JSC Glossary"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "glossary-block",
+        "name": "Glossory Block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

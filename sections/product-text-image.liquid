@@ -1,0 +1,91 @@
+{% if product.tags contains 'LTC-A' %}
+  {% assign image = 'ltc-A.jpg' | asset_img_url: '1000x' %}
+{% elsif product.tags contains 'LTC-B' %}
+  {% assign image = 'ltc-B.jpg' | asset_img_url: '1000x' %}
+{% elsif product.tags contains 'LTC-C' %}
+  {% assign image = 'ltc-C.jpg' | asset_img_url: '1000x' %}
+{% elsif product.tags contains 'LTC-D' %}
+  {% assign image = 'ltc-D.jpg' | asset_img_url: '1000x' %}
+{% elsif product.tags contains 'LTC-E' %}
+  {% assign image = 'ltc-E.jpg' | asset_img_url: '1000x' %}
+{% elsif product.tags contains 'LTC-F' %}
+  {% assign image = 'ltc-F.jpg' | asset_img_url: '1000x' %}
+{% elsif product.tags contains 'LTC-G' %}
+  {% assign image = 'ltc-G.jpg' | asset_img_url: '1000x' %}
+{% elsif product.tags contains 'LTC-H' %}
+  {% assign image = 'ltc-H.jpg' | asset_img_url: '1000x' %}
+{% elsif product.tags contains 'LTC-I' %}
+  {% assign image = 'ltc-I.jpg' | asset_img_url: '1000x' %}
+{% elsif product.tags contains 'LTC-J' %}
+  {% assign image = 'ltc-J.jpg' | asset_img_url: '1000x' %}
+{% elsif product.tags contains 'LTC-K' %}
+  {% assign image = 'ltc-K.jpg' | asset_img_url: '1000x' %}
+{% elsif product.tags contains 'LTC-L' %}
+  {% assign image = 'ltc-L.jpg' | asset_img_url: '1000x' %}
+{% elsif product.tags contains 'LTC-M' %}
+  {% assign image = 'ltc-M.jpg' | asset_img_url: '1000x' %}
+{% elsif product.tags contains 'LTC-N' %}
+  {% assign image = 'ltc-N.jpg' | asset_img_url: '1000x' %}
+{% else %}
+  <style>
+    section.product-image-text.flipped {
+      display: none !important;
+    }
+  </style>
+{% endif %}
+<div class="nosto_element" id="productpage-nosto-4"></div>
+
+<div class="nosto_element" id="productpage-nosto-5"></div>
+<section class="product-image-text flipped">
+  <div class="wrapper">
+    {% if product.type contains 'Luggage' %}
+      <div class="col left">
+        <div class="image-wrapper">
+          <div class="bg-image"></div>
+
+          <img alt="{{section.settings.title}}" class="lazyload" data-src="{{ image }}">
+        </div>
+      </div>
+    {% endif %}
+    <div class="col {% if product.type contains 'Luggage' %}right{% else %}left{% endif %}">
+      {% comment %} <img alt="{{ section.settings.title }}" class="left-img d-none d-lg-inline-block" src="{{ product.images[0].src | img_url: '400x' }}"> {% endcomment %}
+      <div class="text-wrapper">
+        <h2 class="title">{{ section.settings.title }}</h2>
+        <div class="desc">{{ section.settings.text }}</div>
+      </div>
+    </div>
+    {% unless product.type contains 'Luggage' %}
+      <div class="col right">
+        <div class="image-wrapper">
+          <div class="bg-image"></div>
+
+          <img alt="{{ section.settings.title }}" class="lazyload" data-src="{{ image }}">
+        </div>
+      </div>
+    {% endunless %}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Product Size Guide",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "title",
+        "label": "Title",
+        "default": "Size Comparison"
+      },
+      {
+        "type": "textarea",
+        "id": "text",
+        "label": "Text"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Product Text and Image"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,533 @@
+<section class="index-hero main-index-hero index-hero--{{ section.id }} {{ section.settings.layout_style }}">
+  <div class="video-section">
+    <a
+      class="video-img-parent"
+      href="{{ section.settings.button-url }}"
+      data-section="hero"
+      data-position="1"
+      data-text="{{ section.settings.button-text | downcase }}"
+    >
+      {% if section.settings['bg-video'] != blank %}
+        <video class="video w-100" width="907" height="988" playsinline="" autoplay="" muted="" loop="" loading="lazy">
+          <source src="{{ section.settings.bg-video }}">
+        </video>
+      {% else %}
+        {% assign img_url = section.settings['bg-image'] | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+        <img
+          class="hero-image w-100 {% if section.settings.bg-image-xs != blank %}d-none d-lg-block{% endif %}"
+          src="{{ section.settings.bg-image | img_url: '360x' }}"
+          alt="{{section.settings.button-text | escape }}"
+          data-src="{{ img_url }}"
+          data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+          data-aspectratio="{{ section.settings.bg-image.aspect_ratio }}"
+          data-sizes="auto"
+          width="{{ section.settings.bg-image.width }}"
+          height="{{ section.settings.bg-image.height }}"
+        >
+        {% if section.settings['bg-image-xs'] != blank %}
+          {% assign img_url = section.settings['bg-image'] | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+          <img
+            class="hero-image w-100 d-block d-lg-none"
+            src="{{ section.settings.bg-image-xs | img_url: '360x' }}"
+            alt="{{section.settings.button-text | escape }}"
+            data-src="{{ img_url }}"
+            data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+            data-aspectratio="{{ section.settings.bg-image-xs.aspect_ratio }}"
+            data-sizes="auto"
+            width="{{ section.settings.bg-image-xs.width }}"
+            height="{{ section.settings.bg-image-xs.height }}"
+          >
+        {% endif %}
+      {% endif %}
+    </a>
+  </div>
+  <div class="text-container flex-container-left-align">
+    <div class="inner-wrapper">
+      {% if section.settings.icon != blank %}
+        <img alt="Icon" class="ico" src="{{ section.settings.icon | img_url: '300x' }}">
+      {% endif %}
+      {% if section.settings.subtitle != blank %}
+        <div class="subtitle">{{ section.settings.subtitle }}</div>
+      {% endif %}
+
+      {% if section.settings['no-h1'] %}
+        <h2 class="title">
+          {{ section.settings.title }}
+          {% if section.settings['title-color'] != blank %}
+            <div class="title-color">{{ section.settings['title-color'] }}</div>
+          {% endif %}
+        </h2>
+      {% else %}
+        <h1 class="title">
+          {{ section.settings.title }}
+          {% if section.settings['title-color'] != blank %}
+            <div class="title-color">{{ section.settings['title-color'] }}</div>
+          {% endif %}
+        </h1>
+      {% endif %}
+      {% if section.settings.desc != blank %}
+        <div class="desc">{{ section.settings.desc }}</div>
+      {% endif %}
+      <a
+        class="cta track-cta"
+        href="{{ section.settings.button-url }}"
+        data-section="hero"
+        data-position="1"
+        data-text="{{ section.settings.button-text | downcase }}"
+      >
+        {{- section.settings['button-text'] -}}
+      </a>
+      {% if section.settings.layout_style == 'text-container-left' and section.settings['overlay-image-2'] != blank %}
+        <img
+          alt="Overlay Image"
+          class="overlay-image image-2"
+          src="{{ section.settings.overlay-image-2 | img_url: '500x' }}"
+        >
+      {% endif %}
+    </div>
+  </div>
+  {% if section.settings.layout_style == 'text-container-left' and section.settings['overlay-image-1'] != blank %}
+    <img
+      alt="Overlay Image"
+      class="overlay-image image-1 d-none d-lg-block"
+      src="{{ section.settings.overlay-image-1 | img_url: '500x' }}"
+    >
+    <img
+      alt="Overlay Image Small"
+      class="overlay-image image-1 d-block d-lg-none"
+      src="{{ section.settings.overlay-image-1-xs | img_url: '500x' }}"
+    >
+  {% endif %}
+
+  {% if section.settings.layout_style == 'original' %}
+    {% if section.settings['charm-1'] != blank %}
+      <img class="charm charm-1 d-none d-lg-block" alt="Charm" src="{{ section.settings.charm-1 | img_url: '200x' }}">
+    {% endif %}
+    {% if section.settings['charm-2'] != blank %}
+      <img class="charm charm-2" alt="Charm" src="{{ section.settings.charm-2 | img_url: '200x' }}">
+    {% endif %}
+    {% if section.settings['charm-1'] != blank %}
+      <img class="charm charm-3" alt="Charm" src="{{ section.settings.charm-1 | img_url: '200x' }}">
+    {% endif %}
+    {% if section.settings['charm-1'] != blank %}
+      <img class="charm charm-4 d-none d-lg-block" alt="Charm" src="{{ section.settings.charm-1 | img_url: '200x' }}">
+    {% endif %}
+    {% if section.settings['charm-2'] != blank %}
+      <img class="charm charm-5" alt="Charm" src="{{ section.settings.charm-2 | img_url: '200x' }}">
+    {% endif %}
+    {% if section.settings['charm-1'] != blank %}
+      <img class="charm charm-6" alt="Charm" src="{{ section.settings.charm-1 | img_url: '200x' }}">
+    {% endif %}
+
+    {% if section.settings['border-text'] != blank %}
+      <div class="floating-text text-1">
+        {{ section.settings['border-text'] }}
+        {{ section.settings['border-text'] }}
+      </div>
+    {% endif %}
+    {% if section.settings['border-text'] != blank %}
+      <div class="floating-text text-2 d-none d-lg-block">
+        {{ section.settings['border-text'] }}
+        {{ section.settings['border-text'] }}
+      </div>
+    {% endif %}
+    {% if section.settings['border-text'] != blank %}
+      <div class="floating-text text-3">
+        {{ section.settings['border-text'] }}
+        {{ section.settings['border-text'] }}
+      </div>
+    {% endif %}
+    {% if section.settings['border-text'] != blank %}
+      <div class="floating-text text-4 d-none d-lg-block">
+        {{ section.settings['border-text'] }}
+        {{ section.settings['border-text'] }}
+      </div>
+    {% endif %}
+    {% if section.settings['border-text'] != blank %}
+      <div class="floating-text text-5">
+        {{ section.settings['border-text'] }}
+        {{ section.settings['border-text'] }}
+      </div>
+    {% endif %}
+    {% if section.settings['border-text'] != blank %}
+      <div class="floating-text text-6">
+        {{ section.settings['border-text'] }}
+        {{ section.settings['border-text'] }}
+      </div>
+    {% endif %}
+
+    {% if section.settings['invert-border-text'] or section.settings['title-gradient'] %}
+      <style>
+        {% if section.settings.invert-border-text %}
+         div.floating-text {
+           color: #fff !important;
+         }
+         {% endif %}
+        {% if section.settings.title-gradient %}
+         div.title-color {
+           -webkit-text-fill-color: transparent;
+           background: -webkit-linear-gradient(transparent, transparent),
+                       url('{{ section.settings.title-gradient | img_url: '400x' }}') repeat;
+           background: -o-linear-gradient(transparent, transparent);
+           -webkit-background-clip: text;
+           background-size: cover;
+         }
+           {% endif %}
+      </style>
+    {% endif %}
+  {% endif %}
+
+  <style>
+     .subtitle span{
+          color:{{section.settings.subtitle_color}};
+        }
+        .video-section{
+              line-height: 0;
+        }
+        .main-index-hero{
+          background-color:{{section.settings.bg_index_hero}};
+        }
+        section.index-hero div.text-container .subtitle{
+          padding-left: 10px;
+          font-size: 17px;
+          line-height: 1;
+          letter-spacing: .1em;
+      }
+        section.index-hero.original div.text-container{
+          height:100%;
+        }
+        section.index-hero.original div.text-container h1.title, section.index-hero.original div.text-container div.title-color{
+          font-size: 50px;
+          line-height: 1.1;
+          letter-spacing: 1px;
+        }
+
+       section.index-hero div.text-container { padding-left: 115px;}
+        {% if section.settings.layout_style == 'original' %}
+          section.index-hero.original div.text-container {border-bottom: 1px solid #d7d7d7; padding-bottom: {{section.settings.desktop_padding_bottom}}px; padding-top: {{section.settings.desktop_padding_top}}px; }
+
+      @media (max-width: 767px){
+        section.index-hero.original video.video{
+            height: auto !important;
+        }
+        section.index-hero.original img.hero-image{
+            height: auto !important;
+        }
+        section.index-hero div.text-container .subtitle{
+            padding-left:0px;
+        }
+        section.index-hero.original div.text-container h1.title,
+        section.index-hero.original div.text-container div.title-color{
+          font-size: 40px;
+          letter-spacing: 0.5px;
+        }
+       .main-index-hero{
+          background-color:{{section.settings.bg_index_hero_mobile}};
+        }
+        section.index-hero.original div.text-container{
+              padding: 25px;
+              padding-bottom: {{section.settings.mobile_padding_bottom}}px;  
+              padding-top: {{section.settings.mobile_padding_top}}px; 
+        }
+        section.index-hero div.text-container{
+            padding-left: 25px;
+      }
+      }
+      @media (max-width: 1099px){
+          section.index-hero div.text-container {padding: 10px 50px;}
+          section.index-hero.original video.video {height: 100% !important; width:100%;}
+        section.index-hero.original img.hero-image {height: 100% !important; width:100%;}
+        }
+         @media(min-width:1100px) and (max-width:1300px) {
+          section.index-hero.original div.text-container h1.title, section.index-hero.original div.text-container div.title-color {font-size: 40px;}         
+       }
+      @media(min-width:1100px) {
+        section.index-hero.original video.video{max-width:50%;}
+        section.index-hero.original img.hero-image{max-width:50%;}
+        section.index-hero div.text-container{width:50%;}
+          .index-hero video.video { max-height: 550px; object-fit: cover; }
+        .index-hero img.hero-image { max-height: 550px; object-fit: cover; }
+          section.index-hero div.text-container { justify-content: center; padding-left: 0px;}
+          section.index-hero div.text-container .subtitle br { display: none; }
+          }
+
+      @media(min-width:1300px) {
+          .index-hero video.video { max-height: 650px; }
+         .index-hero img.hero-image { max-height: 650px; }
+      }
+      @media(min-width:1300px) and (max-height:870px) {
+              /* .index-hero video.video { max-height: 550px; } */
+              section.index-hero div.text-container .subtitle br { display: block; }
+          }
+         section.index-hero.original video.video{
+              height: 70vh;
+        }
+        section.index-hero.original img.hero-image{
+              height: 70vh;
+        }
+            {% endif %}
+    
+    {% if section.settings.layout_style == 'text-align-right' and section.settings.bg-color != blank %}
+      section.index-hero--{{ section.id }} {
+        background-color: {{ section.settings.bg-color }} !important;
+      }
+    {% endif %}
+
+    {% if section.settings.text-color != blank and section.settings.text-color != 'rgba(0,0,0,0)' %}
+      section.index-hero--{{ section.id }} h1.title, section.index-hero--{{ section.id }} h1.title div.title-color, section.index-hero--{{ section.id }} h3.subtitle, section.index-hero--{{ section.id }} div.desc {
+        color: {{ section.settings.text-color }} !important;
+        -webkit-text-fill-color: {{ section.settings.text-color }} !important;
+      }
+    {% endif %}
+
+    {% if section.settings.button-text-color != blank %}
+      section.index-hero--{{ section.id }} a.cta {
+        color: {{ section.settings.button-text-color }} !important;
+      }
+    {% endif %}
+
+    {% if section.settings.button-bg-color != blank %}
+      section.index-hero--{{ section.id }} a.cta {
+        background-color: {{ section.settings.button-bg-color }} !important;
+        margin-top: 30px;
+      }
+    {% endif %}
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout_style",
+      "label": "Layout Style",
+      "options": [
+        {
+          "value": "original",
+          "label": "1. Original"
+        },
+        {
+          "value": "text-container-left",
+          "label": "2. Text Box to the Left"
+        },
+        {
+          "value": "text-align-right",
+          "label": "3. Text to the Right"
+        },
+        {
+          "value": "text-centered",
+          "label": "4. Text Centered"
+        }
+      ],
+      "default": "original"
+    },
+   {
+      "type":"header",
+      "content":"Desktop Customization Settings"
+    },
+    {
+      "type":"color",
+      "id":"bg_index_hero",
+      "label":"Desktop Background Color",
+      "default": "#fff"
+    },
+      {
+      "type": "range",
+      "id": "desktop_padding_top",
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Content Padding Top",
+      "default": 20
+    },
+      {
+      "type": "range",
+      "id": "desktop_padding_bottom",
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Content Padding Bottom",
+      "default": 20
+    },
+    {
+      "type":"header",
+      "content":"Mobile Customization Settings"
+    },
+    {
+      "type":"color",
+      "id":"bg_index_hero_mobile",
+      "label":"Mobile Background Color",
+      "default": "#fff"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Content Padding Top",
+      "default": 35
+    },
+      {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Content Padding Bottom",
+      "default": 35
+    },
+    
+    {
+      "type": "image_picker",
+      "id": "bg-image",
+      "label": "Background Image - Desktop",
+      "info": "Layout 1 Image must be sized at 1290px by 1235px"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg-image-xs",
+      "label": "Background Image - Mobile"
+    },
+    {
+      "type": "text",
+      "id": "bg-video",
+      "label": "Background Video",
+      "info": "Vimeo Download URL - takes priority over Image above and must be sized 1000px by 650px"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+     {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#2a2a5f"
+    },
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "checkbox",
+      "id": "no-h1",
+      "label": "Use H2 instead h1"
+    },
+    {
+      "type": "textarea",
+      "id": "desc",
+      "label": "Description"
+    },
+    {
+      "type": "color",
+      "id": "text-color",
+      "label": "Text Color"
+    },
+    {
+      "type": "text",
+      "id": "button-text",
+      "label": "Button Text",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "button-url",
+      "label": "Button URL"
+    },
+    {
+      "type": "color",
+      "id": "button-text-color",
+      "label": "Button Text Color"
+    },
+    {
+      "type": "color",
+      "id": "button-bg-color",
+      "label": "Button Background Color"
+    },
+    {
+      "type": "header",
+      "content": "Layout 1 Settings"
+    },
+    {
+      "type": "text",
+      "id": "title-color",
+      "label": "Color Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "title-gradient",
+      "label": "Gradient Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "charm-1",
+      "label": "Charm Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "charm-2",
+      "label": "Charm Image 2"
+    },
+    {
+      "type": "textarea",
+      "id": "border-text",
+      "label": "Border Text",
+      "info": "Layout 1 only - Make sure text is repeated enough times to actually fill screen space"
+    },
+    {
+      "type": "checkbox",
+      "id": "invert-border-text",
+      "label": "Invert Border Text Color"
+    },
+    {
+      "type": "header",
+      "content": "Layout 2 Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "overlay-image-1",
+      "label": "Overlay Image 1 - Desktop"
+    },
+    {
+      "type": "image_picker",
+      "id": "overlay-image-1-xs",
+      "label": "Overlay Image 1 - Mobile"
+    },
+    {
+      "type": "image_picker",
+      "id": "overlay-image-2",
+      "label": "Overlay Image 2"
+    },
+    {
+      "type": "header",
+      "content": "Layout 3 Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "Icon"
+    },
+    {
+      "type": "color",
+      "id": "bg-color",
+      "label": "Background Color"
+    }
+  ],
+  "presets": [
+   {
+      "name": "Hero",
+      "category": "Custom",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}

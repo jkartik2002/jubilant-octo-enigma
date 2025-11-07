@@ -1,0 +1,307 @@
+{% if section.settings.show-section %}
+  <section class="bracelet-guide bracelet-guide--styles chain-guide--styles">
+    <div class="inner-wrapper">
+      <h2 class="title">{{ section.settings.title }}</h2>
+      {% if section.settings.desc != blank %}
+        <div class="desc top">{{ section.settings.desc }}</div>
+      {% endif %}
+
+      <div class="wrapper">
+        <div class="col">
+          {% assign collection1 = collections[section.settings.collection-1] %}
+          <a href="{{ collection1.url }}">
+            <img alt="" class="hover-bg lazyload" data-src="{{ 'hover-effect.png' | asset_img_url: '500x' }}">
+            {% assign img_url = section.settings.image-1 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img 
+              class="d-none d-lg-block lazyload"
+              alt="{{ section.settings.title | escape | strip }}"
+              data-src="{{ img_url }}"
+              data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+              data-aspectratio="{{ section.settings.image-1.aspect_ratio }}"
+              data-sizes="auto"
+              style="display: block; width: 100%; height: auto;"
+              width="{{ section.settings.image-1.width }}"
+              height="{{ section.settings.image-1.height }}"
+              data-cc-animate="cc-fade-in-up"
+              data-cc-animate-delay="0.1s"
+            />
+            <div class="title">{{ section.settings.title-1 }}</div>
+          </a>
+        </div>
+        <div class="col">
+          {% assign collection1 = collections[section.settings.collection-2] %}
+          <a href="{{ collection1.url }}">
+            <img alt="" class="hover-bg lazyload" data-src="{{ 'hover-effect.png' | asset_img_url: '500x' }}">
+            {% assign img_url = section.settings.image-2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img 
+              class="d-none d-lg-block lazyload"
+              alt="{{ section.settings.title-2 | escape | strip }}"
+              data-src="{{ img_url }}"
+              data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+              data-aspectratio="{{ section.settings.image-2.aspect_ratio }}"
+              data-sizes="auto"
+              style="display: block; width: 100%; height: auto;"
+              width="{{ section.settings.image-2.width }}"
+              height="{{ section.settings.image-2.height }}"
+              data-cc-animate="cc-fade-in-up"
+              data-cc-animate-delay="0.2s"
+            />
+            <div class="title">{{ section.settings.title-2 }}</div>
+          </a>
+        </div>
+        {% if section.settings.image-3 != blank %}
+          <div class="col">
+            {% assign collection1 = collections[section.settings.collection-3] %}
+            <a href="{{ collection1.url }}">
+            <img alt="" class="hover-bg lazyload" data-src="{{ 'hover-effect.png' | asset_img_url: '500x' }}">
+              {% assign img_url = section.settings.image-3 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+              <img 
+                class="d-none d-lg-block lazyload"
+                alt="{{ section.settings.title-3 | escape | strip }}"
+                data-src="{{ img_url }}"
+                data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+                data-aspectratio="{{ section.settings.image-3.aspect_ratio }}"
+                data-sizes="auto"
+                style="display: block; width: 100%; height: auto;"
+                width="{{ section.settings.image-3.width }}"
+                height="{{ section.settings.image-3.height }}"
+                data-cc-animate="cc-fade-in-up"
+                data-cc-animate-delay="0.3s"
+              />
+              <div class="title">{{ section.settings.title-3 }}</div>
+            </a>
+          </div>
+        {% endif %}
+        {% if section.settings.image-4 != blank %}
+          <div class="col">
+            {% assign collection1 = collections[section.settings.collection-4] %}
+            <a href="{{ collection1.url }}">
+            <img alt="" class="hover-bg lazyload" data-src="{{ 'hover-effect.png' | asset_img_url: '500x' }}">
+              {% assign img_url = section.settings.image-4 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+              <img 
+                class="d-none d-lg-block lazyload"
+                alt="{{ section.settings.title-4 | escape | strip }}"
+                data-src="{{ img_url }}"
+                data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+                data-aspectratio="{{ section.settings.image-4.aspect_ratio }}"
+                data-sizes="auto"
+                style="display: block; width: 100%; height: auto;"
+                width="{{ section.settings.image-4.width }}"
+                height="{{ section.settings.image-4.height }}"
+                data-cc-animate="cc-fade-in-up"
+                data-cc-animate-delay="0.4s"
+              />
+              <div class="title">{{ section.settings.title-4 }}</div>
+            </a>
+          </div>
+        {% endif %}
+        {% if section.settings.image-5 != blank %}
+          <div class="col">
+            {% assign collection1 = collections[section.settings.collection-5] %}
+            <a href="{{ collection1.url }}">
+            <img alt="" class="hover-bg lazyload" data-src="{{ 'hover-effect.png' | asset_img_url: '500x' }}">
+              {% assign img_url = section.settings.image-5 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+              <img 
+                class="d-none d-lg-block lazyload"
+                alt="{{ section.settings.title-5 | escape | strip }}"
+                data-src="{{ img_url }}"
+                data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+                data-aspectratio="{{ section.settings.image-5.aspect_ratio }}"
+                data-sizes="auto"
+                style="display: block; width: 100%; height: auto;"
+                width="{{ section.settings.image-5.width }}"
+                height="{{ section.settings.image-5.height }}"
+                data-cc-animate="cc-fade-in-up"
+                data-cc-animate-delay="0.5s"
+              />
+              <div class="title">{{ section.settings.title-5 }}</div>
+            </a>
+          </div>
+        {% endif %}
+        {% if section.settings.image-6 != blank %}
+          <div class="col">
+            {% assign collection1 = collections[section.settings.collection-6] %}
+            <a href="{{ collection1.url }}">
+            <img alt="" class="hover-bg lazyload" data-src="{{ 'hover-effect.png' | asset_img_url: '500x' }}">
+              {% assign img_url = section.settings.image-6 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+              <img 
+                class="d-none d-lg-block lazyload"
+                alt="{{ section.settings.title-6 | escape | strip }}"
+                data-src="{{ img_url }}"
+                data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+                data-aspectratio="{{ section.settings.image-6.aspect_ratio }}"
+                data-sizes="auto"
+                style="display: block; width: 100%; height: auto;"
+                width="{{ section.settings.image-6.width }}"
+                height="{{ section.settings.image-6.height }}"
+                data-cc-animate="cc-fade-in-up"
+                data-cc-animate-delay="0.6s"
+              />
+              <div class="title">{{ section.settings.title-6 }}</div>
+            </a>
+          </div>
+        {% endif %}
+        {% if section.settings.image-7 != blank %}
+          <div class="col">
+            {% assign collection1 = collections[section.settings.collection-7] %}
+            <a href="{{ collection1.url }}">
+            <img alt="" class="hover-bg lazyload" data-src="{{ 'hover-effect.png' | asset_img_url: '500x' }}">
+              {% assign img_url = section.settings.image-7 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+              <img 
+                class="d-none d-lg-block lazyload"
+                alt="{{ section.settings.title-7 | escape | strip }}"
+                data-src="{{ img_url }}"
+                data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+                data-aspectratio="{{ section.settings.image-7.aspect_ratio }}"
+                data-sizes="auto"
+                style="display: block; width: 100%; height: auto;"
+                width="{{ section.settings.image-7.width }}"
+                height="{{ section.settings.image-7.height }}"
+                data-cc-animate="cc-fade-in-up"
+                data-cc-animate-delay="0.7s"
+              />
+              <div class="title">{{ section.settings.title-7 }}</div>
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Styles",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show-section",
+        "label": "Show Section?",
+        "default": true
+      },
+      {
+        "type": "richtext",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "desc",
+        "label": "Desc",
+        "default": "Lorem ipsum dolor sit amet, consectetur adipiscing."
+      },
+      {
+        "type": "image_picker",
+        "id": "image-1",
+        "label": "Image 1"
+      },
+      {
+        "type": "collection",
+        "id": "collection-1",
+        "label": "Collection Link 1"
+      },
+      {
+        "type": "text",
+        "id": "title-1",
+        "label": "Title 1",
+        "default": "Regular Cable"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-2",
+        "label": "Image 2"
+      },
+      {
+        "type": "collection",
+        "id": "collection-2",
+        "label": "Collection Link 2"
+      },
+      {
+        "type": "text",
+        "id": "title-2",
+        "label": "Title 2",
+        "default": "Heavy Cable"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-3",
+        "label": "Image 3"
+      },
+      {
+        "type": "collection",
+        "id": "collection-3",
+        "label": "Collection Link 3"
+      },
+      {
+        "type": "text",
+        "id": "title-3",
+        "label": "Title 3",
+        "default": "Superfine Cable"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-4",
+        "label": "Image 4"
+      },
+      {
+        "type": "collection",
+        "id": "collection-4",
+        "label": "Collection Link 4"
+      },
+      {
+        "type": "text",
+        "id": "title-4",
+        "label": "Title 4",
+        "default": "Regular Cable with Sideplane"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-5",
+        "label": "Image 5"
+      },
+      {
+        "type": "collection",
+        "id": "collection-5",
+        "label": "Collection Link 5"
+      },
+      {
+        "type": "text",
+        "id": "title-5",
+        "label": "Title 5",
+        "default": "Regular Cable with Sideplane"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-6",
+        "label": "Image 6"
+      },
+      {
+        "type": "collection",
+        "id": "collection-6",
+        "label": "Collection Link 6"
+      },
+      {
+        "type": "text",
+        "id": "title-6",
+        "label": "Title 6",
+        "default": "Regular Cable with Sideplane"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-7",
+        "label": "Image 7"
+      },
+      {
+        "type": "collection",
+        "id": "collection-7",
+        "label": "Collection Link 7"
+      },
+      {
+        "type": "text",
+        "id": "title-7",
+        "label": "Title 7",
+        "default": "Regular Cable with Sideplane"
+      }
+    ]
+  }
+{% endschema %}

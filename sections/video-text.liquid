@@ -1,0 +1,86 @@
+{% if section.settings.show-video %}
+<div class="nosto_element" id="productpage-nosto-4"></div>
+<div class="nosto_element" id="productpage-nosto-5"></div>
+  <section class="product-image-text video">
+    <div class="wrapper">
+      {% unless section.settings.video-right %}
+        <div class="col left">
+          <div class="image-wrapper">
+            <div class="bg-image"></div>
+            {% if section.settings.video-link != blank %}
+              <video class="video" playsinline="" autoplay="" muted="" loop="">
+                <source src="{{ section.settings.video-link }}">
+              </video>
+            {% else %}
+              <img class="lazyload" alt="{{section.settings.title}}" data-src="{{ section.settings.gif-link }}">
+            {% endif %}
+          </div>
+        </div>
+      {% endunless %}
+      <div class="col right">
+        <h2 class="title">{{ section.settings.title }}</h2>
+        <div class="desc">{{ section.settings.text }}</div>
+      </div>
+      {% if section.settings.video-right %}
+        <div class="col right">
+          <div class="image-wrapper">
+            <div class="bg-image"></div>
+            {% if section.settings.video-link != blank %}
+              <video class="video" playsinline="" autoplay="" muted="" loop="">
+                <source src="{{ section.settings.video-link }}">
+              </video>
+            {% else %}
+              <img class="lazyload" alt="{{section.settings.title}}" data-src="{{ section.settings.gif-link }}">
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Video and Text",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show-video",
+        "label": "Show section?",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "video-link",
+        "label": "Video Link",
+        "info": "Only use Video or Gif, leave the unneeded one blank"
+      },
+      {
+        "type": "text",
+        "id": "gif-link",
+        "label": "Gif Link"
+      },
+      {
+        "type": "checkbox",
+        "id": "video-right",
+        "label": "Video on Right Side?"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Title"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Video and Text"
+      }
+    ]
+  }
+{% endschema %}

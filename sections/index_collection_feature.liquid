@@ -1,0 +1,85 @@
+<section class="collection-feature">
+  <h2 class="title">{{ section.settings.title }}</h2>
+
+  <div class="wrapper">
+    <div class="col col-collection left" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".1s">
+      {% assign collection1 = collections[section.settings.collection-1] %}
+      <a href="{{ collection1.url }}">
+        <img class="w-100 lazyload"
+             data-src="{{ section.settings.collection-1-image | img_url: '1000x' }}"
+             src="{{ section.settings.collection-1-image | img_url: '20x' }}">
+        <div class="text-container">
+          <div class="title">{{ collection1.title | remove: 'Solid Sterling ' }}</div>
+        </div>
+        <img class="svg-hover lazyload"
+             data-src="{{ 'shop-now-1.png' | asset_img_url: '1500x' }}"
+             src="{{ 'shop-now-1.png' | asset_img_url: '20x' }}">
+      </a>
+    </div>
+    <div class="col col-collection right" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".2s">
+      {% assign collection2 = collections[section.settings.collection-2] %}
+      <a href="{{ collection2.url }}">
+        <img class="w-100 lazyload"
+             data-src="{{ section.settings.collection-2-image | img_url: '1000x' }}"
+             src="{{ section.settings.collection-2-image | img_url: '20x' }}">
+        <div class="text-container">
+          <div class="title">{{ collection2.title | remove: 'Solid Sterling ' }}</div>
+        </div>
+        <img class="svg-hover lazyload"
+             data-src="{{ 'shop-now.png' | asset_img_url: '1500x' }}"
+             src="{{ 'shop-now.png' | asset_img_url: '20x' }}">
+      </a>
+    </div>
+  </div>
+
+  <script>
+    $('div.col-collection').mouseenter(function() {
+      $(this).addClass('hovered');
+    })
+
+    $('div.col-collection').mouseleave(function() {
+      $(this).removeClass('hovered');
+    })
+  </script>
+</section>
+
+{% schema %}
+  {
+    "name": "Two Collection Split",
+    "settings": [
+      {
+        "type": "richtext",
+        "id": "title",
+        "label": "Title",
+        "default": "<p>Choose <i>your</i> Metal</p>"
+      },
+      {
+        "type": "collection",
+        "id": "collection-1",
+        "label": "Collection 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "collection-1-image",
+        "label": "Collection 1 - Image"
+      },
+      {
+        "type": "collection",
+        "id": "collection-2",
+        "label": "Collection 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "collection-2-image",
+        "label": "Collection 2 - Image"
+      }
+    ],
+    "presets": [
+	    {
+        "name": "Two Collection Split",
+        "category": "Custom",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}

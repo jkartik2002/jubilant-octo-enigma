@@ -1,0 +1,86 @@
+{% if section.settings.show-section %}
+  <section class="product-image-text our-story">
+    <div class="wrapper">
+      <div class="col left">
+        <div class="image-wrapper">
+          <div class="bg-image"></div>
+
+          {% if section.settings.video-link != blank %}
+            <video class="video" playsinline="" autoplay="" muted="" loop="">
+              <source src="{{ section.settings.video-link }}">
+            </video>
+          {% else %}
+            {% assign img_url = section.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img 
+              class="lazyload"
+              alt="{{ section.settings.title | escape | strip }}"
+              data-src="{{ img_url }}"
+              data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+              data-aspectratio="{{ section.settings.image.aspect_ratio }}"
+              data-sizes="auto"
+              style="display: block; width: 100%; height: auto;"
+              width="{{ section.settings.image.width }}"
+              height="{{ section.settings.image.height }}"
+              data-cc-animate="cc-fade-in-up"
+            />
+          {% endif %}
+        </div>
+      </div>
+      <div class="col right">
+        <div class="text-wrapper">
+          <h2 class="title">{{ section.settings.title }}</h2>
+          <div class="desc">{{ section.settings.text }}</div>
+        </div>
+      </div>
+      {% if section.settings.floating-icon != blank %}
+        <img alt="Floating Icon" class="floating-icon d-none d-lg-block" src="{{ section.settings.floating-icon | img_url: '200x' }}">
+      {% endif %}
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Text and Image",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show-section",
+        "label": "Show Section?",
+        "default": true
+      },
+      {
+        "type": "textarea",
+        "id": "title",
+        "label": "Title",
+        "default": "Size Comparison"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text"
+      },
+      {
+        "type": "text",
+        "id": "video-link",
+        "label": "Video",
+        "info": "Vimeo Download URL - takes priority over Image above"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "floating-icon",
+        "label": "Icon"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Text and Image"
+      }
+    ]
+  }
+{% endschema %}

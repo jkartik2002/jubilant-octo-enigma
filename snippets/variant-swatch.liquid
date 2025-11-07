@@ -1,0 +1,58 @@
+{% capture label %}
+{%- render 'product-label', product: variant -%}
+{% endcapture %}
+{% capture price %}
+<p class="boost-pfs-filter-product-item-price">  
+  {% if variant.compare_at_price_min > variant.price_min %}
+  	<span class="boost-pfs-filter-product-item-sale-price">{% if product.template_suffix == "multicharm" and product.metafields.custom.collection != blank %}From{% endif %} {{ variant.price_min | money_without_trailing_zeros }}</span>
+  	<s>{{ variant.compare_at_price_min | money_without_trailing_zeros }}</s>  
+  {% else %}
+  	{% if variant.price_varies %}<span class="boost-pfs-filter-product-item-price-from-text">{{ 'products.listing.from' | t }}</span>{% endif %}
+    <span class="boost-pfs-filter-product-item-regular-price">{% if product.template_suffix == "multicharm" and product.metafields.custom.collection != blank %}From{% endif %} {{ variant.price_min | money_without_trailing_zeros }}</span>
+  {% endif %}
+</p>
+{% endcapture %}
+<div
+  class="variant {% if product.handle == variant.handle %}selected{% endif %} {% if isEnamel %}is-enamel enamel-{{ product.handle }}{% endif %} {% if noJS %}no-js{% endif %}"
+  data-variant-title="{{ variantTitle }}"
+  data-variant-id="{{ variant.variants[0].id }}"
+  data-price="{% if product.template_suffix == "multicharm" and product.metafields.custom.collection != blank %}From{% endif %} {{ variant.price | money_without_trailing_zeros }}"
+  data-url="{{ variant.url }}"
+  data-image-1="{{ variant.images[0].src | product_img_url: '500x' }}"
+  data-image-2="{{ variant.images[1].src | product_img_url: '500x' }}"
+  {% if quick_add %}
+    data-quick-add="enable"
+  {% endif %}
+  data-label="{{ label | escape }}"
+  data-price-html="{{ price | escape }}"
+>
+  {% if variant.tags contains 'two-tone-swatch' %}
+    {% if variant.tags contains 'two-tone-gold-silver' %}
+      {% assign ptag = 'two-tone-gold-silver' %}
+    {% elsif variant.tags contains 'two-tone-silver-gold' %}
+      {% assign ptag = 'two-tone-silver-gold' %}
+      {% comment %}
+        {% elsif variant.tags contains 'two-tone-gold-rose' %}
+          {% assign ptag = 'two-tone-gold-rose' %}
+        {% elsif variant.tags contains 'two-tone-silver-rose' %}
+          {% assign ptag = 'two-tone-silver-rose' %}
+      {% endcomment %}
+    {% endif %}
+    <div
+      class="variant-inner {{ collectionClass }} two-tone {{ ptag }}"
+      {% if variant.metafields.custom_fields.variant_swatch_color_code != blank %}
+        style="background-color: {{ variant.metafields.custom_fields["variant_swatch_color_code"] }};"
+      {% endif %}
+    >
+      <span class="left-side"></span>
+      <span class="right-side"></span>
+    </div>
+  {% else %}
+    <div
+      class="variant-inner {{ collectionClass }}"
+      {% if variant.metafields.custom_fields.variant_swatch_color_code != blank %}
+        style="background-color: {{ variant.metafields.custom_fields["variant_swatch_color_code"] }};"
+      {% endif %}
+    ></div>
+  {% endif %}
+</div>

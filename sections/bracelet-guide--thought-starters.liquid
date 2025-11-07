@@ -1,0 +1,98 @@
+{% if section.settings.show-section %}
+  <section class="bracelet-guide bracelet-guide--thought-starters">
+    <h2 class="title">{{ section.settings.title }}</h2>
+    <div class="desc">{{ section.settings.subtitle }}</div>
+    <div class="desc right d-none d-lg-block">{{ section.settings.text }}</div>
+
+    <div class="image-wrapper">
+      <img alt="{{section.settings.title}}" class="w-100 d-none d-lg-block lazyload" data-src="{{ section.settings.image | img_url: '2000x' }}">
+      <img alt="{{section.settings.title}}" class="w-100 d-block d-lg-none lazyload" data-src="{{ section.settings.image-xs | img_url: '2000x' }}">
+      <img alt="Arrow" class="checkmark checkmark-1 d-none d-lg-block lazyload" data-src="{{ 'checkmark.png' | asset_img_url: '200x' }}">
+      <img alt="Arrow" class="checkmark checkmark-1 d-block d-lg-none lazyload" data-src="{{ 'checkmark-1.png' | asset_img_url: '200x' }}">
+      <img alt="Arrow" class="checkmark checkmark-2 d-none d-lg-block lazyload" data-src="{{ 'checkmark.png' | asset_img_url: '200x' }}">
+      <img alt="Arrow" class="checkmark checkmark-2 d-block d-lg-none lazyload" data-src="{{ 'checkmark-2.png' | asset_img_url: '200x' }}">
+      <img alt="Arrow" class="checkmark checkmark-3 d-none d-lg-block lazyload" data-src="{{ 'checkmark.png' | asset_img_url: '200x' }}">
+      <img alt="Arrow" class="checkmark checkmark-3 d-block d-lg-none lazyload" data-src="{{ 'checkmark-3.png' | asset_img_url: '200x' }}">
+      <img alt="Arrow" class="checkmark checkmark-4 d-none d-lg-block lazyload" data-src="{{ 'checkmark.png' | asset_img_url: '200x' }}">
+      <img alt="Arrow" class="checkmark checkmark-4 d-block d-lg-none lazyload" data-src="{{ 'checkmark-4.png' | asset_img_url: '200x' }}">
+      <div class="desc floating desc-1">{{ section.settings.text-1 }}</div>
+      <div class="desc floating desc-2">{{ section.settings.text-2 }}</div>
+      <div class="desc floating desc-3">{{ section.settings.text-3 }}</div>
+      <div class="desc floating desc-4">{{ section.settings.text-4 }}</div>
+    </div>
+    <div class="desc right d-block d-lg-none">{{ section.settings.text }}</div>
+
+    <img  alt="{{section.settings.title}}" class="floating-image d-none d-lg-block lazyload" data-src="{{ 'thought-floating.png' | asset_img_url: '1000x' }}">
+    <img alt="{{section.settings.title}}" class="floating-image d-block d-lg-none lazyload" data-src="{{ 'thought-floating-xs.png' | asset_img_url: '400x' }}">
+    <img alt="Arrow" class="checkmark checkmark-5 lazyload" data-src="{{ 'checkmark-pink.png' | asset_img_url: '200x' }}">
+    <div class="desc floating desc-5">{{ section.settings.text-5 }}</div>
+  </section>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Thought Starters",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show-section",
+        "label": "Show Section?",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Thought Starters"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subtitle",
+        "default": "Feeling stuck on how to start?"
+      },
+      {
+        "type": "text",
+        "id": "text",
+        "label": "Text",
+        "default": "OR build multiple bracelets to represent different chapters of your travel story!"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image - Desktop"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-xs",
+        "label": "Image - Mobile"
+      },
+      {
+        "type": "text",
+        "id": "text-1",
+        "label": "Image Text 1"
+      },
+      {
+        "type": "text",
+        "id": "text-2",
+        "label": "Image Text 2"
+      },
+      {
+        "type": "text",
+        "id": "text-3",
+        "label": "Image Text 3"
+      },
+      {
+        "type": "text",
+        "id": "text-4",
+        "label": "Image Text 4"
+      },
+      {
+        "type": "text",
+        "id": "text-5",
+        "label": "Image Text 5",
+        "default": "2011 - 2016"
+      }
+    ]
+  }
+{% endschema %}

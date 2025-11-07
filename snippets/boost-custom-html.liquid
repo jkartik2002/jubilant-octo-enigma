@@ -1,0 +1,62 @@
+{% assign promoText = '' %}
+{% assign flag = true %}
+{% assign currentDate = 'now' | date: "%Y-%m-%d %H:%M" %}
+{% for collection in product.collections %}
+
+  {% if settings.end_date != blank and settings.start_date != blank %}
+    {% if settings.end_date >= currentDate and settings.start_date <= currentDate %}
+      {% for collection2 in settings.collections_list %}
+        {% if flag and collection.handle == collection2.handle %}
+          {% if collection.metafields.custom_fields[settings.metafield_key] != blank %}
+            {% assign promoText = collection.metafields.custom_fields[settings.metafield_key] %}
+            {% assign flag = false %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+  {% if settings.end_date2 != blank and settings.start_date2 != blank %}
+    {% if settings.end_date2 >= currentDate and settings.start_date2 <= currentDate %}
+      {% for collection2 in settings.collections_list2 %}
+        {% if flag and collection.handle == collection2.handle %}
+          {% if collection.metafields.custom_fields[settings.metafield_key2] != blank %}
+            {% assign promoText = collection.metafields.custom_fields[settings.metafield_key2] %}
+            {% assign flag = false %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+  {% if settings.end_date3 != blank and settings.start_date3 != blank %}
+    {% if settings.end_date3 >= currentDate and settings.start_date3 <= currentDate %}
+      {% for collection3 in settings.collections_list3 %}
+        {% if flag and collection.handle == collection3.handle %}
+          {% if collection.metafields.custom_fields[settings.metafield_key3] != blank %}
+            {% assign promoText = collection.metafields.custom_fields[settings.metafield_key3] %}
+            {% assign flag = false %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+  {% if settings.end_date4 != blank and settings.start_date4 != blank %}
+    {% if settings.end_date4 >= currentDate and settings.start_date4 <= currentDate %}
+      {% for collection4 in settings.collections_list4 %}
+        {% if flag and collection.handle == collection4.handle %}
+          {% if collection.metafields.custom_fields[settings.metafield_key4] != blank %}
+            {% assign promoText = collection.metafields.custom_fields[settings.metafield_key4] %}
+            {% assign flag = false %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+  
+  {% if flag and collection.metafields.custom_fields["promo_code_text_line"] != blank %}
+    {% assign promoText = collection.metafields.custom_fields["promo_code_text_line"] %}
+  {% endif %}
+{% endfor %}
+
+{% if promoText != blank %}
+	{{ promoText }}
+{% endif %}

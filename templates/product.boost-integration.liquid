@@ -1,0 +1,34 @@
+{%- capture custom_html -%}
+  {%- render 'product-label', product: product -%}
+{%- endcapture -%}
+
+{%- capture title -%}
+  {% if product.metafields.custom_fields["variant_collection_reference"] != blank %}
+  {{ collections[product.metafields.custom_fields["variant_collection_reference"]].title }}
+  {% elsif product.metafields.custom_fields["shortened_title"] != blank  %}
+  {{ product.metafields.custom_fields["shortened_title"] }}
+  {% else %}
+  {{ product.title }}
+  {% endif %}
+{%- endcapture -%}
+
+{%- capture promotion -%}
+    {%- render 'boost-custom-html', product: product -%}
+{%- endcapture -%}
+
+{%- capture variant_swatches -%}
+    {%- render 'variant-swatches', product: product, collection: collection, quick_add: true -%}
+{%- endcapture -%}
+
+{% layout none %}
+{
+  "id":{{ product.id | json }},
+  "label":
+  {{ custom_html | json }},
+  "title":
+  {{ title | json }},
+  "promotion":
+  {{ promotion | json }},
+  "variant_swatches":
+  {{ variant_swatches | json }}
+}

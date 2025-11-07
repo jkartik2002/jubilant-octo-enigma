@@ -1,0 +1,205 @@
+{% if section.settings.show-section %}
+  <section class="product-image-text chain-guide--text-image-2">
+    <h2 class="title fancy">{{ section.settings.title }}</h2>
+    <div class="wrapper">
+      <div class="col left">
+        <div class="image-wrapper">
+          {% assign img_url = section.settings.image-1 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+          <img 
+            class="w-100 lazyload"
+            alt="{{ section.settings.title | escape | strip }}"
+            data-src="{{ img_url }}"
+            data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+            data-aspectratio="{{ section.settings.image-1.aspect_ratio }}"
+            data-sizes="auto"
+            width="{{ section.settings.image-1.width }}"
+            height="{{ section.settings.image-1.height }}"
+            data-cc-animate="cc-fade-in-up"
+          />
+        </div>
+      </div>
+      <div class="col right">
+        <div class="title">{{ section.settings.title-1 }}</div>
+        {% if section.settings.text-1 != blank %}
+          <div class="desc">{{ section.settings.text-1 }}</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="wrapper mobile-reverse">
+      <div class="col left">
+        <div class="title">{{ section.settings.title-2 }}</div>
+        {% if section.settings.text-2 != blank %}
+          <div class="desc">{{ section.settings.text-2 }}</div>
+        {% endif %}
+      </div>
+      <div class="col right">
+        <div class="image-wrapper">
+          <div class="bg-image"></div>
+          {% assign img_url = section.settings.image-2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+          <img 
+            class="w-100 br lazyload"
+            alt="{{ section.settings.title-2 | escape | strip }}"
+            data-src="{{ img_url }}"
+            data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+            data-aspectratio="{{ section.settings.image-2.aspect_ratio }}"
+            data-sizes="auto"
+            width="{{ section.settings.image-2.width }}"
+            height="{{ section.settings.image-2.height }}"
+            data-cc-animate="cc-fade-in-up"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper nopad">
+      <div class="col left">
+        {% assign img_url = section.settings.image-3 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+        <img 
+          class="w-100 moved lazyload"
+          alt="{{ section.settings.title-3 | escape | strip }}"
+          data-src="{{ img_url }}"
+          data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+          data-aspectratio="{{ section.settings.image-3.aspect_ratio }}"
+          data-sizes="auto"
+          width="{{ section.settings.image-3.width }}"
+          height="{{ section.settings.image-3.height }}"
+          data-cc-animate="cc-fade-in-up"
+        />
+      </div>
+      <div class="col right">
+        <div class="subtitle">{{ section.settings.subtitle-3 }}</div>
+        <div class="title">{{ section.settings.title-3 }}</div>
+        {% if section.settings.text-3 != blank %}
+          <div class="desc pad">{{ section.settings.text-3 }}</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="position-relative">
+      {% assign img_url = section.settings.image-full | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+      <img 
+        class="w-100 full d-none d-lg-block lazyload"
+        alt="{{ section.settings.button-text-full | escape | strip }}"
+        data-src="{{ img_url }}"
+        data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+        data-aspectratio="{{ section.settings.image-full.aspect_ratio }}"
+        data-sizes="auto"
+        width="{{ section.settings.image-full.width }}"
+        height="{{ section.settings.image-full.height }}"
+        data-cc-animate="cc-fade-in-up"
+      />
+      {% assign img_url = section.settings.image-full-xs | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+      <img 
+        class="w-100 full d-block d-lg-none lazyload"
+        alt="{{ section.settings.button-text-full | escape | strip }}"
+        data-src="{{ img_url }}"
+        data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+        data-aspectratio="{{ section.settings.image-full-xs.aspect_ratio }}"
+        data-sizes="auto"
+        width="{{ section.settings.image-full-xs.width }}"
+        height="{{ section.settings.image-full-xs.height }}"
+        data-cc-animate="cc-fade-in-up"
+      />
+
+      <a class="cta full" href="{{ section.settings.button-url-full }}">{{ section.settings.button-text-full }}</a>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Text and Image",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show-section",
+        "label": "Show Section?",
+        "default": true
+      },
+      {
+        "type": "richtext",
+        "id": "title",
+        "label": "Section Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-1",
+        "label": "Image 1"
+      },
+      {
+        "type": "textarea",
+        "id": "title-1",
+        "label": "Title 1",
+        "default": "Lorem Ipsum Dolor Set"
+      },
+      {
+        "type": "textarea",
+        "id": "text-1",
+        "label": "Text 1",
+        "default": "We offer a wide variety of styles and lengths from delicate to chunky, classic to edgy, and short to long necklace chains"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-2",
+        "label": "Image 2"
+      },
+      {
+        "type": "textarea",
+        "id": "title-2",
+        "label": "Title 2",
+        "default": "Lorem Ipsum Dolor Set"
+      },
+      {
+        "type": "textarea",
+        "id": "text-2",
+        "label": "Text 2",
+        "default": "Whether you are looking for the single perfect chain for everyday wear or looking for additional chains to layer and play with, we have something for you!"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-3",
+        "label": "Image 3"
+      },
+      {
+        "type": "text",
+        "id": "subtitle-3",
+        "label": "Subtitle 3",
+        "default": "Just a side note"
+      },
+      {
+        "type": "textarea",
+        "id": "title-3",
+        "label": "Title 3",
+        "default": "It's all in the details"
+      },
+      {
+        "type": "textarea",
+        "id": "text-3",
+        "label": "Text 3",
+        "default": "All of our chains (except for our super fine solid gold chains) come with a pear-shaped clasp and have our tiny signature jet plane at the back near the clasp."
+      },
+      {
+        "type": "image_picker",
+        "id": "image-full",
+        "label": "Image Full - Desktop"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-full-xs",
+        "label": "Image Full - Mobile"
+      },
+      {
+        "type": "text",
+        "id": "button-text-full",
+        "label": "Button Text",
+        "default": "SHOP CHAINS"
+      },
+      {
+        "type": "url",
+        "id": "button-url-full",
+        "label": "Button URL"
+      }
+    ]
+  }
+{% endschema %}

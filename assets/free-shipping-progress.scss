@@ -1,0 +1,48 @@
+$blue: #292A5F;
+
+#free-shipping-progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    flex-direction: column;
+    align-self: center;
+    background: #F0F0F0;
+    margin-bottom: 20px;
+
+    .free-shipping-progress__label {
+        margin: 0 auto;
+        width: 100%;
+        text-align: left;
+        color: $blue;
+        line-height: 1;
+        margin-bottom: 0.5em;
+    }
+
+    progress {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 100%;
+        border: 1px solid $blue;
+        border-radius: 10px;
+        height: 10px;
+        background-color: #D9FCEE;
+        /* For IE10 */
+        color: #000;
+
+        &::-webkit-progress-bar {
+            border-radius: 10px;
+            background-color: #D9FCEE;
+        }
+
+        &::-webkit-progress-value {
+            background-color: $blue;
+        }
+
+        &::-moz-progress-bar {
+            border-radius: 10px;
+            background-color: $blue;
+        }
+    }
+}

@@ -1,0 +1,22 @@
+{{ section.settings.custom_html }}
+
+{% schema %}
+  {
+    "name": "Nosto Markup",
+    "settings": [
+      {
+        "type": "html",
+        "id": "custom_html",
+        "label": "Custom HTML",
+        "info": "Nosto Markup",
+        "default": "<div class='nosto_element' id='frontpage-nosto-2'></div>"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Nosto Markup",
+        "category": "Advanced"
+      }
+    ]
+  }
+{% endschema %}

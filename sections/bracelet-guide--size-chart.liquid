@@ -1,0 +1,457 @@
+{% if section.settings.show-section %}
+  <section class="bracelet-guide bracelet-guide--size-chart">
+    <div class="guide-wrapper">
+      <h2 class="title d-none d-lg-block">{{ section.settings.title }}</h2>
+      <h2 class="title d-block d-lg-none">{{ section.settings.title-xs }}</h2>
+      {% if section.settings.chart-1-title !=blank %}
+      <h3 class="subtitle">
+        {{ section.settings.chart-1-title }}
+        <img alt="{{ section.settings.chart-1-title }}" class="lazyload" data-src="{{ section.settings.image-1 | img_url: '200x' }}">
+      </h3>
+{% endif %}
+      <table>
+        <thead>
+          <tr>
+            <td class="first">Size</td>
+            <td class="rxs">Silver</td>
+            <td class="rxs">Gold</td>
+            <td class="rxs">Solid Gold</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="first">{{ section.settings.chart-1-row-1-col-1 }}</td>
+            <td class="rxs">{{ section.settings.chart-1-row-1-col-2 }}</td>
+            <td class="rxs">{{ section.settings.chart-1-row-1-col-3 }}</td>
+            <td class="price rxs">{{ section.settings.chart-1-row-1-col-4 }}</td>
+          </tr>
+          <tr>
+            <td class="first">{{ section.settings.chart-1-row-2-col-1 }}</td>
+            <td class="price rxs">{{ section.settings.chart-1-row-2-col-2 }}</td>
+            <td class="price rxs">{{ section.settings.chart-1-row-2-col-3 }}</td>
+            <td class="rxs">{{ section.settings.chart-1-row-2-col-4 }}</td>
+          </tr>
+          <tr>
+            <td class="first">{{ section.settings.chart-1-row-3-col-1 }}</td>
+            <td class="price rxs">{{ section.settings.chart-1-row-3-col-2 }}</td>
+            <td class="price rxs">{{ section.settings.chart-1-row-3-col-3 }}</td>
+            <td class="rxs">{{ section.settings.chart-1-row-3-col-4 }}</td>
+          </tr>
+          <tr>
+            <td class="first">{{ section.settings.chart-1-row-4-col-1 }}</td>
+            <td class="price rxs">{{ section.settings.chart-1-row-4-col-2 }}</td>
+            <td class="price rxs">{{ section.settings.chart-1-row-4-col-3 }}</td>
+            <td class="rxs">{{ section.settings.chart-1-row-4-col-4 }}</td>
+          </tr>
+          <tr class="bottom">
+            <td class="first">{{ section.settings.chart-1-row-5-col-1 }}</td>
+            <td class="price rxs">{{ section.settings.chart-1-row-5-col-2 }}</td>
+            <td class="price rxs">{{ section.settings.chart-1-row-5-col-3 }}</td>
+            <td class="rxs">{{ section.settings.chart-1-row-5-col-4 }}</td>
+          </tr>
+          <tr class="bottom">
+            <td class="first">{{ section.settings.chart-1-row-6-col-1 }}</td>
+            <td class="price cxs">
+              <img alt="Silver Link" class="link d-none d-lg-inline-block lazyload" data-src="{{ 'link-silver.png' | asset_img_url: '200x' }}">
+              {{ section.settings.chart-1-row-6-col-2 }}
+            </td>
+            <td class="price cxs">
+              <img alt="Gold Link" class="link d-none d-lg-inline-block lazyload" data-src="{{ 'link-gold.png' | asset_img_url: '200x' }}">
+              {{ section.settings.chart-1-row-6-col-3 }}
+            </td>
+            <td class="rxs">
+              <img alt="Solid Gold Link" class="link d-none d-lg-inline-block lazyload" data-src="{{ 'link-gold.png' | asset_img_url: '200x' }}">
+              {{ section.settings.chart-1-row-6-col-4 }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+{% if section.settings.chart-2-title !=blank %}
+      <h3 class="subtitle">
+        {{ section.settings.chart-2-title }}
+        <img alt="{{ section.settings.chart-2-title }}" class="lazyload" data-src="{{ section.settings.image-2 | img_url: '200x' }}">
+      </h3>
+{% endif %}
+      <table>
+        <thead>
+          <tr>
+            <td class="first">Size</td>
+            <td class="rxs">Silver</td>
+            <td class="rxs">Gold</td>
+            <td class="rxs">Solid Gold</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="first">{{ section.settings.chart-2-row-1-col-1 }}</td>
+            <td class="rxs">{{ section.settings.chart-2-row-1-col-2 }}</td>
+            <td class="rxs">{{ section.settings.chart-2-row-1-col-3 }}</td>
+            <td class="price rxs">{{ section.settings.chart-2-row-1-col-4 }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    {% if section.settings.chart-3-title !=blank %}
+      <h3 class="subtitle">
+        {{ section.settings.chart-3-title }}
+        <img alt="{{ section.settings.chart-3-title }}" class="lazyload" data-src="{{ section.settings.image-3 | img_url: '200x' }}">
+      </h3>
+{% endif %}
+      <table>
+        <thead>
+          <tr>
+            <td class="first">Size</td>
+            <td class="rxs">Silver</td>
+            <td class="rxs">Gold</td>
+            <td class="rxs">Solid Gold</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {% if section.settings.chart-3-row-1-col-1 !=blank  %}
+              <td class="first">{{ section.settings.chart-3-row-1-col-1 }}</td>
+            {% endif %}
+            {% if section.settings.chart-3-row-1-col-2 !=blank  %}
+             <td class="rxs">{{ section.settings.chart-3-row-1-col-2 }}</td>
+            {% endif %}
+            {% if section.settings.chart-3-row-1-col-3  !=blank  %}
+             <td class="rxs">{{ section.settings.chart-3-row-1-col-3 }}</td>
+            {% endif %}
+            {% if section.settings.chart-3-row-1-col-4 !=blank  %}
+             <td class="price rxs">{{ section.settings.chart-3-row-1-col-4 }}</td>
+            {% endif %}
+          </tr>
+          <tr>
+            {% if section.settings.chart-3-row-2-col-1 !=blank  %}
+              <td class="first">{{ section.settings.chart-3-row-2-col-1 }}</td>
+            {% endif %}
+            {% if section.settings.chart-3-row-2-col-2 !=blank  %}
+             <td class="rxs">{{ section.settings.chart-3-row-2-col-2 }}</td>
+            {% endif %}
+            {% if section.settings.chart-3-row-2-col-3  !=blank  %}
+             <td class="rxs">{{ section.settings.chart-3-row-2-col-3 }}</td>
+            {% endif %}
+            {% if section.settings.chart-3-row-2-col-4 !=blank  %}
+             <td class="price rxs">{{ section.settings.chart-3-row-2-col-4 }}</td>
+            {% endif %}
+          </tr>
+        </tbody>
+      </table>
+
+      {% comment %} <h3 class="subtitle">
+        Paperclip
+        {% if section.settings.image-3 != blank %}
+          <img alt="Paperclip Bracelet" src="{{ section.settings.image-3 | img_url: '200x' }}">
+        {% endif %}
+      </h3>
+
+      <table>
+        <thead>
+          <tr>
+            <td class="first">Size</td>
+            <td class="rxs">Silver</td>
+            <td class="rxs">Gold</td>
+            <td class="rxs">Solid Gold</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="first">7”</td>
+            <td class="rxs">$50</td>
+            <td class="rxs">$70</td>
+            <td class="price rxs">-</td>
+          </tr>
+          <tr>
+            <td class="first">8”</td>
+            <td class="rxs">$50</td>
+            <td class="rxs">$70</td>
+            <td class="price rxs">-</td>
+          </tr>
+        </tbody>
+      </table> {% endcomment %}
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Size Chart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show-section",
+        "label": "Show Section?",
+        "default": true
+      },
+      {
+        "type": "textarea",
+        "id": "title",
+        "label": "Title - Desktop",
+        "default": "Bracelet Size Chart"
+      },
+      {
+        "type": "textarea",
+        "id": "title-xs",
+        "label": "Title - Mobile",
+        "default": "Bracelet Size Chart"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-1",
+        "label": "Chain Image 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-2",
+        "label": "Chain Image 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-3",
+        "label": "Paperclip Image"
+      },
+      {
+        "type": "header",
+        "content": "First Table"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-title",
+        "label": "Table Title"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-1-col-1",
+        "label": "Classic Row 1 Column 1",
+        "default": "7” / 11 links"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-1-col-2",
+        "label": "Classic Row 1 Column 2",
+        "default": "-"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-1-col-3",
+        "label": "Classic Row 1 Column 3",
+        "default": "-"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-1-col-4",
+        "label": "Classic Row 1 Column 4",
+        "default": "$1,998"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-2-col-1",
+        "label": "Classic Row 2 Column 1",
+        "default": "7.08” / 12 links"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-2-col-2",
+        "label": "Classic Row 2 Column 2",
+        "default": "$298"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-2-col-3",
+        "label": "Classic Row 2 Column 3",
+        "default": "$398"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-2-col-4",
+        "label": "Classic Row 2 Column 4",
+        "default": "-"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-3-col-1",
+        "label": "Classic Row 3 Column 1",
+        "default": "7.67” / 13 links"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-3-col-2",
+        "label": "Classic Row 3 Column 2",
+        "default": "$323"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-3-col-3",
+        "label": "Classic Row 3 Column 3",
+        "default": "$431"
+      },
+       {
+        "type": "text",
+        "id": "chart-1-row-3-col-4",
+        "label": "Classic Row 3 Column 4",
+        "default": "-"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-4-col-1",
+        "label": "Classic Row 4 Column 1",
+        "default": "8.26” / 14 links"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-4-col-2",
+        "label": "Classic Row 4 Column 2",
+        "default": "$348"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-4-col-3",
+        "label": "Classic Row 4 Column 3",
+        "default": "$464"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-4-col-4",
+        "label": "Classic Row 4 Column 4",
+        "default": "-"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-5-col-1",
+        "label": "Classic Row 5 Column 1",
+        "default": "8.85” / 15 links"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-5-col-2",
+        "label": "Classic Row 5 Column 2",
+        "default": "$373"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-5-col-3",
+        "label": "Classic Row 5 Column 3",
+        "default": "$497"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-5-col-4",
+        "label": "Classic Row 5 Column 4",
+        "default": "-"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-6-col-1",
+        "label": "Classic Row 6 Column 1",
+        "default": "Extra link (.59”)"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-6-col-2",
+        "label": "Classic Row 6 Column 2",
+        "default": "$25 / link"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-6-col-3",
+        "label": "Classic Row 6 Column 3",
+        "default": "$33 / link"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-6-col-4",
+        "label": "Classic Row 6 Column 4",
+        "default": "$182 / link"
+      },
+       {
+        "type": "header",
+        "content": "Second Table"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-title",
+        "label": "Table Title"
+      },
+
+      {
+        "type": "text",
+        "id": "chart-2-row-1-col-1",
+        "label": "Slim Row 1 Column 1",
+        "default": "7” | 14 Links"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-1-col-2",
+        "label": "Slim Row 1 Column 2",
+        "default": "-"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-1-col-3",
+        "label": "Slim Row 1 Column 3",
+        "default": "-"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-1-col-4",
+        "label": "Slim Row 1 Column 4",
+        "default": "$998"
+      },
+       {
+        "type": "header",
+        "content": "Third Table"
+      },
+      {
+        "type": "text",
+        "id": "chart-3-title",
+        "label": "Table Title"
+      },
+      {
+        "type": "text",
+        "id": "chart-3-row-1-col-1",
+        "label": "Slim Row 1 Column 1",
+        "default": "7” | 14 Links"
+      },
+      {
+        "type": "text",
+        "id": "chart-3-row-1-col-2",
+        "label": "Slim Row 1 Column 2",
+        "default": "-"
+      },
+      {
+        "type": "text",
+        "id": "chart-3-row-1-col-3",
+        "label": "Slim Row 1 Column 3",
+        "default": "-"
+      },
+      {
+        "type": "text",
+        "id": "chart-3-row-1-col-4",
+        "label": "Slim Row 1 Column 4",
+        "default": "$998"
+      },
+      {
+        "type": "text",
+        "id": "chart-3-row-2-col-1",
+        "label": "Classic Row 2 Column 1"
+      },
+      {
+        "type": "text",
+        "id": "chart-3-row-2-col-2",
+        "label": "Classic Row 2 Column 2"
+      },
+      {
+        "type": "text",
+        "id": "chart-3-row-2-col-3",
+        "label": "Classic Row 2 Column 3"
+        
+      },
+      {
+        "type": "text",
+        "id": "chart-3-row-2-col-4",
+        "label": "Classic Row 2 Column 4"
+      }
+
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,15 @@
+{% comment %} This script allows View Tech Specs anchor buttons to scroll smoothly down the page when they are clicked {% endcomment %}
+<script>
+  $(document).ready(function(){
+    $('a[href^="#tech"]').on('click',function (e) {
+        e.preventDefault();
+
+        var target = this.hash;
+        var $target = $(target);
+
+        $('html, body').stop().animate({
+            'scrollTop': $target.offset().top
+        }, 900, 'swing');
+    });
+  });
+</script>

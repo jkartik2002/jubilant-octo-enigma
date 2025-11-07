@@ -1,0 +1,143 @@
+<section id="auto-gen" class="more-from">
+  {% assign collection1 = '' %}
+
+  {% if section.settings.manual-collection == blank %}
+    {% if product.metafields.custom_fields["variant_collection_reference"] != blank %}
+      {% assign productTitle = collections[product.metafields.custom_fields["variant_collection_reference"]].title %}
+    {% elsif product.metafields.custom_fields["shortened_title"] != blank  %}
+      {% assign productTitle = product.metafields.custom_fields["shortened_title"] %}
+    {% else %}
+      {% assign productTitle = product.title %}
+    {% endif %}
+
+    {% if productTitle contains product.collections[0].title and product.collections[0].title != 'Bestsellers' %}
+      {% assign collection1 = product.collections[0] %}
+    {% elsif productTitle contains product.collections[1].title and product.collections[1].title != 'Bestsellers' %}
+      {% assign collection1 = product.collections[1] %}
+    {% elsif productTitle contains product.collections[2].title and product.collections[2].title != 'Bestsellers' %}
+      {% assign collection1 = product.collections[2] %}
+    {% elsif productTitle contains product.collections[3].title and product.collections[3].title != 'Bestsellers' %}
+      {% assign collection1 = product.collections[3] %}
+    {% elsif productTitle contains product.collections[4].title and product.collections[4].title != 'Bestsellers' %}
+      {% assign collection1 = product.collections[4] %}
+    {% elsif productTitle contains product.collections[5].title and product.collections[5].title != 'Bestsellers' %}
+      {% assign collection1 = product.collections[5] %}
+    {% elsif productTitle contains product.collections[6].title and product.collections[6].title != 'Bestsellers' %}
+      {% assign collection1 = product.collections[6] %}
+    {% elsif productTitle contains product.collections[7].title and product.collections[7].title != 'Bestsellers' %}
+      {% assign collection1 = product.collections[7] %}
+    {% elsif productTitle contains product.collections[6].title and product.collections[8].title != 'Bestsellers' %}
+      {% assign collection1 = product.collections[8] %}
+    {% elsif productTitle contains product.collections[9].title and product.collections[9].title != 'Bestsellers' %}
+      {% assign collection1 = product.collections[9] %}
+    {% elsif productTitle contains product.collections[10].title and product.collections[10].title != 'Bestsellers' %}
+      {% assign collection1 = product.collections[10] %}
+    {% elsif productTitle contains product.collections[11].title and product.collections[11].title != 'Bestsellers' %}
+      {% assign collection1 = product.collections[11] %}
+    {% elsif productTitle contains product.collections[12].title and product.collections[12].title != 'Bestsellers' %}
+      {% assign collection1 = product.collections[12] %}
+    {% else %}
+      <style>
+        #auto-gen {
+          display: none;
+        }
+      </style>
+    {% endif %}
+  {% else %}
+    {% assign collection1 = collections[section.settings.manual-collection] %}
+  {% endif %}
+
+  <h2 class="h2 section-heading" data-cc-animate>{{ collection1.title }}</h2>
+  <div class="wrapper">
+    {%- for product in collection1.products limit: 3 -%}
+      <script>
+        dataLayer.push({ ecommerce: null });              // Clear the previous ecommerce object.
+        dataLayer.push({
+          event: 'gtmEvent',
+          eventCategory: 'enhanced ecommerce',
+          eventAction: 'product impressions',
+          eventLabel: 'not set',                       // set to 'not set' string
+          eventValue: 0,
+          interactionEvent: false,
+          gtmUse: false,
+          ecommerce: {
+            currencyCode: 'USD',                       // Local currency is optional.
+            impressions: [
+              {% paginate collection1.products by products_per_page %}
+                {% for product in collection1.products  %}
+
+                {% assign sca_product = product %}{% assign sca_product_id_text = "," | append : sca_product.id | append : "," %}{% assign sca_price = sca_product.price %}{% assign sca_price_min = sca_product.price_min %}{% assign sca_price_max = sca_product.price_max %}{% assign sca_compare_at_price = sca_product.compare_at_price %}{% assign sca_compare_at_price_min = sca_product.compare_at_price_min %}{% assign sca_compare_at_price_max = sca_product.compare_at_price_max %}{% assign sca_product_available = sca_product.available %}{% assign sca_product_variantCount = sca_product.variants.size %}{% assign sca_compare_at_price_varies = sca_product.compare_at_price_varies %}{% assign sca_price_varies = sca_product.price_varies %}{% assign sca_has_only_default_variant = false %}{% capture sca_product_variants_json %}{{sca_product.variants | json }}{% endcapture %} {% capture sca_product_json %}{ {% if sca_all_gift_products_ids == null or sca_all_gift_products_ids contains sca_product_id_text %}{% assign sca_product_available = false %}{% assign sca_product_variantCount = 0 %}{% assign sca_has_only_default_variant = true %}{% assign sca_is_first_variant = true %}{% capture sca_variants_json %} [{% for variant in sca_product.variants %}{% unless variant.metafields.secomapp.freegifts %}{% unless variant.title contains '(Freegifts)' %}{% unless variant.title contains '% Off' %}{% unless variant.metafields.shappify_qb.qb_hide == "1" %}{% unless variant.metafields.shappify_bundle.is_bundle == "true" %}{% unless variant.metafields.brodev_scn.hide == "true" %}{% unless variant.metafields.wholesaler2.wholesale %}{% unless variant.metafields.Wholesaler.level %}{% unless variant.title contains '(Wholesale' %}{% if sca_is_first_variant%} {{ variant | json }}{% assign sca_price = variant.price %} {% assign sca_price_min = variant.price %} {% assign sca_price_max = variant.price %} {% assign sca_compare_at_price = variant.compare_at_price %} {% assign sca_compare_at_price_min = variant.compare_at_price %} {% assign sca_compare_at_price_max = variant.compare_at_price %} {% assign sca_product_available = variant.available %} {% assign sca_product_variantCount = 1 %} {% assign sca_is_first_variant = false%}{% else %},{{variant | json }} {% if sca_price_min >= variant.price %} {% assign sca_price_min = variant.price %} {% assign sca_price = variant.price %}{% endif %} {% if sca_price_max <= variant.price %} {% assign sca_price_max = variant.price %} {% endif %} {% if variant.compare_at_price %} {% if sca_compare_at_price_min==null or sca_compare_at_price_min >= variant.compare_at_price %} {% assign sca_compare_at_price_min = variant.compare_at_price %} {% assign sca_compare_at_price = variant.compare_at_price %} {% endif %} {% if sca_compare_at_price_max==null or sca_compare_at_price_max < variant.compare_at_price %} {% assign sca_compare_at_price_max = variant.compare_at_price %} {% endif %} {% endif %} {% if variant.available == true %} {% assign sca_product_available = true %} {% endif %} {% assign sca_product_variantCount = sca_product_variantCount | plus: 1 %}{% endif %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{%endfor%} ]{% endcapture %}{% if sca_price_min < sca_price_max %}{% assign sca_price_varies = true %}{% else %}{% assign sca_price_varies = false %}{% endif %}{% if sca_compare_at_price_min < sca_compare_at_price_max %}{% assign sca_compare_at_price_varies = true %}{% else %}{% assign sca_compare_at_price_varies = false %}{% endif %}{% if sca_product_variantCount > 1 %}{% assign sca_has_only_default_variant = false %}{% endif %}{% if sca_product_variantCount == sca_product.variants.size %} "variants":{{ sca_product.variants }},{% else %}{%assign sca_product_variants_json = sca_variants_json %} "variants":{{ sca_variants_json }},{% endif %}{% else %} "variants":{{ sca_product_variants_json }},{% endif %} "id": {{sca_product.id}}, "title": {{sca_product.title | json}}, "handle": {{sca_product.handle | json}}, "description": {{sca_product.description | json}}, "published_at": "{{sca_product.published_at | date: "%Y-%m-%dT%H-%M-%S%:z" }}", "created_at": "{{sca_product.created_at | date: "%Y-%m-%dT%H-%M-%S%:z" }}", "vendor": {{sca_product.vendor | json}}, "type": {{sca_product.type | json}}, "tags": {{sca_product.tags | json}}, "price": {{sca_price}}, "price_min": {{sca_price_min}}, "price_max": {{sca_price_max}}, "available": {{sca_product.available}}, "price_varies": {{sca_price_varies}}, "compare_at_price": {{sca_compare_at_price}}, "compare_at_price_min": {{sca_compare_at_price_min}}, "compare_at_price_max": {{sca_compare_at_price_max}}, "compare_at_price_varies": {{sca_compare_at_price_varies}}, "images": {{sca_product.images | json}}, "featured_image": {{sca_product.featured_image | json }}, "options": {{sca_product.options | json}}, "media": {{sca_product.media | json }}, "content": {{sca_product.content | json }}} {% endcapture sca_product_json %}
+
+                  {% assign firstVariantTitle = '' %}
+                  {% if product.metafields.custom_fields["variant_title"] != blank %}
+                    {% assign firstVariantTitle = product.metafields.custom_fields["variant_title"] %}
+                  {% elsif collection.title contains 'Solid Gold' %}
+                    {% assign firstVariantTitle = 'Solid Gold' %}
+                  {% elsif collection.title contains 'Gold Vermeil' %}
+                    {% assign firstVariantTitle = 'Gold Vermeil' %}
+                  {% elsif collection.title contains 'Sterling Silver' %}
+                    {% assign firstVariantTitle = 'Sterling Silver' %}
+                  {% elsif product.title contains 'Solid Rose Gold' %}
+                    {% assign firstVariantTitle = 'Solid Rose Gold' %}
+                  {% elsif product.title contains 'Rose Gold' %}
+                    {% assign firstVariantTitle = 'Rose Gold' %}
+                  {% endif %}
+                  {
+                    name: '{{ product.title }}',       // Name or ID is required.
+                    id: '{{ product.id }}',
+                    price: '{{ sca_price | money_without_currency }}',
+                    brand: '{{ shop.name }}',
+                    category: '{{ product.type }}',
+                    variant: '{{ firstVariantTitle }}',
+                    list: '{{ collection1.title }}',
+                    position: {{ forloop.index }},
+                    dimension10: true, // upsell
+                    dimension11: false, // bundle
+                  },
+                {% endfor  %}
+              {% assign dm_paginate_by = paginate.page_size %}{% endpaginate %}
+            ]
+          }
+        });
+      </script>
+      <div class="column {% if forloop.index == 3 %}last{% endif %}">
+        {% render 'product-block', product: product, product_class: product_class, i: forloop.index, animate: forloop.index, show_vendor: false %}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% if dm_paginate_by %}{% render 'spurit_dmr_collection_template_snippet', paginate_by: dm_paginate_by %}{% endif %}{% schema %}
+  {
+    "name": "Relevant Collection",
+    "class": "section-product-recommendations",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Best Sellers"
+      },
+      {
+        "type": "collection",
+        "id": "manual-collection",
+        "label": "Manual Collection Override"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "Show product vendor",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "grid",
+        "label": "Products per row",
+        "min": 2,
+        "max": 4,
+        "step": 1,
+        "default": 3
+      }
+    ]
+  }
+{% endschema %}

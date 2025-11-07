@@ -1,0 +1,104 @@
+<section class="cart-drawer">
+  <div class="ajax-cart__modal js-ajax-cart-modal">
+    <div class="ajax-cart-modal">
+      <div class="ajax-cart-modal__close js-ajax-cart-modal-close">
+        {% include 'icon-close' %}
+      </div>
+      <div class="ajax-cart-modal__content js-ajax-cart-modal-content"></div>
+    </div>
+  </div>
+
+  <div class="ajax-cart__drawer js-ajax-cart-drawer">
+    <div class="ajax-cart-drawer">
+      <div class="message-bar klarna d-block d-lg-none">
+        <strong>Afterpay</strong> or <strong>Klarna</strong> Available During Checkout
+      </div>
+      <div class="top-cart-header">
+        <h2>Your Bag (<span id="cart-counter" class="cart-counter">{{ cart.item_count }}</span>)</h2>
+        {% comment %} <div id="shipping-notif" class="desc">Add $$ more for free shipping</div> {% endcomment %}
+        <div class="ajax-cart-drawer__close js-ajax-cart-drawer-close">
+          {% include 'icon-close' %}
+        </div>
+      </div>
+
+      <div class="message-bar d-none d-lg-block">
+        <img alt="Airplane Icon" class="lazyload" data-src="{{ 'airplane2.svg' | asset_url }}">
+        Free U.S. Shipping On Orders $150+
+      </div>
+
+      <div class="message-bar klarna d-none d-lg-block">
+        <strong>Afterpay</strong> or <strong>Klarna</strong> Available During Checkout
+      </div>
+
+      <div class="ajaxcart__inner">
+        <div class="ajax-cart-drawer__content js-ajax-cart-drawer-content"></div>
+
+        {% comment %} <p class="note-area">
+          <label for="note">{{ 'cart.label.note' | t }}</label>
+          <textarea id="note" name="note">{{ cart.note }}</textarea>
+        </p> {% endcomment %}
+
+        {% comment %} <div class="ajax-cart-item__gift_wrapper">
+          {% include 'gift-option-cart-attributes' %}
+        </div> {% endcomment %}
+
+        <div class="you-might-like-container">
+          <h2 class="title">{{ collections['you-might-like'].title }}</h2>
+          <div class="carousel" data-flickity='{ "cellAlign": "left", "contain": true, "pageDots": false, "imagesLoaded": true, "resize": true }'>
+            {% for product in collections['you-might-like'].products %}
+              <div class="carousel-cell">
+                {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, no_quick: false, no_wishlist: true, quick_add: true, no_swatch: true, cart_quick: true, ajax_cart: true %}
+
+                {% comment %} <form class="quick-add">
+                  <input type="hidden" name="form_type" value="product">
+                  <input type="hidden" name="id" value="{{ product.variants[0].id }}">
+                  <input type="hidden" name="quantity" value="1">
+                  {% if product.metafields.custom_fields["variant_collection_reference"] != blank %}
+                   {% assign title = collections[product.metafields.custom_fields["variant_collection_reference"]].title %}
+                  {% elsif product.metafields.custom_fields["shortened_title"] != blank  %}
+                    {% assign title = product.metafields.custom_fields["shortened_title"] %}
+                  {% else %}
+                    {% assign title = '' %}
+                  {% endif %}
+                  <input type="hidden" name="properties[_short_title]" value="{{ title }}">
+                  <button class="cta" type="submit">ADD TO BAG</button>
+                </form> {% endcomment %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="disclaimer d-none d-lg-block">You may be subject to additional taxes and duties charges depending on laws in your country. For concerns, please check with your local authorities.</div>
+
+        <a class="button cta drawer-cta" href="/collections/shop-all">CONTINUE SHOPPING</a>
+      </div>
+
+      <div class="ajax-cart-drawer__buttons">
+        <div class="total-div first">
+          <span class="label">Discount Code</span>
+          <span class="calculated float-right">Applied at Checkout</span>
+        </div>
+        <div class="total-div">
+          <span class="label">Shipping</span>
+          <span id="shipping-calc" class="calculated float-right">Calculated at Checkout</span>
+        </div>
+        <div class="total-div">
+          <span class="label">Subtotal</span>
+          <span class="class_total float-right"></span>
+        </div>
+
+        <div class="button-wrapper">
+          <a href="/cart" class="button view-bag button--black button--full-width js-button btn">
+            <span>View Bag</span>
+          </a>
+
+          <a id="drawer-checkout" href="/checkout" class="button checkout-btn checkout button--black button--full-width js-button js-ajax-checkout-button btn">Checkout</a>
+        </div>
+
+        <div class="disclaimer d-block d-lg-none">You may be subject to additional taxes and duties charges depending on laws in your country. For concerns, please check with your local authorities.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ajax-cart__overlay js-ajax-cart-overlay"></div>
+</section>

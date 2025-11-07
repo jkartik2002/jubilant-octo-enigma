@@ -1,0 +1,44 @@
+{% if section.settings.show-section %}
+  <section class="bracelet-guide bracelet-guide--cta chain">
+    <h2 class="title">{{ section.settings.title }}</h2>
+    <div class="desc">{{ section.settings.text }}</div>
+    <a class="cta" href="{{ section.settings.button-url }}">{{ section.settings.button-text }}</a>
+  </section>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "CTA",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show-section",
+        "label": "Show Section?",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Need guidance on where to start?"
+      },
+      {
+        "type": "text",
+        "id": "text",
+        "label": "Text",
+        "default": "Book an appointment here."
+      },
+      {
+        "type": "text",
+        "id": "button-text",
+        "label": "Button Text",
+        "default": "BOOK NOW"
+      },
+      {
+        "type": "url",
+        "id": "button-url",
+        "label": "Button URL"
+      }
+    ]
+  }
+{% endschema %}

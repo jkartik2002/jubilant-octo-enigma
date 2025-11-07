@@ -1,0 +1,9 @@
+{% assign promoText = '' %}
+{% for collection in product.collections %}
+	{% if collection.metafields.custom_fields["promo_code_text_line"] != blank %}
+		{% assign promoText = collection.metafields.custom_fields["promo_code_text_line"] %}
+	{% endif %}
+{% endfor %}
+{% if promoText != blank %}
+	<div class="promo-text">{{ promoText }}</div>
+{% endif %}

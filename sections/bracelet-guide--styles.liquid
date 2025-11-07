@@ -1,0 +1,163 @@
+{% if section.settings.show-section %}
+  <section class="bracelet-guide bracelet-guide--styles">
+    <div class="inner-wrapper">
+      <h2 class="title">{{ section.settings.title }}</h2>
+
+      <div class="wrapper text-center">
+        <div class="col">
+          {% assign product1 = all_products[section.settings.product-1] %}
+          <a href="{{ product1.url }}">
+            {% assign img_url = section.settings.image-1 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img 
+              class="lazyload"
+              alt="{{ section.settings.title-1 | escape | strip }}"
+              data-src="{{ img_url }}"
+              data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+              data-aspectratio="{{ section.settings.image-1.aspect_ratio }}"
+              data-sizes="auto"
+              width="{{ section.settings.image-1.width }}"
+              height="{{ section.settings.image-1.height }}"
+              data-cc-animate="cc-fade-in-up"
+            />
+            <div class="title">{{ section.settings.title-1 }}</div>
+          </a>
+          <div class="desc">{{ section.settings.text-1 }}</div>
+        </div>
+        <div class="col">
+          {% assign product1 = all_products[section.settings.product-2] %}
+          <a href="{{ product1.url }}">
+            {% assign img_url = section.settings.image-2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <img 
+              class="lazyload"
+              alt="{{ section.settings.title-2 | escape | strip }}"
+              data-src="{{ img_url }}"
+              data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+              data-aspectratio="{{ section.settings.image-2.aspect_ratio }}"
+              data-sizes="auto"
+              width="{{ section.settings.image-2.width }}"
+              height="{{ section.settings.image-2.height }}"
+              data-cc-animate="cc-fade-in-up"
+            />
+            <div class="title">{{ section.settings.title-2 }}</div>
+          </a>
+          <div class="desc">{{ section.settings.text-2 }}</div>
+        </div>
+        {% if section.settings.image-3 != blank %}
+          <div class="col">
+            {% assign product1 = all_products[section.settings.product-3] %}
+            <a href="{{ product1.url }}">
+              {% assign img_url = section.settings.image-3 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+              <img 
+                class="lazyload"
+                alt="{{ section.settings.title-3 | escape | strip }}"
+                data-src="{{ img_url }}"
+                data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+                data-aspectratio="{{ section.settings.image-3.aspect_ratio }}"
+                data-sizes="auto"
+                width="{{ section.settings.image-3.width }}"
+                height="{{ section.settings.image-3.height }}"
+                data-cc-animate="cc-fade-in-up"
+              />
+              <div class="title">{{ section.settings.title-3 }}</div>
+            </a>
+            <div class="desc">{{ section.settings.text-3 }}</div>
+          </div>
+        {% else %}
+          <style>
+            @media (min-width: 1100px) {
+              section.bracelet-guide--styles div.inner-wrapper div.col {
+                width: 50% !important;
+              }
+            }
+          </style>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Styles",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show-section",
+        "label": "Show Section?",
+        "default": true
+      },
+      {
+        "type": "textarea",
+        "id": "title",
+        "label": "Title",
+        "default": "Two Classic Styles"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-1",
+        "label": "Image 1"
+      },
+      {
+        "type": "product",
+        "id": "product-1",
+        "label": "Product Link 1"
+      },
+      {
+        "type": "text",
+        "id": "title-1",
+        "label": "Title 1",
+        "default": "Standard"
+      },
+      {
+        "type": "text",
+        "id": "text-1",
+        "label": "Text 1",
+        "default": "Comes in silver, gold vermeil, and solid gold."
+      },
+      {
+        "type": "image_picker",
+        "id": "image-2",
+        "label": "Image 2"
+      },
+      {
+        "type": "product",
+        "id": "product-2",
+        "label": "Product Link 2"
+      },
+      {
+        "type": "text",
+        "id": "title-2",
+        "label": "Title 2",
+        "default": "Slim"
+      },
+      {
+        "type": "text",
+        "id": "text-2",
+        "label": "Text 2",
+        "default": "Available in solid gold<br>Made for mini charms<br>Offers a more delicate look"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-3",
+        "label": "Image 3"
+      },
+      {
+        "type": "product",
+        "id": "product-3",
+        "label": "Product Link 3"
+      },
+      {
+        "type": "text",
+        "id": "title-3",
+        "label": "Title 3",
+        "default": "Slim"
+      },
+      {
+        "type": "text",
+        "id": "text-3",
+        "label": "Text 3",
+        "default": "Available in solid gold<br>Made for mini charms<br>Offers a more delicate look"
+      }
+    ]
+  }
+{% endschema %}

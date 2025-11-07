@@ -1,0 +1,15 @@
+{% if settings.enable-free-shipping-progress %}
+    {% assign cart_subtotal = cart.items_subtotal_price %}
+    {% assign free_shipping_limit = settings.free-shipping-progress-limit | times: 100 %}
+    {% assign remaining =  cart_subtotal | minus: free_shipping_limit | abs | money_with_currency %}
+
+    <div id="free-shipping-progress" class="free-shipping-progress__wrapper">
+        {% if cart_subtotal >= free_shipping_limit %}
+            <p class="free-shipping-progress__label">{{settings.free-shipping-progress-success-label}}</p>
+        {% else %}
+            <p class="free-shipping-progress__label">{{settings.free-shipping-progress-label | replace: '####', remaining}}</p>
+        {% endif %}
+
+        <progress id="free-shipping-progress__bar" value="{{cart_subtotal}}" max="{{free_shipping_limit}}"> {{cart_subtotal | divided_by: free_shipping_limit}} </progress>
+    </div>
+{% endif %}

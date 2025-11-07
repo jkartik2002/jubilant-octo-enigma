@@ -1,0 +1,2621 @@
+{% if section.settings.show-section %}
+  <section class="bracelet-guide bracelet-guide--size-chart chain-guide--size-chart">
+    {% if section.settings.floating-image != blank %}
+      <img alt="" class="floating-image d-none d-lg-block" src="{{ section.settings.floating-image | img_url: '400x' }}">
+    {% endif %}
+
+   <div class="guide-wrapper">
+      <h2 class="title">{{ section.settings.title }}</h2>
+
+      <div class="text-center">
+        <div class="chart-nav d-none d-lg-inline-block">
+          <span class="option selected">CABLE</span>
+          <span class="option">BALL</span>
+          <span class="option">ROLO</span>
+          <span class="option">BOX</span>
+          <span class="option">INFINITY</span>
+          <span class="option">PAPERCLIP</span>
+          {% if section.settings.show-chart-7 %}
+            <span class="option">HERRINGBONE</span>
+          {% endif %}
+        </div>
+      </div>
+
+      <select id="chart-picker" class="chart-picker noreplace d-block d-lg-none">
+        <option value="cable">CABLE</option>
+        <option value="ball">BALL</option>
+        <option value="rolo">ROLO</option>
+        <option value="box">BOX</option>
+        <option value="infinity">INFINITY</option>
+        <option value="paperclip">PAPERCLIP</option>
+        {% if section.settings.show-chart-7 %}
+          <option value="herringbone">HERRINGBONE</option>
+        {% endif %}
+      </select>
+
+      <div id="chart-cable" class="chart-wrapper">
+        <div class="wrapper">
+          <div class="col table-left">
+            <div class="d-block d-lg-none">
+              <h3 class="subtitle">{{ section.settings.title-1 }}</h3>
+              <div class="desc">{{ section.settings.text-1 }}</div>
+            </div>
+            <div class="carousel carousel-cable">
+              <div class="carousel-cell">
+                <img alt="{{section.settings.caption-1-1}}" class="w-100 lazyload" src="{{ section.settings.image-1-1 | img_url: '120x' }}" data-src="{{ section.settings.image-1-1 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-1-1 }}</div>
+              </div>
+              <div class="carousel-cell">
+                <img alt="{{section.settings.caption-1-2}}" class="w-100 lazyload" data-src="{{ section.settings.image-1-2 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-1-2 }}</div>
+              </div>
+              {% if section.settings.image-1-3 != blank %}
+                <div class="carousel-cell">
+                  <img alt="{{section.settings.caption-1-3}}" class="w-100 lazyload" data-src="{{ section.settings.image-1-3 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-1-3 }}</div>
+                </div>
+              {% endif %}
+              {% if section.settings.image-1-4 != blank %}
+                <div class="carousel-cell">
+                  <img alt="{{section.settings.caption-1-4}}" class="w-100 lazyload" data-src="{{ section.settings.image-1-4 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-1-4 }}</div>
+                </div>
+              {% endif %}
+              {% if section.settings.image-1-5 != blank %}
+                <div class="carousel-cell">
+                  <img alt="{{section.settings.caption-1-5}}" class="w-100 lazyload" data-src="{{ section.settings.image-1-5 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-1-5 }}</div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col table-right">
+            <div class="d-none d-lg-block">
+              <h3 class="subtitle">{{ section.settings.title-1 }}</h3>
+              <div class="desc">{{ section.settings.text-1 }}</div>
+              <!-- <a class="cta d-none d-lg-inline-block" href="/products/{{ section.settings.product-1-1 }}">SHOP CABLE CHAINS</a> -->
+            </div>
+
+            <table class="cable">
+              <thead>
+                <tr>
+                  <td class="first">Size</td>
+                  <td class="rxs silver">
+                    <a href="/products/{{ section.settings.product-1-1 }}">
+                      Silver
+                    </a>
+                    {% include 'chain-guide-swatches', chart: 'cable', silver: true, gold: true, solidgold: true, selected: 'silver' %}
+                  </td>
+                  <td class="rxs gold">
+                    <a href="/products/{{ section.settings.product-1-2 }}">
+                      Gold Vermeil
+                    </a>
+                    {% include 'chain-guide-swatches', chart: 'cable', silver: true, gold: true, solidgold: true, selected: 'gold' %}
+                  </td>
+                  <td class="rxs solid-gold">
+                    <a href="/products/{{ section.settings.product-1-3 }}">
+                      Solid Gold
+                    </a>
+                    {% include 'chain-guide-swatches', chart: 'cable', silver: true, gold: true, solidgold: true, selected: 'solid-gold' %}
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="first">
+                    {% if section.settings.chart-1-row-1-text-1-url != blank %}
+                      <a href="{{ all_products[section.settings.chart-1-row-1-text-1-url].url }}">
+                    {% endif %}
+                    {{ section.settings.chart-1-row-1-text-1 }}
+                    {% if section.settings.chart-1-row-1-text-1-url != blank %}
+                      </a>
+                    {% endif %}
+                  </td>
+                  {% comment %} <td class="center">{{ section.settings.chart-1-row-1-text-2 }}</td> {% endcomment %}
+                  <td class="rxs silver">{{ section.settings.chart-1-row-1-text-3 }}</td>
+                  <td class="rxs gold">{{ section.settings.chart-1-row-1-text-4 }}</td>
+                  <td class="rxs solid-gold">{{ section.settings.chart-1-row-1-text-5 }}</td>
+                </tr>
+                <tr>
+                  <td class="first">
+                    {% if section.settings.chart-1-row-2-text-1-url != blank %}
+                      <a href="{{ all_products[section.settings.chart-1-row-2-text-1-url].url }}">
+                    {% endif %}
+                    {{ section.settings.chart-1-row-2-text-1 }}
+                    {% if section.settings.chart-1-row-2-text-1-url != blank %}
+                      </a>
+                    {% endif %}
+                    <img id="tooltip-1" class="tooltip lazyload" alt="Tooltip Icon" data-src="{{ 'tooltip.svg' | asset_url }}">
+                  </td>
+                  {% comment %} <td class="center">{{ section.settings.chart-1-row-2-text-2 }}</td> {% endcomment %}
+                  <td class="rxs silver">{{ section.settings.chart-1-row-2-text-3 }}</td>
+                  <td class="rxs gold">{{ section.settings.chart-1-row-2-text-4 }}</td>
+                  <td class="rxs solid-gold">{{ section.settings.chart-1-row-2-text-5 }}</td>
+                </tr>
+                {% if section.settings.chart-1-row-3-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {% if section.settings.chart-1-row-3-text-1-url != blank %}
+                        <a href="{{ all_products[section.settings.chart-1-row-3-text-1-url].url }}">
+                      {% endif %}
+                      {{ section.settings.chart-1-row-3-text-1 }}
+                      {% if section.settings.chart-1-row-3-text-1-url != blank %}
+                        </a>
+                      {% endif %}
+                      <img id="tooltip-2" class="tooltip lazyload" alt="Tooltip Icon" data-src="{{ 'tooltip.svg' | asset_url }}">
+                    </td>
+                    {% comment %} <td class="center">{{ section.settings.chart-1-row-3-text-2 }}</td> {% endcomment %}
+                    <td class="rxs silver">{{ section.settings.chart-1-row-3-text-3 }}</td>
+                    <td class="rxs gold">{{ section.settings.chart-1-row-3-text-4 }}</td>
+                    <td class="rxs solid-gold">{{ section.settings.chart-1-row-3-text-5 }}</td>
+                  </tr>
+                {% endif %}
+                {% if section.settings.chart-1-row-4-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {% if section.settings.chart-1-row-4-text-1-url != blank %}
+                        <a href="{{ all_products[section.settings.chart-1-row-4-text-1-url].url }}">
+                      {% endif %}
+                      {{ section.settings.chart-1-row-4-text-1 }}
+                      {% if section.settings.chart-1-row-4-text-1-url != blank %}
+                        </a>
+                      {% endif %}
+                    </td>
+                    {% comment %} <td class="center">{{ section.settings.chart-1-row-4-text-2 }}</td> {% endcomment %}
+                    <td class="rxs silver">{{ section.settings.chart-1-row-4-text-3 }}</td>
+                    <td class="rxs gold">{{ section.settings.chart-1-row-4-text-4 }}</td>
+                    <td class="rxs solid-gold">{{ section.settings.chart-1-row-4-text-5 }}</td>
+                  </tr>
+                {% endif %}
+                {% if section.settings.chart-1-row-5-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {% if section.settings.chart-1-row-5-text-1-url != blank %}
+                        <a href="{{ all_products[section.settings.chart-1-row-5-text-1-url].url }}">
+                      {% endif %}
+                      {{ section.settings.chart-1-row-5-text-1 }}
+                      {% if section.settings.chart-1-row-5-text-1-url != blank %}
+                        </a>
+                      {% endif %}
+                    </td>
+                    {% comment %} <td class="center">{{ section.settings.chart-1-row-5-text-2 }}</td> {% endcomment %}
+                    <td class="rxs silver">{{ section.settings.chart-1-row-5-text-3 }}</td>
+                    <td class="rxs gold">{{ section.settings.chart-1-row-5-text-4 }}</td>
+                    <td class="rxs solid-gold">{{ section.settings.chart-1-row-5-text-5 }}</td>
+                  </tr>
+                {% endif %}
+                {% if section.settings.chart-1-row-6-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {% if section.settings.chart-1-row-6-text-1-url != blank %}
+                        <a href="{{ all_products[section.settings.chart-1-row-6-text-1-url].url }}">
+                      {% endif %}
+                      {{ section.settings.chart-1-row-6-text-1 }}
+                      {% if section.settings.chart-1-row-6-text-1-url != blank %}
+                        </a>
+                      {% endif %}
+                    </td>
+                    {% comment %} <td class="center">{{ section.settings.chart-1-row-6-text-2 }}</td> {% endcomment %}
+                    <td class="rxs silver">{{ section.settings.chart-1-row-6-text-3 }}</td>
+                    <td class="rxs gold">{{ section.settings.chart-1-row-6-text-4 }}</td>
+                    <td class="rxs solid-gold">{{ section.settings.chart-1-row-6-text-5 }}</td>
+                  </tr>
+                {% endif %}
+                {% if section.settings.chart-1-row-7-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {% if section.settings.chart-1-row-7-text-1-url != blank %}
+                        <a href="{{ all_products[section.settings.chart-1-row-7-text-1-url].url }}">
+                      {% endif %}
+                      {{ section.settings.chart-1-row-7-text-1 }}
+                      {% if section.settings.chart-1-row-7-text-1-url != blank %}
+                        </a>
+                      {% endif %}
+                      <img id="tooltip-3" class="tooltip lazyload" alt="Tooltip Icon" data-src="{{ 'tooltip.svg' | asset_url }}">
+                    </td>
+                    {% comment %} <td class="center">{{ section.settings.chart-1-row-7-text-2 }}</td> {% endcomment %}
+                    <td class="rxs silver">{{ section.settings.chart-1-row-7-text-3 }}</td>
+                    <td class="rxs gold">{{ section.settings.chart-1-row-7-text-4 }}</td>
+                    <td class="rxs solid-gold">{{ section.settings.chart-1-row-7-text-5 }}</td>
+                  </tr>
+                {% endif %}
+                {% if section.settings.chart-1-row-8-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {% if section.settings.chart-1-row-8-text-1-url != blank %}
+                        <a href="{{ all_products[section.settings.chart-1-row-8-text-1-url].url }}">
+                      {% endif %}
+                      {{ section.settings.chart-1-row-8-text-1 }}
+                      {% if section.settings.chart-1-row-8-text-1-url != blank %}
+                        </a>
+                      {% endif %}
+                    </td>
+                    {% comment %} <td class="center">{{ section.settings.chart-1-row-8-text-2 }}</td> {% endcomment %}
+                    <td class="rxs silver">{{ section.settings.chart-1-row-8-text-3 }}</td>
+                    <td class="rxs gold">{{ section.settings.chart-1-row-8-text-4 }}</td>
+                    <td class="rxs solid-gold">{{ section.settings.chart-1-row-8-text-5 }}</td>
+                  </tr>
+                {% endif %}
+                {% if section.settings.chart-1-row-9-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {% if section.settings.chart-1-row-9-text-1-url != blank %}
+                        <a href="{{ all_products[section.settings.chart-1-row-9-text-1-url].url }}">
+                      {% endif %}
+                      {{ section.settings.chart-1-row-9-text-1 }}
+                      {% if section.settings.chart-1-row-9-text-1-url != blank %}
+                        </a>
+                      {% endif %}
+                      <img id="tooltip-4" class="tooltip lazyload" alt="Tooltip Icon" data-src="{{ 'tooltip.svg' | asset_url }}">
+                    </td>
+                    {% comment %} <td class="center">{{ section.settings.chart-1-row-9-text-2 }}</td> {% endcomment %}
+                    <td class="rxs silver">{{ section.settings.chart-1-row-9-text-3 }}</td>
+                    <td class="rxs gold">{{ section.settings.chart-1-row-9-text-4 }}</td>
+                    <td class="rxs solid-gold">{{ section.settings.chart-1-row-9-text-5 }}</td>
+                  </tr>
+                {% endif %}
+                {% if section.settings.chart-1-row-10-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {% if section.settings.chart-1-row-10-text-1-url != blank %}
+                        <a href="{{ all_products[section.settings.chart-1-row-10-text-1-url].url }}">
+                      {% endif %}
+                      {{ section.settings.chart-1-row-10-text-1 }}
+                      {% if section.settings.chart-1-row-10-text-1-url != blank %}
+                        </a>
+                      {% endif %}
+                    </td>
+                    {% comment %} <td class="center">{{ section.settings.chart-1-row-10-text-2 }}</td> {% endcomment %}
+                    <td class="rxs silver">{{ section.settings.chart-1-row-10-text-3 }}</td>
+                    <td class="rxs gold">{{ section.settings.chart-1-row-10-text-4 }}</td>
+                    <td class="rxs solid-gold">{{ section.settings.chart-1-row-10-text-5 }}</td>
+                  </tr>
+                {% endif %}
+                {% if section.settings.chart-1-row-11-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {% if section.settings.chart-1-row-11-text-1-url != blank %}
+                        <a href="{{ all_products[section.settings.chart-1-row-11-text-1-url].url }}">
+                      {% endif %}
+                      {{ section.settings.chart-1-row-11-text-1 }}
+                      {% if section.settings.chart-1-row-11-text-1-url != blank %}
+                        </a>
+                      {% endif %}
+                      <img id="tooltip-5" class="tooltip lazyload" alt="Tooltip Icon" data-src="{{ 'tooltip.svg' | asset_url }}">
+                    </td>
+                    {% comment %} <td class="center">{{ section.settings.chart-1-row-11-text-2 }}</td> {% endcomment %}
+                    <td class="rxs silver">{{ section.settings.chart-1-row-11-text-3 }}</td>
+                    <td class="rxs gold">{{ section.settings.chart-1-row-11-text-4 }}</td>
+                    <td class="rxs solid-gold">{{ section.settings.chart-1-row-11-text-5 }}</td>
+                  </tr>
+                {% endif %}
+              </tbody>
+            </table>
+
+            <div class="text-center d-block d-lg-none">
+              <button class="show-chart" data-type="cable">Show Size Chart</button>
+            </div>
+
+            <div class="text-center">
+              <a class="cta" href="{{ section.settings.chart-1-cta }}">SHOP CABLE CHAINS</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="chart-ball" class="chart-wrapper">
+        <div class="wrapper">
+          <div class="col table-left">
+            <div class="d-block d-lg-none">
+              <h3 class="subtitle">{{ section.settings.title-2 }}</h3>
+              <div class="desc">{{ section.settings.text-2 }}</div>
+            </div>
+            <div class="carousel carousel-ball">
+              <div class="carousel-cell">
+                <img alt="{{section.settings.caption-2-1}}" class="w-100 lazyload" src="{{ section.settings.image-2-1 | img_url: '120x' }}" data-src="{{ section.settings.image-2-1 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-2-1 }}</div>
+              </div>
+              <div class="carousel-cell">
+                <img alt="{{section.settings.caption-2-2}}" class="w-100 lazyload" data-src="{{ section.settings.image-2-2 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-2-2 }}</div>
+              </div>
+              {% if section.settings.image-2-3 != blank %}
+                <div class="carousel-cell">
+                  <img alt="{{section.settings.caption-2-3}}" class="w-100 lazyload" data-src="{{ section.settings.image-2-3 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-2-3 }}</div>
+                </div>
+              {% endif %}
+              {% if section.settings.image-2-4 != blank %}
+                <div class="carousel-cell">
+                  <img alt="{{section.settings.caption-2-4}}" class="w-100 lazyload" data-src="{{ section.settings.image-2-4 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-2-4 }}</div>
+                </div>
+              {% endif %}
+              {% if section.settings.image-2-5 != blank %}
+                <div class="carousel-cell">
+                  <img alt="{{section.settings.caption-2-5}}" class="w-100 lazyload" data-src="{{ section.settings.image-2-5 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-2-5 }}</div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col table-right">
+            <div class="d-none d-lg-block">
+              <h3 class="subtitle">{{ section.settings.title-2 }}</h3>
+              <div class="desc">{{ section.settings.text-2 }}</div>
+            </div>
+
+            <table class="ball">
+              <thead>
+                <tr>
+                  <td class="first">Size</td>
+                  <td class="rxs silver">
+                    <a href="/products/{{ section.settings.product-2-1 }}">
+                      Silver
+                    </a>
+                    {% include 'chain-guide-swatches', chart: 'ball', silver: true, gold: true, solidgold: false, selected: 'silver' %}
+                  </td>
+                  <td class="rxs gold">
+                    <a href="/products/{{ section.settings.product-2-2 }}">
+                      Gold Vermeil
+                    </a>
+                    {% include 'chain-guide-swatches', chart: 'ball', silver: true, gold: true, solidgold: false, selected: 'gold' %}
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="first">
+                    {% if section.settings.chart-2-row-1-text-1-url != blank %}
+                      <a href="{{ all_products[section.settings.chart-2-row-1-text-1-url].url }}">
+                    {% endif %}
+                    {{ section.settings.chart-2-row-1-text-1 }}
+                    {% if section.settings.chart-2-row-1-text-1-url != blank %}
+                      </a>
+                    {% endif %}
+                  </td>
+                  {% comment %} <td class="center">{{ section.settings.chart-2-row-1-text-2 }}</td> {% endcomment %}
+                  <td class="rxs silver">{{ section.settings.chart-2-row-1-text-3 }}</td>
+                  <td class="rxs gold">{{ section.settings.chart-2-row-1-text-4 }}</td>
+                </tr>
+                <tr>
+                  <td class="first">
+                    {% if section.settings.chart-2-row-2-text-1-url != blank %}
+                      <a href="{{ all_products[section.settings.chart-2-row-2-text-1-url].url }}">
+                    {% endif %}
+                    {{ section.settings.chart-2-row-2-text-1 }}
+                    {% if section.settings.chart-2-row-2-text-1-url != blank %}
+                      </a>
+                    {% endif %}
+                    <img id="tooltip-6" class="tooltip lazyload" alt="Tooltip Icon" data-src="{{ 'tooltip.svg' | asset_url }}">
+                  </td>
+                  {% comment %} <td class="center">{{ section.settings.chart-2-row-2-text-2 }}</td> {% endcomment %}
+                  <td class="rxs silver">{{ section.settings.chart-2-row-2-text-3 }}</td>
+                  <td class="rxs gold">{{ section.settings.chart-2-row-2-text-4 }}</td>
+                </tr>
+                {% if section.settings.chart-2-row-3-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {% if section.settings.chart-2-row-3-text-1-url != blank %}
+                        <a href="{{ all_products[section.settings.chart-2-row-3-text-1-url].url }}">
+                      {% endif %}
+                      {{ section.settings.chart-2-row-3-text-1 }}
+                      {% if section.settings.chart-2-row-3-text-1-url != blank %}
+                        </a>
+                      {% endif %}
+                    </td>
+                    {% comment %} <td class="center">{{ section.settings.chart-2-row-3-text-2 }}</td> {% endcomment %}
+                    <td class="rxs silver">{{ section.settings.chart-2-row-3-text-3 }}</td>
+                    <td class="rxs gold">{{ section.settings.chart-2-row-3-text-4 }}</td>
+                  </tr>
+                {% endif %}
+                {% if section.settings.chart-2-row-4-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {% if section.settings.chart-2-row-4-text-1-url != blank %}
+                        <a href="{{ all_products[section.settings.chart-2-row-4-text-1-url].url }}">
+                      {% endif %}
+                      {{ section.settings.chart-2-row-4-text-1 }}
+                      {% if section.settings.chart-2-row-4-text-1-url != blank %}
+                        </a>
+                      {% endif %}
+                      <img id="tooltip-7" class="tooltip lazyload" alt="Tooltip Icon" data-src="{{ 'tooltip.svg' | asset_url }}">
+                    </td>
+                    {% comment %} <td class="center">{{ section.settings.chart-2-row-4-text-2 }}</td> {% endcomment %}
+                    <td class="rxs silver">{{ section.settings.chart-2-row-4-text-3 }}</td>
+                    <td class="rxs gold">{{ section.settings.chart-2-row-4-text-4 }}</td>
+                  </tr>
+                {% endif %}
+                {% if section.settings.chart-2-row-5-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {% if section.settings.chart-2-row-5-text-1-url != blank %}
+                        <a href="{{ all_products[section.settings.chart-2-row-5-text-1-url].url }}">
+                      {% endif %}
+                      {{ section.settings.chart-2-row-5-text-1 }}
+                      {% if section.settings.chart-2-row-5-text-1-url != blank %}
+                        </a>
+                      {% endif %}
+                      <img id="tooltip-8" class="tooltip lazyload" alt="Tooltip Icon" data-src="{{ 'tooltip.svg' | asset_url }}">
+                    </td>
+                    {% comment %} <td class="center">{{ section.settings.chart-2-row-5-text-2 }}</td> {% endcomment %}
+                    <td class="rxs silver">{{ section.settings.chart-2-row-5-text-3 }}</td>
+                    <td class="rxs gold">{{ section.settings.chart-2-row-5-text-4 }}</td>
+                  </tr>
+                {% endif %}
+                {% if section.settings.chart-2-row-6-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {% if section.settings.chart-2-row-6-text-1-url != blank %}
+                        <a href="{{ all_products[section.settings.chart-2-row-6-text-1-url].url }}">
+                      {% endif %}
+                      {{ section.settings.chart-2-row-6-text-1 }}
+                      {% if section.settings.chart-2-row-6-text-1-url != blank %}
+                        </a>
+                      {% endif %}
+                    </td>
+                    {% comment %} <td class="center">{{ section.settings.chart-2-row-6-text-2 }}</td> {% endcomment %}
+                    <td class="rxs silver">{{ section.settings.chart-2-row-6-text-3 }}</td>
+                    <td class="rxs gold">{{ section.settings.chart-2-row-6-text-4 }}</td>
+                  </tr>
+                {% endif %}
+                {% if section.settings.chart-2-row-7-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {% if section.settings.chart-2-row-7-text-1-url != blank %}
+                        <a href="{{ all_products[section.settings.chart-2-row-7-text-1-url].url }}">
+                      {% endif %}
+                      {{ section.settings.chart-2-row-7-text-1 }}
+                      {% if section.settings.chart-2-row-7-text-1-url != blank %}
+                        </a>
+                      {% endif %}
+                    </td>
+                    {% comment %} <td class="center">{{ section.settings.chart-2-row-7-text-2 }}</td> {% endcomment %}
+                    <td class="rxs silver">{{ section.settings.chart-2-row-7-text-3 }}</td>
+                    <td class="rxs gold">{{ section.settings.chart-2-row-7-text-4 }}</td>
+                  </tr>
+                {% endif %}
+                {% if section.settings.chart-2-row-8-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {% if section.settings.chart-2-row-8-text-1-url != blank %}
+                        <a href="{{ all_products[section.settings.chart-2-row-8-text-1-url].url }}">
+                      {% endif %}
+                      {{ section.settings.chart-2-row-8-text-1 }}
+                      {% if section.settings.chart-2-row-8-text-1-url != blank %}
+                        </a>
+                      {% endif %}
+                    </td>
+                    {% comment %} <td class="center">{{ section.settings.chart-2-row-8-text-2 }}</td> {% endcomment %}
+                    <td class="rxs silver">{{ section.settings.chart-2-row-8-text-3 }}</td>
+                    <td class="rxs gold">{{ section.settings.chart-2-row-8-text-4 }}</td>
+                  </tr>
+                {% endif %}
+              </tbody>
+            </table>
+
+            <div class="text-center d-block d-lg-none">
+              <button class="show-chart" data-type="ball">Show Size Chart</button>
+            </div>
+
+            <div class="text-center">
+              <a class="cta" href="{{ section.settings.chart-2-cta }}">SHOP BALL CHAINS</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="chart-rolo" class="chart-wrapper">
+        <div class="wrapper">
+          <div class="col table-left">
+            <div class="d-block d-lg-none">
+              <h3 class="subtitle">{{ section.settings.title-3 }}</h3>
+              <div class="desc">{{ section.settings.text-3 }}</div>
+            </div>
+            <div class="carousel carousel-rolo">
+              <div class="carousel-cell">
+                <img class="w-100 lazyload" alt="{{section.settings.caption-3-1}}" src="{{ section.settings.image-3-1 | img_url: '120x' }}" data-src="{{ section.settings.image-3-1 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-3-1 }}</div>
+              </div>
+              <div class="carousel-cell">
+                <img class="w-100 lazyload" alt="{{section.settings.caption-3-2}}" data-src="{{ section.settings.image-3-2 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-3-2 }}</div>
+              </div>
+              {% if section.settings.image-3-3 != blank %}
+                <div class="carousel-cell">
+                  <img class="w-100 lazyload" alt="{{section.settings.caption-3-3}}" data-src="{{ section.settings.image-3-3 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-3-3 }}</div>
+                </div>
+              {% endif %}
+              {% if section.settings.image-3-4 != blank %}
+                <div class="carousel-cell">
+                  <img class="w-100 lazyload" alt="{{section.settings.caption-3-4}}" data-src="{{ section.settings.image-3-4 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-3-4 }}</div>
+                </div>
+              {% endif %}
+              {% if section.settings.image-3-5 != blank %}
+                <div class="carousel-cell">
+                  <img class="w-100 lazyload" alt="{{section.settings.caption-3-5}}" data-src="{{ section.settings.image-3-5 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-3-5 }}</div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col table-right">
+            <div class="d-none d-lg-block">
+              <h3 class="subtitle">{{ section.settings.title-3 }}</h3>
+              <div class="desc">{{ section.settings.text-3 }}</div>
+            </div>
+
+            <table class="rolo" class="rolo">
+              <thead>
+                <tr>
+                  <td class="first">Size</td>
+                  <td class="rxs silver">
+                    <a href="/products/{{ section.settings.product-3-1 }}">
+                      Silver
+                    </a>
+                    {% include 'chain-guide-swatches', chart: 'rolo', silver: true, gold: true, solidgold: false, selected: 'silver' %}
+                  </td>
+                  <td class="rxs gold">
+                    <a href="/products/{{ section.settings.product-3-2 }}">
+                      Gold Vermeil
+                    </a>
+                    {% include 'chain-guide-swatches', chart: 'rolo', silver: true, gold: true, solidgold: false, selected: 'gold' %}
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="first">
+                    {% if section.settings.chart-3-row-1-text-1-url != blank %}
+                      <a href="{{ all_products[section.settings.chart-3-row-1-text-1-url].url }}">
+                    {% endif %}
+                    {{ section.settings.chart-3-row-1-text-1 }}
+                    {% if section.settings.chart-3-row-1-text-1-url != blank %}
+                      </a>
+                    {% endif %}
+                  </td>
+                  <td class="rxs silver">{{ section.settings.chart-3-row-1-text-2 }}</td>
+                  <td class="rxs gold">{{ section.settings.chart-3-row-1-text-3 }}</td>
+                </tr>
+                <tr>
+                  <td class="first">
+                    {% if section.settings.chart-3-row-2-text-1-url != blank %}
+                      <a href="{{ all_products[section.settings.chart-3-row-2-text-1-url].url }}">
+                    {% endif %}
+                    {{ section.settings.chart-3-row-2-text-1 }}
+                    {% if section.settings.chart-3-row-2-text-1-url != blank %}
+                      </a>
+                    {% endif %}
+                  </td>
+                  <td class="rxs silver">{{ section.settings.chart-3-row-2-text-2 }}</td>
+                  <td class="rxs gold">{{ section.settings.chart-3-row-2-text-3 }}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="text-center d-block d-lg-none">
+              <button class="show-chart" data-type="rolo">Show Size Chart</button>
+            </div>
+
+            <div class="text-center">
+              <a class="cta" href="{{ section.settings.chart-3-cta }}">SHOP ROLO CHAINS</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="chart-box" class="chart-wrapper">
+        <div class="wrapper">
+          <div class="col table-left">
+            <div class="d-block d-lg-none">
+              <h3 class="subtitle">{{ section.settings.title-4 }}</h3>
+              <div class="desc">{{ section.settings.text-4 }}</div>
+            </div>
+            <div class="carousel carousel-box">
+              <div class="carousel-cell">
+                <img class="w-100 lazyload" alt="{{section.settings.caption-4-1}}" src="{{ section.settings.image-4-1 | img_url: '120x' }}" data-src="{{ section.settings.image-4-1 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-4-1 }}</div>
+              </div>
+              <div class="carousel-cell">
+                <img class="w-100 lazyload" alt="{{section.settings.caption-4-2}}" data-src="{{ section.settings.image-4-2 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-4-2 }}</div>
+              </div>
+              {% if section.settings.image-4-3 != blank %}
+                <div class="carousel-cell">
+                  <img class="w-100 lazyload" alt="{{section.settings.caption-4-3}}" data-src="{{ section.settings.image-4-3 | img_url: '1200x' }}">
+                  <div class="caption">{{ section.settings.caption-4-3 }}</div>
+                </div>
+              {% endif %}
+              {% if section.settings.image-4-4 != blank %}
+                <div class="carousel-cell">
+                  <img class="w-100 lazyload" alt="{{section.settings.caption-4-4}}" data-src="{{ section.settings.image-4-4 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-4-4 }}</div>
+                </div>
+              {% endif %}
+              {% if section.settings.image-4-5 != blank %}
+                <div class="carousel-cell">
+                  <img class="w-100 lazyload" alt="{{section.settings.caption-4-5}}" data-src="{{ section.settings.image-4-5 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-4-5 }}</div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col table-right">
+            <div class="d-none d-lg-block">
+              <h3 class="subtitle">{{ section.settings.title-4 }}</h3>
+              <div class="desc">{{ section.settings.text-4 }}</div>
+            </div>
+
+            <table class="box">
+              <thead>
+                <tr>
+                  <td class="first">Size</td>
+                  <td class="rxs silver">
+                    <a href="/products/{{ section.settings.product-4-1 }}">
+                      Silver
+                    </a>
+                    {% include 'chain-guide-swatches', chart: 'box', silver: true, gold: true, solidgold: false, selected: 'silver' %}
+                  </td>
+                  <td class="rxs gold">
+                    <a href="/products/{{ section.settings.product-4-2 }}">
+                      Gold Vermeil
+                    </a>
+                    {% include 'chain-guide-swatches', chart: 'box', silver: true, gold: true, solidgold: false, selected: 'gold' %}
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="first">
+                    {% if section.settings.chart-4-row-1-text-1-url != blank %}
+                      <a href="{{ all_products[section.settings.chart-4-row-1-text-1-url].url }}">
+                    {% endif %}
+                    {{ section.settings.chart-4-row-1-text-1 }}
+                    {% if section.settings.chart-4-row-1-text-1-url != blank %}
+                      </a>
+                    {% endif %}
+                    <img id="tooltip-9" class="tooltip lazyload" alt="Tooltip Icon" data-src="{{ 'tooltip.svg' | asset_url }}">
+                  </td>
+                  <td class="rxs silver">{{ section.settings.chart-4-row-1-text-2 }}</td>
+                  <td class="rxs gold">{{ section.settings.chart-4-row-1-text-3 }}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="text-center d-block d-lg-none">
+              <button class="show-chart" data-type="box">Show Size Chart</button>
+            </div>
+
+            <div class="text-center">
+              <a class="cta" href="{{ section.settings.chart-4-cta }}">SHOP BOX CHAINS</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="chart-infinity" class="chart-wrapper">
+        <div class="wrapper">
+          <div class="col table-left">
+            <div class="d-block d-lg-none">
+              <h3 class="subtitle">{{ section.settings.title-5 }}</h3>
+              <div class="desc">{{ section.settings.text-5 }}</div>
+            </div>
+            <div class="carousel carousel-infinity">
+              <div class="carousel-cell">
+                <img class="w-100 lazyload" alt="{{section.settings.caption-5-1}}" src="{{ section.settings.image-5-1 | img_url: '120x' }}" data-src="{{ section.settings.image-5-1 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-5-1 }}</div>
+              </div>
+              <div class="carousel-cell">
+                <img class="w-100 lazyload" alt="{{section.settings.caption-5-2}}" data-src="{{ section.settings.image-5-2 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-5-2 }}</div>
+              </div>
+              {% if section.settings.image-5-3 != blank %}
+                <div class="carousel-cell">
+                  <img class="w-100 lazyload" alt="{{section.settings.caption-5-3}}" data-src="{{ section.settings.image-5-3 | img_url: '1200x' }}">
+                  <div class="caption">{{ section.settings.caption-5-3 }}</div>
+                </div>
+              {% endif %}
+              {% if section.settings.image-5-4 != blank %}
+                <div class="carousel-cell">
+                  <img class="w-100 lazyload" alt="{{section.settings.caption-5-4}}" data-src="{{ section.settings.image-5-4 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-5-4 }}</div>
+                </div>
+              {% endif %}
+              {% if section.settings.image-5-5 != blank %}
+                <div class="carousel-cell">
+                  <img class="w-100 lazyload" alt="{{section.settings.caption-5-5}}" data-src="{{ section.settings.image-5-5 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-5-5 }}</div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col table-right">
+            <div class="d-none d-lg-block">
+              <h3 class="subtitle">{{ section.settings.title-5 }}</h3>
+              <div class="desc">{{ section.settings.text-5 }}</div>
+            </div>
+
+            <table class="infinity">
+              <thead>
+                <tr>
+                  <td class="first">Size</td>
+                  <td class="rxs silver">
+                    <a href="/products/{{ section.settings.product-5-1 }}">
+                      Silver
+                    </a>
+                    {% include 'chain-guide-swatches', chart: 'infinity', silver: true, gold: true, solidgold: true, selected: 'silver' %}
+                  </td>
+                  <td class="rxs gold">
+                    <a href="/products/{{ section.settings.product-5-2 }}">
+                      Gold Vermeil
+                    </a>
+                    {% include 'chain-guide-swatches', chart: 'infinity', silver: true, gold: true, solidgold: true, selected: 'gold' %}
+                  </td>
+                  <td class="rxs solid-gold">
+                    <a href="/products/{{ section.settings.product-5-3 }}">
+                      Solid Gold
+                    </a>
+                    {% include 'chain-guide-swatches', chart: 'infinity', silver: true, gold: true, solidgold: true, selected: 'solid-gold' %}
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="first">
+                    {% if section.settings.chart-5-row-1-text-1-url != blank %}
+                      <a href="{{ all_products[section.settings.chart-5-row-1-text-1-url].url }}">
+                    {% endif %}
+                    {{ section.settings.chart-5-row-1-text-1 }}
+                    {% if section.settings.chart-5-row-1-text-1-url != blank %}
+                      </a>
+                    {% endif %}
+                  </td>
+                  {% comment %} <td class="center">{{ section.settings.chart-5-row-1-text-2 }}</td> {% endcomment %}
+                  <td class="rxs silver">{{ section.settings.chart-5-row-1-text-3 }}</td>
+                  <td class="rxs gold">{{ section.settings.chart-5-row-1-text-4 }}</td>
+                  <td class="rxs solid-gold">{{ section.settings.chart-5-row-1-text-5 }}</td>
+                </tr>
+                <tr>
+                  <td class="first">
+                    {% if section.settings.chart-5-row-2-text-1-url != blank %}
+                      <a href="{{ all_products[section.settings.chart-5-row-2-text-1-url].url }}">
+                    {% endif %}
+                    {{ section.settings.chart-5-row-2-text-1 }}
+                    {% if section.settings.chart-5-row-2-text-1-url != blank %}
+                      </a>
+                    {% endif %}
+                  </td>
+                  {% comment %} <td class="center">{{ section.settings.chart-5-row-2-text-2 }}</td> {% endcomment %}
+                  <td class="rxs silver">{{ section.settings.chart-5-row-2-text-3 }}</td>
+                  <td class="rxs gold">{{ section.settings.chart-5-row-2-text-4 }}</td>
+                  <td class="rxs solid-gold">{{ section.settings.chart-5-row-2-text-5 }}</td>
+                </tr>
+                <tr>
+                  <td class="first">
+                    {% if section.settings.chart-5-row-3-text-1-url != blank %}
+                      <a href="{{ all_products[section.settings.chart-5-row-3-text-1-url].url }}">
+                    {% endif %}
+                    {{ section.settings.chart-5-row-3-text-1 }}
+                    {% if section.settings.chart-5-row-3-text-1-url != blank %}
+                      </a>
+                    {% endif %}
+                  </td>
+                  {% comment %} <td class="center">{{ section.settings.chart-5-row-3-text-2 }}</td> {% endcomment %}
+                  <td class="rxs silver">{{ section.settings.chart-5-row-3-text-3 }}</td>
+                  <td class="rxs gold">{{ section.settings.chart-5-row-3-text-4 }}</td>
+                  <td class="rxs solid-gold">{{ section.settings.chart-5-row-3-text-5 }}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table class="infinity">
+              <thead>
+                <tr>
+                  <td class="first">Size</td>
+                  <td class="rxs-inf">
+                    <a href="/products/{{ section.settings.product-5-4 }}">
+                      Solid Gold Slim
+                    </a>
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="first">
+                    {% if section.settings.chart-5-row-1-text-1-url != blank %}
+                      <a href="{{ all_products[section.settings.chart-5-row-1-text-1-url].url }}">
+                    {% endif %}
+                    {{ section.settings.chart-5-row-1-text-1 }}
+                    {% if section.settings.chart-5-row-1-text-1-url != blank %}
+                      </a>
+                    {% endif %}
+                  </td>
+                  <td class="rxs-inf">{{ section.settings.chart-55-row-1-text-2 }}</td>
+                </tr>
+                <tr>
+                  <td class="first">
+                    {% if section.settings.chart-5-row-2-text-1-url != blank %}
+                      <a href="{{ all_products[section.settings.chart-5-row-2-text-1-url].url }}">
+                    {% endif %}
+                    {{ section.settings.chart-5-row-2-text-1 }}
+                    {% if section.settings.chart-5-row-2-text-1-url != blank %}
+                      </a>
+                    {% endif %}
+                  </td>
+                  <td class="rxs-inf">{{ section.settings.chart-55-row-2-text-2 }}</td>
+                </tr>
+                <tr>
+                  <td class="first">
+                    {% if section.settings.chart-5-row-3-text-1-url != blank %}
+                      <a href="{{ all_products[section.settings.chart-5-row-3-text-1-url].url }}">
+                    {% endif %}
+                    {{ section.settings.chart-5-row-3-text-1 }}
+                    {% if section.settings.chart-5-row-3-text-1-url != blank %}
+                      </a>
+                    {% endif %}
+                  </td>
+                  <td class="rxs-inf">{{ section.settings.chart-55-row-3-text-2 }}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="text-center d-block d-lg-none">
+              <button class="show-chart" data-type="infinity">Show Size Chart</button>
+            </div>
+
+            <div class="text-center">
+              <a class="cta" href="{{ section.settings.chart-5-cta }}">SHOP INFINITY CHAINS</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="chart-paperclip" class="chart-wrapper">
+        <div class="wrapper">
+          <div class="col table-left">
+            <div class="d-block d-lg-none">
+              <h3 class="subtitle">{{ section.settings.title-6 }}</h3>
+              <div class="desc">{{ section.settings.text-6 }}</div>
+            </div>
+            <div class="carousel carousel-paperclip">
+              <div class="carousel-cell">
+                <video class="video" playsinline="" autoplay="" muted="" loop="">
+                  <source src="{{ section.settings.image-6-1 }}">
+                </video>
+                <div  alt="{{section.settings.caption-6-1}}"class="caption">{{ section.settings.caption-6-1 }}</div>
+              </div>
+              <div class="carousel-cell">
+                <img class="w-100 lazyload" alt="{{section.settings.caption-6-2}}" src="{{ section.settings.image-6-2 | img_url: '120x' }}" data-src="{{ section.settings.image-6-2 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-6-2 }}</div>
+              </div>
+              {% if section.settings.image-6-3 != blank %}
+                <div class="carousel-cell">
+                  <img class="w-100 lazyload" alt="{{section.settings.caption-6-3}}" data-src="{{ section.settings.image-6-3 | img_url: '1200x' }}">
+                  <div class="caption">{{ section.settings.caption-6-3 }}</div>
+                </div>
+              {% endif %}
+              {% if section.settings.image-6-4 != blank %}
+                <div class="carousel-cell">
+                  <img class="w-100 lazyload" alt="{{section.settings.caption-6-4}}" data-src="{{ section.settings.image-6-4 | img_url: '1200x' }}">
+                  <div class="caption">{{ section.settings.caption-6-4 }}</div>
+                </div>
+              {% endif %}
+              {% if section.settings.image-6-5 != blank %}
+                <div class="carousel-cell">
+                  <img class="w-100 lazyload" alt="{{section.settings.caption-6-5}}" data-src="{{ section.settings.image-6-5 | img_url: '1200x' }}">
+                <div class="caption">{{ section.settings.caption-6-5 }}</div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col table-right">
+            <div class="d-none d-lg-block">
+              <h3 class="subtitle">{{ section.settings.title-6 }}</h3>
+              <div class="desc">{{ section.settings.text-6 }}</div>
+            </div>
+
+            <table class="paperclip">
+              <thead>
+                <tr>
+                  <td class="first">Size</td>
+                  <td class="rxs silver">
+                    <a href="/products/{{ section.settings.product-6-1 }}">
+                      Silver
+                    </a>
+                    {% include 'chain-guide-swatches', chart: 'paperclip', silver: true, gold: true, solidgold: false, selected: 'silver' %}
+                  </td>
+                  <td class="rxs gold">
+                    <a href="/products/{{ section.settings.product-6-2 }}">
+                      Gold Vermeil
+                    </a>
+                    {% include 'chain-guide-swatches', chart: 'paperclip', silver: true, gold: true, solidgold: false, selected: 'gold' %}
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="first">
+                    {% if section.settings.chart-6-row-1-text-1-url != blank %}
+                      <a href="{{ all_products[section.settings.chart-6-row-1-text-1-url].url }}">
+                    {% endif %}
+                    {{ section.settings.chart-6-row-1-text-1 }}
+                    {% if section.settings.chart-6-row-1-text-1-url != blank %}
+                      </a>
+                    {% endif %}
+                  </td>
+                  <td class="rxs silver">{{ section.settings.chart-6-row-1-text-2 }}</td>
+                  <td class="rxs gold">{{ section.settings.chart-6-row-1-text-3 }}</td>
+                </tr>
+                <tr>
+                  <td class="first">
+                    {% if section.settings.chart-6-row-2-text-1-url != blank %}
+                      <a href="{{ all_products[section.settings.chart-6-row-2-text-1-url].url }}">
+                    {% endif %}
+                    {{ section.settings.chart-6-row-2-text-1 }}
+                    {% if section.settings.chart-6-row-2-text-1-url != blank %}
+                      </a>
+                    {% endif %}
+                    <img id="tooltip-10" class="tooltip lazyload" alt="Tooltip Icon" data-src="{{ 'tooltip.svg' | asset_url }}">
+                  </td>
+                  <td class="rxs silver">{{ section.settings.chart-6-row-2-text-2 }}</td>
+                  <td class="rxs gold">{{ section.settings.chart-6-row-2-text-3 }}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="text-center d-block d-lg-none">
+              <button class="show-chart" data-type="paperclip">Show Size Chart</button>
+            </div>
+
+            <div class="text-center">
+              <a class="cta" href="{{ section.settings.chart-6-cta }}">SHOP PAPERCLIP CHAINS</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% if section.settings.show-chart-7 %}
+        <div id="chart-herringbone" class="chart-wrapper">
+          <div class="wrapper">
+            <div class="col table-left">
+              <div class="d-block d-lg-none">
+                <h3 class="subtitle">{{ section.settings.title-7 }}</h3>
+                <div class="desc">{{ section.settings.text-7 }}</div>
+              </div>
+              <div class="carousel carousel-herringbone">
+                <div class="carousel-cell">
+                  <img class="w-100 lazyload" alt="{{section.settings.caption-7-1}}" src="{{ section.settings.image-7-1 | img_url: '120x' }}" data-src="{{ section.settings.image-7-1 | img_url: '1200x' }}">
+                  <div class="caption">{{ section.settings.caption-7-1 }}</div>
+                </div>
+                <div class="carousel-cell">
+                  <img class="w-100 lazyload" alt="{{section.settings.caption-7-2}}" data-src="{{ section.settings.image-7-2 | img_url: '1200x' }}">
+                  <div class="caption">{{ section.settings.caption-7-2 }}</div>
+                </div>
+                {% if section.settings.image-7-3 != blank %}
+                  <div class="carousel-cell">
+                    <img class="w-100 lazyload" alt="{{section.settings.caption-7-3}}" data-src="{{ section.settings.image-7-3 | img_url: '1200x' }}">
+                    <div class="caption">{{ section.settings.caption-7-3 }}</div>
+                  </div>
+                {% endif %}
+                {% if section.settings.image-7-4 != blank %}
+                  <div class="carousel-cell">
+                    <img class="w-100 lazyload" alt="{{section.settings.caption-7-4}}" data-src="{{ section.settings.image-7-4 | img_url: '1200x' }}">
+                    <div class="caption">{{ section.settings.caption-7-4 }}</div>
+                  </div>
+                {% endif %}
+                {% if section.settings.image-7-5 != blank %}
+                  <div class="carousel-cell">
+                    <img class="w-100 lazyload" alt="{{section.settings.caption-7-5}}" data-src="{{ section.settings.image-7-5 | img_url: '1200x' }}">
+                  <div class="caption">{{ section.settings.caption-7-5 }}</div>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+            <div class="col table-right">
+              <div class="d-none d-lg-block">
+                <h3 class="subtitle">{{ section.settings.title-7 }}</h3>
+                <div class="desc">{{ section.settings.text-7 }}</div>
+              </div>
+
+              <table class="herringbone">
+                <thead>
+                  <tr>
+                    <td class="first">Size</td>
+                    <td class="rxs silver">
+                      <a href="/products/{{ section.settings.product-7-1 }}">
+                        Silver
+                      </a>
+                      {% include 'chain-guide-swatches', chart: 'herringbone', silver: true, gold: true, solidgold: false, selected: 'silver' %}
+                    </td>
+                    <td class="rxs gold">
+                      <a href="/products/{{ section.settings.product-7-2 }}">
+                        Gold Vermeil
+                      </a>
+                      {% include 'chain-guide-swatches', chart: 'herringbone', silver: true, gold: true, solidgold: false, selected: 'gold' %}
+                    </td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="first">
+                      {% if section.settings.chart-7-row-1-text-1-url != blank %}
+                        <a href="{{ all_products[section.settings.chart-7-row-1-text-1-url].url }}">
+                      {% endif %}
+                      {{ section.settings.chart-7-row-1-text-1 }}
+                      {% if section.settings.chart-7-row-1-text-1-url != blank %}
+                        </a>
+                      {% endif %}
+                    </td>
+                    <td class="rxs silver">{{ section.settings.chart-7-row-1-text-2 }}</td>
+                    <td class="rxs gold">{{ section.settings.chart-7-row-1-text-3 }}</td>
+                  </tr>
+                  <tr>
+                    {% if section.settings.chart-7-row-2-text-1 != blank %}
+                      <td class="first">
+                        {% if section.settings.chart-7-row-2-text-1-url != blank %}
+                          <a href="{{ all_products[section.settings.chart-7-row-2-text-1-url].url }}">
+                        {% endif %}
+                        {{ section.settings.chart-7-row-2-text-1 }}
+                        {% if section.settings.chart-7-row-2-text-1-url != blank %}
+                          </a>
+                        {% endif %}
+                        <img id="tooltip-11" class="tooltip lazyload" alt="Tooltip Icon" data-src="{{ 'tooltip.svg' | asset_url }}">
+                      </td>
+                    {% endif %}
+                    {% if section.settings.chart-7-row-2-text-2 != blank %}
+                      <td class="rxs silver">{{ section.settings.chart-7-row-2-text-2 }}</td>
+                    {% endif %}
+                    {% if section.settings.chart-7-row-2-text-3 != blank %}
+                      <td class="rxs gold">{{ section.settings.chart-7-row-2-text-3 }}</td>
+                    {% endif %}
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="text-center d-block d-lg-none">
+                <button class="show-chart" data-type="herringbone">Show Size Chart</button>
+              </div>
+
+              <div class="text-center">
+                <a class="cta" href="{{ section.settings.chart-7-cta }}">SHOP HERRINGBONE CHAINS</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <script>
+      var options = {
+        cellAlign: 'left',
+        contain: true,
+        imagesLoaded: true,
+        wrapAround: true
+      };
+
+      var carouselCable = $('.carousel.carousel-cable').flickity(options),
+          carouselBall = $('.carousel.carousel-ball').flickity(options),
+          carouselRolo = $('.carousel.carousel-rolo').flickity(options),
+          carouselBox = $('.carousel.carousel-box').flickity(options),
+          carouselInfinity = $('.carousel.carousel-infinity').flickity(options),
+          carouselPaperclip = $('.carousel.carousel-paperclip').flickity(options),
+          carouselHerringbone = $('.carousel.carousel-herringbone').flickity(options);
+
+      $('span.option').click(function() {
+        var type = $(this).text().toLowerCase();
+
+        $('div.chart-wrapper').hide();
+        $(`#chart-${type}`).show();
+        $('span.option').removeClass('selected');
+        $(this).addClass('selected');
+
+        if(type == 'cable') {
+          carouselCable.flickity('resize');
+        } else if(type == 'ball') {
+          carouselBall.flickity('resize');
+        } else if(type == 'rolo') {
+          carouselRolo.flickity('resize');
+        } else if(type == 'box') {
+          carouselBox.flickity('resize');
+        } else if(type == 'infinity') {
+          carouselInfinity.flickity('resize');
+        } else if(type == 'paperclip') {
+          carouselPaperclip.flickity('resize');
+        } else if(type == 'herringbone') {
+          carouselHerringbone.flickity('resize');
+        }
+      })
+
+      $('#chart-picker').on('change', function() {
+        var type = $(this).val();
+
+        $('div.chart-wrapper').hide();
+        $(`#chart-${type}`).show();
+
+        if(type == 'cable') {
+          carouselCable.flickity('resize');
+        } else if(type == 'ball') {
+          carouselBall.flickity('resize');
+        } else if(type == 'rolo') {
+          carouselRolo.flickity('resize');
+        } else if(type == 'box') {
+          carouselBox.flickity('resize');
+        } else if(type == 'infinity') {
+          carouselInfinity.flickity('resize');
+        } else if(type == 'paperclip') {
+          carouselPaperclip.flickity('resize');
+        } else if(type == 'herringbone') {
+          carouselHerringbone.flickity('resize');
+        }
+      });
+
+      tippy('#tooltip-1', {
+        content: '<h3>16" Thick Cable</h3><div>Super Strong, great for kids</div>',
+        allowHTML: true,
+        theme: 'light',
+        placement: 'top-start',
+      });
+
+      tippy('#tooltip-2', {
+        content: '<h3>16"-18" Adjustable Cable</h3><div>Our most popular and perfect for gifting</div>',
+        allowHTML: true,
+        theme: 'light',
+        placement: 'top-start',
+      });
+
+      tippy('#tooltip-3', {
+        content: '<h3>24" Cable</h3><div>Great for every day wear as 24" can be slipped over the head without unclasping</div>',
+        allowHTML: true,
+        theme: 'light',
+        placement: 'top-start',
+      });
+
+      tippy('#tooltip-4', {
+        content: '<h3>24" Thick Cable</h3><div>Popular with men or for a bolder look</div>',
+        allowHTML: true,
+        theme: 'light',
+        placement: 'top-start',
+      });
+
+      tippy('#tooltip-5', {
+        content: '<h3>30" Thick Cable</h3><div>Also popular with men or for a bolder look</div>',
+        allowHTML: true,
+        theme: 'light',
+        placement: 'top-start',
+      });
+
+      tippy('#tooltip-6', {
+        content: '<h3>16"-18" Adjustable Ball</h3><div>Our most popular and perfect for gifting</div>',
+        allowHTML: true,
+        theme: 'light',
+        placement: 'top-start',
+      });
+
+      tippy('#tooltip-7', {
+        content: '<h3>24" Ball</h3><div>Great for every day wear as 24" can be slipped over the head without unclasping</div>',
+        allowHTML: true,
+        theme: 'light',
+        placement: 'top-start',
+      });
+
+      tippy('#tooltip-8', {
+        content: '<h3>24" Heavy Ball</h3><div>Popular with men or for a bolder look</div>',
+        allowHTML: true,
+        theme: 'light',
+        placement: 'top-start',
+      });
+
+      tippy('#tooltip-9', {
+        content: '<h3>24" Box</h3><div>Popular with men or for a bolder look</div>',
+        allowHTML: true,
+        theme: 'light',
+        placement: 'top-start',
+      });
+
+      tippy('#tooltip-10', {
+        content: '<h3>20" Paperclip</h3><div>Great for layering</div>',
+        allowHTML: true,
+        theme: 'light',
+        placement: 'top-start',
+      });
+
+      tippy('#tooltip-11', {
+        content: '<h3>{{ settings.chart-7-row-2-text-1 }}</h3><div>{{ settings.chart-7-row-2-text-tt }}</div>',
+        allowHTML: true,
+        theme: 'light',
+        placement: 'top-start',
+      });
+
+      $('button.show-chart').click(function() {
+        var type = $(this).data('type');
+
+        if(!$(this).hasClass('opened')) {
+          $(this).addClass('opened');
+          $(this).text('Hide Size Chart');
+          $(`table.${type}`).slideDown();
+        } else {
+          $(this).removeClass('opened')
+          $(this).text('Show Size Chart')
+          $(`table.${type}`).slideUp();
+        }
+      })
+
+      $('span.swatch-outer').click(function() {
+        var type = $(this).data('type'),
+            chart = $(this).data('chart');
+
+        $(`div#chart-${chart} table td.rxs`).hide();
+        $(`div#chart-${chart} table td.rxs.${type}`).show();
+      })
+    </script>
+  </section>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Size Chart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show-section",
+        "label": "Show Section?",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "floating-image",
+        "label": "Floating Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title - Desktop",
+        "default": "Chain Styles"
+      },
+      {
+        "type": "header",
+        "content": "Chart 1"
+      },
+      {
+        "type": "text",
+        "id": "title-1",
+        "label": "Title",
+        "default": "Cable Chains"
+      },
+      {
+        "type": "textarea",
+        "id": "text-1",
+        "label": "Text",
+        "default": "Our cable chains are our most traditional type of chain and are great for a classic, timeless look. These are a great option for gifts if you are unsure about the recipients style preferences."
+      },
+      {
+        "type": "image_picker",
+        "id": "image-1-1",
+        "label": "Image 1"
+      },
+      {
+        "type": "text",
+        "id": "caption-1-1",
+        "label": "Caption 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-1-2",
+        "label": "Image 2"
+      },
+      {
+        "type": "text",
+        "id": "caption-1-2",
+        "label": "Caption 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-1-3",
+        "label": "Image 3"
+      },
+      {
+        "type": "text",
+        "id": "caption-1-3",
+        "label": "Caption 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-1-4",
+        "label": "Image 4"
+      },
+      {
+        "type": "text",
+        "id": "caption-1-4",
+        "label": "Caption 4"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-1-5",
+        "label": "Image 5"
+      },
+      {
+        "type": "text",
+        "id": "caption-1-5",
+        "label": "Caption 5"
+      },
+      {
+        "type": "product",
+        "id": "product-1-1",
+        "label": "Silver Product Link"
+      },
+      {
+        "type": "product",
+        "id": "product-1-2",
+        "label": "Gold Vermeil Product Link"
+      },
+      {
+        "type": "product",
+        "id": "product-1-3",
+        "label": "Solid Gold Product Link"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-1-text-1",
+        "label": "Row 1 Col 1",
+        "default": "14\" | 25 links"
+      },
+      {
+        "type": "product",
+        "id": "chart-1-row-1-text-1-url",
+        "label": "Row 1 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-1-text-3",
+        "label": "Row 1 Col 3",
+        "default": "$30"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-1-text-4",
+        "label": "Row 1 Col 4",
+        "default": "$50"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-1-text-5",
+        "label": "Row 1 Col 5",
+        "default": "$50"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-2-text-1",
+        "label": "Row 2 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-1-row-2-text-1-url",
+        "label": "Row 2 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-2-text-3",
+        "label": "Row 2 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-2-text-4",
+        "label": "Row 2 Col 4",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-3-text-1",
+        "label": "Row 3 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-3-text-3",
+        "label": "Row 3 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-3-text-4",
+        "label": "Row 3 Col 4",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-3-text-5",
+        "label": "Row 3 Col 5",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-4-text-1",
+        "label": "Row 4 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-4-text-3",
+        "label": "Row 4 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-4-text-4",
+        "label": "Row 4 Col 4",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-5-text-1",
+        "label": "Row 5 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-5-text-3",
+        "label": "Row 5 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-5-text-4",
+        "label": "Row 5 Col 4",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-6-text-1",
+        "label": "Row 6 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-1-row-6-text-1-url",
+        "label": "Row 6 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-6-text-2",
+        "label": "Row 6 Col 2",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-6-text-3",
+        "label": "Row 6 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-6-text-4",
+        "label": "Row 6 Col 4",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-7-text-1",
+        "label": "Row 7 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-1-row-7-text-1-url",
+        "label": "Row 7 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-7-text-2",
+        "label": "Row 7 Col 2",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-7-text-3",
+        "label": "Row 7 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-7-text-4",
+        "label": "Row 7 Col 4",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-7-text-5",
+        "label": "Row 7 Col 5",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-8-text-1",
+        "label": "Row 8 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-1-row-8-text-1-url",
+        "label": "Row 8 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-8-text-3",
+        "label": "Row 8 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-8-text-4",
+        "label": "Row 8 Col 4",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-9-text-1",
+        "label": "Row 9 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-1-row-9-text-1-url",
+        "label": "Row 9 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-9-text-3",
+        "label": "Row 9 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-9-text-4",
+        "label": "Row 9 Col 4",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-10-text-1",
+        "label": "Row 10 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-1-row-10-text-1-url",
+        "label": "Row 10 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-10-text-3",
+        "label": "Row 10 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-10-text-4",
+        "label": "Row 10 Col 4",
+        "default": "TEXT"
+      },      {
+        "type": "text",
+        "id": "chart-1-row-11-text-1",
+        "label": "Row 11 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-1-row-11-text-1-url",
+        "label": "Row 11 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-11-text-3",
+        "label": "Row 11 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-11-text-4",
+        "label": "Row 11 Col 4",
+        "default": "TEXT"
+      },
+      {
+        "type": "url",
+        "id": "chart-1-cta",
+        "label": "Chart 1 CTA"
+      },
+      {
+        "type": "header",
+        "content": "Chart 2"
+      },
+      {
+        "type": "text",
+        "id": "title-2",
+        "label": "Title",
+        "default": "Ball Chains"
+      },
+      {
+        "type": "textarea",
+        "id": "text-2",
+        "label": "Text",
+        "default": "Our cable chains are our most traditional type of chain and are great for a classic, timeless look. These are a great option for gifts if you are unsure about the recipients style preferences."
+      },
+      {
+        "type": "image_picker",
+        "id": "image-2-1",
+        "label": "Image 1"
+      },
+      {
+        "type": "text",
+        "id": "caption-2-1",
+        "label": "Caption 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-2-2",
+        "label": "Image 2"
+      },
+      {
+        "type": "text",
+        "id": "caption-2-2",
+        "label": "Caption 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-2-3",
+        "label": "Image 3"
+      },
+      {
+        "type": "text",
+        "id": "caption-2-3",
+        "label": "Caption 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-2-4",
+        "label": "Image 4"
+      },
+      {
+        "type": "text",
+        "id": "caption-2-4",
+        "label": "Caption 4"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-2-5",
+        "label": "Image 5"
+      },
+      {
+        "type": "text",
+        "id": "caption-2-5",
+        "label": "Caption 5"
+      },
+      {
+        "type": "product",
+        "id": "product-2-1",
+        "label": "Silver Product Link"
+      },
+      {
+        "type": "product",
+        "id": "product-2-2",
+        "label": "Gold Vermeil Product Link"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-1-text-1",
+        "label": "Row 1 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-2-row-1-text-1-url",
+        "label": "Row 1 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-1-text-2",
+        "label": "Row 1 Col 2",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-1-text-3",
+        "label": "Row 1 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-1-text-4",
+        "label": "Row 1 Col 4",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-2-text-1",
+        "label": "Row 2 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-2-row-2-text-1-url",
+        "label": "Row 2 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-2-text-2",
+        "label": "Row 2 Col 2",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-2-text-3",
+        "label": "Row 2 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-2-text-4",
+        "label": "Row 2 Col 4",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-3-text-1",
+        "label": "Row 3 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-2-row-3-text-1-url",
+        "label": "Row 3 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-3-text-2",
+        "label": "Row 3 Col 2",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-3-text-3",
+        "label": "Row 3 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-3-text-4",
+        "label": "Row 3 Col 4",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-4-text-1",
+        "label": "Row 4 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-2-row-4-text-1-url",
+        "label": "Row 4 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-4-text-2",
+        "label": "Row 4 Col 2",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-4-text-3",
+        "label": "Row 4 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-4-text-4",
+        "label": "Row 4 Col 4",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-5-text-1",
+        "label": "Row 5 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-2-row-5-text-1-url",
+        "label": "Row 5 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-5-text-2",
+        "label": "Row 5 Col 2",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-5-text-3",
+        "label": "Row 5 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-5-text-4",
+        "label": "Row 5 Col 4",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-6-text-1",
+        "label": "Row 6 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-2-row-6-text-1-url",
+        "label": "Row 6 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-6-text-2",
+        "label": "Row 6 Col 2",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-6-text-3",
+        "label": "Row 6 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-2-row-6-text-4",
+        "label": "Row 6 Col 4",
+        "default": "TEXT"
+      },
+      {
+        "type": "url",
+        "id": "chart-2-cta",
+        "label": "Chart 2 CTA"
+      },
+      {
+        "type": "header",
+        "content": "Chart 3"
+      },
+      {
+        "type": "text",
+        "id": "title-3",
+        "label": "Title",
+        "default": "Rolo Chains"
+      },
+      {
+        "type": "textarea",
+        "id": "text-3",
+        "label": "Text",
+        "default": "Our cable chains are our most traditional type of chain and are great for a classic, timeless look. These are a great option for gifts if you are unsure about the recipients style preferences."
+      },
+      {
+        "type": "image_picker",
+        "id": "image-3-1",
+        "label": "Image 1"
+      },
+      {
+        "type": "text",
+        "id": "caption-3-1",
+        "label": "Caption 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-3-2",
+        "label": "Image 2"
+      },
+      {
+        "type": "text",
+        "id": "caption-3-2",
+        "label": "Caption 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-3-3",
+        "label": "Image 3"
+      },
+      {
+        "type": "text",
+        "id": "caption-3-3",
+        "label": "Caption 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-3-4",
+        "label": "Image 4"
+      },
+      {
+        "type": "text",
+        "id": "caption-3-4",
+        "label": "Caption 4"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-3-5",
+        "label": "Image 5"
+      },
+      {
+        "type": "text",
+        "id": "caption-3-5",
+        "label": "Caption 5"
+      },
+      {
+        "type": "product",
+        "id": "product-3-1",
+        "label": "Silver Product Link"
+      },
+      {
+        "type": "product",
+        "id": "product-3-2",
+        "label": "Gold Vermeil Product Link"
+      },
+      {
+        "type": "text",
+        "id": "chart-3-row-1-text-1",
+        "label": "Row 1 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-3-row-1-text-1-url",
+        "label": "Row 1 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-3-row-1-text-2",
+        "label": "Row 1 Col 2",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-3-row-1-text-3",
+        "label": "Row 1 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-3-row-2-text-1",
+        "label": "Row 2 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-3-row-2-text-1-url",
+        "label": "Row 2 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-3-row-2-text-2",
+        "label": "Row 2 Col 2",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-3-row-2-text-3",
+        "label": "Row 2 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "url",
+        "id": "chart-3-cta",
+        "label": "Chart 3 CTA"
+      },
+      {
+        "type": "header",
+        "content": "Chart 4"
+      },
+      {
+        "type": "text",
+        "id": "title-4",
+        "label": "Title",
+        "default": "Box Chains"
+      },
+      {
+        "type": "textarea",
+        "id": "text-4",
+        "label": "Text",
+        "default": "Our cable chains are our most traditional type of chain and are great for a classic, timeless look. These are a great option for gifts if you are unsure about the recipients style preferences."
+      },
+      {
+        "type": "image_picker",
+        "id": "image-4-1",
+        "label": "Image 1"
+      },
+      {
+        "type": "text",
+        "id": "caption-4-1",
+        "label": "Caption 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-4-2",
+        "label": "Image 2"
+      },
+      {
+        "type": "text",
+        "id": "caption-4-2",
+        "label": "Caption 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-4-3",
+        "label": "Image 3"
+      },
+      {
+        "type": "text",
+        "id": "caption-4-3",
+        "label": "Caption 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-4-4",
+        "label": "Image 4"
+      },
+      {
+        "type": "text",
+        "id": "caption-4-4",
+        "label": "Caption 4"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-4-5",
+        "label": "Image 5"
+      },
+      {
+        "type": "text",
+        "id": "caption-4-5",
+        "label": "Caption 5"
+      },
+      {
+        "type": "product",
+        "id": "product-4-1",
+        "label": "Silver Product Link"
+      },
+      {
+        "type": "product",
+        "id": "product-4-2",
+        "label": "Gold Vermeil Product Link"
+      },
+      {
+        "type": "text",
+        "id": "chart-4-row-1-text-1",
+        "label": "Row 1 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-4-row-1-text-1-url",
+        "label": "Row 1 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-4-row-1-text-2",
+        "label": "Row 1 Col 2",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-4-row-1-text-3",
+        "label": "Row 1 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "url",
+        "id": "chart-4-cta",
+        "label": "Chart 4 CTA"
+      },
+      {
+        "type": "header",
+        "content": "Chart 5"
+      },
+      {
+        "type": "text",
+        "id": "title-5",
+        "label": "Title",
+        "default": "Box Chains"
+      },
+      {
+        "type": "textarea",
+        "id": "text-5",
+        "label": "Text",
+        "default": "Our cable chains are our most traditional type of chain and are great for a classic, timeless look. These are a great option for gifts if you are unsure about the recipients style preferences."
+      },
+      {
+        "type": "image_picker",
+        "id": "image-5-1",
+        "label": "Image 1"
+      },
+      {
+        "type": "text",
+        "id": "caption-5-1",
+        "label": "Caption 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-5-2",
+        "label": "Image 2"
+      },
+      {
+        "type": "text",
+        "id": "caption-5-2",
+        "label": "Caption 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-5-3",
+        "label": "Image 3"
+      },
+      {
+        "type": "text",
+        "id": "caption-5-3",
+        "label": "Caption 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-5-4",
+        "label": "Image 4"
+      },
+      {
+        "type": "text",
+        "id": "caption-5-4",
+        "label": "Caption 4"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-5-5",
+        "label": "Image 5"
+      },
+      {
+        "type": "text",
+        "id": "caption-5-5",
+        "label": "Caption 5"
+      },
+      {
+        "type": "product",
+        "id": "product-5-1",
+        "label": "Silver Product Link"
+      },
+      {
+        "type": "product",
+        "id": "product-5-2",
+        "label": "Gold Vermeil Product Link"
+      },
+      {
+        "type": "product",
+        "id": "product-5-3",
+        "label": "Solid Gold Product Link"
+      },
+      {
+        "type": "product",
+        "id": "product-5-4",
+        "label": "Solid Gold Slim Product Link"
+      },
+      {
+        "type": "text",
+        "id": "chart-5-row-1-text-1",
+        "label": "Row 1 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-5-row-1-text-1-url",
+        "label": "Row 1 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-5-row-1-text-2",
+        "label": "Row 1 Col 2",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-5-row-1-text-3",
+        "label": "Row 1 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-5-row-1-text-4",
+        "label": "Row 1 Col 4",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-5-row-1-text-5",
+        "label": "Row 1 Col 5",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-5-row-2-text-1",
+        "label": "Row 2 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-5-row-2-text-1-url",
+        "label": "Row 2 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-5-row-2-text-2",
+        "label": "Row 2 Col 2",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-5-row-2-text-3",
+        "label": "Row 2 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-5-row-2-text-4",
+        "label": "Row 2 Col 4",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-5-row-2-text-5",
+        "label": "Row 2 Col 5",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-5-row-3-text-1",
+        "label": "Row 3 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-5-row-3-text-1-url",
+        "label": "Row 3 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-5-row-3-text-2",
+        "label": "Row 3 Col 2",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-5-row-3-text-3",
+        "label": "Row 3 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-5-row-3-text-4",
+        "label": "Row 3 Col 4",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-5-row-3-text-5",
+        "label": "Row 3 Col 5",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-55-row-1-text-1",
+        "label": "Row 1 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-55-row-1-text-1-url",
+        "label": "Row 1 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-55-row-1-text-2",
+        "label": "Row 1 Col 2",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-55-row-2-text-1",
+        "label": "Row 2 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-55-row-2-text-1-url",
+        "label": "Row 2 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-55-row-2-text-2",
+        "label": "Row 2 Col 2",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-55-row-3-text-1",
+        "label": "Row 3 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-55-row-3-text-1-url",
+        "label": "Row 3 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-55-row-3-text-2",
+        "label": "Row 3 Col 2",
+        "default": "TEXT"
+      },
+      {
+        "type": "url",
+        "id": "chart-5-cta",
+        "label": "Chart 5 CTA"
+      },
+      {
+        "type": "header",
+        "content": "Chart 6"
+      },
+      {
+        "type": "text",
+        "id": "title-6",
+        "label": "Title",
+        "default": "Box Chains"
+      },
+      {
+        "type": "textarea",
+        "id": "text-6",
+        "label": "Text",
+        "default": "Our cable chains are our most traditional type of chain and are great for a classic, timeless look. These are a great option for gifts if you are unsure about the recipients style preferences."
+      },
+      {
+        "type": "text",
+        "id": "image-6-1",
+        "label": "Video 1"
+      },
+      {
+        "type": "text",
+        "id": "caption-6-1",
+        "label": "Caption 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-6-2",
+        "label": "Image 2"
+      },
+      {
+        "type": "text",
+        "id": "caption-6-2",
+        "label": "Caption 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-6-3",
+        "label": "Image 3"
+      },
+      {
+        "type": "text",
+        "id": "caption-6-3",
+        "label": "Caption 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-6-4",
+        "label": "Image 4"
+      },
+      {
+        "type": "text",
+        "id": "caption-6-4",
+        "label": "Caption 4"
+      },
+      {
+        "type": "product",
+        "id": "product-6-1",
+        "label": "Silver Product Link"
+      },
+      {
+        "type": "product",
+        "id": "product-6-2",
+        "label": "Gold Vermeil Product Link"
+      },
+      {
+        "type": "text",
+        "id": "chart-6-row-1-text-1",
+        "label": "Row 1 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-6-row-1-text-1-url",
+        "label": "Row 1 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-6-row-1-text-2",
+        "label": "Row 1 Col 2",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-6-row-1-text-3",
+        "label": "Row 1 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-6-row-2-text-1",
+        "label": "Row 2 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-6-row-2-text-1-url",
+        "label": "Row 2 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-6-row-2-text-2",
+        "label": "Row 2 Col 2",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-6-row-2-text-3",
+        "label": "Row 2 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "url",
+        "id": "chart-6-cta",
+        "label": "Chart 6 CTA"
+      },
+      {
+        "type": "header",
+        "content": "Chart 7"
+      },
+      {
+        "type": "checkbox",
+        "id": "show-chart-7",
+        "label": "Show Chart 7?",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "title-7",
+        "label": "Title",
+        "default": "Box Chains"
+      },
+      {
+        "type": "textarea",
+        "id": "text-7",
+        "label": "Text",
+        "default": "Our cable chains are our most traditional type of chain and are great for a classic, timeless look. These are a great option for gifts if you are unsure about the recipients style preferences."
+      },
+      {
+        "type": "image_picker",
+        "id": "image-7-1",
+        "label": "Image 1"
+      },
+      {
+        "type": "text",
+        "id": "caption-7-1",
+        "label": "Caption 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-7-2",
+        "label": "Image 2"
+      },
+      {
+        "type": "text",
+        "id": "caption-7-2",
+        "label": "Caption 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-7-3",
+        "label": "Image 3"
+      },
+      {
+        "type": "text",
+        "id": "caption-7-3",
+        "label": "Caption 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-7-4",
+        "label": "Image 4"
+      },
+      {
+        "type": "text",
+        "id": "caption-7-4",
+        "label": "Caption 4"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-7-5",
+        "label": "Image 5"
+      },
+      {
+        "type": "text",
+        "id": "caption-7-5",
+        "label": "Caption 5"
+      },
+      {
+        "type": "product",
+        "id": "product-7-1",
+        "label": "Silver Product Link"
+      },
+      {
+        "type": "product",
+        "id": "product-7-2",
+        "label": "Gold Vermeil Product Link"
+      },
+      {
+        "type": "text",
+        "id": "chart-7-row-1-text-1",
+        "label": "Row 1 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-7-row-1-text-1-url",
+        "label": "Row 1 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-7-row-1-text-2",
+        "label": "Row 1 Col 2",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-7-row-1-text-3",
+        "label": "Row 1 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-7-row-2-text-1",
+        "label": "Row 2 Col 1",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-7-row-2-text-tt",
+        "label": "Row 2 Col 1 Tooltip",
+        "default": "TEXT"
+      },
+      {
+        "type": "product",
+        "id": "chart-7-row-2-text-1-url",
+        "label": "Row 2 Col 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "chart-7-row-2-text-2",
+        "label": "Row 2 Col 2",
+        "default": "TEXT"
+      },
+      {
+        "type": "text",
+        "id": "chart-7-row-2-text-3",
+        "label": "Row 2 Col 3",
+        "default": "TEXT"
+      },
+      {
+        "type": "url",
+        "id": "chart-7-cta",
+        "label": "Chart 7 CTA"
+      }
+    ]
+  }
+{% endschema %}

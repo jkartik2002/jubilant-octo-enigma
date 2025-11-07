@@ -1,0 +1,189 @@
+{% comment %}<div class="packaging_wrapper">
+  <h3>Packaging Options</h3>
+  <div class="cart-attribute__field">
+    <input type="radio" id="package_1" name="attributes[Packaging Options]" value="Full Packaging"{% if cart.attributes["Packaging Options"] == "Full Packaging" %} checked{% endif %}>
+    <div class="packaging_desc_wrapper">
+      <span>Full Packaging</span>
+      <div class="packaging_desc packaging_desc_1">
+        {{ settings.full_package_img | image_url: width: 200 | image_tag }}
+        <p>{{ settings.full_package_msg }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="cart-attribute__field">
+    <input type="radio" id="package_2" name="attributes[Packaging Options]" value="Reduced Packaging"{% if cart.attributes["Packaging Options"] != "Full Packaging" %} checked{% endif %}>
+    <div class="packaging_desc_wrapper">
+      <span>Reduced Packaging</span><br>
+      <div class="packaging_desc packaging_desc_2">
+        {{ settings.reduced_package_img | image_url: width: 200 | image_tag }}
+        <p>{{ settings.reduced_package_msg }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="cart-attribute__field">
+    <input type="checkbox" id="special_ins"{% if cart.attributes["Special Instructions"] %} checked{% endif %}>
+    <div class="packaging_desc_wrapper">
+      <span>Special Instructions</span>
+      <div class="special-instructions-wrapper">
+        <textarea id="special-instructions" name="attributes[Special Instructions]" placeholder="Special Instructions" maxlength="250">{{ cart.attributes["Special Instructions"] }}</textarea>
+        <div class="word-counter special-ins">0/250</div>
+      </div>
+    </div>
+  </div>
+  <div class="cart-attribute__field">
+    <input type="checkbox" id="gift_checkbox"{% if cart.attributes["Postcard"] %} checked{% endif %}>
+    <div class="packaging_desc_wrapper">
+      <span class="gift_desc_title">This is a Gift<img alt="Gift Icon" class="tooltip" width="16" height="16" src="{{ 'gift-icon.svg' | asset_url }}"><i>(+ Choose a postcard)</i></span>
+
+      <div class="gift_wrapper">
+        <div class="card-container">
+          <div class="card-title">Select a Postcard</div>
+          <div class="card-desc">Choice not guaranteed but we'll do our best</div>
+          <div class="wrapper">
+            {% for variant in all_products['gift-note'].variants %}
+              {% capture u %}{% cycle 'odd', 'even' %}{% endcapture %}
+              <div class="column {{ u }}">
+                <label class="image" for="{{ variant.id }}">
+                  {% assign img_url = variant.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+                  <img 
+                    class="gift-image lazyload"
+                    alt="{{ variant.title | escape | strip }}"
+                    data-src="{{ img_url }}"
+                    data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+                    data-aspectratio="{{ variant.image.aspect_ratio }}"
+                    data-sizes="auto"
+                    width="{{ variant.image.width }}"
+                    height="{{ variant.image.height }}"
+                  />
+                  <input id="{{ variant.id }}" class="giftcard" name="attributes[Postcard]" type="radio" value="{{ variant.title }}"{% if cart.attributes["Postcard"] == variant.title %} checked{% endif %}>
+                  <span>{{ variant.title }}</span>
+                </label>
+              </div>
+            {% endfor %}
+          </div>
+          <textarea class="gift-message" id="gift-message" placeholder="Gift Message (Optional)" name="attributes[Gift Message]" maxlength="100">{{ cart.attributes["Gift Message"] }}</textarea>
+          <div class="word-counter">0/100</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    if ($("#package_1").is(":checked")) {
+      $('.packaging_desc_1').css('display', 'flex');
+    }
+
+    if ($("#package_2").is(":checked")) {
+      $('.packaging_desc_2').css('display', 'flex');
+    }
+
+    if ($("#special_ins").is(":checked")) {
+      $(".special-instructions-wrapper").show();
+    }
+
+    if ($("#gift_checkbox").is(":checked")) {
+      $(".gift_wrapper").show();
+    }
+
+    $("#package_1, #package_2").change(function () {
+      if ($("#package_1").is(":checked")) {
+        $('.packaging_desc_1').css('display', 'flex');
+        $('.packaging_desc_2').hide();
+      }
+      else if ($("#package_2").is(":checked")) {
+        $('.packaging_desc_1').hide();
+        $('.packaging_desc_2').css('display', 'flex');
+      }
+    });
+
+    $("#special_ins").change(function () {
+      if (this.checked) {
+        $(".special-instructions-wrapper").show();
+      } else {
+        $(".special-instructions-wrapper").hide();
+      }
+    });
+
+    $("#gift_checkbox").change(function () {
+      if (this.checked) {
+        $(".gift_wrapper").show();
+      } else {
+        $(".gift_wrapper").hide();
+      }
+    });
+
+    // Electric Eye - Mike Weaver
+    // Set Gift Cart Attributes
+    // Always set Packaging Options,
+    // then watch and update any option if the input changes
+    $.ajax({
+      type: 'GET',
+      url: '/cart.js', 
+      dataType: 'json'
+    }).then(function(res) {
+      if(
+        !res.attributes
+        || !res.attributes['Packaging Options']
+      ) {
+        $.post('/cart/update.js', {
+          attributes: {
+            'Packaging Options': 'Reduced Packaging'
+          }
+        })
+      }
+    })
+
+    $('.packaging_wrapper input, .packaging_wrapper textarea').change(function(e) {
+      // if is an attribute
+      var matches = e.target.name.match(/\[(.*?)\]/);
+      if (matches) {
+        var submatch = matches[1];
+        var attributes = {}
+        attributes[submatch] = e.target.value
+
+        $.post('/cart/update.js', {
+          attributes: attributes
+        })
+      }
+
+      // else if it's a checkbox
+      var targetId = e.target.id
+      if ((
+          targetId === 'special_ins'
+          || targetId === 'gift_checkbox'
+        ) && !e.target.checked
+      ) {
+        var attributes = {}
+        if(targetId === 'special_ins') {
+          $('#gift-message').val('')
+          attributes['Special Instructions'] = null
+        }
+
+        if(targetId === 'gift_checkbox') {
+          $('#special-instructions').val('')
+          attributes['Gift Message'] = null
+          attributes['Postcard'] = null
+        }
+
+        $.post('/cart/update.js', {
+          attributes: attributes
+        })
+      }
+    })
+
+    // word counter initial set
+    var specialInstructions = $('#special-instructions');
+    var siLength = specialInstructions && specialInstructions.val().length
+    var wordCounter = $('.word-counter.special-ins');
+    if(
+      specialInstructions 
+      && siLength > 0
+      && wordCounter 
+      && wordCounter.is(':visible')
+    ) {
+      wordCounter.text($.trim(specialInstructions.val().length)+'/100');
+    }
+  })
+</script> {% endcomment %}

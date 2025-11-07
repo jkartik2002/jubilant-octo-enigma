@@ -1,0 +1,302 @@
+{% assign sca_product = product %}{% assign sca_product_id_text = "," | append : sca_product.id | append : "," %}{% assign sca_price = sca_product.price %}{% assign sca_price_min = sca_product.price_min %}{% assign sca_price_max = sca_product.price_max %}{% assign sca_compare_at_price = sca_product.compare_at_price %}{% assign sca_compare_at_price_min = sca_product.compare_at_price_min %}{% assign sca_compare_at_price_max = sca_product.compare_at_price_max %}{% assign sca_product_available = sca_product.available %}{% assign sca_product_variantCount = sca_product.variants.size %}{% assign sca_compare_at_price_varies = sca_product.compare_at_price_varies %}{% assign sca_price_varies = sca_product.price_varies %}{% assign sca_has_only_default_variant = false %}{% capture sca_product_variants_json %}{{sca_product.variants | json }}{% endcapture %} {% capture sca_product_json %}{ {% if sca_all_gift_products_ids == null or sca_all_gift_products_ids contains sca_product_id_text %}{% assign sca_product_available = false %}{% assign sca_product_variantCount = 0 %}{% assign sca_has_only_default_variant = true %}{% assign sca_is_first_variant = true %}{% capture sca_variants_json %} [{% for variant in sca_product.variants %}{% unless variant.metafields.secomapp.freegifts %}{% unless variant.title contains '(Freegifts)' %}{% unless variant.title contains '% Off' %}{% unless variant.metafields.shappify_qb.qb_hide == "1" %}{% unless variant.metafields.shappify_bundle.is_bundle == "true" %}{% unless variant.metafields.brodev_scn.hide == "true" %}{% unless variant.metafields.wholesaler2.wholesale %}{% unless variant.metafields.Wholesaler.level %}{% unless variant.title contains '(Wholesale' %}{% if sca_is_first_variant%} {{ variant | json }}{% assign sca_price = variant.price %} {% assign sca_price_min = variant.price %} {% assign sca_price_max = variant.price %} {% assign sca_compare_at_price = variant.compare_at_price %} {% assign sca_compare_at_price_min = variant.compare_at_price %} {% assign sca_compare_at_price_max = variant.compare_at_price %} {% assign sca_product_available = variant.available %} {% assign sca_product_variantCount = 1 %} {% assign sca_is_first_variant = false%}{% else %},{{variant | json }} {% if sca_price_min >= variant.price %} {% assign sca_price_min = variant.price %} {% assign sca_price = variant.price %}{% endif %} {% if sca_price_max <= variant.price %} {% assign sca_price_max = variant.price %} {% endif %} {% if variant.compare_at_price %} {% if sca_compare_at_price_min==null or sca_compare_at_price_min >= variant.compare_at_price %} {% assign sca_compare_at_price_min = variant.compare_at_price %} {% assign sca_compare_at_price = variant.compare_at_price %} {% endif %} {% if sca_compare_at_price_max==null or sca_compare_at_price_max < variant.compare_at_price %} {% assign sca_compare_at_price_max = variant.compare_at_price %} {% endif %} {% endif %} {% if variant.available == true %} {% assign sca_product_available = true %} {% endif %} {% assign sca_product_variantCount = sca_product_variantCount | plus: 1 %}{% endif %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{%endfor%} ]{% endcapture %}{% if sca_price_min < sca_price_max %}{% assign sca_price_varies = true %}{% else %}{% assign sca_price_varies = false %}{% endif %}{% if sca_compare_at_price_min < sca_compare_at_price_max %}{% assign sca_compare_at_price_varies = true %}{% else %}{% assign sca_compare_at_price_varies = false %}{% endif %}{% if sca_product_variantCount > 1 %}{% assign sca_has_only_default_variant = false %}{% endif %}{% if sca_product_variantCount == sca_product.variants.size %} "variants":{{ sca_product.variants }},{% else %}{%assign sca_product_variants_json = sca_variants_json %} "variants":{{ sca_variants_json }},{% endif %}{% else %} "variants":{{ sca_product_variants_json }},{% endif %} "id": {{sca_product.id}}, "title": {{sca_product.title | json}}, "handle": {{sca_product.handle | json}}, "description": {{sca_product.description | json}}, "published_at": "{{sca_product.published_at | date: "%Y-%m-%dT%H-%M-%S%:z" }}", "created_at": "{{sca_product.created_at | date: "%Y-%m-%dT%H-%M-%S%:z" }}", "vendor": {{sca_product.vendor | json}}, "type": {{sca_product.type | json}}, "tags": {{sca_product.tags | json}}, "price": {{sca_price}}, "price_min": {{sca_price_min}}, "price_max": {{sca_price_max}}, "available": {{sca_product.available}}, "price_varies": {{sca_price_varies}}, "compare_at_price": {{sca_compare_at_price}}, "compare_at_price_min": {{sca_compare_at_price_min}}, "compare_at_price_max": {{sca_compare_at_price_max}}, "compare_at_price_varies": {{sca_compare_at_price_varies}}, "images": {{sca_product.images | json}}, "featured_image": {{sca_product.featured_image | json }}, "options": {{sca_product.options | json}}, "media": {{sca_product.media | json }}, "content": {{sca_product.content | json }}} {% endcapture sca_product_json %}
+
+{% layout none %}
+{% assign bc_settings = shop.metafields.bc-sf-filter.settings %}
+  {% assign active_vendor = true %}
+  {% assign active_description = true %}
+  {% assign active_cart_form = true %}
+  {% assign active_price = true %}{% assign file_extension = 'png' %}
+  {% assign view_full_label = 'product_filter_search_quickview.view_full' | t %}
+  {% if view_full_label contains 'translation missing'  %}
+    {% assign view_full_label = 'View full details' %}
+  {% endif %}
+
+  {% assign quantity_label = 'product_filter_search_quickview.quantity' | t %}
+  {% if quantity_label contains 'translation missing'  %}
+    {% assign quantity_label = 'Quantity' %}
+  {% endif %}
+
+  {% assign add_to_cart_btn_label = 'product_filter_search_quickview.add_to_cart' | t %}
+  {% if add_to_cart_btn_label contains 'translation missing'  %}
+    {% assign add_to_cart_btn_label = 'Add To Cart' %}
+  {% endif %}
+
+  {% assign sold_out_btn_label = 'product_filter_search_quickview.sold_out' | t %}
+  {% if sold_out_btn_label contains 'translation missing'  %}
+    {% assign sold_out_btn_label = 'Sold Out' %}
+  {% endif %}
+
+
+  {% comment %} Translation {% endcomment %}
+  {% assign view_full_label = 'View Full Details' %}
+  {% if bc_settings contains 'qvViewFullDetails' %}
+  {% assign view_full_label = bc_settings | split: 'qvViewFullDetails":' | last | split: ',' | first | replace: '"', '' | replace: '}', '' | strip | escape %}
+  {% endif %}
+  {% assign quantity_label = 'Quantity' %}
+  {% if bc_settings contains 'qvQuantity' %}
+  {% assign quantity_label = bc_settings | split: 'qvQuantity":' | last | split: ',' | first | replace: '"', '' | replace: '}', '' | strip | escape %}
+  {% endif %}
+  {% assign add_to_cart_btn_label = 'Add To Cart' %}
+  {% if bc_settings contains 'qvAddToCartBtnLabel' %}
+  {% assign add_to_cart_btn_label = bc_settings | split: 'qvAddToCartBtnLabel":' | last | split: ',' | first | replace: '"', '' | replace: '}', '' | strip | escape %}
+  {% endif %}
+  {% assign sold_out_btn_label = 'Sold Out' %}
+  {% if bc_settings contains 'qvSoldOutLabel' %}
+  {% assign sold_out_btn_label = bc_settings | split: 'qvSoldOutLabel":' | last | split: ',' | first | replace: '"', '' | replace: '}', '' | strip | escape %}
+  {% endif %}
+
+  {% comment %} QV Settings {% endcomment %}
+  {% assign active_vendor = true %}
+  {% assign active_description = true %}
+
+  {% assign bc_al_qv_cart_form_enable = 'true' %}
+  {% if bc_settings contains 'qvCartFormEnable' and bc_al_is_advanced_version %}
+    {% assign bc_al_qv_cart_form_enable = bc_settings | split: 'qvCartFormEnable:' | last | split: ',' | first | replace: '"', '' | replace: '}', '' | strip %}
+  {% endif %}
+
+  {% assign bc_al_qv_notify_form_enable = 'false' %}
+  {% if bc_settings contains 'qvNotifyMeFormEnable' and bc_al_is_advanced_version %}
+    {% assign bc_al_qv_notify_form_enable = bc_settings | split: 'qvNotifyMeFormEnable:' | last | split: ',' | first | replace: '"', '' | replace: '}', '' | strip %}
+  {% endif %}
+  {% comment %} Translation {% endcomment %}
+  {% assign view_full_label = 'View Full Details' %}
+  {% if bc_settings contains 'qvViewFullDetails' %}
+  {% assign view_full_label = bc_settings | split: 'qvViewFullDetails":' | last | split: ',' | first | replace: '"', '' | replace: '}', '' | strip | escape %}
+  {% endif %}
+  {% assign quantity_label = 'Quantity' %}
+  {% if bc_settings contains 'qvQuantity' %}
+  {% assign quantity_label = bc_settings | split: 'qvQuantity":' | last | split: ',' | first | replace: '"', '' | replace: '}', '' | strip | escape %}
+  {% endif %}
+  {% assign add_to_cart_btn_label = 'Add To Cart' %}
+  {% if bc_settings contains 'qvAddToCartBtnLabel' %}
+  {% assign add_to_cart_btn_label = bc_settings | split: 'qvAddToCartBtnLabel":' | last | split: ',' | first | replace: '"', '' | replace: '}', '' | strip | escape %}
+  {% endif %}
+  {% assign sold_out_btn_label = 'Sold Out' %}
+  {% if bc_settings contains 'qvSoldOutLabel' %}
+  {% assign sold_out_btn_label = bc_settings | split: 'qvSoldOutLabel":' | last | split: ',' | first | replace: '"', '' | replace: '}', '' | strip | escape %}
+  {% endif %}
+
+  {% comment %} QV Settings {% endcomment %}
+  {% assign active_vendor = true %}
+  {% assign active_description = true %}
+
+  {% assign bc_al_qv_cart_form_enable = 'true' %}
+  {% if bc_settings contains 'qvCartFormEnable' and bc_al_is_advanced_version %}
+    {% assign bc_al_qv_cart_form_enable = bc_settings | split: 'qvCartFormEnable:' | last | split: ',' | first | replace: '"', '' | replace: '}', '' | strip %}
+  {% endif %}
+
+  {% assign bc_al_qv_notify_form_enable = 'false' %}
+  {% if bc_settings contains 'qvNotifyMeFormEnable' and bc_al_is_advanced_version %}
+    {% assign bc_al_qv_notify_form_enable = bc_settings | split: 'qvNotifyMeFormEnable:' | last | split: ',' | first | replace: '"', '' | replace: '}', '' | strip %}
+  {% endif %}
+
+  {% assign bc_al_qv_social_block_enable = 'false' %}
+  {% if bc_settings contains 'qvSocilaBlockEnable' and bc_al_is_advanced_version %}
+    {% assign bc_al_qv_social_block_enable = bc_settings | split: 'qvSocilaBlockEnable:' | last | split: ',' | first | replace: '"', '' | replace: '}', '' | strip %}
+  {% endif %}
+
+  {% assign bc_al_qv_social_block_enable = 'false' %}
+  {% if bc_settings contains 'qvSocilaBlockEnable' and bc_al_is_advanced_version %}
+    {% assign bc_al_qv_social_block_enable = bc_settings | split: 'qvSocilaBlockEnable:' | last | split: ',' | first | replace: '"', '' | replace: '}', '' | strip %}
+  {% endif %}
+
+{% assign image_size = 'original' %}
+{% assign image_thumb_size = 'original' %}
+{% assign image_scale = 3 %}
+{% assign truncate_words = 30 %}
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+
+<div class="boost-pfs-quickview-wrapper">
+  <button title="Close" class="boost-pfs-quickview-close boost-pfs-filter-button">×</button>
+  <div class="boost-pfs-quickview-content">
+    <div class="boost-pfs-quickview-left boost-pfs-quickview-product-thumbs">
+
+      {% if product.images.size > 0 %}
+      <div class="boost-pfs-quickview-slider">
+          <div class="boost-pfs-quickview-slider-inner">
+            <div class="boost-pfs-quickview-featured-image-wrapper">
+        {% for image in product.images %}<div class="boost-pfs-quickview-featured-image">
+          <img src="{{ image.src | img_url: image_size }}" alt="{{ image.alt | escape }}" />
+                </div>
+        {% endfor %}</div>
+      </div>
+      {% if sca_compare_at_price > sca_price %}
+        <div class="boost-pfs-quickview-sale-lable">Sale</div>
+        {% endif %}<div class="boost-pfs-quickview-slider-nav">
+            <div class="boost-pfs-quickview-slider-prev"></div>
+            <div class="boost-pfs-quickview-slider-next"></div>
+          </div>
+          <div class="boost-pfs-quickview-slider-dots">
+            {% for image in product.images %}
+              <div class="boost-pfs-quickview-slider-dot" data-image="{{ image.src | product_img_url }}" data-index="{{forloop.index0}}"></div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+    </div>
+
+    <div class="boost-pfs-quickview-right product-details" tabindex="-1">
+      <div class="boost-pfs-quickview-right-inner">
+        <h2 class="boost-pfs-quickview-title" tabindex="-1">{{ product.title }}</h2>
+
+        {% if active_vendor %}
+        <p class="boost-pfs-quickview-vendor">{{ product.vendor }}</p>
+        {% endif %}
+
+        {% if active_description %}
+        <div class="boost-pfs-quickview-description">
+          {{ product.description | strip_html | truncatewords: truncate_words }}
+        </div>
+        {% endif %}
+
+
+
+        {% if active_price %}
+        <div class="boost-pfs-quickview-price-wrapper {% unless current_variant.available %} boost-pfs-quickview-price-sold-out{% endunless %} {% if current_variant.compare_at_price > current_variant.price %} boost-pfs-quickview-price-on-sale{% endif %}">
+            <p class="boost-pfs-quickview-price">
+              {% if current_variant.compare_at_price > current_variant.price %}
+                <span id="boost-pfs-quickview-current-price" class="boost-pfs-quickview-price">
+                  {{ current_variant.price | money }}
+                </span>
+                <span id="boost-pfs-quickview-was-price" class="boost-pfs-quickview-price boost-pfs-quickview-was-price">
+                  {{ current_variant.compare_at_price | money }}
+                </span>
+              {% else %}
+                <span id="boost-pfs-quickview-current-price" class="boost-pfs-quickview-price">
+                  {{ current_variant.price | money }}
+                </span>
+                <span id="boost-pfs-quickview-was-price" class="boost-pfs-quickview-price boost-pfs-quickview-was-price"></span>
+              {% endif %}
+            </p>
+        </div>
+        {% endif %}
+
+        {% if active_cart_form %}
+        <form id="boost-pfs-quickview-cart-form" action="/cart/add" method="post" enctype="multipart/form-data" class="boost-pfs-quickview-cart-form product-form">
+          <div id="boost-pfs-quickview-variants-data" style="display:none">
+            [
+            {% for variant in product.variants %}
+{% unless variant.metafields.secomapp.freegifts %}
+{% unless variant.title contains '% off)' %}
+
+              {
+                "id": {{ variant.id | json }},
+                "option1": {{ variant.option1 | json }},
+                "option2": {{ variant.option2 | json }},
+                "option3": {{ variant.option3 | json }},
+                "available": {{ variant.available | json }}
+              }{%- if forloop.last != true -%},{%- endif -%}
+
+{% endunless %}
+{% endunless %}
+            {% endfor %}
+            ]
+          </div>
+
+          <select style="display:none" name="id" id="boost-pfs-quickview-variants-selector" class="boost-pfs-quickview-variants-selector">
+            {% for variant in product.variants %}
+{% unless variant.metafields.secomapp.freegifts %}
+{% unless variant.title contains '% off)' %}
+
+              {% if variant.image != blank %}
+                {% assign variant_image = variant.image %}
+              {% else %}
+                {% assign variant_image = featured_image %}
+              {% endif %}
+              <option value="{{ variant.id }}"
+                  data-magnify-src="{{ variant_image | img_url: image_size, scale: image_scale }}"
+                  data-featured-image="{{ variant_image | img_url: image_size }}"
+                  data-variant-id="{{ variant.id }}" data-options="{{ variant.title }}"
+                  data-current-price-without-currency="{{ variant.price | money_without_currency }}"
+                  data-current-price="{{ variant.price | money | strip_html }}"
+                  data-was-price-without-currency="{{ variant.compare_at_price | money_without_currency }}"
+                  data-was-price="{% if variant.compare_at_price > 0 %} {{ variant.compare_at_price | money | strip_html }} {% endif %}"
+                  {% if variant.available %} data-available="true" {% else %} data-available="false" disabled="disabled" {% endif %}
+                  {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %}>
+              </option>
+
+{% endunless %}
+{% endunless %}
+            {% endfor %}
+          </select>
+
+          {% assign variantCount = sca_product_variantCount %}
+          {% if variantCount > 0 and product.variants[0].title != 'Default Title'  %}
+            {%- for option in product.options_with_values -%}
+                {% assign is_color = false %}
+                {% assign option_name = option.name | downcase %}
+                {% assign file_extension = 'png' %}
+                {% assign option_id = 'option' | append: forloop.index %}
+                {% if option_name contains 'color' or option_name contains 'colour' %}
+                  {% assign is_color = true %}
+                {% endif %}
+              <div class="boost-pfs-quickview-selector-wrapper {% if index == option_size %}last{% endif %}" id="ProductSelect-option-{{ forloop.index0 }}" name="{{ option.name | handleize }}">
+                <div class="boost-pfs-quickview-product-option-header">
+                  {{ option.name | escape }}
+                </div>
+                {%- for value in option.values -%}
+                  <!-- Check to see if there's a product size option. If there is a size, check to see if there's any availble for purchase. If not, set the variat control in a "disabled" state. -->
+                  {%- assign variant_label_state = true -%}
+
+                  {%- if product.options.size == 1 -%}
+                    {%- unless product.variants[forloop.index0].available -%}
+                      {%- assign variant_label_state = false -%}
+                    {%- endunless -%}
+                  {%- endif -%}
+                  <div data-value="{{ value | escape }}" class="boost-pfs-swatch-element {% if is_color %} boost-pfs-quickview-option-color {% endif %} {{ value | handle }} {% if variant.available %}available{% else %}boost-pfs-soldout{% endif %}">
+                    {% if is_color %}
+                    <div class="boost-pfs-quickview-tooltip">{{ value }}</div>
+                    {% endif %}
+                    <input type="radio"
+                      {% if option.selected_value == value %} checked="checked"{% endif %}
+                      {% unless variant_label_state %} disabled="disabled"{% endunless %}
+                      value="{{ value | escape }}"
+                      data-name="{{ option.name | handleize }}"
+                      name="{{ option_id }}"
+                      id="ProductSelect-option-{{ option.name | handleize }}-{{ value | escape }}"
+                      class="boost-pfs-quickview-select-option">
+                    {% if is_color %}
+                    <label tabindex="0" for="ProductSelect-option-{{ option.name | handleize }}-{{ value | escape }}" style="background-color: {{ value | split: ' ' | last | handle }}; background-image: url({{ value| prepend: 'color-' | handle | append: '.' | append: file_extension | file_url }})">
+                    </label>
+                    {%- else -%}
+                    <label tabindex="0" for="ProductSelect-option-{{ option.name | handleize }}-{{ value | escape }}">
+                      {{ value | escape }}
+                    </label>
+                    {%- endif -%}
+                  </div>
+                {%- endfor -%}
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
+
+          <div class="boost-pfs-quickview-qty-cartbtn-wrapper">
+            <label for="boost-pfs-quickview-cart-quantity">{{ quantity_label }}</label>
+            <div class="boost-pfs-quickview-qty-cartbtn">
+              <div class="boost-pfs-quickview-quantity">
+                <input type="number" id="boost-pfs-quickview-cart-quantity" name="quantity" value="1" min="1" class="boost-pfs-quickview-cart-quantity" pattern="[0-9]*" required>
+              </div>
+              <div class="boost-pfs-quickview-cart">
+                <button type="submit" name="add" id="boost-pfs-quickview-cart-btn" {% unless current_variant.available %}disabled="disabled"{% endunless %} class="boost-pfs-quickview-cart-btn{% if product.options.size == 1 and product.variants[0].title == 'Default Title' %} product-form__cart-submit--small{% endif %}">
+                  <span id="boost-pfs-quickview-cart-btn-text">
+                    {% unless current_variant.available %}
+                      {{ sold_out_btn_label }}
+                    {% else %}
+                      {{ add_to_cart_btn_label }}
+                    {% endunless %}
+                  </span>
+                </button>
+                <div id="boost-pfs-addtocart-error-label"></div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+
+        {% endif %}
+        <div class="boost-pfs-quickview-view-full-wrapper"><a href="{{ product.url | within_collection }}" class="boost-pfs-quickview-view-full">{{ view_full_label }}</a></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,687 @@
+<section class="passport">
+  <h3 class="title">{{ section.settings.title }}</h3>
+  <h2 class="title">{{ section.settings.subtitle }}</h3>
+
+  <div id="carousel-wrapper" class="carousel-wrapper" style="background: url({{ section.blocks[0].settings.bg-image | img_url: '1700x' }});">
+    <select id="region" class="area-picker noreplace">
+      {% for block in section.blocks %}
+        {% assign passportCollection = collections[block.settings.collection] %}
+        <option value="{{ passportCollection.handle }}" data-handle="{{ passportCollection.handle }}" data-title="{{ passportCollection.title }}" data-url="{{ passportCollection.url }}" data-image="{{ block.settings.bg-image | img_url: '1700x' }}" data-image-2="{{ block.settings.bg-image-2 | img_url: '1000x' }}" data-image-2-xs="{{ block.settings.bg-image-xs | img_url: '1000x' }}">{{ passportCollection.title }}</option>
+      {% endfor %}
+    </select>
+
+    <div class="bg-box"></div>
+    <div class="carousel-inner-wrapper" style="background: url({{ section.blocks[0].settings.bg-image-2 | img_url: '1000x' }});">
+      <div class="carousel-header">
+        <div id="passport-title" class="title">{{ collections[section.blocks[0].settings.collection].title }}</div>
+        <a id="passport-url" href="{{ collections[section.blocks[0].settings.collection].url }}" class="shop-all">
+          SHOP ALL
+          <img alt="Right Arrow" class="arrow" src="{{ 'arrow-right.svg' | asset_url }}">
+        </a>
+      </div>
+      {% for block in section.blocks %}
+        {% assign passportCollection = collections[block.settings.collection] %}
+        <div id="carousel-{{ passportCollection.handle }}" class="carousel carousel-region carousel-region-desktop {{ passportCollection.handle }} carousel-{{ forloop.index }}">
+          <div class="carousel-cell">
+            <div class="cell-body">
+              <div class="wrapper">
+                {% for product in passportCollection.products limit: 8 %}
+                  <div class="column">
+                    {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          {% if passportCollection.products.size > 8 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 8 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 16 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 8 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 24 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 8 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% comment %} {% if passportCollection.products.size > 32 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 8 offset: continue %}
+                      <div class="column">
+                        {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                      </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 40 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 8 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 48 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 8 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 56 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 8 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 64 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 8 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 72 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 8 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 80 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 8 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 88 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 8 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 96 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 8 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %} {% endcomment %}
+        </div>
+
+        <div id="carousel-{{ passportCollection.handle }}-xs" class="carousel carousel-region carousel-region-mobile {{ passportCollection.handle }}-xs carousel-{{ forloop.index }}-xs">
+          <div class="carousel-cell">
+            <div class="cell-body">
+              <div class="wrapper">
+                {% for product in passportCollection.products limit: 4 %}
+                  <div class="column">
+                    {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          {% if passportCollection.products.size > 4 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 8 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 12 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% comment %} {% if passportCollection.products.size > 16 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 20 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 24 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 28 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 32 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 36 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 40 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 44 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 48 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 52 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 56 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 60 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 64 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 68 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 72 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 76 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 80 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 84 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 88 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 92 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if passportCollection.products.size > 96 %}
+            <div class="carousel-cell">
+              <div class="cell-body">
+                <div class="wrapper">
+                  {% for product in passportCollection.products limit: 4 offset: continue %}
+                    <div class="column">
+                      {% render 'product-block', product: product, product_class: '', i: forloop.index, show_vendor: false, passport: true, category: passportCollection.title %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %} {% endcomment %}
+        </div>
+        <script>
+          var options = {
+                cellAlign: 'left',
+                contain: true,
+                pageDots: false,
+                imagesLoaded: true,
+                resize: true,
+                adaptiveHeight: true
+              };
+
+          var productCarousel{{ passportCollection.handle | remove: '-' }} = $('.carousel.{{ passportCollection.handle }}').flickity(options);
+          var productCarousel{{ passportCollection.handle | remove: '-' }}XS = $('.carousel.{{ passportCollection.handle }}-xs').flickity(options);
+
+          $(document).ready(() => {
+            $('#region').on('change',function() {
+              var value = $(this).val(),
+                  title = $(this).find(':selected').data('title'),
+                  handle = $(this).find(':selected').data('handle'),
+                  url = $(this).find(':selected').data('url'),
+                  image = $(this).find(':selected').data('image'),
+                  image2 = $(this).find(':selected').data('image-2'),
+                  image2xs = $(this).find(':selected').data('image-2-xs');
+
+              $('#passport-title').text(title);
+              $('#passport-url').attr('href', url);
+              $('#carousel-wrapper').css('background',`url(${image})`);
+              if($(window).width() > 1099) {
+                $('.carousel-inner-wrapper').css('background',`url(${image2})`);
+              } else {
+                $('.carousel-inner-wrapper').css('background',`url(${image2xs})`);
+              }
+              $('div.carousel-region').hide();
+
+              let index = 0;
+
+              if($(window).width() < 1100) {
+                $(`#carousel-${handle}-xs`).show();
+                productCarousel{{ passportCollection.handle | remove: '-' }}XS.flickity('resize');
+                index = $(`#carousel-${handle}-xs div.carousel-cell.is-selected`).index() + 1;
+
+                var total = $(`#carousel-${handle}-xs div.carousel-cell`).length;
+                var percent = (index / total) * 100;
+                $('div.progress-bar').css('width',`${percent}%`);
+              } else {
+                $(`#carousel-${handle}`).show();
+                productCarousel{{ passportCollection.handle | remove: '-' }}.flickity('resize');
+                index = $(`#carousel-${handle} div.carousel-cell.is-selected`).index() + 1;
+
+                var carouselSize = $(`div.carousel-region.${handle} div.carousel-cell`).length;
+                $('#total-pages').text(carouselSize);
+              }
+
+              $('#passport-current-page').text(index);
+            })
+
+            productCarousel{{ passportCollection.handle | remove: '-' }}.on('change.flickity', function(event, index) {
+              $('#passport-current-page').text(index + 1);
+            });
+
+            productCarousel{{ passportCollection.handle | remove: '-' }}XS.on('change.flickity', function(event, index) {
+              $('#passport-current-page').text(index + 1);
+            });
+
+            var progressBar = document.querySelector('.progress-bar')
+
+            productCarousel{{ passportCollection.handle | remove: '-' }}XS.on('change.flickity', function() {
+              var index = $(`#carousel-{{ passportCollection.handle }}-xs div.carousel-cell.is-selected`).index() + 1,
+                  total = $(`#carousel-{{ passportCollection.handle }}-xs div.carousel-cell`).length,
+                  progress = index / total;
+              progressBar.style.width = progress * 100 + '%';
+            });
+          })
+        </script>
+      {% endfor %}
+    </div>
+
+    <div class="progress-wrapper d-block d-lg-none">
+      <div class="progress-bar"></div>
+    </div>
+
+    <div class="carousel-pagination d-none d-lg-block">
+      <span id="passport-current-page" class="num current-page">1</span>
+      <span class="num divider">/</span>
+      <span id="total-pages" class="num total-pages d-none d-lg-inline-block">0</span>
+    </div>
+    <script>
+      $(document).ready(() => {
+        var size = $('div.carousel-1 div.carousel-cell').length,
+            indexXS = $('div.carousel-1-xs div.carousel-cell.is-selected').index() + 1,
+            totalXS = $('div.carousel-1-xs div.carousel-cell').length,
+            percent = (indexXS / totalXS) * 100;
+
+        $('#total-pages').text(size);
+        $('div.progress-bar').css('width',`${percent}%`);
+
+        if($(window).width() < 1100) {
+          var firstHeight = $('div.carousel-inner-wrapper').height(),
+            boxHeight = firstHeight - 24;
+
+          $('div.bg-box').css('height',`${boxHeight}px`);
+        }
+      })
+    </script>
+    <style>
+      @media (max-width: 1099px) {
+        .carousel-inner-wrapper {
+          background: url("{{ section.blocks[0].settings.bg-image-2-xs | img_url: '1000x' }}") !important;
+        }
+      }
+    </style>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Passport",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "FILL YOUR PASSPORT"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subtitle",
+        "default": "Collect the pieces from your favorite destinations around the globe"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+            "type": "collection",
+            "id": "collection",
+            "label": "Collection"
+          },
+          {
+            "type": "image_picker",
+            "id": "bg-image",
+            "label": "Main Background Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "bg-image-2",
+            "label": "Passport Booklet Background Image - Desktop",
+            "info": "Recommended 1000px x 690px"
+          },
+          {
+            "type": "image_picker",
+            "id": "bg-image-2-xs",
+            "label": "Passport Booklet Background Image - Mobile",
+            "info": "Recommended 700px x 790px"
+          }
+        ]
+      }
+    ],
+    "presets": [
+	    {
+        "name": "Passport",
+        "category": "Custom",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}

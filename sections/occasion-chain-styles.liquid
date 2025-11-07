@@ -1,0 +1,1008 @@
+<style>
+  @media(min-width:992px) {
+    section.bracelet-guide--styles.chain-guide--styles div.inner-wrapper div.wrapper {display: flex;flex-flow: row wrap;}
+    section.bracelet-guide--styles.chain-guide--styles div.inner-wrapper div.col {
+        width: calc(100% / 4);
+      margin-top: 15px;
+    margin-bottom: 15px;
+    }
+    section.bracelet-guide--styles.chain-guide--styles div.inner-wrapper div.col a img {
+        width: 70% !important;
+    }
+  }
+  section.bracelet-guide--size-chart.chain-guide--size-chart div.guide-wrapper table span.variant-wrapper span.swatch-outer div.swatch-inner {
+   display: inline-block !important;
+}
+  section.bracelet-guide--styles.chain-guide--styles div.inner-wrapper div.wrapper {
+    overflow: inherit;
+}
+  section.bracelet-guide--size-chart.chain-guide--size-chart div.chart-wrapper {
+    display:block;
+    height:0px;
+    overflow:hidden;
+  }
+  section.bracelet-guide--size-chart.chain-guide--size-chart div.chart-wrapper.chart-wrapperShow {
+    
+    height:auto;
+    overflow:inherit;
+  }
+  
+ .chart-wrapper table td.first img{ display:none}
+  .chart-wrapper table td.first #cable_2, .chart-wrapper table td.first #cable_3, .chart-wrapper table td.first #cable_7, .chart-wrapper table td.first #cable_9, .chart-wrapper table td.first #cable_11, .chart-wrapper table td.first #ball_2, .chart-wrapper table td.first #ball_4, .chart-wrapper table td.first #ball_5, .chart-wrapper table td.first #box_1, .chart-wrapper table td.first #paperclip_2 {
+	display: inline-block;
+}
+ div.guide-wrapper table td:last-child:empty {
+    padding-right: 0px !important;
+}
+  @media(max-width:1099px) {
+    section.bracelet-guide--styles.chain-guide--styles div.inner-wrapper div.wrapper {
+     overflow: hidden;
+   }
+    section.bracelet-guide--size-chart.chain-guide--size-chart div.guide-wrapper table span.variant-wrapper span.pipe {
+    margin-left: 4px;
+    margin-right: 1px;
+    }
+    section.bracelet-guide--size-chart.chain-guide--size-chart div.guide-wrapper table thead td.rxs, section.bracelet-guide--size-chart.chain-guide--size-chart div.guide-wrapper table thead td.rxs-inf, section.bracelet-guide--size-chart.chain-guide--size-chart div.guide-wrapper table thead td {
+        font-size: 16px;
+    }
+    section.bracelet-guide--size-chart.chain-guide--size-chart div.guide-wrapper table td {
+      font-size: 14px;
+    }
+    /*#chart-ball table span.variant-wrapper span.swatch-outer[data-type="solid-gold"],
+    #chart-rolo table span.variant-wrapper span.swatch-outer[data-type="solid-gold"],
+    #chart-box table span.variant-wrapper span.swatch-outer[data-type="solid-gold"],
+    #chart-paperclip table span.variant-wrapper span.swatch-outer[data-type="solid-gold"],
+    #chart-herringbone table span.variant-wrapper span.swatch-outer[data-type="solid-gold"]
+    {
+        display: none !important;
+    }*/
+    #chart-ball table span.variant-wrapper span.swatch-outer[data-type="solid-gold"],
+     #chart-rolo table span.variant-wrapper span.swatch-outer[data-type="solid-gold"],
+    #chart-box table span.variant-wrapper span.swatch-outer[data-type="solid-gold"],
+    #chart-paperclip table span.variant-wrapper span.swatch-outer[data-type="solid-gold"],
+    #chart-herringbone table span.variant-wrapper span.swatch-outer[data-type="solid-gold"],
+    #chart-the_daily table span.variant-wrapper span.swatch-outer[data-type="solid-gold"]{
+      display: none !important;
+    }
+  }
+</style>
+{% if section.settings.occasion_section %}
+  <section class="bracelet-guide bracelet-guide--styles chain-guide--styles">
+    <div class="inner-wrapper">
+      {% if section.settings.occasion_title != blank %}
+        <h2 class="title"><p>{{ section.settings.occasion_title }}</p></h2>
+      {% endif %}
+      {% if section.settings.occasion_desc != blank %}
+        <div class="desc top">{{ section.settings.occasion_desc }}</div>
+      {% endif %}
+      <div class="wrapper">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'iccasion_item' -%}
+            {% if block.settings.title %}
+              <div class="col">
+                <a href="/collections/{{ block.settings.collection }}">
+                  <img alt="" class="hover-bg lazyload" data-src="{{ 'hover-effect.png' | asset_img_url: '500x' }}">
+                  {% assign img_url = block.settings['image'] | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+                  <img
+                    class="d-none d-lg-block lazyload"
+                    alt="{{ block.settings.title | escape | strip }}"
+                    data-src="{{ img_url }}"
+                    data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+                    data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                    data-sizes="auto"
+                    style="display: block; width: 100%; height: auto;"
+                    width="{{ block.settings.image.width }}"
+                    height="{{ block.settings.image.height }}"
+                    data-cc-animate="cc-fade-in-up"
+                    data-cc-animate-delay="0.1s"
+                  >
+                  <div class="title">{{ block.settings.title }}</div>
+                </a>
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+{% if section.settings.occasion_section %}
+  <section class="bracelet-guide bracelet-guide--size-chart chain-guide--size-chart">
+    <div class="guide-wrapper">
+      {% if section.settings.chain_title != blank %}
+        <h2 class="title">{{ section.settings.chain_title }}</h2>
+      {% endif %}
+      {% if section.settings.chain_desc != blank %}
+        <div class="desc top">{{ section.settings.chain_desc }}</div>
+      {% endif %}
+      <div class="text-center">
+        <div class="chart-nav d-none d-lg-inline-block">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'tab_item' -%}
+              {% if block.settings.title %}
+                <span class="option">{{ block.settings.title }}</span>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <select id="chart-picker" class="chart-picker noreplace d-block d-lg-none">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'tab_item' -%}
+            {% if block.settings.title %}
+              <option value="{{ block.settings.title | downcase }}">{{ block.settings.title }}</option>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </select>
+<div class="chart-wrapperGroup">  
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'chain_styles_item' -%}
+         <div id="chart-{{ block.settings.tabid  | downcase | replace: ' ', '_' }}" class="chart-wrapper">
+          
+          <div class="wrapper">
+          <div class="col table-left">
+            <div class="d-block d-lg-none">
+              <h3 class="subtitle">{{ block.settings.title }}</h3>
+              <div class="desc">{{ block.settings.text-1 }}</div>
+            </div>
+            <div class="carousel carousel-{{ block.settings.tabid  | downcase | replace: ' ', '_' }}">
+          {% if block.settings.image-1-1 != blank or block.settings.video1 !=blank %}
+              <div class="carousel-cell">
+             {% if block.settings.image-1-1 != blank %}
+              <img alt="{{block.settings.caption-1-1}}" class="w-100 lazyload" src="{{ block.settings.image-1-1 | img_url: '120x' }}" data-src="{{ block.settings.image-1-1 | img_url: '1200x' }}">
+             {% endif %}
+                {% if block.settings.video1 !=blank %} 
+                <video class="video" playsinline="" autoplay="" muted="" loop="">
+                        <source src="{{ block.settings.video1 }}">
+                      </video>  
+                {% endif %} 
+          <div class="caption">{{ block.settings.caption-1-1 }}</div>
+                
+              </div>
+      {% endif %}
+          {% if block.settings.image-1-2 != blank or block.settings.video2 !=blank %}
+              <div class="carousel-cell">
+             {% if block.settings.image-1-2 != blank %}
+                <img alt="{{block.settings.caption-1-2}}" class="w-100 lazyload" data-src="{{ block.settings.image-1-2 | img_url: '1200x' }}">
+             {% endif %}  
+                {% if block.settings.video2 !=blank %} 
+                <video class="video" playsinline="" autoplay="" muted="" loop="">
+                        <source src="{{ block.settings.video2 }}">
+                      </video>  
+                {% endif %}
+                <div class="caption">{{ block.settings.caption-1-2 }}</div>
+              </div>
+            {% endif %}
+              {% if block.settings.image-1-3 != blank or block.settings.video3 !=blank %}
+                <div class="carousel-cell">
+                 {% if block.settings.image-1-3 != blank %}
+                    <img alt="{{block.settings.caption-1-3}}" class="w-100 lazyload" data-src="{{ block.settings.image-1-3 | img_url: '1200x' }}">
+                 {% endif %}  
+                {% if block.settings.video3 !=blank %} 
+                <video class="video" playsinline="" autoplay="" muted="" loop="">
+                        <source src="{{ block.settings.video3 }}">
+                      </video>  
+                {% endif %}
+                <div class="caption">{{ block.settings.caption-1-3 }}</div>
+                </div>
+              {% endif %}
+              {% if block.settings.image-1-4 != blank or block.settings.video4 !=blank %}
+                <div class="carousel-cell">
+                {% if block.settings.image-1-4 != blank %}
+                  <img alt="{{block.settings.caption-1-4}}" class="w-100 lazyload" data-src="{{ block.settings.image-1-4 | img_url: '1200x' }}">
+                 {% endif %} 
+                {% if block.settings.video4 !=blank %} 
+                <video class="video" playsinline="" autoplay="" muted="" loop="">
+                        <source src="{{ block.settings.video4 }}">
+                      </video>  
+                {% endif %} 
+                <div class="caption">{{ block.settings.caption-1-4 }}</div>
+                </div>
+              {% endif %}
+              {% if block.settings.image-1-5 != blank and block.settings.video5 !=blank %}
+                <div class="carousel-cell">
+                {% if block.settings.image-1-5 != blank %}
+                  <img alt="{{block.settings.caption-1-5}}" class="w-100 lazyload" data-src="{{ block.settings.image-1-5 | img_url: '1200x' }}">
+                {% endif %}
+                {% if block.settings.video5 !=blank %} 
+                  <video class="video" playsinline="" autoplay="" muted="" loop="">
+                    <source src="{{ block.settings.video5 }}">
+                   </video>  
+                {% endif %}
+                <div class="caption">{{ block.settings.caption-1-5 }}</div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col table-right">
+            <div class="d-none d-lg-block">
+              <h3 class="subtitle">{{ block.settings.title }}</h3>
+              <div class="desc">{{ block.settings.text-1 }}</div>
+              <!-- <a class="cta d-none d-lg-inline-block" href="/products/{{ block.settings.product-1-1 }}">SHOP CABLE CHAINS</a> -->
+            </div>
+
+            <table class="cable">
+              <thead>
+                <tr>
+                  <td class="first">Size</td>
+                  <td class="rxs silver">
+                    <a href="/products/{{ block.settings.product-1-1 }}">
+                      Silver
+                    </a>
+                    {% include 'chain-guide-swatches', chart: 'cable', silver: true, gold: true, solidgold: true, selected: 'silver' %}
+                  </td>
+                  <td class="rxs gold">
+                    <a href="/products/{{ block.settings.product-1-2 }}">
+                      Gold Vermeil
+                    </a>
+                    {% include 'chain-guide-swatches', chart: 'cable', silver: true, gold: true, solidgold: true, selected: 'gold' %}
+                  </td>
+                  {% if block.settings.product-1-3 !=blank %}
+                  <td class="rxs solid-gold">
+                    <a href="/products/{{ block.settings.product-1-3 }}">
+                      Solid Gold
+                    </a>
+                    {% include 'chain-guide-swatches', chart: 'cable', silver: true, gold: true, solidgold: true, selected: 'solid-gold' %}
+                  </td>
+                  {% endif %}  
+                </tr>
+              </thead>
+              <tbody>
+                {% if block.settings.chart-1-row-1-text-1 != blank %}
+                <tr>
+                  <td class="first">
+                    {{ block.settings.chart-1-row-1-text-1 }}
+                    <img id="{{ block.settings.tabid  | downcase }}_1" class="tooltip" alt="Tooltip Icon" src="{{ 'tooltip.svg' | asset_url }}">
+                  </td>
+                 
+                  <td class="rxs silver">{{ block.settings.chart-1-row-1-text-2 }}</td>
+                  <td class="rxs gold">{{ block.settings.chart-1-row-1-text-3 }}</td>
+                  <td class="rxs solid-gold">{{ block.settings.chart-1-row-1-text-4 }}</td>
+                </tr>
+                {% endif %}
+                {% if block.settings.chart-1-row-2-text-1 != blank %}
+                <tr>
+                  <td class="first">{{ block.settings.chart-1-row-2-text-1 }}
+                     <img id="{{ block.settings.tabid  | downcase }}_2" class="tooltip" alt="Tooltip Icon" src="{{ 'tooltip.svg' | asset_url }}">
+                  </td>
+                
+                  <td class="rxs silver">{{ block.settings.chart-1-row-2-text-2 }}</td>
+                  <td class="rxs gold">{{ block.settings.chart-1-row-2-text-3 }}</td>
+                  <td class="rxs solid-gold">{{ block.settings.chart-1-row-2-text-4 }}</td>
+                </tr>
+                 {% endif %}
+                {% if block.settings.chart-1-row-3-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {{ block.settings.chart-1-row-3-text-1 }}
+                      <img id="{{ block.settings.tabid  | downcase }}_3" class="tooltip" alt="Tooltip Icon" src="{{ 'tooltip.svg' | asset_url }}">
+                    </td>
+                    
+                    <td class="rxs silver">{{ block.settings.chart-1-row-3-text-2 }}</td>
+                    <td class="rxs gold">{{ block.settings.chart-1-row-3-text-3 }}</td>
+                    <td class="rxs solid-gold">{{ block.settings.chart-1-row-3-text-4 }}</td>
+                  </tr>
+                {% endif %}
+                {% if block.settings.chart-1-row-4-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {{ block.settings.chart-1-row-4-text-1 }}
+                       <img id="{{ block.settings.tabid  | downcase }}_4" class="tooltip" alt="Tooltip Icon" src="{{ 'tooltip.svg' | asset_url }}">
+                    </td>
+                    {% comment %} <td class="center">{{ block.settings.chart-1-row-4-text-2 }}</td> {% endcomment %}
+                    <td class="rxs silver">{{ block.settings.chart-1-row-4-text-2 }}</td>
+                    <td class="rxs gold">{{ block.settings.chart-1-row-4-text-3 }}</td>
+                    <td class="rxs solid-gold">{{ block.settings.chart-1-row-4-text-4 }}</td>
+                  </tr>
+                {% endif %}
+                {% if block.settings.chart-1-row-5-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {{ block.settings.chart-1-row-5-text-1 }}
+                      <img id="{{ block.settings.tabid  | downcase }}_5" class="tooltip" alt="Tooltip Icon" src="{{ 'tooltip.svg' | asset_url }}">
+                    </td>
+                    
+                    <td class="rxs silver">{{ block.settings.chart-1-row-5-text-2 }}</td>
+                    <td class="rxs gold">{{ block.settings.chart-1-row-5-text-3 }}</td>
+                    <td class="rxs solid-gold">{{ block.settings.chart-1-row-5-text-4 }}</td>
+                  </tr>
+                {% endif %}
+                {% if block.settings.chart-1-row-6-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {{ block.settings.chart-1-row-6-text-1 }}
+                       <img id="{{ block.settings.tabid  | downcase }}_6" class="tooltip" alt="Tooltip Icon" src="{{ 'tooltip.svg' | asset_url }}">
+                    </td>
+                    {% comment %} <td class="center">{{ block.settings.chart-1-row-6-text-2 }}</td> {% endcomment %}
+                    <td class="rxs silver">{{ block.settings.chart-1-row-6-text-2 }}</td>
+                    <td class="rxs gold">{{ block.settings.chart-1-row-6-text-3 }}</td>
+                    <td class="rxs solid-gold">{{ block.settings.chart-1-row-6-text-4 }}</td>
+                  </tr>
+                {% endif %}
+                {% if block.settings.chart-1-row-7-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {{ block.settings.chart-1-row-7-text-1 }}
+                      <img id="{{ block.settings.tabid  | downcase }}_7" class="tooltip" alt="Tooltip Icon" src="{{ 'tooltip.svg' | asset_url }}">
+                    </td>
+                   
+                    <td class="rxs silver">{{ block.settings.chart-1-row-7-text-2 }}</td>
+                    <td class="rxs gold">{{ block.settings.chart-1-row-7-text-3 }}</td>
+                    <td class="rxs solid-gold">{{ block.settings.chart-1-row-7-text-4 }}</td>
+                  </tr>
+                {% endif %}
+                {% if block.settings.chart-1-row-8-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {{ block.settings.chart-1-row-8-text-1 }}
+                       <img id="{{ block.settings.tabid  | downcase }}_8" class="tooltip" alt="Tooltip Icon" src="{{ 'tooltip.svg' | asset_url }}">
+                    </td>
+                    {% comment %} <td class="center">{{ block.settings.chart-1-row-8-text-2 }}</td> {% endcomment %}
+                    <td class="rxs silver">{{ block.settings.chart-1-row-8-text-2 }}</td>
+                    <td class="rxs gold">{{ block.settings.chart-1-row-8-text-3 }}</td>
+                    <td class="rxs solid-gold">{{ block.settings.chart-1-row-8-text-4 }}</td>
+                  </tr>
+                {% endif %}
+                {% if block.settings.chart-1-row-9-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {{ block.settings.chart-1-row-9-text-1 }}
+                      <img id="{{ block.settings.tabid  | downcase }}_9" class="tooltip" alt="Tooltip Icon" src="{{ 'tooltip.svg' | asset_url }}">
+                    </td>
+                    {% comment %} <td class="center">{{ block.settings.chart-1-row-9-text-2 }}</td> {% endcomment %}
+                    <td class="rxs silver">{{ block.settings.chart-1-row-9-text-2 }}</td>
+                    <td class="rxs gold">{{ block.settings.chart-1-row-9-text-3 }}</td>
+                    <td class="rxs solid-gold">{{ block.settings.chart-1-row-9-text-4 }}</td>
+                  </tr>
+                {% endif %}
+                {% if block.settings.chart-1-row-10-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {{ block.settings.chart-1-row-10-text-1 }}
+                   <img id="{{ block.settings.tabid  | downcase }}_10" class="tooltip" alt="Tooltip Icon" src="{{ 'tooltip.svg' | asset_url }}">
+                    </td>
+                    {% comment %} <td class="center">{{ block.settings.chart-1-row-10-text-2 }}</td> {% endcomment %}
+                    <td class="rxs silver">{{ block.settings.chart-1-row-10-text-2 }}</td>
+                    <td class="rxs gold">{{ block.settings.chart-1-row-10-text-3 }}</td>
+                    <td class="rxs solid-gold">{{ block.settings.chart-1-row-11-text-4 }}</td>
+                  </tr>
+                {% endif %}
+                {% if block.settings.chart-1-row-11-text-1 != blank %}
+                  <tr>
+                    <td class="first">
+                      {{ block.settings.chart-1-row-11-text-1 }}
+                       <img id="{{ block.settings.tabid  | downcase }}_11" class="tooltip" alt="Tooltip Icon" src="{{ 'tooltip.svg' | asset_url }}">
+                    </td>
+                    {% comment %} <td class="center">{{ block.settings.chart-1-row-11-text-2 }}</td> {% endcomment %}
+                    <td class="rxs silver">{{ block.settings.chart-1-row-11-text-2 }}</td>
+                    <td class="rxs gold">{{ block.settings.chart-1-row-11-text-3 }}</td>
+                    <td class="rxs solid-gold">{{ block.settings.chart-1-row-11-text-4 }}</td>
+                  </tr>
+                {% endif %}
+              </tbody>
+            </table>
+          {% assign infinity = block.settings.tabid %}
+     		{% if infinity contains 'Infinity' %}
+      
+          
+            <table class="infinity">
+              <thead>
+                <tr>
+                  <td class="first">Size</td>
+                  <td class="rxs-inf">
+                    <a href="/products/slim-solid-gold-infinity-link-charm-necklace">
+                      Solid Gold Slim
+                    </a>
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="first">
+                    
+                    14” 25 links
+                    
+                  </td>
+                  <td class="rxs-inf">$2798</td>
+                </tr>
+                <tr>
+                  <td class="first">
+                    
+                    16” 28 links
+                    
+                  </td>
+                  <td class="rxs-inf">$3168</td>
+                </tr>
+                <tr>
+                  <td class="first">
+                    
+                    18” 32 links
+                    
+                  </td>
+                  <td class="rxs-inf">$3558</td>
+                </tr>
+              </tbody>
+            </table>
+          {% endif %}
+            <div class="text-center d-block d-lg-none">
+              <button class="show-chart" data-type="cable">Show Size Chart</button>
+            </div>
+            {% if block.settings.chart-1-cta_label !=blank %}
+              <div class="text-center">
+                <a class="cta" href="{{ block.settings.chart-1-cta }}">{{ block.settings.chart-1-cta_label }}</a>
+              </div>
+            {% endif %}  
+          </div>
+        </div>
+      </div>
+          
+          
+        {% endif %}
+      {% endfor %}
+</div>    
+    </div>
+  </section>
+
+   <script>
+       $('div.chart-nav span.option:first-child').addClass('selected');
+      $('.chart-wrapperGroup .chart-wrapper:first-child').addClass('chart-wrapperShow');
+    
+    $('.swatch-wrapper .swatch-outer').click(function(){
+      let thisdata = $(this).attr('data-type');
+      $('.rxs').css({'display': 'none'});
+      $(`.${thisdata}`).css({'display': 'table-cell'});
+    });
+        
+      var options = {
+        cellAlign: 'left',
+        contain: true,
+        imagesLoaded: true,
+        wrapAround: true
+      };
+       {%- for block in section.blocks -%}
+        {%- if block.type == 'chain_styles_item' -%}
+        $('.carousel.carousel-{{ block.settings.tabid  | downcase | replace: ' ', '_' }}').flickity(options);
+       {% endif %}
+      {% endfor %}  
+
+      $('span.option').click(function() {
+        var type = $(this).text().toLowerCase().replace(" ","_");
+        
+        $('div.chart-wrapper').removeClass('chart-wrapperShow');
+        $(`#chart-${type}`).addClass('chart-wrapperShow');
+        $('span.option').removeClass('selected');
+        $(this).addClass('selected');
+        
+      })
+
+      $('#chart-picker').on('change', function() {
+        var type = $(this).val().toLowerCase().replace(" ","_");
+        $('div.chart-wrapper').removeClass('chart-wrapperShow');
+        $(`#chart-${type}`).addClass('chart-wrapperShow');
+
+      });
+
+     
+
+      tippy('#cable_2', {
+        content: '<h3>16" Thick Cable</h3><div>Super Strong, great for kids</div>',
+        allowHTML: true,
+        theme: 'light',
+        placement: 'top-start',
+      });
+
+      tippy('#cable_3', {
+        content: '<h3>16"-18" Adjustable Cable</h3><div>Our most popular and perfect for gifting</div>',
+        allowHTML: true,
+        theme: 'light',
+        placement: 'top-start',
+      });
+
+      tippy('#cable_7', {
+        content: '<h3>24" Cable</h3><div>Great for every day wear as 24" can be slipped over the head without unclasping</div>',
+        allowHTML: true,
+        theme: 'light',
+        placement: 'top-start',
+      });
+
+      tippy('#cable_9', {
+        content: '<h3>24" Thick Cable</h3><div>Popular with men or for a bolder look</div>',
+        allowHTML: true,
+        theme: 'light',
+        placement: 'top-start',
+      });
+
+      tippy('#cable_11', {
+        content: '<h3>30" Thick Cable</h3><div>Also popular with men or for a bolder look</div>',
+        allowHTML: true,
+        theme: 'light',
+        placement: 'top-start',
+      });
+
+      tippy('#ball_2', {
+        content: '<h3>16"-18" Adjustable Ball</h3><div>Our most popular and perfect for gifting</div>',
+        allowHTML: true,
+        theme: 'light',
+        placement: 'top-start',
+      });
+
+      tippy('#ball_4', {
+        content: '<h3>24" Ball</h3><div>Great for every day wear as 24" can be slipped over the head without unclasping</div>',
+        allowHTML: true,
+        theme: 'light',
+        placement: 'top-start',
+      });
+
+      tippy('#ball_5', {
+        content: '<h3>24" Heavy Ball</h3><div>Popular with men or for a bolder look</div>',
+        allowHTML: true,
+        theme: 'light',
+        placement: 'top-start',
+      });
+
+      tippy('#box_1', {
+        content: '<h3>24" Box</h3><div>Popular with men or for a bolder look</div>',
+        allowHTML: true,
+        theme: 'light',
+        placement: 'top-start',
+      });
+
+      tippy('#paperclip_2', {
+        content: '<h3>20" Paperclip</h3><div>Great for layering</div>',
+        allowHTML: true,
+        theme: 'light',
+        placement: 'top-start',
+      });
+
+      tippy('#tooltip-11', {
+        content: '<h3>{{ settings.chart-7-row-2-text-1 }}</h3><div>{{ settings.chart-7-row-2-text-tt }}</div>',
+        allowHTML: true,
+        theme: 'light',
+        placement: 'top-start',
+      });
+
+      $('button.show-chart').click(function() {
+        var type = $(this).data('type');
+
+        if(!$(this).hasClass('opened')) {
+          $(this).addClass('opened');
+          $(this).text('Hide Size Chart');
+          $(`table.${type}`).slideDown();
+        } else {
+          $(this).removeClass('opened')
+          $(this).text('Show Size Chart')
+          $(`table.${type}`).slideUp();
+        }
+      })
+
+      $('span.swatch-outer').click(function() {
+        var type = $(this).data('type'),
+            chart = $(this).data('chart');
+
+        $(`div#chart-${chart} table td.rxs`).hide();
+        $(`div#chart-${chart} table td.rxs.${type}`).show();
+      })
+    </script>
+  </section>     
+  {% endif %}
+
+{% schema %}
+{
+  "name": "Occasion Chain Styles",
+  "settings": [
+    {
+      "type" : "header",
+      "content" : "Section Show/Hide"
+    },
+    {
+      "type": "checkbox",
+      "id": "occasion_section",
+      "label": "A Style Occasion Section?",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "chain_section",
+      "label": "Chain Section?",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "occasion_title",
+      "label": "Occasion Title"
+    },
+    {
+      "type": "textarea",
+      "id": "occasion_desc",
+      "label": "Occasion Description"
+    },
+     {
+      "type": "textarea",
+      "id": "chain_title",
+      "label": "Chain Title"
+    },
+    {
+      "type": "textarea",
+      "id": "chain_desc",
+      "label": "Chain Description"
+    }
+  ],
+  "blocks": [
+     {
+       "name": "Occasion Item",
+       "type": "iccasion_item",
+       "settings": [
+         {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "Collection Link"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      }
+     ]
+   },
+    {
+       "name": "Tab Item",
+       "type": "tab_item",
+       "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      }
+     ]
+   },
+    {
+       "name": "Chain Styles Item",
+       "type": "chain_styles_item",
+       "settings": [
+          {
+            "type": "text",
+            "id": "tabid",
+            "label": "Data ID"
+          },
+         {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "text-1",
+        "label": "Text"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-1-1",
+        "label": "Image 1"
+      },
+      {
+        "type": "text",
+        "id": "video1",
+        "label": "Video 1"
+      },
+      {
+        "type": "text",
+        "id": "caption-1-1",
+        "label": "Caption 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-1-2",
+        "label": "Image 2"
+      },
+         {
+        "type": "text",
+        "id": "video2",
+        "label": "Video 2"
+      },
+      {
+        "type": "text",
+        "id": "caption-1-2",
+        "label": "Caption 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-1-3",
+        "label": "Image 3"
+      },
+      {
+        "type": "text",
+        "id": "video3",
+        "label": "Video 3"
+      },   
+      {
+        "type": "text",
+        "id": "caption-1-3",
+        "label": "Caption 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-1-4",
+        "label": "Image 4"
+      },
+      {
+        "type": "text",
+        "id": "video4",
+        "label": "Video 4"
+      },   
+      {
+        "type": "text",
+        "id": "caption-1-4",
+        "label": "Caption 4"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-1-5",
+        "label": "Image 5"
+      },
+      {
+        "type": "text",
+        "id": "video5",
+        "label": "Video 5"
+      },   
+      {
+        "type": "text",
+        "id": "caption-1-5",
+        "label": "Caption 5"
+      },
+      {
+        "type": "product",
+        "id": "product-1-1",
+        "label": "Silver Product Link"
+      },
+      {
+        "type": "product",
+        "id": "product-1-2",
+        "label": "Gold Vermeil Product Link"
+      },
+      {
+        "type": "product",
+        "id": "product-1-3",
+        "label": "Solid Gold Product Link"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-1-text-1",
+        "label": "Row 1 Col 1"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-1-text-2",
+        "label": "Row 1 Col 2"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-1-text-3",
+        "label": "Row 1 Col 3"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-1-text-4",
+        "label": "Row 1 Col 4"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-2-text-1",
+        "label": "Row 2 Col 1"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-2-text-2",
+        "label": "Row 2 Col 2"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-2-text-3",
+        "label": "Row 2 Col 3"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-2-text-4",
+        "label": "Row 2 Col 4"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-3-text-1",
+        "label": "Row 3 Col 1"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-3-text-2",
+        "label": "Row 3 Col 2"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-3-text-3",
+        "label": "Row 3 Col 3"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-3-text-4",
+        "label": "Row 3 Col 4"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-4-text-1",
+        "label": "Row 4 Col 1"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-4-text-2",
+        "label": "Row 4 Col 2"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-4-text-3",
+        "label": "Row 4 Col 3"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-4-text-4",
+        "label": "Row 4 Col 4"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-5-text-1",
+        "label": "Row 5 Col 1"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-5-text-2",
+        "label": "Row 5 Col 2"
+      },
+      
+      {
+        "type": "text",
+        "id": "chart-1-row-5-text-3",
+        "label": "Row 5 Col 3"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-5-text-4",
+        "label": "Row 5 Col 4"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-6-text-1",
+        "label": "Row 6 Col 1"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-6-text-2",
+        "label": "Row 6 Col 2"
+      },
+      
+      {
+        "type": "text",
+        "id": "chart-1-row-6-text-3",
+        "label": "Row 6 Col 3"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-6-text-4",
+        "label": "Row 6 Col 4"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-7-text-1",
+        "label": "Row 7 Col 1"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-7-text-2",
+        "label": "Row 7 Col 2"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-7-text-3",
+        "label": "Row 7 Col 3"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-7-text-4",
+        "label": "Row 7 Col 4"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-8-text-1",
+        "label": "Row 8 Col 1"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-8-text-2",
+        "label": "Row 8 Col 2"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-8-text-3",
+        "label": "Row 8 Col 3"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-8-text-4",
+        "label": "Row 8 Col 4"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-9-text-1",
+        "label": "Row 9 Col 1"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-9-text-2",
+        "label": "Row 9 Col 2"
+      },   
+      {
+        "type": "text",
+        "id": "chart-1-row-9-text-3",
+        "label": "Row 9 Col 3"
+      },      {
+        "type": "text",
+        "id": "chart-1-row-9-text-4",
+        "label": "Row 9 Col 4"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-10-text-1",
+        "label": "Row 10 Col 1"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-10-text-2",
+        "label": "Row 10 Col 2"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-10-text-3",
+        "label": "Row 10 Col 3"
+      },
+      {
+        "type": "text",
+        "id": "chart-1-row-10-text-4",
+        "label": "Row 10 Col 4"
+      }, 
+       {
+        "type": "text",
+        "id": "chart-1-row-11-text-1",
+        "label": "Row 11 Col 1"
+      },  
+         {
+        "type": "text",
+        "id": "chart-1-row-11-text-2",
+        "label": "Row 11 Col 2"
+      }, 
+         {
+        "type": "text",
+        "id": "chart-1-row-11-text-3",
+        "label": "Row 11 Col 3"
+      }, 
+      {
+        "type": "text",
+        "id": "chart-1-row-11-text-4",
+        "label": "Row 11 Col 4"
+      }, 
+          {
+        "type": "text",
+        "id": "chart-1-cta_label",
+        "label": "Chart CTA Label"
+      },
+      {
+        "type": "url",
+        "id": "chart-1-cta",
+        "label": "Chart 1 CTA"
+      }
+     ]
+   }
+]
+}
+{% endschema %}

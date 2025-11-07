@@ -1,0 +1,155 @@
+<section class="staff-picks big-bottom">
+  <h2 class="title">{{ section.settings.title }}</h2>
+    <a class="view-all-link" href="{{ section.settings.button-url }}">
+      {{ section.settings.button-text }}
+      <img alt="Right Arrow" class="arrow" src="{{ 'arrow-right.svg' | asset_url }}">
+    </a>
+
+  <div class="wrapper d-none d-lg-block">
+    <div class="column" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".1s">
+      {% assign article1 = articles[section.settings.article-1] %}
+      {% assign img_url = article1.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+      <img 
+        class="lazyload"
+        alt="{{ article1.title | escape | strip }}"
+        src="{{ article1.image | img_url: '180x' }}"
+        data-src="{{ img_url }}"
+        data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+        data-aspectratio="{{ article1.image.aspect_ratio }}"
+        data-sizes="auto"
+        width="{{ article1.image.width }}"
+        height="{{ article1.image.height }}"
+      />
+      <div class="desc">{{ article1.title }}</div>
+      <div class="name">{{ article1.published_at | date: "%b %d, %Y" }}</div>
+    </div>
+    <div class="column" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".2s">
+      {% assign article2 = articles[section.settings.article-2] %}
+      {% assign img_url = article2.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+      <img 
+        class="rounded lazyload"
+        alt="{{ article2.title | escape | strip }}"
+        data-src="{{ img_url }}"
+        data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+        data-aspectratio="{{ article2.image.aspect_ratio }}"
+        data-sizes="auto"
+        width="{{ article2.image.width }}"
+        height="{{ article2.image.height }}"
+      />
+      <div class="desc">{{ article2.title }}</div>
+      <div class="name">{{ article2.published_at | date: "%b %d, %Y" }}</div>
+    </div>
+    <div class="column" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".3s">
+      {% assign article3 = articles[section.settings.article-3] %}
+      {% assign img_url = article3.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+      <img 
+        class="top-rounded lazyload"
+        alt="{{ article3.title | escape | strip }}"
+        data-src="{{ img_url }}"
+        data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+        data-aspectratio="{{ article3.image.aspect_ratio }}"
+        data-sizes="auto"
+        width="{{ article3.image.width }}"
+        height="{{ article3.image.height }}"
+      />
+      <div class="desc">{{ article3.title }}</div>
+      <div class="name">{{ article3.published_at | date: "%b %d, %Y" }}</div>
+    </div>
+  </div>
+
+  <div class="carousel carousel-blog d-block d-lg-none" data-flickity='{ "cellAlign": "left", "contain": true, "pageDots": false, "prevNextButtons": false, "imagesLoaded": true }'>
+    <div class="carousel-cell">
+      {% assign img_url = article1.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+      <img 
+        class="lazyload"
+        alt="{{ article1.title | escape | strip }}"
+        src="{{ article1.image | img_url: '180x' }}"
+        data-src="{{ img_url }}"
+        data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+        data-aspectratio="{{ article1.image.aspect_ratio }}"
+        data-sizes="auto"
+        width="{{ article1.image.width }}"
+        height="{{ article1.image.height }}"
+      />
+      <div class="desc">{{ article1.title }}</div>
+      <div class="name">{{ article1.published_at | date: "%b %d, %Y" }}</div>
+    </div>
+    <div class="carousel-cell">
+      {% assign img_url = article2.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+      <img 
+        class="rounded lazyload"
+        alt="{{ article2.title | escape | strip }}"
+        data-src="{{ img_url }}"
+        data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+        data-aspectratio="{{ article2.image.aspect_ratio }}"
+        data-sizes="auto"
+        width="{{ article2.image.width }}"
+        height="{{ article2.image.height }}"
+      />
+      <div class="desc">{{ article2.title }}</div>
+      <div class="name">{{ article2.published_at | date: "%b %d, %Y" }}</div>
+    </div>
+    <div class="carousel-cell">
+      {% assign img_url = article3.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+      <img 
+        class="top-rounded lazyload"
+        alt="{{ article3.title | escape | strip }}"
+        data-src="{{ img_url }}"
+        data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+        data-aspectratio="{{ article3.image.aspect_ratio }}"
+        data-sizes="auto"
+        width="{{ article3.image.width }}"
+        height="{{ article3.image.height }}"
+      />
+      <div class="desc">{{ article3.title }}</div>
+      <div class="name">{{ article3.published_at | date: "%b %d, %Y" }}</div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Blog Feature",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Staff Picks"
+      },
+      {
+        "type": "text",
+        "id": "button-text",
+        "label": "Button Text",
+        "default": "SHOP STAFF PICKS"
+      },
+      {
+        "type": "url",
+        "id": "button-url",
+        "label": "Button URL"
+      },
+      {
+        "type": "article",
+        "id": "article-1",
+        "label": "Article 1"
+      },
+      {
+        "type": "article",
+        "id": "article-2",
+        "label": "Article 2"
+      },
+      {
+        "type": "article",
+        "id": "article-3",
+        "label": "Article 3"
+      }
+    ],
+    "presets": [
+	    {
+        "name": "Blog Feature",
+        "category": "Custom",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}

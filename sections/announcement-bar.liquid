@@ -1,0 +1,176 @@
+{%- capture announcement -%}
+  {% if section.settings.show_announcement %}
+    {% if template == 'index' or section.settings.announcement_home_only == false %}
+      {% assign autoplaySpeed = section.settings.announcement_slider_speed | times: 1000 %}
+      <div
+        id="announcement-slider-{{section.id}}"
+        class="cc-announcement"
+        data-slick='{"slidesToShow": 1, "slidesToScroll": 1, "autoplaySpeed": {{autoplaySpeed}}}'>
+        {% for block in section.blocks %}
+        <div class="cc-announcement__inner">
+              {% if block.settings.announcement_link != blank %}
+                <a data-cc-animate-click href="{{ block.settings.announcement_link }}"></a>
+                {% endif %}
+              <img alt="Airplane Icon" width="12" height="12" class="plane d-none d-lg-inline-block" src="{{ 'airplane.svg' | asset_url }}">
+              {{ block.settings.announcement_text }}
+            </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endif %}
+{%- endcapture -%}
+
+
+{{ announcement }}
+
+
+<style>
+  .cc-announcement {
+    {% if section.settings.announcement_text_size > 16 %}
+      font-size: 16px;
+    {% else %}
+      font-size: {{ section.settings.announcement_text_size }}
+      px;
+    {% endif %}
+  }
+
+  .cc-announcement {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease;
+    -webkit-transition: opacity 1s ease;
+  }
+
+  .cc-announcement.slick-initialized {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .cc-announcement__inner > a {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .cc-announcement .cc-announcement__inner + .cc-announcement__inner {
+height: 0;
+opacity: 0;
+padding: 0;  }
+
+  .cc-announcement.slick-initialized .cc-announcement__inner {
+    height: unset;
+    opacity: 1;
+    padding: 0.7em;
+  }
+
+  .cc-announcement .slick-arrow {
+    top: 50%;
+    height: 100%;
+    width: 1.5rem;
+    transform: translateY(-50%);
+  }
+
+  .cc-announcement .slick-arrow:hover {
+    opacity: 0.5;
+  }
+
+  .cc-announcement .slick-arrow:after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: url("{{ 'arrow-right.svg' | asset_url }}") center center no-repeat;
+  }
+
+
+  .cc-announcement .slick-prev {
+    left: 0;
+    right: unset;
+  }
+
+  .cc-announcement .slick-prev:after {
+    background-image: url("{{ 'arrow-left.svg' | asset_url }}")
+  }
+  .cc-announcement .slick-next {
+    right: 0;
+    left: unset;
+  }
+
+  @media(min-width: 768px) {
+    .cc-announcement {
+      font-size: {{ section.settings.announcement_text_size }}
+      px;
+    }
+
+    .cc-announcement .slick-arrow {
+    width: 5rem;
+  }
+  }
+</style>
+
+
+{% schema %}
+
+  {
+    "name": "Announcement Bar",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Announcement"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_announcement",
+        "label": "Show announcement",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "announcement_home_only",
+        "label": "Show on home page only",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "announcement_text_size",
+        "min": 13,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "label": "Text size",
+        "default": 15
+      }, {
+        "type": "range",
+        "id": "announcement_slider_speed",
+        "min": 1,
+        "max": 30,
+        "step": 1,
+        "unit": "s",
+        "label": "Slider Speed",
+        "default": 5
+      }
+
+    ],
+
+    "blocks": [
+      {
+        "name": "Announcement",
+        "type": "announcement",
+        "settings": [
+          {
+            "type": "text",
+            "id": "announcement_text",
+            "label": "Text"
+          }, {
+            "type": "url",
+            "id": "announcement_link",
+            "label": "Link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

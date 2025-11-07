@@ -1,0 +1,105 @@
+{% if product.tags contains 'solid sterling silver' or product.tags contains 'solid gold' or product.tags contains 'gold vermeil' %}
+  {% if product.tags contains 'solid sterling silver' %}
+    {% assign image = section.settings.image-silver | img_url: '1000x' %}
+    {% assign title = section.settings.title-silver %}
+    {% assign text = section.settings.text-silver %}
+  {% elsif product.tags contains 'solid gold' %}
+    {% assign image = section.settings.image-gold | img_url: '1000x' %}
+    {% assign title = section.settings.title-gold %}
+    {% assign text = section.settings.text-gold %}
+  {% elsif product.tags contains 'gold vermeil' %}
+    {% assign image = section.settings.image-vermeil | img_url: '1000x' %}
+    {% assign title = section.settings.title-vermeil %}
+    {% assign text = section.settings.text-vermeil %}
+  {% endif %}
+<div class="nosto_element" id="productpage-nosto-4"></div>
+
+<div class="nosto_element" id="productpage-nosto-5"></div>
+  <section class="product-image-text reorder-mobile">
+    <div class="wrapper">
+      <div class="col left">
+        <h2 class="title">{{ title }}</h2>
+        <div class="desc">{{ text }}</div>
+      </div>
+      <div class="col right">
+        <div class="image-wrapper">
+          <div class="bg-image"></div>
+          <img alt="{{title}}" class="lazyload" data-src="{{ image }}">
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Product Material",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Silver Content"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-silver",
+        "label": "Image",
+        "info": "This section only displayed on certain Product Types"
+      },
+      {
+        "type": "text",
+        "id": "title-silver",
+        "label": "Heading"
+      },
+      {
+        "type": "textarea",
+        "id": "text-silver",
+        "label": "Text"
+      },
+      {
+        "type": "header",
+        "content": "Gold Content"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-gold",
+        "label": "Image",
+        "info": "This section only displayed on certain Product Types"
+      },
+      {
+        "type": "text",
+        "id": "title-gold",
+        "label": "Heading"
+      },
+      {
+        "type": "textarea",
+        "id": "text-gold",
+        "label": "Text"
+      },
+      {
+        "type": "header",
+        "content": "Vermeil Content"
+      },
+      {
+        "type": "image_picker",
+        "id": "image-vermeil",
+        "label": "Image",
+        "info": "This section only displayed on certain Product Types"
+      },
+      {
+        "type": "text",
+        "id": "title-vermeil",
+        "label": "Heading"
+      },
+      {
+        "type": "textarea",
+        "id": "text-vermeil",
+        "label": "Text"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Product Image and Text"
+      }
+    ]
+  }
+{% endschema %}

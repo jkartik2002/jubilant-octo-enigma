@@ -1,0 +1,741 @@
+
+{% style %}
+  #gift-guide-page .wide-collection-list-container{
+    margin-left:0;
+    margin-right:0;
+  }
+  
+  .title-container .title {
+    -webkit-text-fill-color: transparent;
+    background: -webkit-linear-gradient(transparent, transparent),
+                url('{{ section.settings.title-gradient | img_url: '400x' }}') repeat;
+    background: -o-linear-gradient(transparent, transparent);
+    -webkit-background-clip: text;
+    background-size: cover;
+  }
+    @media(max-width:1199px){
+    #gift-guide-page {padding: 48px 24px;}
+  }
+    @media(min-width:1200px){
+    #gift-guide-page {padding-left:0px; padding-right:0px;}
+      .page-gift-guide-original .nosto_element, .page-gift-guide-original-tbc .nosto_element {
+    max-width: 1260px;
+    margin: 0 auto;
+}
+  }
+{% endstyle %}
+
+<div id="gift-guide-page" class="gift-guide-page-container">
+  <div class="gift-container">
+    <div class="title-container">
+      <h1 class="title">
+        {{ section.settings.page_title }}
+      </h1>
+      <p>
+        {{ section.settings.page_description }}
+      </p>
+    </div>
+  </div>
+
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'sub-menu' %}
+        <div class="gift-container">
+          <div class="sub-menu-container">
+            {% for link in linklists[block.settings.sub_menu].links %}
+              <div class="link-wrapper">
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              </div>
+            {% endfor %}
+          </div>
+
+          <span class="sub-menu-dropdown">
+            <input type="radio" name="giftGuide" value="#" checked="checked" id="placeholder">
+            <label for="placeholder">LGA or select another...</label>
+            {% for link in linklists[block.settings.sub_menu].links %}
+              <input type="radio" name="giftGuide" value="{{ link.url }}" id="{{ link.handle }}">
+              <label for="{{ link.handle }}">{{ link.title }}</label>
+            {% endfor %}
+          </span>
+        </div>
+      {% when 'image-with-text-car' %}
+     {% include 'slider-data' %}
+      {% when 'image-with-text' %}
+        <div class="gift-container">
+          <div class="image-with-text-container">
+            <div class="image-wrapper lazyload--placeholder">
+              <a href="{{ block.settings.button_link }}">
+                {%- if block.settings.image == blank -%}
+                  <div class="placeholder-image">
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                  </div>
+                {%- else -%}
+                  <div class="rimage-outer-wrapper lazyload fade-in"
+                      data-bgset="{% render 'bgset', image: block.settings.image %}"
+                      data-sizes="auto"
+                      data-parent-fit="cover"
+                      {% comment %} style="max-width: {{ block.settings.image.width }}px; max-height: {{ block.settings.image.height }}px" {% endcomment %}
+                      >
+                    <div class="rimage-wrapper" style="padding-top:{{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 }}%">
+                      <noscript>
+                        <img src="{{ block.settings.image | img_url: '1024x1024' }}" alt="{{ block.settings.image.alt | escape }}" class="rimage__image">
+                      </noscript>
+                    </div>
+                  </div>
+                {%- endif -%}
+              </a>
+            </div>
+            <div class="info-wrapper" {% if block.settings.image_position == 'right' %}style="order: -1"{% endif %}>
+              <h1>{{ block.settings.title }}</h1>
+              <p class="subheading">{{ block.settings.subheading }}</p>
+
+              <div class="btn-wrapper">
+                <a href="{{ block.settings.button_link }}">
+                  {{ block.settings.button_label }}
+                  <img src="https://cdn.shopify.com/s/files/1/0072/8455/5834/files/pink_arrow.png?v=1636098385" alt="">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      {% when 'collection-list' %}
+        <div class="collection-list-container">
+          <div class="wrapper w-100">
+            <div class="column">
+              <div class="image-wrapper lazyload--placeholder">
+                <a href="{{ block.settings.button_link_1 }}">
+                  {%- if block.settings.image_1 == blank -%}
+                    <div class="placeholder-image">
+                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                    </div>
+                  {%- else -%}
+                    <div class="rimage-outer-wrapper lazyload fade-in"
+                        data-bgset="{% render 'bgset', image: block.settings.image_1 %}"
+                        data-sizes="auto"
+                        data-parent-fit="cover"
+                        {% comment %} style="max-width: {{ block.settings.image_1.width }}px; max-height: {{ block.settings.image_1.height }}px" {% endcomment %}
+                        >
+                      <div class="rimage-wrapper" style="padding-top:{{ 1 | divided_by: block.settings.image_1.aspect_ratio | times: 100 }}%">
+                        <noscript>
+                          <img src="{{ block.settings.image_1 | img_url: '1024x1024' }}" alt="{{ block.settings.image_1.alt | escape }}" class="rimage__image">
+                        </noscript>
+                      </div>
+                    </div>
+                  {%- endif -%}
+                </a>
+              </div>
+
+              <div class="info-wrapper">
+                <h3>{{ block.settings.title_1 }}</h3>
+                <p class="subheading">{{ block.settings.subheading_1 }}</p>
+
+                <div class="btn-wrapper">
+                  <a href="{{ block.settings.button_link_1 }}">
+                    {{ block.settings.button_label_1 }}
+                    <img src="https://cdn.shopify.com/s/files/1/0072/8455/5834/files/pink_arrow.png?v=1636098385" alt="">
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="column">
+              <div class="image-wrapper lazyload--placeholder">
+                <a href="{{ block.settings.button_link_2 }}">
+                  {%- if block.settings.image_2 == blank -%}
+                    <div class="placeholder-image">
+                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                    </div>
+                  {%- else -%}
+                    <div class="rimage-outer-wrapper lazyload fade-in"
+                        data-bgset="{% render 'bgset', image: block.settings.image_2 %}"
+                        data-sizes="auto"
+                        data-parent-fit="cover"
+                        {% comment %} style="max-width: {{ block.settings.image_2.width }}px; max-height: {{ block.settings.image_2.height }}px" {% endcomment %}
+                        >
+                      <div class="rimage-wrapper" style="padding-top:{{ 1 | divided_by: block.settings.image_2.aspect_ratio | times: 100 }}%">
+                        <noscript>
+                          <img src="{{ block.settings.image_2 | img_url: '1024x1024' }}" alt="{{ block.settings.image_2.alt | escape }}" class="rimage__image">
+                        </noscript>
+                      </div>
+                    </div>
+                  {%- endif -%}
+                </a>
+              </div>
+
+              <div class="info-wrapper">
+                <h3>{{ block.settings.title_2 }}</h3>
+                <p class="subheading">{{ block.settings.subheading_2 }}</p>
+
+                <div class="btn-wrapper">
+                  <a href="{{ block.settings.button_link_2 }}">
+                    {{ block.settings.button_label_2 }}
+                    <img src="https://cdn.shopify.com/s/files/1/0072/8455/5834/files/pink_arrow.png?v=1636098385" alt="">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      {% when 'wide-collection-list' %}
+        <div class="wide-collection-list-container">
+          <div class="gift-container">
+            <div class="title-wrapper">
+              <h1>{{ block.settings.block_title }}</h1>
+            </div>
+            <div class="wrapper w-100">
+              <div class="column">
+                <div class="image-wrapper lazyload--placeholder">
+                  <a href="{{ block.settings.button_link_1 }}">
+                    {%- if block.settings.image_1 == blank -%}
+                      <div class="placeholder-image">
+                        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                      </div>
+                    {%- else -%}
+                      <div class="rimage-outer-wrapper lazyload fade-in"
+                          data-bgset="{% render 'bgset', image: block.settings.image_1 %}"
+                          data-sizes="auto"
+                          data-parent-fit="cover"
+                          {% comment %} style="max-width: {{ block.settings.image_1.width }}px; max-height: {{ block.settings.image_1.height }}px" {% endcomment %}
+                          >
+                        <div class="rimage-wrapper" style="padding-top:{{ 1 | divided_by: block.settings.image_1.aspect_ratio | times: 100 }}%">
+                          <noscript>
+                            <img src="{{ block.settings.image_1 | img_url: '1024x1024' }}" alt="{{ block.settings.image_1.alt | escape }}" class="rimage__image">
+                          </noscript>
+                        </div>
+                      </div>
+                    {%- endif -%}
+                  </a>
+                </div>
+
+                <div class="info-wrapper">
+                  <h3>{{ block.settings.title_1 }}</h3>
+                  <p class="subheading">{{ block.settings.subheading_1 }}</p>
+
+                  <div class="btn-wrapper">
+                    <a href="{{ block.settings.button_link_1 }}">
+                      {{ block.settings.button_label_1 }}
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="column">
+                <div class="image-wrapper lazyload--placeholder">
+                  <a href="{{ block.settings.button_link_2 }}">
+                    {%- if block.settings.image_2 == blank -%}
+                      <div class="placeholder-image">
+                        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                      </div>
+                    {%- else -%}
+                      <div class="rimage-outer-wrapper lazyload fade-in"
+                          data-bgset="{% render 'bgset', image: block.settings.image_2 %}"
+                          data-sizes="auto"
+                          data-parent-fit="cover"
+                          {% comment %} style="max-width: {{ block.settings.image_2.width }}px; max-height: {{ block.settings.image_2.height }}px" {% endcomment %}
+                          >
+                        <div class="rimage-wrapper" style="padding-top:{{ 1 | divided_by: block.settings.image_2.aspect_ratio | times: 100 }}%">
+                          <noscript>
+                            <img src="{{ block.settings.image_2 | img_url: '1024x1024' }}" alt="{{ block.settings.image_2.alt | escape }}" class="rimage__image">
+                          </noscript>
+                        </div>
+                      </div>
+                    {%- endif -%}
+                  </a>
+                </div>
+
+                <div class="info-wrapper">
+                  <h3>{{ block.settings.title_2 }}</h3>
+                  <p class="subheading">{{ block.settings.subheading_2 }}</p>
+
+                  <div class="btn-wrapper">
+                    <a href="{{ block.settings.button_link_2 }}">
+                      {{ block.settings.button_label_2 }}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {%- when 'liquid' -%}
+          {{- block.settings.liquid -}}
+      {% else %}
+
+    {% endcase %}
+  {% endfor %}
+
+</div>
+
+<script>
+  $('.sub-menu-dropdown').click(function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $(this).toggleClass('expanded');
+    // $('#'+$(e.target).attr('for')).prop('checked',true);
+    window.location.href = $('#'+$(e.target).attr('for')).attr('value');
+  });
+  $(document).click(function() {
+    $('.sub-menu-dropdown').removeClass('expanded');
+  });
+</script>
+<script>
+$('.image-with-text-car-scn').flickity({
+  prevNextButtons: true,
+  pageDots: false,
+  draggable: true,
+  cellAlign: 'left',
+  groupCells: 2
+});
+</script>
+
+{% schema %}
+  {
+    "name": "Gift guide page",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "title-gradient",
+        "label": "Gradient Image"
+      },
+      {
+        "type": "text",
+        "id": "page_title",
+        "label": "Page title"
+      },
+      {
+        "type": "richtext",
+        "id": "page_description",
+        "label": "Page description"
+      }
+    ],
+    
+    "blocks": [
+      {
+        "name": "Sub Menu",
+        "type": "sub-menu",
+        "settings": [
+          {
+            "type": "link_list",
+            "id": "sub_menu",
+            "label": "Sub menu"
+          }
+        ]
+      },
+      {
+        "type": "liquid",
+        "name": "Custom Liquid",
+        "settings": [
+          {
+            "type": "liquid",
+            "id": "liquid",
+            "label": "Liquid",
+            "info": "Add HTML, app snippets, or other Liquid code to create advanced customizations."
+          }
+        ]
+      },
+      {
+        "name": "Image with text Carousel",
+        "type": "image-with-text-car",
+        "settings":[
+            {
+              "type": "image_picker",
+              "id": "image1",
+              "label": "Image 1"
+            },
+            {
+              "type": "text",
+              "id": "text1",
+              "label": "Text 1"
+            },
+            {
+              "type": "url",
+              "id": "link1",
+              "label": "Block link 1"
+            },
+            {
+              "type": "image_picker",
+              "id": "image2",
+              "label": "Image 2"
+            },
+            {
+              "type": "text",
+              "id": "text2",
+              "label": "Text 2"
+            },
+            {
+              "type": "url",
+              "id": "link2",
+              "label": "Block link 2"
+            },
+            {
+              "type": "image_picker",
+              "id": "image3",
+              "label": "Image 3"
+            },
+            {
+              "type": "text",
+              "id": "text3",
+              "label": "Text 3"
+            },
+            {
+              "type": "url",
+              "id": "link3",
+              "label": "Block link 3"
+            },
+            {
+              "type": "image_picker",
+              "id": "image4",
+              "label": "Image 4"
+            },
+            {
+              "type": "text",
+              "id": "text4",
+              "label": "Text 4"
+            },
+            {
+              "type": "url",
+              "id": "link4",
+              "label": "Block link 4"
+            },
+            {
+              "type": "image_picker",
+              "id": "image5",
+              "label": "Image 5"
+            },
+            {
+              "type": "text",
+              "id": "text5",
+              "label": "Text 5"
+            },
+            {
+              "type": "url",
+              "id": "link5",
+              "label": "Block link 5"
+            },
+            {
+              "type": "image_picker",
+              "id": "image6",
+              "label": "Image 6"
+            },
+            {
+              "type": "text",
+              "id": "text6",
+              "label": "Text 6"
+            },
+            {
+              "type": "url",
+              "id": "link6",
+              "label": "Block link 6"
+            },
+            {
+              "type": "image_picker",
+              "id": "image7",
+              "label": "Image 7"
+            },
+            {
+              "type": "text",
+              "id": "text7",
+              "label": "Text 7"
+            },
+            {
+              "type": "url",
+              "id": "link7",
+              "label": "Block link 7"
+            },
+            {
+              "type": "image_picker",
+              "id": "image8",
+              "label": "Image 8"
+            },
+            {
+              "type": "text",
+              "id": "text8",
+              "label": "Text 8"
+            },
+            {
+              "type": "url",
+              "id": "link8",
+              "label": "Block link 8"
+            },
+            {
+              "type": "image_picker",
+              "id": "image9",
+              "label": "Image 9"
+            },
+            {
+              "type": "text",
+              "id": "text9",
+              "label": "Text 9"
+            },
+            {
+              "type": "url",
+              "id": "link9",
+              "label": "Block link 9"
+            },
+            {
+              "type": "image_picker",
+              "id": "image10",
+              "label": "Image 10"
+            },
+            {
+              "type": "text",
+              "id": "text10",
+              "label": "Text 10"
+            },
+            {
+              "type": "url",
+              "id": "link10",
+              "label": "Block link 10"
+            },
+            {
+              "type": "image_picker",
+              "id": "image11",
+              "label": "Image 11"
+            },
+            {
+              "type": "text",
+              "id": "text11",
+              "label": "Text 11"
+            },
+            {
+              "type": "url",
+              "id": "link11",
+              "label": "Block link 11"
+            },
+            {
+              "type": "image_picker",
+              "id": "image12",
+              "label": "Image 12"
+            },
+            {
+              "type": "text",
+              "id": "text12",
+              "label": "Text 12"
+            },
+            {
+              "type": "url",
+              "id": "link12",
+              "label": "Block link 12"
+            }
+        ]
+      },
+      {
+        "name": "Image with text",
+        "type": "image-with-text",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Text"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Media with text"
+          },
+          {
+            "type": "textarea",
+            "id": "subheading",
+            "label": "Subheading"
+          },
+          {
+            "type": "text",
+            "id": "button_label",
+            "label": "Button"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link"
+          },
+          {
+            "type": "header",
+            "content": "Media"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "1024px x 1024px recommended"
+          },
+          {
+            "type": "select",
+            "id": "image_position",
+            "label": "Media position",
+            "default": "right",
+            "options": [
+              {
+                "value": "right",
+                "label": "Right"
+              },
+              {
+                "value": "left",
+                "label": "Left"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Collection List",
+        "type": "collection-list",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Collection #1"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "Image",
+            "info": "512px x 512px recommended"
+          },
+          {
+            "type": "header",
+            "content": "Text"
+          },
+          {
+            "type": "text",
+            "id": "title_1",
+            "label": "Heading",
+            "default": "Media with text"
+          },
+          {
+            "type": "textarea",
+            "id": "subheading_1",
+            "label": "Subheading"
+          },
+          {
+            "type": "text",
+            "id": "button_label_1",
+            "label": "Button"
+          },
+          {
+            "type": "url",
+            "id": "button_link_1",
+            "label": "Button link"
+          },
+          {
+            "type": "header",
+            "content": "Collection #2"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image",
+            "info": "512px x 512px recommended"
+          },
+          {
+            "type": "header",
+            "content": "Text"
+          },
+          {
+            "type": "text",
+            "id": "title_2",
+            "label": "Heading",
+            "default": "Media with text"
+          },
+          {
+            "type": "textarea",
+            "id": "subheading_2",
+            "label": "Subheading"
+          },
+          {
+            "type": "text",
+            "id": "button_label_2",
+            "label": "Button"
+          },
+          {
+            "type": "url",
+            "id": "button_link_2",
+            "label": "Button link"
+          }
+        ]
+      },
+      {
+        "name": "Wide Collection List",
+        "type": "wide-collection-list",
+        "settings": [
+          {
+            "type": "text",
+            "id": "block_title",
+            "label": "Block Heading",
+            "default": "Title"
+          },
+          {
+            "type": "header",
+            "content": "Collection #1"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "Image",
+            "info": "512px x 512px recommended"
+          },
+          {
+            "type": "header",
+            "content": "Text"
+          },
+          {
+            "type": "text",
+            "id": "title_1",
+            "label": "Heading",
+            "default": "Media with text"
+          },
+          {
+            "type": "textarea",
+            "id": "subheading_1",
+            "label": "Subheading"
+          },
+          {
+            "type": "text",
+            "id": "button_label_1",
+            "label": "Button"
+          },
+          {
+            "type": "url",
+            "id": "button_link_1",
+            "label": "Button link"
+          },
+          {
+            "type": "header",
+            "content": "Collection #2"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image",
+            "info": "512px x 512px recommended"
+          },
+          {
+            "type": "header",
+            "content": "Text"
+          },
+          {
+            "type": "text",
+            "id": "title_2",
+            "label": "Heading",
+            "default": "Media with text"
+          },
+          {
+            "type": "textarea",
+            "id": "subheading_2",
+            "label": "Subheading"
+          },
+          {
+            "type": "text",
+            "id": "button_label_2",
+            "label": "Button"
+          },
+          {
+            "type": "url",
+            "id": "button_link_2",
+            "label": "Button link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

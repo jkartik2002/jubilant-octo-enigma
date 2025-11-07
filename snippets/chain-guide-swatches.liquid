@@ -1,0 +1,20 @@
+<span class="variant-wrapper">
+  <span class="pipe"></span>
+  <span class="swatch-wrapper">
+    {% if silver %}
+      <span class="swatch-outer {% if selected == 'silver' %}selected{% endif %}" data-type="silver" data-chart="{{ chart }}">
+        <div class="swatch-inner silver"></div>
+      </span>
+    {% endif %}
+    {% if gold %}
+      <span class="swatch-outer {% if selected == 'gold' %}selected{% endif %}" data-type="gold" data-chart="{{ chart }}">
+        <div class="swatch-inner gold"></div>
+      </span>
+    {% endif %}
+    {% if solidgold %}
+      <span class="swatch-outer {% if selected == 'solid-gold' %}selected{% endif %}" data-type="solid-gold" data-chart="{{ chart }}">
+        <div class="swatch-inner solid-gold"></div>
+      </span>
+    {% endif %}
+  </span>
+</span>

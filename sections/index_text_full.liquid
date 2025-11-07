@@ -1,0 +1,218 @@
+<style>
+  @media(min-width: 1100px) {
+    #shopify-section-{{section.id}} {
+      margin-top: 80px;
+    }
+  }
+</style>
+<section class="text-full index {% if section.settings.extra_padding %}extra-padding{% endif %}">
+  <div class="text-wrapper" data-cc-animate="cc-fade-in-up" data-cc-animate-delay=".1s">
+    {% if section.settings.title != blank %}
+      <h3 class="title">{{ section.settings.title }}</h3>
+    {% endif %}
+    <div class="desc {% if section.settings.extra_padding %}d-none d-lg-block{% endif %}">
+      {{ section.settings.desc }}
+    </div>
+    <a class="cta" href="{{ section.settings.button-url }}">{{ section.settings['button-text'] }}</a>
+  </div>
+
+  {% if section.settings['image-1'] %}
+    {% assign img_url = section.settings['image-1'] | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+    <img
+      class="floating-image image-1 d-none d-lg-block lazyload"
+      alt="{{ section.settings.title | escape }}"
+      data-src="{{ img_url }}"
+      data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+      data-aspectratio="{{ section.settings.image-1.aspect_ratio }}"
+      data-sizes="auto"
+      width="350"
+      height="350"
+      data-cc-animate="cc-fade-in-up"
+      data-cc-animate-delay=".1s"
+    >
+
+    {% assign img_url = section.settings['image-1-xs'] | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+    <img
+      class="floating-image image-1 d-block d-lg-none lazyload"
+      alt="{{ section.settings.title | escape }}"
+      data-src="{{ img_url }}"
+      data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+      data-aspectratio="{{ section.settings.image-1-xs.aspect_ratio }}"
+      data-sizes="auto"
+      width="160"
+      height="160"
+      data-cc-animate="cc-fade-in-up"
+      data-cc-animate-delay=".1s"
+    >
+  {% endif %}
+  {% if section.settings['image-2'] %}
+    {% assign img_url = section.settings['image-2'] | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+    <img
+      class="floating-image image-2 d-none d-lg-block lazyload"
+      alt="{{ section.settings.title | escape }}"
+      data-src="{{ img_url }}"
+      data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+      data-aspectratio="{{ section.settings.image-2.aspect_ratio }}"
+      data-sizes="auto"
+      width="350"
+      height="351"
+      data-cc-animate="cc-fade-in-up"
+      data-cc-animate-delay=".1s"
+    >
+
+    {% assign img_url = section.settings['image-2-xs'] | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+    <img
+      class="floating-image image-2 d-block d-lg-none lazyload"
+      alt="{{ section.settings.title | escape }}"
+      data-src="{{ img_url }}"
+      data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+      data-aspectratio="{{ section.settings.image-2-xs.aspect_ratio }}"
+      data-sizes="auto"
+      width="160"
+      height="160"
+      data-cc-animate="cc-fade-in-up"
+      data-cc-animate-delay=".1s"
+    >
+  {% endif %}
+  {% if section.settings['image-3'] %}
+    {% assign img_url = section.settings['image-3'] | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+    <img
+      class="floating-image image-3 d-none d-lg-block lazyload"
+      alt="{{ section.settings.title | escape }}"
+      data-src="{{ img_url }}"
+      data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+      data-aspectratio="{{ section.settings.image-3.aspect_ratio }}"
+      data-sizes="auto"
+      width="350"
+      height="351"
+      data-cc-animate="cc-fade-in-up"
+      data-cc-animate-delay=".1s"
+    >
+
+    {% assign img_url = section.settings['image-3-xs'] | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+    <img
+      class="floating-image image-3 d-block d-lg-none lazyload"
+      alt="{{ section.settings.title | escape }}"
+      data-src="{{ img_url }}"
+      data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+      data-aspectratio="{{ section.settings.image-3-xs.aspect_ratio }}"
+      data-sizes="auto"
+      width="160"
+      height="160"
+      data-cc-animate="cc-fade-in-up"
+      data-cc-animate-delay=".1s"
+    >
+  {% endif %}
+  {% if section.settings['image-4'] %}
+    {% assign img_url = section.settings['image-4'] | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+    <img
+      class="floating-image image-4 d-none d-lg-block lazyload"
+      alt="{{ section.settings.title | escape }}"
+      data-src="{{ img_url }}"
+      data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+      data-aspectratio="{{ section.settings.image-4.aspect_ratio }}"
+      data-sizes="auto"
+      width="350"
+      height="350"
+      data-cc-animate="cc-fade-in-up"
+      data-cc-animate-delay=".1s"
+    >
+
+    {% assign img_url = section.settings['image-4-xs'] | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+    <img
+      class="floating-image image-2 d-block d-lg-none lazyload"
+      alt="{{ section.settings.title | escape }}"
+      data-src="{{ img_url }}"
+      data-widths="[180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024]"
+      data-aspectratio="{{ section.settings.image-4-xs.aspect_ratio }}"
+      data-sizes="auto"
+      width="160"
+      height="160"
+      data-cc-animate="cc-fade-in-up"
+      data-cc-animate-delay=".1s"
+    >
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Text Feature",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "extra_padding",
+      "label": "Extra Vertical Padding?"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "YOUR WEARABLE TRAVEL DIARY"
+    },
+    {
+      "type": "richtext",
+      "id": "desc",
+      "label": "Body Text",
+      "default": "<p>Mix and match your charms on chains and bracelets and tell your own unique story. Whether you’re an avid traveler or simply have hometown pride...the possibilities are endless and so is the fun.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button-text",
+      "label": "Button Text",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "button-url",
+      "label": "Button URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "image-1",
+      "label": "Floating Image 1 - Desktop"
+    },
+    {
+      "type": "image_picker",
+      "id": "image-1-xs",
+      "label": "Floating Image 1 - Mobile"
+    },
+    {
+      "type": "image_picker",
+      "id": "image-2",
+      "label": "Floating Image 2 - Desktop"
+    },
+    {
+      "type": "image_picker",
+      "id": "image-2-xs",
+      "label": "Floating Image 2 - Mobile"
+    },
+    {
+      "type": "image_picker",
+      "id": "image-3",
+      "label": "Floating Image 3 - Desktop"
+    },
+    {
+      "type": "image_picker",
+      "id": "image-3-xs",
+      "label": "Floating Image 3 - Mobile"
+    },
+    {
+      "type": "image_picker",
+      "id": "image-4",
+      "label": "Floating Image 4 - Desktop"
+    },
+    {
+      "type": "image_picker",
+      "id": "image-4-xs",
+      "label": "Floating Image 4 - Mobile"
+    }
+  ],
+  "presets": [
+   {
+      "name": "Text Feature",
+      "category": "Custom",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}

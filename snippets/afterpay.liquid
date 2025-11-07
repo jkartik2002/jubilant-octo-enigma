@@ -1,0 +1,62 @@
+<script
+    src="https://js.afterpay.com/afterpay-1.x.js"
+    data-min="1.00"
+    data-max="2000.00"
+    async
+></script>
+
+<script>
+window.addEventListener("load", () => {
+
+      let targetSelector = "";
+      let attributes = {};
+
+      attributes.size =   "sm"; // xs, sm, md, lg
+      attributes.showUpperLimit = true;
+      attributes.showLowerLimit = false;
+      attributes.badgeTheme = "black-on-mint";
+      attributes.isEligible = true;
+      attributes.locale = "en_US";
+      attributes.currency = "USD";
+{% if template.name contains 'product' %}
+
+        let title = {{product.title | json}};
+        if (title.includes("Gift Card")) attributes.isEligible = false;
+        attributes.amount = "{{ product.selected_or_first_available_variant.price |   money_without_currency }}"
+	targetSelector = '.product-area__col.product-area__col--price';
+	attributes.amountSelector = ".current-price";
+      Afterpay.createPlacements({
+          targetSelector,
+          attributes
+      });
+{% else if template.name == 'cart' %}
+        let cartItems = {{cart.items | json }};
+        let giftCardPresent = cartItems.some(item => item.gift_card);
+        if (giftCardPresent) {
+          attributes.cartIsEligible = false;
+        }
+        attributes.amount = "{{ cart.total_price | money_without_currency }}";
+        targetSelector = '.subtotal-row';
+	    attributes.amountSelector = ".subtotal .amount.theme-money";
+
+	Afterpay.createPlacements({
+		targetSelector,
+		attributes
+	});
+{% endif %}
+
+});
+</script>
+<style>
+  @media screen and (max-width:770px){
+     afterpay-placement {}
+  }
+  @media screen and (min-width:771px){
+     afterpay-placement {}
+  }
+  afterpay-placement {
+/*     --logo-badge-width: 100px; */
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+</style>

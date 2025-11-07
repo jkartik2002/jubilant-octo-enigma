@@ -1,0 +1,812 @@
+<!doctype html>
+<html class="no-js" lang="{{ shop.locale }}">
+  <head>
+     {% render 'head-tag' %}
+    <!-- Google Tag Manager -->
+      <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KFJ8ST9');
+      </script>
+   
+    <!-- End Google Tag Manager -->
+   
+    {%- assign base_font = settings.type_base_font -%}
+    {%- assign base_font_medium = base_font | font_modify: 'weight', '500' -%}
+    {%- assign base_font_semibold = base_font | font_modify: 'weight', '600' -%}
+    {%- if base_font_medium -%}
+      <link rel="preload" as="font" href="{{ base_font_medium | font_url }}" type="font/woff2" crossorigin>
+    {%- endif -%}
+    {%- if base_font_semibold -%}
+      <link rel="preload" as="font" href="{{ base_font_semibold | font_url }}" type="font/woff2" crossorigin>
+    {%- endif -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <meta name="theme-color" content="{{ settings.col_btn_bg }}">
+
+    <title>{{- page_title -}}{% if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' %}&ndash;{{ 'general.meta.tags' | t: tags: meta_tags -}}{%- endif %}{% if current_page != 1 %}&ndash;{{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}</title>
+
+    {% render 'social-meta-tags' %}
+
+    <script src="{{ 'jquery-1.12.4.min.js' | asset_url }}"></script>
+
+    <script src="{{ 'flickity.pkgd.min.js' | asset_url }}"></script>
+    <script src="https://unpkg.com/@popperjs/core@2" defer="defer"></script>
+    <script src="https://unpkg.com/tippy.js@6" defer="defer"></script>
+
+    <script
+      async
+      type="text/javascript"
+      src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=LyvkJJ"
+    ></script>
+
+    <link
+      rel="preload"
+      href="{{ 'styles.css' | asset_url  }}"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    >
+    <noscript><link rel="stylesheet" href="{{ 'styles.css' | asset_url  }}"></noscript>
+    <link
+      rel="preload"
+      href="{{ 'layout.scss.css' | asset_url  }}"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    >
+    <noscript><link rel="stylesheet" href="{{ 'layout.scss.css' | asset_url  }}"></noscript>
+
+    <link
+      rel="preload"
+      href="{{ 'css-vendors.css' | asset_url  }}"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    >
+    <noscript><link rel="stylesheet" href="{{ 'css-vendors.css' | asset_url  }}"></noscript>
+    <link
+      rel="preload"
+      href="{{ 'ajax-cart.scss.css' | asset_url  }}"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    >
+    <noscript><link rel="stylesheet" href="{{ 'ajax-cart.scss.css' | asset_url  }}"></noscript>
+    <link
+      rel="preload"
+      href="{{ 'all_plugins.scss.css' | asset_url  }}"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    >
+    <noscript><link rel="stylesheet" href="{{ 'all_plugins.scss.css' | asset_url  }}"></noscript>
+
+    {% comment %}
+      //Combile all below css file code into all_plugins.scss.css file
+
+      <link rel="preload" href="{{ 'gift-guide.scss.css' | asset_url  }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+      <noscript><link rel="stylesheet" href="{{ 'gift-guide.scss.css' | asset_url  }}"></noscript>
+      <link rel="preload" href="{{ 'free-shipping-progress.scss.css' | asset_url  }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+      <noscript><link rel="stylesheet" href="{{ 'free-shipping-progress.scss.css' | asset_url  }}"></noscript>
+
+      <link rel="preload" href="{{ 'bracelet-guide.scss.css' | asset_url  }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+      <noscript><link rel="stylesheet" href="{{ 'bracelet-guide.scss.css' | asset_url  }}"></noscript>
+    {% endcomment %}
+
+    {{ content_for_header }}
+
+    {% if template == 'product' and product.metafields.inventory.ShappifyHidden or product.type contains '_HIDDEN_' -%}
+      <meta name="robots" content="noindex">
+    {%- endif %}
+
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', '');
+      window.theme = window.theme || {};
+      theme.money_format = {{ shop.money_format | json }};
+      theme.money_container = '.theme-money';
+      theme.strings = {
+        previous: {{ 'general.accessibility_labels.previous' | t | json }},
+        next: {{ 'general.accessibility_labels.next' | t | json }},
+        close: {{ 'general.accessibility_labels.close' | t | json }},
+        addressError: {{ 'map.errors.address_error' | t | json }},
+        addressNoResults: {{ 'map.errors.address_no_results' | t | json }},
+        addressQueryLimit: {{ 'map.errors.address_query_limit_html' | t | json }},
+        authError: {{ 'map.errors.auth_error' | t | json }},
+        back: {{ 'layout.navigation.back' | t | json }},
+        cartConfirmation: {{ 'cart.terms.confirmation' | t | json }},
+        loadMore: {{ 'general.accessibility_labels.load_more' | t | json }},
+        infiniteScrollNoMore: {{ 'collections.general.infinite_scroll_no_more' | t | json }},
+        priceNonExistent: {{ 'products.variant.non_existent' | t | json }},
+        buttonDefault: {{ 'products.product.add_to_cart' | t | json }},
+        buttonNoStock: {{ 'products.variant.out_of_stock' | t | json }},
+        buttonNoVariant: {{ 'products.variant.non_existent' | t | json }},
+        variantNoStock: {{ 'products.variant.no_stock' | t | json }},
+        unitPriceSeparator: {{ 'products.product.unit_price_separator' | t | json }},
+        colorBoxPrevious: {{ 'general.lightbox.previous' | t | json }},
+        colorBoxNext: {{ 'general.lightbox.next' | t | json }},
+        colorBoxClose: {{ 'general.lightbox.close' | t | json }},
+        navigateHome: {{ 'layout.navigation.home' | t | json }},
+        productAddingToCart: {{ 'products.product.adding_to_cart' | t | json }},
+        productAddedToCart: {{ 'products.product.added_to_cart' | t | json }},
+        popupWasAdded: {{ 'products.product.popup_was_added' | t | json }},
+        popupCheckout: {{ 'products.product.popup_checkout' | t | json }},
+        popupContinueShopping: {{ 'products.product.popup_continue_shopping' | t | json }},
+        onlyXLeft: {{ 'products.labels.only_x_left' | t: quantity: '[[ quantity ]]' | json }},
+        priceSoldOut: {{ 'products.labels.sold_out' | t | json }},
+        loading: {{ 'products.listing.loading' | t | json }},
+        viewCart: {{ 'layout.cart_summary.cart' | t | json }},
+        page: {{ 'general.meta.page' | t | json }},
+        imageSlider: {{ 'general.slider.images' | t | json }},
+        clearAll: {{ 'collections.filtering.clear_all' | t | json }}
+      };
+      theme.routes = {
+        search_url: '{{ routes.search_url }}',
+        cart_url: '{{ routes.cart_url }}',
+        cart_add_url: '{{ routes.cart_add_url }}',
+        checkout: '/checkout'
+      };
+      theme.settings = {
+        productImageParallax: {{ settings.animation_parallax_prod_image | json }},
+        animationEnabledDesktop: {{ settings.animation_enabled_desktop | json }},
+        animationEnabledMobile: {{ settings.animation_enabled_mobile | json }}
+      };
+
+      theme.checkViewportFillers = function(){
+        var toggleState = false;
+        var elPageContent = document.getElementById('page-content');
+        if(elPageContent) {
+          var elOverlapSection = elPageContent.querySelector('.header-overlap-section');
+          if (elOverlapSection) {
+            var padding = parseInt(getComputedStyle(elPageContent).getPropertyValue('padding-top'));
+            toggleState = ((Math.round(elOverlapSection.offsetTop) - padding) === 0);
+          }
+        }
+        if(toggleState) {
+          document.getElementsByTagName('body')[0].classList.add('header-section-overlap');
+        } else {
+          document.getElementsByTagName('body')[0].classList.remove('header-section-overlap');
+        }
+      };
+
+      theme.assessAltLogo = function(){
+        var elsOverlappers = document.querySelectorAll('.needs-alt-logo');
+        var useAltLogo = false;
+        if(elsOverlappers.length) {
+          var elSiteControl = document.querySelector('#site-control');
+          var elSiteControlInner = document.querySelector('#site-control .site-control__inner');
+          var headerMid = elSiteControlInner.offsetTop + elSiteControl.offsetTop + elSiteControlInner.offsetHeight / 2;
+          Array.prototype.forEach.call(elsOverlappers, function(el, i){
+            var thisTop = el.getBoundingClientRect().top;
+            var thisBottom = thisTop + el.offsetHeight;
+            if(headerMid > thisTop && headerMid < thisBottom) {
+              useAltLogo = true;
+              return false;
+            }
+          });
+        }
+        if(useAltLogo) {
+          document.getElementsByTagName('body')[0].classList.add('use-alt-logo');
+        } else {
+          document.getElementsByTagName('body')[0].classList.remove('use-alt-logo');
+        }
+      };
+    </script>
+
+    <!-- begin-boost-pfs-filter-css -->
+    {% render 'boost-pfs-style' %}
+    <!-- end-boost-pfs-filter-css -->
+
+    <script defer="defer">
+      window.dataLayer = window.dataLayer || [];
+    </script>
+
+    {% render 'ga-customer' %}
+
+    {% if template.name == 'product' %}
+      <script defer="defer">
+        dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+        dataLayer.push({
+          'ecommerce': {
+            'detail': {
+              {% if product.collections.size > 0 %}
+                'actionField': {'list': '{{ product.collections[0].title }}'},    // 'detail' actions have an optional list property.
+              {% endif %}
+              'products': [{
+                'name': '{{ product.title }}',         // Name or ID is required.
+                'id': '{{ product.id }}',
+                'price': '{{ product.price | money_without_currency }}',
+                'brand': '{{ shop.name }}',
+                'category': '{{ product.type }}',
+                'variant': '{{ product.first_available_variant.title }}'
+              }]
+            }
+          }
+        });
+
+        {% if product.selected_or_first_available_variant.inventory_quantity > 10 or product.selected_or_first_available_variant.inventory_policy == 'continue' %}
+          {% assign stock = 'in stock' %}
+        {% elsif product.selected_or_first_available_variant.inventory_quantity > 0 %}
+          {% assign stock = 'low stock' %}
+        {% else %}
+          {% assign stock = 'out of stock' %}
+        {% endif %}
+        dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+        dataLayer.push({
+          event: 'gtmEvent',
+          eventCategory: 'inventory',
+          eventAction: '{{ stock }}',
+          eventLabel: '{{ product.title }}',
+          inventoryOnHand: {{ product.selected_or_first_available_variant.inventory_quantity }},
+          productId: {{ product.selected_or_first_available_variant.id }}
+        })
+      </script>
+    {% elsif template.name == 'collection' %}
+      <script defer="defer">
+        dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+        dataLayer.push({
+          'ecommerce': {
+            'currencyCode': '{{ shop.currency }}',
+            'impressions': [
+              {% for product in collection.products %}
+                {
+                  'name': '{{ product.title }}',
+                  'id': '{{ product.id }}',
+                  'price': '{{ product.price | money_without_currency }}',
+                  'brand': '{{ shop.name }}',
+                  'category': '{{ collection.title }}',
+                  'variant': '{{ product.first_available_variant.title }}',
+                  'list': '{{ collection.title }}',
+                  'position': 1
+                }{% unless forloop.last %},{% endunless %}
+              {% endfor %}
+            ]
+          }
+        });
+      </script>
+    {% endif %}
+
+    {% include 'sca.freegifts' %}
+    <style>
+      /* Main theme + Cart Discount show */
+       .cart-list .col-notimage .discounts.list-unstyled {
+            padding-left: 0px;
+            list-style: none;
+            margin-top: 4px;
+        }
+        div.cart-page li.item div.line-price { margin-top: 14px;}
+      .cart-list .discounts .discounts__discount {
+          border: none;
+          background-color: transparent;
+          padding: 0px;
+          font-size: 14px;
+          margin-top: 0;
+      }
+      .cart-list .discounts .discounts__discount svg {
+          width: 14px;
+          height: 12px;
+      }
+      /* Main theme + Cart Discount show */
+    </style>
+  </head>
+
+  <body
+    id="page-{{ page_title | handle }}"
+    class="page-{{ page_title | handle }} {% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if template.suffix != blank %} template-suffix-{{ template.suffix }}{% endif %}{% if template contains 'customers' %} template-customer-area{% endif %}{% if logo_html contains 'img' %} has-logo{% endif %} {% if settings.enable-sale-banner %}sale-banner{% endif %}"
+  >
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-KFJ8ST9"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    {% comment %}
+      <script
+        async
+        src="https://na-library.klarnaservices.com/lib.js"
+        data-client-id="48c5c99c-ae60-5e2f-abc5-c68d7b8cd96c"
+      ></script>
+    {% endcomment %}
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-KFJ8ST9"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <script defer="defer">
+       {% if settings.animation_enabled_mobile %}
+          if(window.innerWidth < 768 && window.localStorage.getItem('is_first_visit') !== null) {
+            var pageFadedIn = false;
+            document.body.style.opacity = 0;
+
+            function fadeInPageMob(){
+              if(!pageFadedIn) {
+                document.body.classList.add("cc-animate-enabled");
+                document.body.style.transition = 'opacity 0.4s';
+                setTimeout(function () {
+                  document.body.style.opacity = 1;
+                }, 200);
+                pageFadedIn = true;
+              }
+            }
+
+            window.addEventListener("load", fadeInPageMob);
+            setTimeout(fadeInPageMob, 3000);
+          }
+
+          window.addEventListener("pageshow", function(){
+            document.getElementById('cc-veil').classList.remove('-in');
+          });
+      {% endif %}
+
+      {% if settings.animation_enabled_desktop %}
+      if ('IntersectionObserver' in window) {
+        document.body.classList.add("cc-animate-enabled");
+      }
+      {% endif %}
+    </script>
+    <a class="skip-link visually-hidden" href="#page-content">
+      {{- 'general.accessibility_labels.skip_to_content' | t -}}
+    </a>
+
+    {% section 'announcement-bar' %}
+    {% section 'header' %}
+
+    <main id="page-content">
+      {{ content_for_layout }}
+    </main>
+
+    <script defer="defer">
+      var firstSection = document.body.querySelector('#page-content .shopify-section:first-child');
+      if(firstSection) {
+        var firstBgSet = firstSection.querySelector('[data-bgset]');
+
+        if (firstBgSet) {
+          var bgSets = firstBgSet.dataset.bgset.split(',');
+          for (var i = 0; i < bgSets.length; i++) {
+            var width = parseInt(bgSets[i].match(/ [0-9]+w/g)[0].replace('w', '').trim());
+            var height = parseInt(bgSets[i].match(/ [0-9]+h/g)[0].replace('h', '').trim());
+
+            if (width >= window.innerWidth && height >= window.innerHeight) {
+              firstBgSet.style.backgroundImage = "url('" + bgSets[i].trim().split(' ')[0] + "')";
+              firstBgSet.classList.remove('fade-in');
+              break;
+            }
+          }
+        } else if (firstSection.querySelector('[data-src]')) {
+          var firstDataSrc = firstSection.querySelector('[data-src]');
+          var widths = JSON.parse(firstDataSrc.dataset.widths);
+          for (var i = 0; i < widths.length; i++) {
+            var width = parseInt(widths[i]);
+            if (width >= window.innerWidth) {
+              firstDataSrc.setAttribute('src', firstDataSrc.dataset.src.replace('{width}', width));
+              firstDataSrc.classList.remove('fade-in');
+              break;
+            }
+          }
+        }
+      }
+    </script>
+
+    {% section 'popup' %}
+    {% section 'footer' %}
+
+    <!-- Search form -->
+    <div id="search-modal" class="theme-modal theme-modal--fullscreen" tabindex="-1">
+      <a href="#" data-modal-close class="modal-close">&times;</a>
+      <div class="inner">
+        <div class="container growth-area">
+          <form action="{{ routes.search_url }}" method="get" class="search-form" role="search">
+            {% comment %} Remove the following line to search everything, not just products {% endcomment %}
+            <input type="hidden" name="type" value="product">
+            <input type="hidden" name="options[prefix]" value="last">
+
+            <div class="inline-mini-form inline-mini-form--arrow">
+              <input
+                type="text"
+                name="q"
+                placeholder="{{ 'general.search.page_placeholder' | t }}"
+                class="focus-me"
+                value="{{ search.terms | escape }}"
+                aria-label="{{ 'general.search.input_label' | t | escape }}"
+                autocomplete="off"
+                required
+              >
+              <button
+                class="compact no-hover"
+                type="submit"
+                aria-label="{{ 'general.search.search_button' | t | escape }}"
+              >
+                {% render 'svg-rarrow-long' %}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="cc-veil" class="{% if settings.animation_loading %}cc-veil--animate{% endif %}">
+      {% if settings.animation_loading %}
+        <div
+          class="
+            cc-veil-loader cc-veil-loader--{{ settings.animation_loading_animation }}
+            {% if settings.animation_loading_message != blank and settings.animation_loading_image != blank %}cc-veil-loader--image-text{% endif %}
+            {% if settings.animation_loading_message == blank and settings.animation_loading_image == blank %}cc-veil-loader--blank{% endif %}
+          "
+        >
+          {% if settings.animation_loading_image != blank %}
+            <img
+              class="cc-veil-loader__image"
+              src="{{ settings.animation_loading_image | img_url: '500x500' }}"
+              alt="{{ settings.animation_loading_image.alt | escape }}"
+              width="{{ settings.animation_loading_image.width }}"
+              height="{{ settings.animation_loading_image.height }}"
+            >
+          {% endif %}
+
+          {% if settings.animation_loading_message != blank %}
+            <p class="cc-veil-loader__message">
+              {{ settings.animation_loading_message }}
+            </p>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+
+    <script src="{{ 'vendor.js' | asset_url }}" defer></script>
+    <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+
+    {% render 'body-end-tag' %}
+
+    <!-- begin-boost-pfs-js -->
+    {% render 'boost-pfs' %}
+    <!-- end-boost-pfs-js -->
+
+    {% unless settings.quickbuy_enabled %}
+      <style>
+        div.quickview-wrapper {
+          display: none !important;
+        }
+      </style>
+    {% endunless %}
+
+    {% comment %}
+      {% if template == 'product' %}
+        <!-- Back in Stock helper snippet -->
+        {% render 'back-in-stock-helper' %}
+        <!-- End Back in Stock helper snippet -->
+      {% endif %}
+    {% endcomment %}
+
+    {% render 'spurit_dmr_theme_snippet' %}
+
+    {% include 'swymSnippet' %}
+    {% include 'swym-custom' %}
+
+    {% if settings['enable-drawer'] %}
+      {% include 'ajax-cart' %}
+      <script src="{{ 'ajax-cart.js' | asset_url }}"></script>
+    {% endif %}
+
+    <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/lmr4oul.css">
+
+    <script>
+      window.KlarnaThemeGlobals={};{%case template.name%} {%when"product"%} window.KlarnaThemeGlobals.data_purchase_amount={{product.first_available_variant.price}};window.KlarnaThemeGlobals.productVariants={{product.variants|json}};window.KlarnaThemeGlobals.documentCopy=document.cloneNode(true);{%when"cart"%} window.KlarnaThemeGlobals.data_purchase_amount={{cart.total_price}};window.KlarnaThemeGlobals.documentCopy=document.cloneNode(true);{%endcase%}
+    </script>
+
+    {% comment %} {% render "afterpay" %} {% endcomment %}
+
+    <script data-cfasync="false">
+      window.ju_num="8745D4B3-E808-47F4-A307-13546C2F1AD1";window.asset_host='//cdn.jst.ai/';(function(i,s,o,g,r,a,m){i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)};a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script',asset_host+'vck.js','juapp');
+    </script>
+
+    {% section 'app-optimization' %}
+    {% render 'nosto-tagging' %}
+
+    {% render 'special-offers' %}
+
+    <script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script>
+    <script
+      async
+      type="text/javascript"
+      src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=LyvkJJ"
+    ></script>
+    <script>
+      var klaviyo = klaviyo || [];
+      klaviyo.init({
+        account: "LyvkJJ",
+        list: 'MYfuYG',
+        platform: "shopify",
+        exclude_on_tags: "no_bis"
+      });
+
+      klaviyo.enable("backinstock", {
+        trigger: {
+          product_page_text: "ADD TO WAITLIST",
+          product_page_class: "button flex-button",
+          product_page_text_align: "center",
+          product_page_margin: "0px",
+          replace_anchor: false
+        },
+        modal: {
+          headline: "{product_name}",
+          body_content: "Register below to receive a notification if this product becomes available. Unfortunately, we cannot guarantee that it will but your interest is welcome and noted!",
+          email_field_label: "Email",
+          button_label: "ADD TO WAITLIST",
+          subscription_success_label: "Thanks! We'll notify you if this product is in stock.",
+          font_family: 'futura-pt,sans-serif',
+          headers_font_family: 'futura-pt,sans-serif',
+          additional_styles: "@import 'https://use.typekit.net/ryb7rpx.css'; body, p, .btn, select, input { font-family: futura-pt,sans-serif; font-size: 16px !important; } h3 { font-weight: bold !important; } button { width: auto;border: none;font-weight: 400;border-radius: 30px !important;font-weight: bold;font-size: 14px;line-height: 1; text-transform: uppercase; } input { color: #2a2a5f !important; }",
+          drop_background_color: "#060606",
+          background_color: "#fff",
+          text_color: "#2a2a5f",
+          button_text_color: "#2a2a5f",
+          button_background_color: "#91fcd4",
+          close_button_color: "#ccc",
+          error_background_color: "#fcd6d7",
+          error_text_color: "#C72E2F",
+          success_background_color: "#d3efcd",
+          success_text_color: "#1B9500",
+          subscribe_checked: false
+        }
+      });
+    </script>
+    <script>
+           window.addEventListener( "pageshow", function ( event ) {
+        var historyTraversal = event.persisted ||
+                               ( typeof window.performance != "undefined" &&
+                                    window.performance.navigation.type === 2 );
+        if ( historyTraversal ) {
+          // Handle page restore.
+          window.location.reload();
+        }
+      });
+    </script>
+
+    <!-- Gorgias Chat Widget Start -->
+    <script
+      id="gorgias-chat-widget-install-v3"
+      src="https://config.gorgias.chat/bundle-loader/01H3010GK1JG0GVXK55H9NX8BA?source=shopify1click"
+    ></script>
+    <script id="gorgias-chat-shopify-install">
+      !function(_){_.SHOPIFY_PERMANENT_DOMAIN="{{shop.permanent_domain}}",_.SHOPIFY_CUSTOMER_ID="{{customer.id}}",_.SHOPIFY_CUSTOMER_EMAIL="{{customer.email}}"}(window||{});
+    </script>
+    <!-- Gorgias Chat Widget End -->
+    <script>
+      var initGorgiasChatPromise = (window.GorgiasChat) ? window.GorgiasChat.init() : new Promise(function (resolve) { window.addEventListener('gorgias-widget-loaded', function () { resolve();})});
+
+      initGorgiasChatPromise.then(async () => {
+        GorgiasChat.hidePoweredBy(true)
+      });
+    </script>
+    {% if product.type contains 'Bundle'
+      or product.type contains 'Ring, Solid Gold'
+      or product.type contains 'Ring'
+      or product.type contains 'Cuffs'
+      or product.type contains 'Earrings'
+      or product.type contains 'Archived'
+      or product.type contains 'Seasonal'
+      or product.type contains 'Chain Infinity Necklace'
+      or product.type contains 'Necklace'
+      or product.type contains 'GWP'
+      or product.type contains 'OPTION'
+      or product.type contains 'Gift Card'
+    %}
+      <style>
+        .nosto-bundle-trigger{display:none !important;}
+      </style>
+    {% endif %}
+    <script>
+      function mobPLPSlide() {
+         $('.mob-plp-item-slider').slick({
+            infinite: false,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            dots: true,
+          });
+
+      }
+        setTimeout(function(){
+         mobPLPSlide();
+        },3000);
+
+       $(document).on('click', '.boost-pfs-filter-load-more-button-container .boost-pfs-filter-load-more-button, .boost-pfs-filter-btn-load-previous-page .js-boost-pfs-filter-btn-load-previous-page', function(){
+        setTimeout(function(){
+           $('.mob-plp-item-slider').not('.slick-initialized').slick({
+            infinite: false,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            dots: true,
+          });
+          },2000);
+
+       });
+    </script>
+    {% if template contains 'product' %}
+      <script>
+        function openReviews(event){
+          if(document.querySelector(".product-custom-reviews a").getAttribute("aria-selected") == ""){
+            document.querySelector(".product-custom-reviews a").click();
+          }
+        }
+      </script>
+    {% endif %}
+    {% if template == 'product' %}
+      <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+        function nostoSliderHeight() {
+          var flickityViewport = $('#productpage-nosto-4 .flickity-viewport');
+          const nostoheight = document.querySelector('#productpage-nosto-5 .flickity-slider')?.clientHeight;
+          flickityViewport.css('height', `${nostoheight}px`); 
+        }
+         nostoSliderHeight();
+        setTimeout(function(){
+           nostoSliderHeight();
+        },2000);
+         setTimeout(function(){
+           nostoSliderHeight();
+        },4000);
+        setTimeout(function(){
+           nostoSliderHeight();
+        },8000);
+       });
+      </script>
+    {% endif %}
+
+    <style>
+          #stamped-reviews-widget[data-widget-type="full-page"] .stamped-widget-buttons {
+          display: none !important;
+      }
+    </style>
+
+    <!-- Stamped Main Script: Begin -->
+    <script>
+      function myInit(){ StampedFn.init({ apiKey: 'pubkey-8f6AbX4jq5S9SvVWP3hm5VW6W7dA8F', sId: '226524' }); }
+    </script>
+    <script async onload="myInit()" type="text/javascript" src="https://cdn1.stamped.io/files/widget.min.js"></script>
+    <!-- Stamped Main Script: End -->
+    {% if template.name == 'page' and handle == 'reviews' %}
+      <script type="application/ld+json">
+        {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "image": "https://jetsetcandy.com/cdn/shop/t/218/assets/logo.svg?v=18247009746610548151716184701",
+        "name": "Jet Set Candy Product Reviews",
+        "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1",
+        "ratingCount": "1207"
+        }
+        }
+      </script>
+    {% endif %}
+    
+<script defer="defer">
+    new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+            if (mutation.type === 'childList' || mutation.type === 'subtree') {
+                document.querySelectorAll('.mu-item-property.mu-text-sm.mu-capitalize').forEach(item => {
+                    if ((item.getAttribute('data-key') === '-' || item.getAttribute('data-key') === 'Add') && item.getAttribute('data-value') === '-') {
+                        item.style.display = 'none';
+                    }
+                    if(item.getAttribute('data-key') === 'ESTIMATED TIME'){
+                        if(item.querySelector("b")){ 
+                          item.querySelector("b").innerHTML = "";
+                        } 
+                    }
+                });
+                if(document.querySelector(".mu-w-4.mu-h-4.mu-rounded-full.mu-absolute.mu-flex-center.mu-text-white")){
+                  document.querySelector(".mu-w-4.mu-h-4.mu-rounded-full.mu-absolute.mu-flex-center.mu-text-white").style.background = "rgb(145, 252, 212)";
+                }
+                if(document.querySelectorAll('.mu-item-image.mu-bg-cover.mu-bg-center.mu-block.mu-mr-2').length > 0){
+                   document.querySelectorAll('.mu-item-image.mu-bg-cover.mu-bg-center.mu-block.mu-mr-2').forEach(item => {
+                    if (!item.parentElement.classList.contains('bg-card-color')) { 
+                        const parentDiv = document.createElement('div');
+                        parentDiv.classList.add('bg-card-color');
+                        item.parentNode.insertBefore(parentDiv, item); 
+                        parentDiv.appendChild(item);
+                    }
+                });
+                }
+                  if (document.querySelectorAll('.mu-free-gift.mu-flex.mu-p-2').length > 0) {
+                    document.querySelectorAll('.mu-free-gift.mu-flex.mu-p-2').forEach(item => {
+                        if (item.querySelector('.mu-free-gift-image.mu-bg-cover.mu-bg-center.mu-block.mu-relative.mu-mr-2') 
+                            && !item.querySelector('.mu-free-gift-image.mu-bg-cover.mu-bg-center.mu-block.mu-relative.mu-mr-2').parentElement.classList.contains('bg-card-color')) {
+                            const parentDiv = document.createElement('div');
+                            parentDiv.classList.add('bg-card-color');
+                            item.querySelector('.mu-free-gift-image.mu-bg-cover.mu-bg-center.mu-block.mu-relative.mu-mr-2').parentNode.insertBefore(
+                                parentDiv, item.querySelector('.mu-free-gift-image.mu-bg-cover.mu-bg-center.mu-block.mu-relative.mu-mr-2')
+                            );
+                            parentDiv.appendChild(item.querySelector('.mu-free-gift-image.mu-bg-cover.mu-bg-center.mu-block.mu-relative.mu-mr-2'));
+                        }
+                    });
+                }
+              document.querySelectorAll(".mu-item-quantity.mu-flex.mu-items-stretch.notranslate").forEach((e) => {
+                  if (!e.classList.contains("align-text-center")) {
+                    e.classList.add("align-text-center");
+                  }
+              });
+    
+            }
+        });
+    }).observe(document.body, {
+        childList: true,
+        subtree: true 
+    });
+</script>
+  </body>
+  {% if template contains 'product' %}
+    <script defer="defer">
+      let productsArray = [];
+      var variantQuantity = [];
+      var productCustomFieldsStockMSG = [];
+      // var productDiscountMSG = [];
+      var tagString = "";
+      let productTags = [];
+      {% if product.metafields.custom_fields["stock_status_information"] != blank %}
+        productCustomFieldsStockMSG[{{ product.id }}] = {{ product.metafields.custom_fields["stock_status_information"] | json }};
+      {% endif %}
+      {% comment %}
+      {% if product.metafields.custom.discount_message != blank %}
+      	productDiscountMSG[{{ product.id }}] = {{ product.metafields.custom.discount_message | json }};
+      {% endif %}
+      {% endcomment %}
+      var productsData = {{ product.variants | json }};
+      {% for tag in product.tags %}
+        var shopifyTags = "{{ tag }}";
+        var tagString = tagString + shopifyTags{% unless forloop.last %} + ", "{% endunless %};
+      {% endfor %}
+      tagString.split(", ").forEach((tag) => {
+        if(tag.includes("stock-manual")){
+          var targetElement = document.querySelector("#product-form-pdp form [data-cc-animate]");
+          if (targetElement) {
+              var config = { subtree: true, childList: true, attributes: true };
+              var observer = new MutationObserver(function (mutations) {
+                  mutations.forEach(function (mutation) {
+                      if (mutation.target.classList.contains('stocklabel-active')) {
+                          mutation.target.classList.remove('stocklabel-active');
+                          observer.disconnect();
+                      }
+                  });
+              });
+              observer.observe(targetElement, config);
+          }
+        }
+      });
+      {% for variant in product.variants %}
+        variantQuantity[{{ variant.id }}] = "{{ variant.inventory_quantity }}";
+        var deliveryDate = "{{ variant.metafields.custom.estimated_date }}";
+        productsArray[{{ variant.id }}] = "{{ variant.metafields.custom.estimated_date }}";
+      {% endfor %}
+      if (variantQuantity[{{ product.selected_or_first_available_variant.id }}] <= 0) {
+        var targetElement = document.querySelector("#product-form-pdp form [data-cc-animate]");
+        if (targetElement) {
+            var config = { subtree: true, childList: true, attributes: true };
+            var observer = new MutationObserver(function (mutations) {
+                mutations.forEach(function (mutation) {
+                    if (mutation.target.classList.contains('stocklabel-active')) {
+                        mutation.target.classList.remove('stocklabel-active');
+                        observer.disconnect();
+                    }
+                });
+            });
+            observer.observe(targetElement, config);
+        }
+      }
+    </script>
+  {% endif %}
+</html>

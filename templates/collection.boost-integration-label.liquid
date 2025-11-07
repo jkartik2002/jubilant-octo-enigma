@@ -1,0 +1,39 @@
+{%- comment -%} Please don’t update this content {%- endcomment -%}
+{%- comment -%} This collection template is used to integrate boost product filter with 3rd party apps {%- endcomment -%}
+
+{% layout none %}
+{
+  "products":
+    [
+      {%- for tag in current_tags -%}
+        {
+          {%- assign product_handle = tag | handle -%}
+          {%- assign product = all_products[product_handle] -%}
+
+          "id":{{ product.id | json }},
+          "label":
+            {%- capture custom_html -%}
+              {%- include 'product-label', product: product -%}
+            {%- endcapture -%}
+            {{ custom_html | json }},
+			"title":
+            {%- capture title -%}
+              {% if product.metafields.custom_fields["variant_collection_reference"] != blank %}
+              {{ collections[product.metafields.custom_fields["variant_collection_reference"]].title }}
+              {% elsif product.metafields.custom_fields["shortened_title"] != blank  %}
+              {{ product.metafields.custom_fields["shortened_title"] }}
+              {% else %}
+              {{ product.title }}
+              {% endif %}
+            {%- endcapture -%}
+            {{ title | json }},
+			"promotion":
+            {%- capture promotion -%}
+                {%- include 'boost-custom-html' -%}
+            {%- endcapture -%}
+            {{ promotion | json }}
+        }
+        {%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    ]
+}

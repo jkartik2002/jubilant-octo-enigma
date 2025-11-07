@@ -1,0 +1,176 @@
+{% if collection.metafields.custom.item_list.value != blank %}
+<style>
+.faq-section { padding: 30px 0 40px 0; }
+.faq-section-3 { padding-bottom: 100px }
+.faq-section .faq-header { max-width: 700px; margin: 0 auto; }
+.faq-section h3 { color: #2a2a5f; text-align: left; font-weight: 500; font-size: 28px; line-height: 1.0em; display: inline-block; margin: 0; padding: 0; letter-spacing: 0; text-transform: capitalize; font-family: futura-pt, sans-serif !important; }
+.faq-section .faq-accordions { margin: 8px auto 0 auto; border-top: 1px solid #c1c2c8; }
+.faq-section .faq-accordions .accordion-row { padding-top: 15px; padding-bottom: 13px; border-bottom: 1px solid #c1c2c8; }
+.faq-section .faq-accordions .accordion-row:last-child { border-bottom: none; }
+.faq-section .faq-accordions .accordion-row .accordion-content { max-width: 700px; margin: 0 auto; }
+.faq-section .faq-accordions .accordion-row .accordion-content h1, .faq-section .faq-accordions .accordion-row .accordion-content h2, .faq-section .faq-accordions .accordion-row .accordion-content h3, .faq-section .faq-accordions .accordion-row .accordion-content h4, .faq-section .faq-accordions .accordion-row .accordion-content h5, .faq-section .faq-accordions .accordion-row .accordion-content h6 { text-align: left; }
+.faq-section .faq-accordions .accordion-row .accordion-content a { text-decoration: underline; }
+.faq-section .faq-accordions .accordion-row .accordion-content ul, .faq-section .faq-accordions .accordion-row .accordion-content ol { padding-left: 20px; }
+.faq-section .faq-accordions .accordion-row .accordion-content p { margin-top: 0px; }
+.faq-section .faq-accordions .accordion-row .accordion-content p:last-child { margin-bottom: 0; }
+.faq-section .faq-accordions .accordion-row .title { text-align: left; color: #2a2a5f; font-size: 22px; font-weight: 400; position: relative; cursor: pointer; padding-right: 30px; }
+.faq-section .faq-accordions .title:after { position: absolute; right: 0; content: ""; background: #2a2a5f; height: 2px; width: 16px; top: 10px; }
+.faq-section .faq-accordions .title:before { position: absolute; right: 7px; content: ""; background: #2a2a5f; top: 3px; width: 2px; height: 16px; }
+.faq-section .faq-accordions .title.active:before { display: none; }
+.faq-section-2:has(.faq-accordions:empty),.faq-section-3:has(.faq-accordions:empty),.faq-section-1:has(.faq-accordions:empty) {
+  display: none;
+}
+#page-content .faq-section .faq-accordions .accordion-row .content { text-align: left; color: #2a2a5f; font-size: 14px; line-height: 1.4; font-weight: 400; overflow: hidden; height: 0px; transition: 0.5s all; padding: 0px 35px 0px 0; }
+#page-content .faq-section .faq-accordions .accordion-row .active + .content { height: auto; overflow: initial; padding: 15px 35px 15px 0; }
+  #page-content .faq-section .faq-accordions .accordion-row .title.empty-subheading + .content {
+    height: auto;
+    overflow: initial;
+    padding: 0px 35px 15px 0;
+}
+.faq-section .faq-accordions { margin-top: 0; overflow: hidden; height: 0px; transition: 0.5s all; }
+.faq-section .faq-header { padding: 15px 0; }
+.faq-section .faq-header.main-active + .faq-accordions { height: auto; overflow: initial; }
+.faq-section .faq-header { position: relative; cursor: pointer; padding-right: 30px; }
+.faq-section .faq-header:after { content: ""; position: absolute; right: 0; content: ""; background: #2a2a5f; height: 2px; width: 16px; top: 50%; transform: translateY(-50%); }
+.faq-section .faq-header:before { position: absolute; right: 7px; content: ""; background: #2a2a5f; top: 3px; width: 2px; height: 16px; top: 50%; transform: translateY(-50%); }
+  .faq-section .faq-header.main-active:before{ display: none; }
+.faq-section .faq-header.main-active + .faq-accordions { border-bottom: 1px solid #c1c2c8; }
+    .empty-heading,.empty-subheading  {
+    display: none;
+}
+
+@media(max-width:1099px) {
+  .faq-section .faq-header {
+    padding: 15px 20px;
+    max-width: 100%;
+}
+
+.faq-section .faq-header:after {
+    right: 20px;
+}
+
+.faq-section .faq-header:before {
+    right: 27px;
+}
+
+.faq-section-3 {
+    padding-bottom: 0;
+}
+    .faq-section .faq-accordions .accordion-row .accordion-content { max-width: 100%; padding: 0 20px; }
+}
+
+@media(max-width:767px) {
+    .faq-section .faq-accordions .accordion-row .title { font-size: 18px; }
+    .faq-section h3 { font-size: 24px; }
+    .faq-section .faq-accordions .title:after { font-size: 32px; }
+}
+section.faq-section > div:last-child .faq-accordions {border-bottom-color: transparent !important;}
+section.faq-section > div:last-child .faq-header:not(.main-active) + .faq-accordions {border: none;}
+</style>
+<section class="faq-section c-faq-{{ section.id }} faq-section-1">
+  {% if collection.metafields.custom.faq_title != blank %}
+  <div class="faq-section-1">
+        <div class="faq-header">
+            <h3 class="section-title">{{ collection.metafields.custom.faq_title }}</h3>
+        </div>
+      <div class="faq-accordions ">
+        {% for item in collection.metafields.custom.item_list.value %}
+          <div class="accordion-row">
+            <div class="accordion-content">
+             
+               <div class="title {% if item.title == blank %} active empty-subheading {% endif %} ">{{ item.title }}</div>
+             
+              {% if item.description != blank %}
+                <div class="content">{{ item.description | metafield_tag }}</div>
+             {% endif %} 
+            </div>
+          </div>
+         {% endfor %}  
+      </div> 
+  </div>
+  {% endif %}
+  {% if collection.metafields.custom.faq_title_2 != blank %}
+  <div class="faq-section-2">
+      
+        <div class="faq-header">
+            <h3 class="section-title">{{ collection.metafields.custom.faq_title_2 }}</h3>
+        </div>
+      <div class="faq-accordions">
+        {% for item in collection.metafields.custom.item_list_2.value %}
+          <div class="accordion-row">
+            <div class="accordion-content">
+             
+               <div class="title {% if item.title == blank %} active empty-subheading {% endif %} ">{{ item.title }}</div>
+             
+              {% if item.description != blank %}
+                <div class="content">{{ item.description | metafield_tag }}</div>
+             {% endif %} 
+            </div>
+          </div>
+         {% endfor %}          
+      </div> 
+  </div>
+  {% endif %}
+  {% if collection.metafields.custom.faq_title_3 != blank %}
+    <div class="faq-section-3">
+        <div class="faq-header ">
+            <h3 class="section-title">{{ collection.metafields.custom.faq_title_3 }}</h3>
+        </div>
+      <div class="faq-accordions">
+        {% for item in collection.metafields.custom.item_list_3.value %}
+          <div class="accordion-row">
+            <div class="accordion-content">
+             
+               <div class="title {% if item.title == blank %} active empty-subheading {% endif %}  ">{{ item.title }}</div>
+             
+              {% if item.description != blank %}
+                <div class="content">{{ item.description | metafield_tag }}</div>
+             {% endif %} 
+            </div>
+          </div>
+         {% endfor %}          
+      </div> 
+  </div>
+  {% endif %}
+</section>
+
+<script>
+  document.querySelectorAll('.faq-header').forEach(header => {
+    header.addEventListener('click', () => {
+        header.classList.toggle('main-active');
+    });
+});
+ {% if collection.metafields.custom.first_item_open %} 
+    document.querySelector(".faq-section-1 .faq-accordions .title:first-child").classList.add('active')
+ {% endif %}
+   {% if collection.metafields.custom.first_item_open_2 %} 
+    document.querySelector(".faq-section-2 .faq-accordions .title:first-child").classList.add('active')
+ {% endif %}
+   {% if collection.metafields.custom.first_item_open_3 %} 
+    document.querySelector(".faq-section-3 .faq-accordions .title:first-child").classList.add('active')
+ {% endif %}
+  let items = document.querySelectorAll(".faq-section .faq-accordions .title");
+  items.forEach(function (t) {
+  t.addEventListener("click", function (e) {
+  	items.forEach(function (e) {
+  	e !== t || e.classList.contains("active")
+  		? e.classList.remove("active")
+  		: e.classList.add("active");
+  	});
+  });
+});
+</script>
+{% endif %}  
+{% schema %}
+  {
+    "name": "Custom FAQ 1",
+    "settings": [
+      
+    ],
+    "presets": [
+      {
+       "name": "Custom FAQ 1" 
+      }
+    ]
+  }
+{% endschema %}
